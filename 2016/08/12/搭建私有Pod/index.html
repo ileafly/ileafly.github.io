@@ -4,15 +4,34 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Leafly</title>
+    <title>搭建私有Pod | Leafly</title>
     <base href="https://dwqs.github.io" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Leafly">
-<meta property="og:url" content="http://www.ileafly.com/index.html">
+    <meta name="description" content="Cocoapods是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。
+创建一个私有Pod的步骤：
+创建并设置一个私有的 Spec Repo
+创建Pod所需管理的项目
+创建Pod所对应的podspec文件
+本地测试配置好的p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建私有Pod">
+<meta property="og:url" content="http://www.ileafly.com/2016/08/12/搭建私有Pod/index.html">
 <meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="Cocoapods是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。
+创建一个私有Pod的步骤：
+创建并设置一个私有的 Spec Repo
+创建Pod所需管理的项目
+创建Pod所对应的podspec文件
+本地测试配置好的p">
+<meta property="og:updated_time" content="2016-08-25T02:21:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leafly">
+<meta name="twitter:title" content="搭建私有Pod">
+<meta name="twitter:description" content="Cocoapods是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。
+创建一个私有Pod的步骤：
+创建并设置一个私有的 Spec Repo
+创建Pod所需管理的项目
+创建Pod所对应的podspec文件
+本地测试配置好的p">
     
     
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -69,9 +88,7 @@
     </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-搭建私有Pod" class="article article-type-post" itemscope
+      <section id="main"><article id="post-搭建私有Pod" class="article article-type-post" itemscope
          itemprop="blogPost">
     <div class="article-inner">
         
@@ -79,8 +96,8 @@
             <header class="article-header">
                 
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/搭建私有Pod/">搭建私有Pod</a>
+    <h1 class="article-title" itemprop="name">
+      搭建私有Pod
     </h1>
   
 
@@ -167,114 +184,20 @@ git push origin :refs/tags/0.1.0
         
     </div>
     
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Markdown语法初探" class="article article-type-post" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a>
-    </h1>
+    <a href="/2016/08/11/Markdown语法初探/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Markdown语法初探</div>
+    </a>
   
+</nav>
 
-                <div class="article-meta">
-                    <a href="/2016/08/11/Markdown语法初探/" class="article-date">
-  <time datetime="2016-08-11T02:19:34.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-                    
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：</p>
-<pre><code># 一级标题
-
-#### 四级标题
-</code></pre><p>另外，一级和二级标题还有一种写法：</p>
-<pre><code>一级标题
-=====================
-二级标题
----------------------
-</code></pre><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>在文本中输入的换行会从最终生成的结果中删除，浏览器会根据可用空间自动换行。如果想强迫换行，可以在行尾插入<strong>至少两个空格</strong>。</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>这是一段被引用的内容<br>引用结束</p>
-</blockquote>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><pre><code>[链接文案](链接地址)
-例如： [Markdown](https://zh.wikipedia.org/wiki/Markdown)
-</code></pre><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><pre><code>![Alt text](image url)
-</code></pre><p><img src="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png" alt="foo"></p>
-<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><pre><code>*斜体* 或 _斜体_  
-
-**加重强调** 或 __加重强调__
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">markdown语法参考</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown维基百科</a></p>
-
-            
-        </div>
-        
-    </div>
     
 </article>
 
-
-  
-    <article id="post-如何搭建属于自己的博客" class="article article-type-post" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/08/如何搭建属于自己的博客/">如何搭建属于自己的博客？</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2016/08/08/如何搭建属于自己的博客/" class="article-date">
-  <time datetime="2016-08-08T02:19:34.000Z" itemprop="datePublished">2016-08-08</time>
-</a>
-                    
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>本文主要介绍使用 Github、Jekyll 打造自己的免费独立博客的方法</p>
-<p><a href="http://www.github.com" target="_blank" rel="external">Github</a>是一个代码托管网站，现在很多开源项目都放在Github上。Github还提供了一个功能，叫Github Pages，利用这个功能，我们可以为项目建立网站，当然，这也意味着我们可以通过Github Pages建立自己的博客。</p>
-<p><a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a>是一个简单的，针对博客设计的静态网站生成器。通过结合使用Github和Jekyll，我们可以打造自己的独立博客，可以自由的定制网站风格，并且这一切都是免费的。</p>
-<h2 id="入门指引"><a href="#入门指引" class="headerlink" title="入门指引"></a>入门指引</h2><p><a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a>的主页提供了一个简单的入门指引，阅读并操作一遍，会有一个直观的认识。</p>
-<p>阮一峰的文章<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">搭建一个免费的，无限流量的Blog—Github Pages和Jekyll入门</a>是一篇特别好的入门文章。</p>
-<h2 id="建立自己的博客"><a href="#建立自己的博客" class="headerlink" title="建立自己的博客"></a>建立自己的博客</h2><p>在搭建独立博客时，通过有三种方式可以选择：</p>
-<ol>
-<li>完全自定义博客</li>
-<li>找一个框架，基于框架修改使用</li>
-<li>从Github上找一个比较好的源码，fork使用</li>
-</ol>
-<p>本博客选择的是第三种方法，在Github上有一个比较火的开源博客项目<a href="https://github.com/barryclark/jekyll-now" target="_blank" rel="external">jekyll-now</a>，这个项目的特点是，所有操作都是通过网页进行，不需要懂命令行，对于刚入门的新手来说非常实用。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">搭建一个免费的，无限流量的Blog—Github Pages和Jekyll入门</a></p>
-<p><a href="http://blog.csdn.net/on_1y/article/details/19259435" target="_blank" rel="external">使用Github、Jekyll打造自己的免费独立博客</a></p>
-
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-  
 </section>
       
       <aside id="sidebar">
