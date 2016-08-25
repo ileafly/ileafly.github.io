@@ -100,8 +100,8 @@
 创建Pod所需管理的项目
 创建Pod所对应的podspec文件
 本地测试配置好的p">
-<meta property="og:image" content="https://raw.githubusercontent.com/luzhiyongGit/luzhiyongGit.github.io/master/images/spec_struct.png">
-<meta property="og:updated_time" content="2016-08-25T03:32:56.000Z">
+<meta property="og:image" content="http://www.ileafly.com/images/spec_struct.png">
+<meta property="og:updated_time" content="2016-08-25T06:44:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建私有Pod">
 <meta name="twitter:description" content="Cocoapods是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。
@@ -110,7 +110,7 @@
 创建Pod所需管理的项目
 创建Pod所对应的podspec文件
 本地测试配置好的p">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/luzhiyongGit/luzhiyongGit.github.io/master/images/spec_struct.png">
+<meta name="twitter:image" content="http://www.ileafly.com/images/spec_struct.png">
 
 
 
@@ -303,7 +303,7 @@
 <li>在个人项目中的Podfile中增加刚刚制作好的Pod并使用</li>
 <li>更新维护podspec</li>
 </ol>
-<h3 id="创建私有Spec-Repo"><a href="#创建私有Spec-Repo" class="headerlink" title="创建私有Spec Repo"></a>创建私有Spec Repo</h3><p>先来说第一步，什么是Spec Repo？它是所有的Pods的一个索引，就是一个容器，所有公开的Pods都在这个里面，我们常用的第三方库都是放在<a href="http://www.github.com" target="_blank" rel="external">Github</a>里开源的<a href="https://github.com/CocoaPods/Specs" target="_blank" rel="external">Specs</a>中，当我们使用CocoaPods后就会在~/.cocoapods/repos目录下生成一个官方的Spec Repo文件夹master。这个master目录的结构如图：<br><img src="https://raw.githubusercontent.com/luzhiyongGit/luzhiyongGit.github.io/master/images/spec_struct.png" alt="Foo"></p>
+<h3 id="创建私有Spec-Repo"><a href="#创建私有Spec-Repo" class="headerlink" title="创建私有Spec Repo"></a>创建私有Spec Repo</h3><p>先来说第一步，什么是Spec Repo？它是所有的Pods的一个索引，就是一个容器，所有公开的Pods都在这个里面，我们常用的第三方库都是放在<a href="http://www.github.com" target="_blank" rel="external">Github</a>里开源的<a href="https://github.com/CocoaPods/Specs" target="_blank" rel="external">Specs</a>中，当我们使用CocoaPods后就会在~/.cocoapods/repos目录下生成一个官方的Spec Repo文件夹master。这个master目录的结构如图：<br><img src="/images/spec_struct.png" alt="Foo"></p>
 <p>我们首先需要做的就是创建一个类似于master的私有Spec Repo：  </p>
 <ol>
 <li>创建一个Git仓库  </li>
