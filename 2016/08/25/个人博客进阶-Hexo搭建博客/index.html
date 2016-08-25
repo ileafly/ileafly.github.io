@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Leafly">
 <meta property="og:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
 安装Hexo安装Node.jshexo是一款基于Node.js的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的官网下载相应平台的最新版本，">
-<meta property="og:updated_time" content="2016-08-25T03:15:05.000Z">
+<meta property="og:updated_time" content="2016-08-25T06:35:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人博客进阶--Hexo搭建博客">
 <meta name="twitter:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
@@ -310,17 +310,18 @@ deploy:
 </code></pre><p>3.发布博客</p>
 <pre><code>hexo d
 </code></pre><h3 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h3><p>Hexo有非常多的主题可以选择替换，替换流程也特别方便</p>
-<p>1.从<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">Hexo Themes</a>中找到一个你心仪的主题，本博客使用的是<a href="https://github.com/dwqs/nx" target="_blank" rel="external">nx</a></p>
+<p>1.从<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">Hexo Themes</a>中找到一个你心仪的主题，本博客使用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">next</a></p>
 <p>2.在你的blog文件目录下，执行下面的命令</p>
-<pre><code>git clone https://github.com/dwqs/nx.git themes/nx
+<pre><code>git clone https://github.com/iissnan/hexo-theme-next.git themes/next
 </code></pre><p>3.编辑配置信息</p>
 <pre><code>vi _config.yml
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: nx
-</code></pre><p>4.生成博客页面</p>
+theme: next
+</code></pre><p>  next主题有一个<a href="https://github.com/iissnan/hexo-theme-next/wiki/" target="_blank" rel="external">wiki</a>提供了更详细的配置内容</p>
+<p>4.生成博客页面</p>
 <pre><code>hexo g
 </code></pre><p>5.发布博客</p>
 <pre><code>hexo d
