@@ -245,6 +245,176 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" itemprop="url">
+                  私有pod创建进阶--如何通过pod管理静态库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T15:46:08+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>一文中我们已经总结了如何创建私有的Pod，这次来总结一下如果利用Pod生成和管理静态库。</p>
+<h2 id="创建并发布Pod项目"><a href="#创建并发布Pod项目" class="headerlink" title="创建并发布Pod项目"></a>创建并发布Pod项目</h2><p>首先，我们需要参考<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>创建一个pod项目至<strong>pod lib lint</strong>验证无误。</p>
+<h2 id="打包类库"><a href="#打包类库" class="headerlink" title="打包类库"></a>打包类库</h2><p>我们需要使用一个cocoapods的插件<a href="https://github.com/CocoaPods/cocoapods-packager" target="_blank" rel="external">cocoapods-packager</a>来完成类库的打包。当然也可以手动编译打包，只是过程会很繁琐。</p>
+<ol>
+<li><p>安装打包插件</p>
+<p>  sudo gem install cocoapods-packager</p>
+</li>
+<li><p>打包</p>
+<p>  pod package Lib.podspec –library –force</p>
+<p><strong>–library</strong>指定打包成 <strong>.a</strong> 文件，如果不带上将会打包成 <strong>.framework</strong> 文件。 <strong>–force</strong>是指强制覆盖。</p>
+</li>
+</ol>
+<h2 id="管理类库"><a href="#管理类库" class="headerlink" title="管理类库"></a>管理类库</h2><p>打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。</p>
+<ol>
+<li>在项目根目录中建一个文件夹命名为Release，里面存放一个podspec文件和项目打包成功的.a文件以及.h文件</li>
+<li><p>修改podspec   </p>
+<pre><code>// 指定.h代码源文件地址
+s.source_files = &apos;Release/**/*.h&apos;
+// 指定.a库地址
+s.vendored_libraries = &apos;Release/Lib.a&apos;
+</code></pre></li>
+<li><p>上传Release代码到git master分支，并打上对应tag</p>
+</li>
+<li>发布pod</li>
+</ol>
+<p>贴上Demo中的podspec供参考</p>
+<pre><code>Pod::Spec.new do |s|
+   s.name             = &apos;ZYLib&apos;
+   s.version          = &apos;0.1.0&apos;
+   s.summary          = &apos;A short description of ZYLib.&apos;
+
+   s.homepage         = &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;
+   s.license          = { :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; }
+   s.author           = { &apos;luzy&apos; =&gt; &apos;luzy@2345.com&apos; }
+   s.source           = { :git =&gt; &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;, :tag =&gt; s.version.to_s }
+
+   s.ios.deployment_target = &apos;7.0&apos;
+
+   s.source_files = &apos;Release/**/*&apos;
+
+   s.vendored_frameworks = &apos;Release/ZYLib.a&apos;
+
+   #s.resource_bundles = {
+   #  &apos;ZYLib&apos; =&gt; [&apos;ZYLib/Assets/*.png&apos;]
+   #}
+
+   #s.public_header_files = &apos;Pod/Classes/**/*.h&apos;
+   # s.frameworks = &apos;UIKit&apos;, &apos;MapKit&apos;
+   s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;
+end 
+</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/brycezhang/p/4117180.html" target="_blank" rel="external">使用CocoaPods开发并打包静态库</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/31/git命令行入门/" itemprop="url">
                   git命令行入门
                 </a>
@@ -1104,14 +1274,14 @@ git push origin :refs/tags/0.1.0
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
-               alt="Robin" />
-          <p class="site-author-name" itemprop="name">Robin</p>
+               alt="Leafly" />
+          <p class="site-author-name" itemprop="name">Leafly</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1128,7 +1298,7 @@ git push origin :refs/tags/0.1.0
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1169,7 +1339,7 @@ git push origin :refs/tags/0.1.0
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Robin</span>
+  <span class="author" itemprop="copyrightHolder">Leafly</span>
 </div>
 
 <div class="powered-by">
