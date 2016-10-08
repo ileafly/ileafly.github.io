@@ -245,6 +245,143 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/08/自定义xopen命令打开工程/" itemprop="url">
+                  自定义xopen命令打开工程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-08T16:15:53+08:00" content="2016-10-08">
+              2016-10-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/08/自定义xopen命令打开工程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/自定义xopen命令打开工程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>通常我们在终端中对代码进行版本控制或者使用CocoaPods命令安装完依赖库后，都需要手动去打开工程。对于追求快捷和逼格的我们来说怎样才能进一步提升我们的逼格呢？</p>
+<p>今天就跟大家分享一个通过ruby脚本来帮助我们在终端中直接打开工程的方法。</p>
+<p>如果大家足够细心的话应该能注意到CocoaPods管理的项目后缀是<code>projectname.xcworkspace</code>而普通工程的后缀是<code>projectname.xcodeproj</code>,下面我们就通过ruby脚本来判断后缀，帮助我们优先打开<code>projectname.xcworkspace</code>。</p>
+<pre><code>#!/usr/bin/env ruby
+
+require &apos;shellwords&apos;
+
+proj = Dir[&apos;*.xcworkspace&apos;].first
+proj = Dir[&apos;*.xcodeproj&apos;].first unless proj
+
+if proj
+  puts &quot;Opening #{proj}&quot;
+  `open #{proj}`
+else
+  puts &quot;No xcworkspace|xcproj file found&quot;
+end
+</code></pre><p>将以上内容命名为<code>xopen</code>保存，并将文件拷贝到<code>/usr/local/bin</code>目录下，添加权限：<code>chmod 777 xopen</code></p>
+<p>执行完以上操作后你就可以方便的使用<code>xopen</code>命令来打开工程啦。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" itemprop="url">
                   私有pod创建进阶--如何通过pod管理静态库
                 </a>
@@ -1281,7 +1418,7 @@ git push origin :refs/tags/0.1.0
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1298,7 +1435,7 @@ git push origin :refs/tags/0.1.0
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
