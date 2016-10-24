@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Markdown," />
+  <meta name="keywords" content="CocoaPods," />
 
 
 
@@ -84,45 +84,19 @@
 
 
 
-<meta name="description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
-
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
+<meta name="description" content="升级CocoaPods到1.0.1版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在Podfile里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。
+升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown语法初探">
-<meta property="og:url" content="http://www.ileafly.com/2016/08/11/Markdown语法初探/index.html">
+<meta property="og:title" content="CocoaPods升级后问题解决">
+<meta property="og:url" content="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
-
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
-<meta property="og:image" content="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png">
-<meta property="og:updated_time" content="2016-08-30T08:37:57.000Z">
+<meta property="og:description" content="升级CocoaPods到1.0.1版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在Podfile里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。
+升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研">
+<meta property="og:updated_time" content="2016-10-09T09:45:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown语法初探">
-<meta name="twitter:description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
-
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
-<meta name="twitter:image" content="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png">
+<meta name="twitter:title" content="CocoaPods升级后问题解决">
+<meta name="twitter:description" content="升级CocoaPods到1.0.1版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在Podfile里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。
+升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研">
 
 
 
@@ -143,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://www.ileafly.com/2016/08/11/Markdown语法初探/"/>
+  <link rel="canonical" href="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/"/>
 
-  <title> Markdown语法初探 | Leafly </title>
+  <title> CocoaPods升级后问题解决 | Leafly </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +249,7 @@
             
             
               
-                Markdown语法初探
+                CocoaPods升级后问题解决
               
             
           </h1>
@@ -287,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T10:19:34+08:00" content="2016-08-11">
-              2016-08-11
+            <time itemprop="dateCreated" datetime="2016-10-09T17:30:43+08:00" content="2016-10-09">
+              2016-10-09
             </time>
           </span>
 
@@ -301,8 +275,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -317,8 +291,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/11/Markdown语法初探/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/Markdown语法初探/" itemprop="commentsCount"></span>
+                <a href="/2016/10/09/CocoaPods升级后问题解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/CocoaPods升级后问题解决/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,29 +315,8 @@
       
 
       
-        <p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：</p>
-<pre><code># 一级标题
-
-#### 四级标题
-</code></pre><p>另外，一级和二级标题还有一种写法：</p>
-<pre><code>一级标题
-=====================
-二级标题
----------------------
-</code></pre><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>在文本中输入的换行会从最终生成的结果中删除，浏览器会根据可用空间自动换行。如果想强迫换行，可以在行尾插入<strong>至少两个空格</strong>。</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>这是一段被引用的内容<br>引用结束</p>
-</blockquote>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><pre><code>[链接文案](链接地址)
-例如： [Markdown](https://zh.wikipedia.org/wiki/Markdown)
-</code></pre><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><pre><code>![Alt text](image url)
-</code></pre><p><img src="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png" alt="foo"></p>
-<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><pre><code>*斜体* 或 _斜体_  
-
-**加重强调** 或 __加重强调__
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">markdown语法参考</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown维基百科</a></p>
+        <p>升级<a href="https://cocoapods.org/" target="_blank" rel="external">CocoaPods</a>到<code>1.0.1</code>版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在<code>Podfile</code>里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。</p>
+<p>升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研找到了原因，因为iPhone 4或者iPhone 5模拟器是64位模拟器，也就是说在64位模拟器上编译不会通过，这是因为新版本的CocoaPods</p>
 
       
     </div>
@@ -386,7 +339,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Markdown/" rel="tag">#Markdown</a>
+            <a href="/tags/CocoaPods/" rel="tag">#CocoaPods</a>
           
         </div>
       
@@ -395,16 +348,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/08/如何搭建属于自己的博客/" rel="next" title="如何搭建属于自己的博客？">
-                <i class="fa fa-chevron-left"></i> 如何搭建属于自己的博客？
+              <a href="/2016/10/08/自定义xopen命令打开工程/" rel="next" title="自定义xopen命令打开工程">
+                <i class="fa fa-chevron-left"></i> 自定义xopen命令打开工程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/12/搭建私有Pod/" rel="prev" title="搭建私有Pod">
-                搭建私有Pod <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/24/iOS-让子View不响应父View的手势/" rel="prev" title="iOS--让子View不响应父View的手势">
+                iOS--让子View不响应父View的手势 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -431,8 +384,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/11/Markdown语法初探/"
-           data-title="Markdown语法初探" data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/">
+      <div class="ds-thread" data-thread-key="2016/10/09/CocoaPods升级后问题解决/"
+           data-title="CocoaPods升级后问题解决" data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/">
       </div>
     
   </div>
@@ -523,7 +476,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#换行"><span class="nav-number">2.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接"><span class="nav-number">4.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">5.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强调"><span class="nav-number">6.</span> <span class="nav-text">强调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

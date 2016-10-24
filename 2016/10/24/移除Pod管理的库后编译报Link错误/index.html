@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Markdown," />
+  <meta name="keywords" content="CocoaPods," />
 
 
 
@@ -84,45 +84,33 @@
 
 
 
-<meta name="description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
+<meta name="description" content="在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行pod install还是清除缓存，clean项目，都无法解决这个问题。
 
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
+这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：
+
+点击项目工程文件进入Build Setting
+找到Ot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown语法初探">
-<meta property="og:url" content="http://www.ileafly.com/2016/08/11/Markdown语法初探/index.html">
+<meta property="og:title" content="移除Pod管理的库后编译报Link错误">
+<meta property="og:url" content="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
+<meta property="og:description" content="在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行pod install还是清除缓存，clean项目，都无法解决这个问题。
 
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
-<meta property="og:image" content="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png">
-<meta property="og:updated_time" content="2016-08-30T08:37:57.000Z">
+这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：
+
+点击项目工程文件进入Build Setting
+找到Ot">
+<meta property="og:image" content="http://www.ileafly.com/images/pod移除第三方库后编译报错截图.jpeg">
+<meta property="og:updated_time" content="2016-10-24T06:02:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown语法初探">
-<meta name="twitter:description" content="Markdown是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。
-标题可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：
-# 一级标题
+<meta name="twitter:title" content="移除Pod管理的库后编译报Link错误">
+<meta name="twitter:description" content="在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行pod install还是清除缓存，clean项目，都无法解决这个问题。
 
-#### 四级标题
-另外，一级和二级标题还有一种写法：
-一级标题
-=====================
-二级标题
---">
-<meta name="twitter:image" content="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png">
+这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：
+
+点击项目工程文件进入Build Setting
+找到Ot">
+<meta name="twitter:image" content="http://www.ileafly.com/images/pod移除第三方库后编译报错截图.jpeg">
 
 
 
@@ -143,9 +131,9 @@
 
 
 
-  <link rel="canonical" href="http://www.ileafly.com/2016/08/11/Markdown语法初探/"/>
+  <link rel="canonical" href="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/"/>
 
-  <title> Markdown语法初探 | Leafly </title>
+  <title> 移除Pod管理的库后编译报Link错误 | Leafly </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +263,7 @@
             
             
               
-                Markdown语法初探
+                移除Pod管理的库后编译报Link错误
               
             
           </h1>
@@ -287,38 +275,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T10:19:34+08:00" content="2016-08-11">
-              2016-08-11
+            <time itemprop="dateCreated" datetime="2016-10-24T13:59:00+08:00" content="2016-10-24">
+              2016-10-24
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/11/Markdown语法初探/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/Markdown语法初探/" itemprop="commentsCount"></span>
+                <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/移除Pod管理的库后编译报Link错误/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,29 +310,15 @@
       
 
       
-        <p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：</p>
-<pre><code># 一级标题
-
-#### 四级标题
-</code></pre><p>另外，一级和二级标题还有一种写法：</p>
-<pre><code>一级标题
-=====================
-二级标题
----------------------
-</code></pre><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>在文本中输入的换行会从最终生成的结果中删除，浏览器会根据可用空间自动换行。如果想强迫换行，可以在行尾插入<strong>至少两个空格</strong>。</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>这是一段被引用的内容<br>引用结束</p>
-</blockquote>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><pre><code>[链接文案](链接地址)
-例如： [Markdown](https://zh.wikipedia.org/wiki/Markdown)
-</code></pre><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><pre><code>![Alt text](image url)
-</code></pre><p><img src="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png" alt="foo"></p>
-<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><pre><code>*斜体* 或 _斜体_  
-
-**加重强调** 或 __加重强调__
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">markdown语法参考</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown维基百科</a></p>
+        <p>在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行<code>pod install</code>还是清除缓存，clean项目，都无法解决这个问题。</p>
+<p><img src="/images/pod移除第三方库后编译报错截图.jpeg" alt="pod移除第三方库后编译报错截图"></p>
+<p>这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：</p>
+<ol>
+<li>点击项目工程文件进入Build Setting</li>
+<li>找到Other Linker Flags一栏</li>
+<li>删除到相关库的link</li>
+<li>重新编译即可</li>
+</ol>
 
       
     </div>
@@ -386,7 +341,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Markdown/" rel="tag">#Markdown</a>
+            <a href="/tags/CocoaPods/" rel="tag">#CocoaPods</a>
           
         </div>
       
@@ -395,17 +350,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/08/如何搭建属于自己的博客/" rel="next" title="如何搭建属于自己的博客？">
-                <i class="fa fa-chevron-left"></i> 如何搭建属于自己的博客？
+              <a href="/2016/10/24/iOS-让子View不响应父View的手势/" rel="next" title="iOS--让子View不响应父View的手势">
+                <i class="fa fa-chevron-left"></i> iOS--让子View不响应父View的手势
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/12/搭建私有Pod/" rel="prev" title="搭建私有Pod">
-                搭建私有Pod <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -431,8 +382,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/11/Markdown语法初探/"
-           data-title="Markdown语法初探" data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/">
+      <div class="ds-thread" data-thread-key="2016/10/24/移除Pod管理的库后编译报Link错误/"
+           data-title="移除Pod管理的库后编译报Link错误" data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/">
       </div>
     
   </div>
@@ -523,7 +474,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#换行"><span class="nav-number">2.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接"><span class="nav-number">4.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">5.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强调"><span class="nav-number">6.</span> <span class="nav-text">强调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
