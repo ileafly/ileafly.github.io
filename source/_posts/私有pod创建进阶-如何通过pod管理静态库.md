@@ -25,6 +25,20 @@ categories: iOS
         
    **--library**指定打包成 **.a** 文件，如果不带上将会打包成 **.framework** 文件。 **--force**是指强制覆盖。
    
+## 问题解决
+
+打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错
+
+![类库加入项目后报错截图](images/私有pod创建进阶-如何通过pod管理静态库_类库加入项目后报错.png)
+
+造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在`podspec`文件里添加系统库的引用和开放头文件。
+    
+        s.public_header_files = 'ZYLib/Classes/**/*.h'
+            
+        s.frameworks = 'UIKit', 'CoreFoundation', 'QuartzCore', 'AssetsLibrary', 'ImageIO', 'Accelerate', 'MobileCoreServices', 'sqlite3', 'libz'
+
+
+   
 ## 管理类库
 
 打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。
@@ -62,8 +76,8 @@ categories: iOS
             #  'ZYLib' => ['ZYLib/Assets/*.png']
             #}
 
-            #s.public_header_files = 'Pod/Classes/**/*.h'
-            # s.frameworks = 'UIKit', 'MapKit'
+            s.public_header_files = 'ZYLib/Classes/**/*.h'
+            s.frameworks = 'UIKit', 'CoreFoundation', 'QuartzCore', 'AssetsLibrary', 'ImageIO', 'Accelerate', 'MobileCoreServices', 'sqlite3', 'libz'
             s.dependency 'AFNetworking', '~> 2.3'
          end 
 
