@@ -955,7 +955,13 @@ end
 <p><strong>–library</strong>指定打包成 <strong>.a</strong> 文件，如果不带上将会打包成 <strong>.framework</strong> 文件。 <strong>–force</strong>是指强制覆盖。</p>
 </li>
 </ol>
-<h2 id="管理类库"><a href="#管理类库" class="headerlink" title="管理类库"></a>管理类库</h2><p>打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错</p>
+<p><img src="images/私有pod创建进阶-如何通过pod管理静态库_类库加入项目后报错.png" alt="类库加入项目后报错截图"></p>
+<p>造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在<code>podspec</code>文件里添加系统库的引用和开放头文件。</p>
+<pre><code>s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
+
+s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
+</code></pre><h2 id="管理类库"><a href="#管理类库" class="headerlink" title="管理类库"></a>管理类库</h2><p>打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。</p>
 <ol>
 <li>在项目根目录中建一个文件夹命名为Release，里面存放一个podspec文件和项目打包成功的.a文件以及.h文件</li>
 <li><p>修改podspec   </p>
@@ -989,8 +995,8 @@ s.vendored_libraries = &apos;Release/Lib.a&apos;
    #  &apos;ZYLib&apos; =&gt; [&apos;ZYLib/Assets/*.png&apos;]
    #}
 
-   #s.public_header_files = &apos;Pod/Classes/**/*.h&apos;
-   # s.frameworks = &apos;UIKit&apos;, &apos;MapKit&apos;
+   s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
+   s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
    s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;
 end 
 </code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/brycezhang/p/4117180.html" target="_blank" rel="external">使用CocoaPods开发并打包静态库</a></p>
