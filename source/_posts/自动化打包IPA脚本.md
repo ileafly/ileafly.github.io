@@ -75,6 +75,11 @@ IPAPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE
 ARCHIVEPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE/项目名称_$DATE.xcarchive
 IPANAME=项目名称_$DATE.ipa
 
+PYG_DOMAIN="http://www.pgyer.com"
+PGY_UPLOAD_URL="$PYG_DOMAIN/apiv1/app/upload"
+PGY_UKEY="你的蒲公英账号的ukey"
+PGY_API_KEY="你的蒲公英账号的api key"
+
 # build 
 xcodebuild archive -workspace $SOURCEPATH/项目名称.xcworkspace \
 -scheme $SCHEMENAME \
@@ -104,6 +109,14 @@ else
 	echo "error: Create IPA failed!"
 fi
 
+# upload ipa  上传ipa到蒲公英发布平台
+echo "Uploading the ipa file..."
+echo $IPAPATH
+response=`curl -F "file=@$IPAPATH" -F "uKey=$PGY_UKEY" -F "_api_key=$PGY_API_KEY" $PGY_UPLOAD_URL`
+echo $response
+
+# send email 邮件通知同事让他们之间去下载
+echo "蒲公英网站上的APP已更新，欢迎更新.下载地址：https://www.pgyer.com/****" | mail -s "ipa更新" ****@163.com,****@163.com,****@163.com,****@163.com
 
 ```
 
