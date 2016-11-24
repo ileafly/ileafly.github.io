@@ -126,7 +126,7 @@ git checkout [branch]
 
 拉取远程分支代码
 git pull origin [remote-bra">
-<meta property="og:updated_time" content="2016-11-02T05:37:36.000Z">
+<meta property="og:updated_time" content="2016-11-23T02:12:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git命令行入门">
 <meta name="twitter:description" content="本文结合项目开发中遇到的实际问题对git命令行的使用做一个简单的总结。
@@ -240,6 +240,16 @@ git pull origin [remote-bra">
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -361,6 +371,13 @@ git pull origin [remote-bra">
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/08/31/git命令行入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/git命令行入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -413,7 +430,7 @@ git pull origin [remote-bra">
 <pre><code>git merge [branch]
 </code></pre></li>
 <li><p>提交本地分支代码</p>
-<p>   git push origin [remote-branch]</p>
+<p>  git push origin [remote-branch]</p>
 </li>
 </ol>
 <h3 id="tag命令"><a href="#tag命令" class="headerlink" title="tag命令"></a>tag命令</h3><ol>
@@ -441,9 +458,8 @@ git tag [tag] [commit]
 </code></pre></li>
 <li><p>基于某个tag新建一个分支</p>
 <pre><code>git checkout -b [branch] [tag]
-</code></pre></li>
-</ol>
-<h3 id="撤销命令"><a href="#撤销命令" class="headerlink" title="撤销命令"></a>撤销命令</h3><ol>
+</code></pre><p>​    </p>
+<h3 id="撤销命令"><a href="#撤销命令" class="headerlink" title="撤销命令"></a>撤销命令</h3></li>
 <li><p>恢复暂存区的指定文件到工作区</p>
 <pre><code>git checkout [file]
 </code></pre></li>
@@ -458,9 +474,8 @@ git tag [tag] [commit]
 </code></pre></li>
 <li><p>重置暂存区和工作区，与上次commit保持一致</p>
 <pre><code>git reset --hard       
-</code></pre></li>
-</ol>
-<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3><ol>
+</code></pre><p>​    </p>
+<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3></li>
 <li><p>删除工作区的文件，并将这次删除放入暂存区</p>
 <pre><code>git rm [file1] [file2]  
 </code></pre></li>
@@ -481,6 +496,17 @@ git branch -dr [remore-branch]
 <li><p>删除远程tag</p>
 <pre><code>git push origin :refs/tags/[tag]
 </code></pre></li>
+</ol>
+<h4 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h4><ol>
+<li><p>查看冲突</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择对方版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --theirs [conflict file]</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择本地版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --ours [conflict flie]</div></pre></td></tr></table></figure>
+</li>
 </ol>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">常用Git命令清单</a></p>
 
@@ -553,6 +579,10 @@ git branch -dr [remore-branch]
           
   <div class="comments" id="comments">
     
+      <div class="ds-thread" data-thread-key="2016/08/31/git命令行入门/"
+           data-title="git命令行入门" data-url="http://www.ileafly.com/2016/08/31/git命令行入门/">
+      </div>
+    
   </div>
 
 
@@ -602,10 +632,10 @@ git branch -dr [remore-branch]
 
           
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories">
                 <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -647,7 +677,7 @@ git branch -dr [remore-branch]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tag命令"><span class="nav-number">2.</span> <span class="nav-text">tag命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销命令"><span class="nav-number">3.</span> <span class="nav-text">撤销命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除命令"><span class="nav-number">4.</span> <span class="nav-text">删除命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tag命令"><span class="nav-number">2.</span> <span class="nav-text">tag命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销命令"><span class="nav-number">3.</span> <span class="nav-text">撤销命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除命令"><span class="nav-number">4.</span> <span class="nav-text">删除命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冲突解决"><span class="nav-number">4.1.</span> <span class="nav-text">冲突解决</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
@@ -765,14 +795,33 @@ git branch -dr [remore-branch]
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ileafly"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
-	
 
 
 
