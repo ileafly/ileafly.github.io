@@ -27,6 +27,11 @@ categories: iOS
         }
 ```
 ![打印字体名称](/images/iOS项目添加自定义字体_3.png)
-
+####使用新字体
+打印完所有的字体名称后，我们需要找到新字体的名称，这个比较考验眼力，需要说明的是导入的字体名称与你的字体文件名不存在必然关联，所以找起来比较麻烦，本项目中导入的字体名称是`Woxxdrgnxpjndtijvopiqfvieua` `Rlwnvqnxbaojotrussvqutrmalm` `Gjfhtoyvcitsqewokxubciqwsnn` `Daipwzrbqhqhabefqqcwoentynp`。
+调用方法：
+```
+[UIFont fontWithName:@"Woxxdrgnxpjndtijvopiqfvieua" size:9];
+```
 
 
