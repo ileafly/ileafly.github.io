@@ -23,7 +23,7 @@ categories: Git
 
 4. 创建本地分支
 
-       git checkout [branch]
+       git branch [branch]
 
 5. 切换本地分支
 
@@ -134,6 +134,11 @@ categories: Git
 
        git push origin :refs/tags/[tag]
 
+#### 导出纯代码
+1. 导出纯代码
+```
+git archive --format zip --output "./output.zip" master -0
+```
 
 #### 冲突解决
 

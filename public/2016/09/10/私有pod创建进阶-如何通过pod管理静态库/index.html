@@ -100,8 +100,7 @@
 
 安装打包插件
   sudo gem i">
-<meta property="og:image" content="http://www.ileafly.com/images/私有pod创建进阶-如何通过pod管理静态库_类库加入项目后报错.png">
-<meta property="og:updated_time" content="2016-11-02T05:37:36.000Z">
+<meta property="og:updated_time" content="2016-12-01T03:34:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="私有pod创建进阶--如何通过pod管理静态库">
 <meta name="twitter:description" content="在搭建私有Pod一文中我们已经总结了如何创建私有的Pod，这次来总结一下如果利用Pod生成和管理静态库。
@@ -110,7 +109,6 @@
 
 安装打包插件
   sudo gem i">
-<meta name="twitter:image" content="http://www.ileafly.com/images/私有pod创建进阶-如何通过pod管理静态库_类库加入项目后报错.png">
 
 
 
@@ -203,16 +201,6 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
           </a>
         </li>
       
@@ -334,13 +322,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -375,9 +356,7 @@
 <p><strong>–library</strong>指定打包成 <strong>.a</strong> 文件，如果不带上将会打包成 <strong>.framework</strong> 文件。 <strong>–force</strong>是指强制覆盖。</p>
 </li>
 </ol>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错</p>
-<p><img src="images/私有pod创建进阶-如何通过pod管理静态库_类库加入项目后报错.png" alt="类库加入项目后报错截图"></p>
-<p>造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在<code>podspec</code>文件里添加系统库的引用和开放头文件。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错<br>造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在<code>podspec</code>文件里添加系统库的引用和开放头文件。</p>
 <pre><code>s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
 
 s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
@@ -490,10 +469,6 @@ end
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/10/私有pod创建进阶-如何通过pod管理静态库/"
-           data-title="私有pod创建进阶--如何通过pod管理静态库" data-url="http://www.ileafly.com/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">
-      </div>
-    
   </div>
 
 
@@ -536,24 +511,24 @@ end
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
-              </a>
+              
             </div>
           
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -706,33 +681,14 @@ end
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"ileafly"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
-  
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
+	
 
 
 
