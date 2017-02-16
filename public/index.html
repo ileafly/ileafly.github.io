@@ -236,6 +236,156 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/12/30/3DTouch开发/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Leafly">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Leafly">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Leafly" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/30/3DTouch开发/" itemprop="url">
+                  3DTouch开发
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-30T16:15:53+08:00">
+                2016-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>开发3DTouch功能需要做好以下准备工作：</p>
+<pre><code>1. iPhone6s或以上的设备
+2. iOS9或以上的系统
+3. Xcode7或以上的开发环境
+</code></pre><h3 id="主屏幕按压应用图标展示快捷选项"><a href="#主屏幕按压应用图标展示快捷选项" class="headerlink" title="主屏幕按压应用图标展示快捷选项"></a>主屏幕按压应用图标展示快捷选项</h3><p>应用最多可以有4个快捷选项标签，iOS9为我们提供了两种方式来开发按压应用图片展示快捷选项的功能</p>
+<ol>
+<li><p>静态标签<br>静态标签是我们通过项目的plist文件进行配置的，我们需要在plist里手动添加一个属性<code>UIApplicationShortcutItems</code>，类型为数组，每个元素即表示一个快捷选项标签<br>每个快捷选项标签由以下参数构成：<br><code>UIApplicationShortcutItemTitle</code> 标签标题 (必填)<br><code>UIApplicationShortcutItemType</code> 标签的唯一标识 (必填)<br><code>UIApplicationShortcutItemIconType</code> 使用系统图片的类型<br><code>UIApplicationShortcutItemIconFile</code> 使用项目中的图片作为标签图标<br><code>UIApplicationShortcutItemSubtitle</code> 标签副标题<br><code>UIApplicationShortcutItemUserInfo</code> 字典信息，用于传值</p>
+</li>
+<li><p>动态标签<br>静态标签添加比较方便，但是太不灵活，还好苹果给我们提供了接口来配置快捷选项，下面是添加快捷选项的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool &#123;</div><div class="line">     // Override point for customization after application launch.</div><div class="line">     </div><div class="line">     self.createShortcutItems()</div><div class="line">     </div><div class="line">     return true</div><div class="line"> &#125;</div><div class="line"></div><div class="line">// 创建应用图标上的3D Touch快捷选项</div><div class="line"> func createShortcutItems() &#123;</div><div class="line">     if #available(iOS 9.0, *) &#123;</div><div class="line">         let icon: UIApplicationShortcutIcon = UIApplicationShortcutIcon.init(type: .share)</div><div class="line">         </div><div class="line">         let item: UIApplicationShortcutItem = UIApplicationShortcutItem.init(type: &quot;com.ileafly.3DTouchDemo.share&quot;, localizedTitle: &quot;分享&quot;, localizedSubtitle: nil, icon: icon, userInfo: nil)</div><div class="line">         </div><div class="line">         UIApplication.shared.shortcutItems = [item]</div><div class="line">     &#125; else &#123;</div><div class="line">         // Fallback on earlier versions</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>点击快捷选项标签进入应用的响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@available(iOS 9.0, *) // 只有9系统才能调用此方法</div><div class="line">  func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -&gt; Void) &#123;</div><div class="line">      print(shortcutItem);</div><div class="line">      </div><div class="line">      if let userInfo = shortcutItem.userInfo &#123;</div><div class="line">          print(userInfo);</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p>  <a href="http://liuyanwei.jumppo.com/2016/03/21/iOS-3DTouch-1.html" target="_blank" rel="external">iOS 3D touch 开发(一) Home Screen Quick Actions</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/12/27/runtime机制/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1014,6 +1164,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/11/01/iOS之iOS10系统下的推送开发/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Leafly">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Leafly">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Leafly" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/01/iOS之iOS10系统下的推送开发/" itemprop="url">
+                  iOS之iOS10系统下的推送开发
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-01T11:39:00+08:00">
+                2016-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>iOS10系统发布后，推送功能发生了很多变化，作为iOS开发者就需要适配这些变化，这里对于如果结合极光推送适配iOS10系统进行一个简单的总结，方便在对其他项目进行适配时使用。</p>
+<h3 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h3><ol>
+<li><p>开启<code>Push Notifications</code>功能</p>
+<p><img src="/images/iOS之iOS10系统下的推送开发_1.png" alt="功能开关"></p>
+</li>
+<li><p>添加<code>UserNotifications.framework</code></p>
+<p><img src="/images/iOS之iOS10系统下的推送开发_2.png" alt="新增系统库"></p>
+</li>
+</ol>
+<h3 id="代码适配"><a href="#代码适配" class="headerlink" title="代码适配"></a>代码适配</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 注册推送通知</div><div class="line">// iOS10 Before</div><div class="line">    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];</div><div class="line">    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];</div><div class="line">    </div><div class="line">    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</div><div class="line">        if (!error) &#123;</div><div class="line">            NSLog(@&quot;request authorization success!&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 利用极光推送注册推送通知</div><div class="line">// iOS10 Before</div><div class="line">    </div><div class="line">    [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    </div><div class="line">    JPUSHRegisterEntity *entity = [[JPUSHRegisterEntity alloc] init];</div><div class="line">    entity.types = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;</div><div class="line">    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];</div><div class="line">    </div><div class="line">// 注册极光推送</div><div class="line">    [JPUSHService setupWithOption:launchOptions appKey:@&quot;&quot; channel:@&quot;&quot; apsForProduction:YES];</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1419,294 +1713,6 @@ if ([touch.view isDescendantOfView:你想屏蔽掉手势的子视图]) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Leafly">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Leafly">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Leafly" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/09/CocoaPods升级后问题解决/" itemprop="url">
-                  CocoaPods升级后问题解决
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-09T17:30:43+08:00">
-                2016-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>升级<a href="https://cocoapods.org/" target="_blank" rel="external">CocoaPods</a>到<code>1.0.1</code>版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在<code>Podfile</code>里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。</p>
-<p>升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研找到了原因，因为iPhone 4或者iPhone 5模拟器是64位模拟器，也就是说在64位模拟器上编译不会通过，这是因为新版本的CocoaPods</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Leafly">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Leafly">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Leafly" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/自定义xopen命令打开工程/" itemprop="url">
-                  自定义xopen命令打开工程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-08T16:15:53+08:00">
-                2016-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>通常我们在终端中对代码进行版本控制或者使用CocoaPods命令安装完依赖库后，都需要手动去打开工程。对于追求快捷和逼格的我们来说怎样才能进一步提升我们的逼格呢？</p>
-<p>今天就跟大家分享一个通过ruby脚本来帮助我们在终端中直接打开工程的方法。</p>
-<p>如果大家足够细心的话应该能注意到CocoaPods管理的项目后缀是<code>projectname.xcworkspace</code>而普通工程的后缀是<code>projectname.xcodeproj</code>,下面我们就通过ruby脚本来判断后缀，帮助我们优先打开<code>projectname.xcworkspace</code>。</p>
-<pre><code>#!/usr/bin/env ruby
-
-require &apos;shellwords&apos;
-
-proj = Dir[&apos;*.xcworkspace&apos;].first
-proj = Dir[&apos;*.xcodeproj&apos;].first unless proj
-
-if proj
-  puts &quot;Opening #{proj}&quot;
-  `open #{proj}`
-else
-  puts &quot;No xcworkspace|xcproj file found&quot;
-end
-</code></pre><p>将以上内容命名为<code>xopen</code>保存，并将文件拷贝到<code>/usr/local/bin</code>目录下，添加权限：<code>chmod 777 xopen</code></p>
-<p>执行完以上操作后你就可以方便的使用<code>xopen</code>命令来打开工程啦。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1752,7 +1758,7 @@ end
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1769,7 +1775,7 @@ end
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1809,7 +1815,7 @@ end
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
