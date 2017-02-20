@@ -1,7 +1,7 @@
 ---
 title: 搭建私有Pod
 date: 2016-08-12 10:21:11
-tags: CocoaPods
+tags: iOS小积累
 categories: iOS
 ---
 

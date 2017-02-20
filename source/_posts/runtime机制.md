@@ -1,7 +1,7 @@
 ---
 title: runtime机制
 date: 2016-12-27 15:46:50
-tags: iOS, runtime
+tags: iOS小积累
 catgories: iOS
 ---
 ### runtime实现的机制是什么？

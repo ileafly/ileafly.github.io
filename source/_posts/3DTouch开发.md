@@ -1,7 +1,7 @@
 ---
 title: 3DTouch开发
 date: 2016-12-30 16:15:53
-tags: iOS, 3DTouch
+tags: iOS小积累
 categories: iOS
 ---
 

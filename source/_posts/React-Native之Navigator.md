@@ -1,8 +1,8 @@
 ---
 title: React-Native之Navigator
 date: 2016-11-24 11:26:47
-tags: React-Native
-categories: React-Native
+tags: ReactNative
+categories: ReactNative
 ---
 
 #### 结合官方文档，简单使用Navigator

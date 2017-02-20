@@ -1,7 +1,7 @@
 ---
 title: Hexo多台电脑同步
 date: 2016-10-24 15:00:08
-tags: 博客, Hexo
+tags: Hexo
 categories: 博客
 ---
 

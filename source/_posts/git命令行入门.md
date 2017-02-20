@@ -1,7 +1,7 @@
 ---
 title: git命令行入门
 date: 2016-08-31 19:43:02
-tags: Git
+tags: Git入门
 categories: Git
 ---
 

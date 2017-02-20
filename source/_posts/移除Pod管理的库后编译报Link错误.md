@@ -1,7 +1,7 @@
 ---
 title: 移除Pod管理的库后编译报Link错误
 date: 2016-10-24 13:59:00
-tags: CocoaPods
+tags: iOS小积累
 categries: iOS
 ---
 

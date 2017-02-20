@@ -1,7 +1,7 @@
 ---
 title: iOS--让子View不响应父View的手势
 date: 2016-10-24 13:57:13
-tags: iOS
+tags: iOS小积累
 categories: iOS
 ---
 

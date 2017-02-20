@@ -1,7 +1,7 @@
 ---
 title: 自定义xopen命令打开工程
 date: 2016-10-08 16:15:53
-tags: Xcode
+tags: iOS小积累
 categories: iOS
 ---
 

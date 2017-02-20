@@ -1,7 +1,7 @@
 ---
 title: CocoaPods升级后问题解决
 date: 2016-10-09 17:30:43
-tags: CocoaPods
+tags: iOS小积累
 categories: iOS
 ---
 
