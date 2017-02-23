@@ -1,5 +1,5 @@
 ---
-title: iOS之iOS10系统下的推送开发
+title: iOS10系统下的推送开发
 date: 2016-11-01 11:39:00
 tags: iOS小积累
 categories: iOS
@@ -11,11 +11,11 @@ iOS10系统发布后，推送功能发生了很多变化，作为iOS开发者就
 
 1. 开启`Push Notifications`功能
    
-   ![功能开关](https://github.com/luzhiyongGit/luzhiyongGit.github.io/tree/hexo/public/images/iOS之iOS10系统下的推送开发_1.png)
+   ![功能开关](/images/iOS之iOS10系统下的推送开发_1.png)
 
 2. 添加`UserNotifications.framework`
 
-   ![新增系统库](https://github.com/luzhiyongGit/luzhiyongGit.github.io/tree/hexo/public/images/iOS之iOS10系统下的推送开发_2.png)
+   ![新增系统库](/images/iOS之iOS10系统下的推送开发_2.png)
 
 ### 代码适配
 
