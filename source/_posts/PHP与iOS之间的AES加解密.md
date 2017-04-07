@@ -134,8 +134,8 @@ size_t const kKeySize = kCCKeySizeAES128;
     NSData *initVector = [kInitVector dataUsingEncoding:NSUTF8StringEncoding];
     
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
-                                          kCCAlgorithmAES,
-                                          kCCOptionECBMode, // 加密模式
+                                          kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式
                                           keyPtr,
                                           kKeySize,
                                           initVector.bytes,
@@ -170,7 +170,7 @@ size_t const kKeySize = kCCKeySizeAES128;
     
     CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
                                           kCCAlgorithmAES,
-                                          kCCOptionECBMode, // 加密模式
+                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式
                                           keyPtr,
                                           kKeySize,
                                           initVector.bytes,
