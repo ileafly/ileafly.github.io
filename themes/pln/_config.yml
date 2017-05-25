@@ -1,0 +1,19 @@
+menu:
+  主页: /
+  归档: /archives
+
+logo: XXX
+
+more:
+  友情链接: http://www.jianshu.com/u/ca60cab2466b
+  Github: https://github.com/luzhiyongGit/
+
+about:
+  title: Theme Pln
+  link: https://github.com/gaoryrt/hexo-theme-pln
+
+disqus_shortname:
+
+excerpt_num: 120
+
+footer_info: © XXX 20xx-2017
