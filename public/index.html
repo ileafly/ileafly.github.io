@@ -127,7 +127,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
                     </div>
                 </section>
                 
@@ -188,6 +188,94 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-iOS11开发者需要知道的改变" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/08/iOS11开发者需要知道的改变/" class="article-date">
+      <time datetime="2017-06-08T09:18:08.000Z" itemprop="datePublished">2017-06-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/08/iOS11开发者需要知道的改变/">iOS 11 开发者需要知道的改变</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>苹果在<code>WWDC 2017</code>披露了许多的iOS 11的新特性，作为iOS开发者有哪些改变是我们需要知道的呢？</p>
+<h2 id="iOS-11的发布时间"><a href="#iOS-11的发布时间" class="headerlink" title="iOS 11的发布时间"></a>iOS 11的发布时间</h2><p>在正式发布iOS 11之前，苹果通常会先提供一个可供开发者安装的版本，然后再进过几个版本公开发布的beta版，最终才会发布一个正式版本的iOS 11系统</p>
+<ul>
+<li>开发者beta版本： 已经发布</li>
+<li>公开发布的beta版本：六月底</li>
+<li>最终正式版本：秋季</li>
+</ul>
+<h2 id="iOS-11支持哪些设备"><a href="#iOS-11支持哪些设备" class="headerlink" title="iOS 11支持哪些设备"></a>iOS 11支持哪些设备</h2><ul>
+<li>iPhone 5S, 6, 6 Plus, 6S Plus, SE, 7, 7 Plus</li>
+<li>iPad Air and Air 2, iPad Mini 2, 3, 4, 5代 iPad，所有的 iPad Pro</li>
+<li>6代 iPod Touch</li>
+</ul>
+<h2 id="iOS-新增了哪些框架"><a href="#iOS-新增了哪些框架" class="headerlink" title="iOS 新增了哪些框架"></a>iOS 新增了哪些框架</h2><h3 id="Core-ML"><a href="#Core-ML" class="headerlink" title="Core ML"></a>Core ML</h3><p>iOS 11中苹果新增了一个机器学习框架<a href="https://developer.apple.com/machine-learning/" target="_blank" rel="external">Core ML</a>，同时Apple也提供了<a href="https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml" target="_blank" rel="external">一系列的工具</a>用来将各类机器学习的模型转换为Core ML可以理解的形式，从而帮助开发者轻松的在APP里使用前人训练出来的模型。</p>
+<h3 id="ARKit"><a href="#ARKit" class="headerlink" title="ARKit"></a>ARKit</h3><p><a href="https://developer.apple.com/documentation/arkit" target="_blank" rel="external">ARKit</a>帮助开发者更容易的在项目中使用AR功能，扩展了应用和游戏的应用场景，三年前我在开发带有AR功能的App时，相关的核心功能还需要像高通购买SDK才能实现。现在有了ARKit普通开发者也能够开发AR相关的功能了</p>
+<h2 id="其他值得注意的变更"><a href="#其他值得注意的变更" class="headerlink" title="其他值得注意的变更"></a>其他值得注意的变更</h2><ol>
+<li>在iOS 11系统中，在视频播放界面调节音量时将不会出现音量提示框，一个比之前更小的音量滑动条将会出现在屏幕的右上角<br><img src="https://resource.feng.com/resource/h061/h84/img201706072211540.jpg" alt=""></li>
+<li>由于AppStore的改版，原先在应用内设置的跳转评分的链接将不会正常加载到评分界面</li>
+<li>用户能够在AppStore中的产品页面里直接进行应用内购买，App必须支持新的<code>SKPaymentTransactionObserver</code>方法来支持AppStore内的应用内购买功能</li>
+<li>开发者能够在后台回复用户的评论了，再也不用愁无法跟AppStore里的用户进行沟通了</li>
+<li>由于我们在iTunes Connect后台只能提供一套产品信息，类如应用名称、图标、截图等，这就要求我们考虑到不同版本AppStore界面间的兼容</li>
+<li>新的Navigation title设计，iOS 11系统中大多app都采用了这个新的设计，放大了导航栏的标题字体。虽然个人感觉有点丑，但是如果想要采用这项设计的话，只需要设置<code>navigation bar</code>的<code>prefersLargeTitles</code>即可，当然前提是你的导航栏是用的原生的<code>navigation bar</code></li>
+<li>提供了<a href="https://developer.apple.com/documentation/fileprovider" target="_blank" rel="external">FileProvider</a>功能让App可以获取用户设备或云端上的文件</li>
+<li>iOS 11将不再支持32位的app，如果想要让程序运行在iOS 11设备上，进行64位的重新编译是必须步骤</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://onevcat.com/2017/06/ios-11-sdk/" target="_blank" rel="external">开发者所需要知道的 iOS 11 SDK 新特性</a></p>
+<p><a href="https://developer.apple.com/app-store/product-page/" target="_blank" rel="external">AppStore官方说明</a></p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS11/">iOS11</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Block用法小结" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -902,94 +990,6 @@
     <a class="article-category-link" href="/categories/iOS/">iOS</a>
     </div>
 
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-runtime机制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/27/runtime机制/" class="article-date">
-      <time datetime="2016-12-27T07:46:50.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/runtime机制/">runtime机制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="runtime实现的机制是什么？"><a href="#runtime实现的机制是什么？" class="headerlink" title="runtime实现的机制是什么？"></a>runtime实现的机制是什么？</h3><p>runtime是一套比较底层的纯C语言API，属于一个C语言库，包含了很多底层的C语言API。平时我们编写的OC代码在程序运行过程时，最终都是转换成了runtime的C语言<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">OC: [[User alloc] init]</div><div class="line">runtime: objc_msgSend(objc_msgSend(&quot;User&quot;, &quot;alloc&quot;), &quot;init&quot;)</div></pre></td></tr></table></figure></p>
-<h3 id="runtime能用来干什么？"><a href="#runtime能用来干什么？" class="headerlink" title="runtime能用来干什么？"></a>runtime能用来干什么？</h3><ol>
-<li>在程序运行过程中，动态的创建一个类</li>
-<li>在程序运行过程中，动态的为某个类添加属性、方法，修改属性值、方法</li>
-<li>遍历一个类的所有成员变量、所有方法</li>
-</ol>
-<h3 id="runtime相关知识"><a href="#runtime相关知识" class="headerlink" title="runtime相关知识"></a>runtime相关知识</h3><ol>
-<li><p>相关头文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;objc/runtime.h&gt;</div><div class="line">&lt;objc/message.h&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>相关函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">objc_msgSend: 给对象发送消息</div><div class="line">class_copyMethodList: 获得某个类内部的所有方法</div><div class="line">class_copyIvarList: 获得某个类内部的所有成员变量</div><div class="line">class_getInstanceMethod: 获得某个实例方法</div><div class="line">class_getClassMethod: 获得某个类方法</div><div class="line">method_exchangeImplementations: 交换两个方法的具体实现</div><div class="line">objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy) 关联对象</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="runtime用法介绍"><a href="#runtime用法介绍" class="headerlink" title="runtime用法介绍"></a>runtime用法介绍</h3><ol>
-<li><p>发送消息<br>OC方法调用的本质就是发送消息，消息机制的原理就是对象根据方法编号SEL去映射表中查找对应的方法实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Person *person = [[Person alloc] init];</div><div class="line">[person eat];</div><div class="line"></div><div class="line">// 本质：让对象发送消息</div><div class="line">objc_msgSend(p, @selector(eat));</div><div class="line"></div><div class="line">[Person eat];</div><div class="line"></div><div class="line">// 本质：让类对象发送消息</div><div class="line">objc_msgSend([Person class], @selector(eat));</div></pre></td></tr></table></figure>
-</li>
-<li><p>交换方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">   + (void)load &#123;</div><div class="line">       // 交换吃和读这两个方法</div><div class="line">       Method m1 = class_getInstanceMethod(self, @selector(eat));</div><div class="line">       Method m2 = class_getInstanceMethod(self, @selector(read));</div><div class="line">    </div><div class="line">       method_exchangeImplementations(m1, m2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">#pragma mark - Methods</div><div class="line"></div><div class="line">    - (void)eat &#123;</div><div class="line">       NSLog(@&quot;我非常喜欢美食&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    - (void)read &#123;</div><div class="line">       NSLog(@&quot;我非常喜欢名著&quot;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>动态添加方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 动态给Person类中添加drink方法</div><div class="line">   class_addMethod([person class], @selector(drink), (IMP)drinkWater, &quot;v@:&quot;);</div><div class="line"></div><div class="line">// 调用drink方法         </div><div class="line">   if ([person respondsToSelector:@selector(drink)]) &#123;</div><div class="line">         [person performSelector:@selector(drink)];</div><div class="line">   &#125;</div><div class="line"></div><div class="line">// 编写drinkWater的实现</div><div class="line">// 注意点：1、void 前面没有+、- 号 因为是C语言代码  2、必须有两个指定参数(id self, SEL _cmd)</div><div class="line">   void drinkWater(id self, SEL _cmd) &#123;</div><div class="line">       NSLog(@&quot;我喜欢喝饮料&quot;);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在方法上添加额外功能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">// 以UIButton为类，扩展点击事件</div><div class="line"></div><div class="line">@implementation UIButton (Hook)</div><div class="line"></div><div class="line">+ (void)load &#123;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">       Class selfClass = [self class];</div><div class="line"></div><div class="line">       SEL oriSEL = @selector(sendAction:to:forEvent:);</div><div class="line">       Method oriMethod = class_getInstanceMethod(selfClass, oriSEL);</div><div class="line"></div><div class="line">       SEL cusSEL = @selector(mySendAction:to:forEvent:);</div><div class="line">       Method cusMethod = class_getInstanceMethod(selfClass, cusSEL);</div><div class="line"></div><div class="line">       BOOL addSucc = class_addMethod(selfClass, oriSEL, method_getImplementation(cusMethod), method_getTypeEncoding(cusMethod));</div><div class="line"></div><div class="line">       if (addSucc) &#123;</div><div class="line">          class_replaceMethod(selfClass, cusSEL, method_getImplementation(oriMethod), method_getTypeEncoding(oriMethod));</div><div class="line">       &#125; else &#123;             </div><div class="line">         method_exchangeImplementations(oriMethod, cusMethod);</div><div class="line">       &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)mySendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event &#123;</div><div class="line">  // 自定义事件</div><div class="line">  [self doSomething];</div><div class="line"></div><div class="line">  [self mySendAction:action to:target forEvent:event];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>关联</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)</div><div class="line">// 参数说明：</div><div class="line">// object: 与谁关联</div><div class="line">// key: 唯一键</div><div class="line">// value: 关联所设置的值</div><div class="line">// policy: 内存管理策略</div><div class="line"></div><div class="line">id objc_getAssociatedObject(id object, const void *key)</div><div class="line">// 参数说明：</div><div class="line">// object: 与谁关联</div><div class="line">// key: 唯一键</div><div class="line"></div><div class="line">void objec_remoteAssociatedObjects(id object)</div><div class="line">// 参数说明：</div><div class="line">// object: 与谁关联</div></pre></td></tr></table></figure></li>
-</ol>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
 
       
     <div class="article-tag tagcloud">
