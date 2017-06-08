@@ -127,7 +127,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
                     </div>
                 </section>
                 
@@ -188,6 +188,221 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Block用法小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/06/Block用法小结/" class="article-date">
+      <time datetime="2017-06-06T08:20:01.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/06/Block用法小结/">Block用法小结</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这篇博客将系统整理一下Block相关的知识</p>
+<p>首先，先思考一个问题Block能做些什么？</p>
+<ul>
+<li>Block内部能够读取外部局部变量的值</li>
+<li>经过<code>__block</code>修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值</li>
+<li>Block可以用来作为控制器之间的一个通信</li>
+<li>Block可以作为方法的参数</li>
+</ul>
+<h2 id="进一步深挖block的原理"><a href="#进一步深挖block的原理" class="headerlink" title="进一步深挖block的原理"></a>进一步深挖block的原理</h2><h4 id="为什么不加-block修饰符就不能改变Block外部的局部变量"><a href="#为什么不加-block修饰符就不能改变Block外部的局部变量" class="headerlink" title="为什么不加__block修饰符就不能改变Block外部的局部变量?"></a>为什么不加__block修饰符就不能改变Block外部的局部变量?</h4><p>对于block外的变量引用，block默认是将其复制到其数据结构中实现访问的，对于用<strong>block修饰的外部变量引用，block是复制其引用地址来实现访问的，所以加上</strong>block就能改变block外部的变量</p>
+<h4 id="Block如何作为控制器之间的一个通信？"><a href="#Block如何作为控制器之间的一个通信？" class="headerlink" title="Block如何作为控制器之间的一个通信？"></a>Block如何作为控制器之间的一个通信？</h4><p>举例说明：</p>
+<ol>
+<li><p>页面B的.h文件中声明一个block变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">typedef void(^blo)(NSString *str);</div><div class="line">@property (nonatomic, copy) blo block;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">@property (nonatomic, copy) void (^blo)(NSString *str);</div></pre></td></tr></table></figure>
+</li>
+<li><p>页面A中创建B页面，并调用Block变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.block = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.blo = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在页面B中调用Block变量</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.block(&quot;string&quot;);</div></pre></td></tr></table></figure>
+<h4 id="为何A页面要用-weak修饰？"><a href="#为何A页面要用-weak修饰？" class="headerlink" title="为何A页面要用__weak修饰？"></a>为何A页面要用__weak修饰？</h4><p>使用<strong>weak修饰符是为了避免引起循环引用。如果在Block中使用了</strong>strong修饰符修饰的对象，那么当Block从栈复制到堆时，改对象为Block所有，这就容易引起循环引用，从而发生内存泄漏</p>
+<h4 id="如何使用Block作为方法的参数"><a href="#如何使用Block作为方法的参数" class="headerlink" title="如何使用Block作为方法的参数"></a>如何使用Block作为方法的参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)blockAsParameter:(void (^)())block &#123;</div><div class="line">    block(); // 执行block内部的代码</div><div class="line">&#125;</div><div class="line"></div><div class="line">[self blockAsParameter:^&#123;</div><div class="line">    NSLog(@&quot;&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h4 id="block的三种类型"><a href="#block的三种类型" class="headerlink" title="block的三种类型"></a>block的三种类型</h4><ol>
+<li>不管在ARC还是MRC环境下，block内部如果没有访问外部变量，这个block就是全局block <code>_NSConcreteGlobalBlock</code>，存储在内存中的代码区</li>
+<li>在MRC下，block内部如果访问外部变量，这个block就是栈block <code>_NSConcreteStackBlock</code>，存储在内存中的栈上，当函数返回时会被销毁</li>
+<li>在MRC下，block内部访问外部变量，同时对该block做一次copy操作，这个block就是堆block <code>_NSConcreteMallocBlock</code>，存储在内存的堆上，当引用计数为 0 时会被销毁</li>
+<li>在ARC下，block内部如果访问了外部变量，这个block就是堆block，因为在ARC下，默认对block做一次copy操作</li>
+</ol>
+<h3 id="总结一些block使用的注意点"><a href="#总结一些block使用的注意点" class="headerlink" title="总结一些block使用的注意点"></a>总结一些block使用的注意点</h3><p>1.默认情况下，block内部可以访问外部变量，但是不能修改外部变量，如果想要修改外部变量，可以给外部变量加上<code>__block</code>关键字，block是复制其引用地址来实现访问的</p>
+<ol>
+<li>block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。</li>
+</ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://chun.tips/2014/11/13/objc-block/" target="_blank" rel="external">黑幕背后的 __block 修饰符</a>–分析了为什么不加__block修饰符就不能改变Block外部的局部变量</p>
+<p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-深入浅出Texture-高性能界面的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/" class="article-date">
+      <time datetime="2017-06-01T11:08:54.000Z" itemprop="datePublished">2017-06-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="https://github.com/texturegroup/texture/" target="_blank" rel="external">Texture</a>是由Facebook开源的<a href="https://github.com/facebookarchive/AsyncDisplayKit" target="_blank" rel="external">AsyncDisplayKit</a>演变而来</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>Texture的基础单元是一个个node，ASDisplayNode是基于CALayer的一层抽象。不同于UIView对象，ASDisplayNode是线程安全的，它不仅仅可以用于主线程而且可以在辅线程中使用。</p>
+<p>使用Texture可以让我们在辅线程中进行图片的解析、文本的适应、约束等等UI操作，从而能够保证主线程及时对用户的操作做出反应</p>
+<h3 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h3><ul>
+<li><code>ASViewController</code>: 基于<code>UIViewController</code>封装的子类，能够方便的为我们提供node的管理</li>
+<li><code>ASNavigationController</code>: 可用于替代<code>UINavigationController</code>，遵循<code>ASVisibility</code>协议</li>
+<li><code>ASTabBarController</code>: 可用于替代<code>UITabBarController</code>，遵循<code>ASVisiblity</code>协议</li>
+<li><code>ASCollectionNode</code>、<code>ASTableNode</code>:等同于<code>UICollectionView</code>、<code>UITableView</code></li>
+<li><code>ASPagerNode</code>:基于<code>ASCollectionNode</code>封装的子类，能够像<code>UIPageViewController</code>一样给我们提供强大的滑动操作体验</li>
+<li><code>ASCellNode</code>:等同于<code>UITableViewCell</code>、<code>UICollectionViewCell</code>，需要强调的是它返回的是一个Block(ASCellNodeBlock)。</li>
+<li><code>ASScrollNode</code>: 代替<code>UIScrollView</code></li>
+<li><code>ASEditableTextNode</code>: 代替<code>UITextView</code></li>
+<li><code>ASTextNode</code>: 代替<code>UILabel</code></li>
+<li><code>ASImageNode</code>: 代替<code>UIImage</code></li>
+<li><code>ASNetworkImageNode</code>: 可以自动加载图片并进行内存管理，而且还支持逐步加载Jpeg和动态gif图片</li>
+<li><code>ASMultiplexImageNode</code>:</li>
+<li><code>ASVideoNode</code>: 代替<code>AVPlayerLayer</code></li>
+<li><code>ASVideoPlayerNode</code>: 代替<code>UIMoviePlayer</code></li>
+<li><code>ASControlNode</code>: 代替<code>UIControl</code></li>
+<li><code>ASButtonNode</code>: 代替<code>UIButton</code></li>
+<li><code>ASMapNode</code>: 代替<code>MKMapView</code></li>
+<li><code>ASStackLayoutSpec</code>: 堆放布局规则</li>
+<li><code>ASOverlayLayoutSpec</code>: 覆盖布局规则</li>
+<li><code>ASRelativeLayoutSpec</code>: 相对布局规则</li>
+<li><code>ASInsetLayoutSpec</code>: 插入布局规则</li>
+<li><code>ASBackgroundLayoutSpec</code>: 背景布局规则</li>
+<li><code>ASCenterLayoutSpec</code>: 中心布局规则</li>
+<li><code>ASAbsoluteLayoutSpec</code>: 绝对布局规则</li>
+<li><code>ASRatioLayoutSpec</code>: 比例布局规则</li>
+</ul>
+<h3 id="层级结构"><a href="#层级结构" class="headerlink" title="层级结构"></a>层级结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">ASDisplayNode--&gt;ASTableNode</div><div class="line">ASDisplayNode--&gt;ASCollectionNode</div><div class="line">ASDisplayNode--&gt;ASCellNode</div><div class="line">ASDisplayNode--&gt;ASScrollNode</div><div class="line">ASDisplayNode--&gt;ASEditableTextNode</div><div class="line">ASDisplayNode--&gt;ASControlNode</div><div class="line">ASCollectionNode--&gt;ASPagerNode</div><div class="line">ASControlNode--&gt;ASButtonNode</div><div class="line">ASControlNode--&gt;ASTextNode</div><div class="line">ASControlNode--&gt;ASMapNode</div><div class="line">ASControlNode--&gt;ASImageNode</div><div class="line">ASImageNode--&gt;ASNetworkImageNode</div><div class="line">ASImageNode--&gt;ASMultiplexImageNode</div><div class="line">ASNetworkImageNode--&gt;ASVideoNode</div></pre></td></tr></table></figure>
+<h3 id="批抓取进行无限滚动"><a href="#批抓取进行无限滚动" class="headerlink" title="批抓取进行无限滚动"></a>批抓取进行无限滚动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 将leadingScreensForBatching 设置为1.0表示当滚动到还剩下一个全屏时就开始抓取新的一批数据</div><div class="line">self.tableNode.view.leadingScreensForBatching = 1.0;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)shouldBatchFetchForTableNode:(ASTableNode *)tableNode &#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="ASDK的容器"><a href="#ASDK的容器" class="headerlink" title="ASDK的容器"></a>ASDK的容器</h3><p>当在项目中替换使用AsyncDisplayKit的时候，应该把nodes节点，当做一个子节点添加到一个容器类里，这些容器类负责告诉所包含的节点，他们现在是什么状态，以便尽可能有效的加载数据和渲染，经常犯的一个错误是把node节点直接添加到一个现有的view中，这样做会导致节点在渲染的时候会闪烁一下。</p>
+<p>Texture为我们提供了以下这些节点容器：</p>
+<ul>
+<li><code>ASCollectionNode</code></li>
+<li><code>ASPagerNode</code></li>
+<li><code>ASTableNode</code></li>
+<li><code>ASViewController</code></li>
+<li><code>ASNavigationController</code></li>
+<li><code>ASTabBarController</code></li>
+</ul>
+<h4 id="使用节点容器的好处"><a href="#使用节点容器的好处" class="headerlink" title="使用节点容器的好处"></a>使用节点容器的好处</h4><p>节点容器能够自动为它的节点们管理高效的预加载，这就意味着节点容器中所有的节点的尺寸约束、数据请求、图片解析、渲染都将是异步进行</p>
+<h3 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h3><p>Texture模拟了Core Animation的机制，所有针对ASNode的修改和提交，总有些任务是必需放在主线程执行的，当这种任务出现的时候，ASNode就会把任务用<code>ASAsyncTransaction(Group)</code>封装并提交到一个全局的容器去。Texture在RunLoop中注册了一个Observer，监视的事件和CA一样，但是优先级比CA低。当RunLoop进入休眠前，CA处理完事件后，ASDK就会执行该loop内提交的所有任务</p>
+<p>利用这个机制，Texture可以在合适的机会把异步、并发的操作同步到主线程去，并且获得不错的性能</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
+<li><p>利用ASTableNode替代UITableView创建一个高性能的列表页面</p>
+</li>
+<li><p>利用ASLayoutSpec替代AutoLayout创建高效的页面约束</p>
+</li>
+</ol>
+<h3 id="疑问点"><a href="#疑问点" class="headerlink" title="疑问点"></a>疑问点</h3><ul>
+<li>为何使用<code>ASCellNode</code>不需要担心cell重用问题？</li>
+</ul>
+<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.bijishequ.com/detail/227995?p=" target="_blank" rel="external">AsyncDisplaykit2.0 使用</a>–主要讲解了LayoutSpec相关的知识</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-自定义UIPageControl" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -779,176 +994,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS项目添加自定义字体" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/11/28/iOS项目添加自定义字体/" class="article-date">
-      <time datetime="2016-11-28T03:23:27.000Z" itemprop="datePublished">2016-11-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/28/iOS项目添加自定义字体/">iOS项目添加自定义字体</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>有时候系统的字体无法满足我们的要求，这时就需要我们添加自定义字体，下面就来总结一下添加自定义字体的流程和注意点。</p>
-<p>####添加字体<br>首先，我们需要将需要自定义的字体文件添加到我们的项目中<br><img src="/images/iOS项目添加自定义字体_1.png" alt="添加字体"></p>
-<p>####配置plist<br>添加完成后就需要配置plist文件告诉项目你添加了自定义字体<br><img src="/images/iOS项目添加自定义字体_2.png" alt="配置plist"></p>
-<p>####打印字体名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 打印字体</div><div class="line">        let familyNames: Array = UIFont.familyNames()</div><div class="line">        </div><div class="line">        for familyName in familyNames &#123;</div><div class="line">            let fontNames = UIFont.fontNamesForFamilyName(familyName)</div><div class="line">            </div><div class="line">            for fontName in fontNames &#123;</div><div class="line">                print(&quot;Font:&quot;+fontName)</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
-<p><img src="/images/iOS项目添加自定义字体_3.png" alt="打印字体名称"></p>
-<p>####使用新字体<br>打印完所有的字体名称后，我们需要找到新字体的名称，这个比较考验眼力，需要说明的是导入的字体名称与你的字体文件名不存在必然关联，所以找起来比较麻烦，本项目中导入的字体名称是<code>Woxxdrgnxpjndtijvopiqfvieua</code> <code>Rlwnvqnxbaojotrussvqutrmalm</code> <code>Gjfhtoyvcitsqewokxubciqwsnn</code> <code>Daipwzrbqhqhabefqqcwoentynp</code>。<br>调用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[UIFont fontWithName:@&quot;Woxxdrgnxpjndtijvopiqfvieua&quot; size:9];</div></pre></td></tr></table></figure></p>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-React-Native之Navigator" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/11/24/React-Native之Navigator/" class="article-date">
-      <time datetime="2016-11-24T03:26:47.000Z" itemprop="datePublished">2016-11-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/24/React-Native之Navigator/">React-Native之Navigator</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h4 id="结合官方文档，简单使用Navigator"><a href="#结合官方文档，简单使用Navigator" class="headerlink" title="结合官方文档，简单使用Navigator"></a>结合官方文档，简单使用Navigator</h4><p>React Native内置了navigation组件，在<a href="http://facebook.github.io/react-native/docs/using-navigators.html" target="_blank" rel="external">官方文档</a>中对于如何使用Navigator有了一个简要的说明，下面就让我们跟随文档进行学习。 </p>
-<ol>
-<li><p>页面搭建</p>
-<p>根据文档的描述，我们需要先创建一个文件命名为<code>MyScene.js</code>，内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要使用的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; View, Text, Navigator &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明MyScene类，并设置为外部可以引用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyScene</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> get defaultProps() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">title</span>: <span class="string">'MyScene'</span></div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 绘制界面</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;View style=&#123;&#123;height: 200, top: 64&#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Hi! My name is &#123;this.props.title&#125;.&lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>​      创建完<code>MyScene.js</code>后我们就需要进入到<code>index.ios.js</code>中进行更改。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;MyScene /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
-<p>​      进行上述操作后运行项目来看一下效果：</p>
-<p><img src="/images/React-Native之Navigator_1.png" alt="React-Native之Navigator_1"></p>
-<p>显然，跟我们想要的效果差很远。       </p>
-<ol>
-<li><p>使用Navigator</p>
-<p>接下来我们就需要利用<code>Navigator</code>组件，修改<code>index.ios.js</code>文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
-<p>进行上述操作后我们再次运行项目：</p>
-<p><img src="/images/React-Native之Navigator_2.png" alt="React-Native之Navigator_2.png"></p>
-<p>比较两次的运行结果，似乎只是文案内容发生了改变，让我们继续下去看到更多的变化</p>
-</li>
-<li><p>加入<code>push</code> <code>pop</code> </p>
-<p><code>navigator</code>给我们提供了<code>push</code> <code>pop</code> 操作，我们来继续修改<code>index.ios.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry, Navigator, Text, StyleSheet, View, TouchableOpacity &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; </div><div class="line">              // push操作调用函数</div><div class="line">               onForward=&#123; () =&gt; &#123;</div><div class="line">                 const nextIndex = route.index + 1;</div><div class="line">                 navigator.push(&#123;</div><div class="line">                    title: 'Scene ' + nextIndex,</div><div class="line">                    index: nextIndex,</div><div class="line">                 &#125;);</div><div class="line">               &#125;&#125;</div><div class="line">  </div><div class="line">              // pop操作调用函数</div><div class="line">               onBack=&#123; () =&gt; &#123;</div><div class="line">                 if (route.index &gt; 0) &#123;</div><div class="line">                   navigator.pop();</div><div class="line">                 &#125;</div><div class="line">               &#125;&#125;</div><div class="line">           /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
-<p>现在我们在<code>MyScene.js</code> 里添加上点击事件，并调用<code>onForward</code>和<code>onBack</code>方法看看会有怎样的效果</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要使用的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; View, Text, Navigator, TouchableHighlight &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明MyScene类，并设置为外部可以引用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyScene</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> get defaultProps() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">title</span>: <span class="string">'MyScene'</span></div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 绘制界面</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;View style=&#123;&#123;height: 200, top: 64&#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Hi! My name is &#123;this.props.title&#125;.&lt;/Text&gt;</div><div class="line">      // 添加两个可点击区域，分别用于push和pop</div><div class="line">        &lt;TouchableHighlight onPress=&#123;this.props.onForward&#125;&gt;</div><div class="line">           &lt;Text&gt;Tap me to load the next scene&lt;/Text&gt;</div><div class="line">        &lt;/TouchableHighlight&gt;</div><div class="line">        &lt;TouchableHighlight onPress=&#123;this.props.onBack&#125;&gt;</div><div class="line">           &lt;Text&gt;Tap me to go back&lt;/Text&gt;</div><div class="line">        &lt;/TouchableHighlight&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyScene.propTypes = &#123;</div><div class="line">  <span class="attr">title</span>: PropTypes.string.isRequired,</div><div class="line">  <span class="attr">onForward</span>: PropTypes.func.isRequired,</div><div class="line">  <span class="attr">onBack</span>: PropTypes.func.isRequired,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>再次运行项目看一下效果：</p>
-<p><img src="/images/React-Native之Navigator_3.png" alt="React-Native之Navigator_3.png"></p>
-<p>点击<code>Tap me to load the next scene</code>能够push下一个页面</p>
-<p>点击<code>Tap me to go back</code>能够pop到上一个页面</p>
-<p>看来我们已经顺利集成了<code>Navigator</code> ,不过，似乎还缺少什么？</p>
-</li>
-<li><p>显示Navigator Bar</p>
-<p>通过上述操作我们能够正常实现<code>Navigator</code> 的<code>push</code> 和<code>pop</code> 操作啦，但是，我们一直没有看到导航栏，这是因为在<code>React Native</code>中我们需要额外设置才能够展现<code>Navigator Bar</code> ，下面就让我们来继续修改<code>index.ios.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry, Navigator, Text, StyleSheet, View, TouchableOpacity &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; </div><div class="line">              // push操作调用函数</div><div class="line">               onForward=&#123; () =&gt; &#123;</div><div class="line">                 const nextIndex = route.index + 1;</div><div class="line">                 navigator.push(&#123;</div><div class="line">                    title: 'Scene ' + nextIndex,</div><div class="line">                    index: nextIndex,</div><div class="line">                 &#125;);</div><div class="line">               &#125;&#125;</div><div class="line">  </div><div class="line">              // pop操作调用函数</div><div class="line">               onBack=&#123; () =&gt; &#123;</div><div class="line">                 if (route.index &gt; 0) &#123;</div><div class="line">                   navigator.pop();</div><div class="line">                 &#125;</div><div class="line">               &#125;&#125;</div><div class="line">           /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">         // 增加navigationBar</div><div class="line">          navigationBar=&#123;</div><div class="line">                  	&lt;Navigator.NavigationBar</div><div class="line">                       routeMapper=&#123;NavigationBarRouteMapper&#125;</div><div class="line">                       style=&#123;&#123;backgroundColor:'#fff',</div><div class="line">                               borderColor:'#dddddd',</div><div class="line">                               borderWidth:1,</div><div class="line">                               height: 64&#125;&#125;</div><div class="line">                  	/&gt;</div><div class="line">         &#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 导航栏的Mapper</div><div class="line">var NavigationBarRouteMapper = &#123;</div><div class="line">  // 左键</div><div class="line">  LeftButton(route, navigator, index, navState) &#123;</div><div class="line">    if (index &gt; 0) &#123;</div><div class="line">      return (</div><div class="line">        &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">          &lt;TouchableOpacity</div><div class="line">            underlayColor='transparent'</div><div class="line">            onPress=&#123;() =&gt; &#123;if (index &gt; 0) &#123;navigator.pop()&#125;&#125;&#125;&gt;</div><div class="line">            &lt;Text style=&#123;styles.leftNavButtonText&#125;&gt;</div><div class="line">              后退</div><div class="line">            &lt;/Text&gt;</div><div class="line">          &lt;/TouchableOpacity&gt;</div><div class="line">        &lt;/View&gt;</div><div class="line">      );</div><div class="line">    &#125; else &#123;</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  // 右键</div><div class="line">  RightButton(route, navigator, index, navState) &#123;</div><div class="line">    if (route.onPress)</div><div class="line">      return (</div><div class="line">        &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">          &lt;TouchableOpacity</div><div class="line">            onPress=&#123;() =&gt; route.onPress()&#125;&gt;</div><div class="line">            &lt;Text style=&#123;styles.rightNavButtonText&#125;&gt;</div><div class="line">              &#123;route.rightText || '右键'&#125;</div><div class="line">            &lt;/Text&gt;</div><div class="line">          &lt;/TouchableOpacity&gt;</div><div class="line">        &lt;/View&gt;</div><div class="line">      );</div><div class="line">  &#125;,</div><div class="line">  // 标题</div><div class="line">  Title(route, navigator, index, navState) &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">        &lt;Text style=&#123;styles.title&#125;&gt;</div><div class="line">          应用标题</div><div class="line">        &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var styles = StyleSheet.create(&#123;</div><div class="line">  navBar: &#123;</div><div class="line">      backgroundColor:'#fff',</div><div class="line">      borderColor:'#dddddd',</div><div class="line">      borderWidth:1,</div><div class="line">      height: 64</div><div class="line">  &#125;,</div><div class="line">  navBarTitleText: &#123;</div><div class="line">    fontWeight: '500',</div><div class="line">  &#125;,</div><div class="line">  navBarLeftButton: &#123;</div><div class="line">    paddingLeft: 5,</div><div class="line">  &#125;,</div><div class="line">  navBarRightButton: &#123;</div><div class="line">      marginRight:5,</div><div class="line">  &#125;,</div><div class="line">  icon: &#123;</div><div class="line">      width:30,</div><div class="line">      height:30,</div><div class="line">      marginTop:6,</div><div class="line">      textAlign:'center'</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
-<p>我们来最后看一下效果：</p>
-<p><img src="/images/React-Native之Navigator_4.png" alt="React-Native之Navigator_4"></p>
-<p><img src="/images/React-Native之Navigator_5.png" alt="React-Native之Navigator_5"></p>
-<p>​</p>
-</li>
-</ol>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/ReactNative/">ReactNative</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactNative/">ReactNative</a></li></ul>
     </div>
 
       

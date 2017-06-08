@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Block用法小结 | Leafly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这篇博客将系统整理一下Block相关的知识
+首先，先思考一个问题Block能做些什么？
+
+Block内部能够读取外部局部变量的值
+经过__block修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值
+Block可以用来作为控制器之间的一个通信
+Block可以作为方法的参数
+
+进一步深挖block的原理为什么不加__block修饰符就不能改变Block外部的局部变量?对于b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Block用法小结">
+<meta property="og:url" content="http://www.ileafly.com/2017/06/06/Block用法小结/index.html">
+<meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="这篇博客将系统整理一下Block相关的知识
+首先，先思考一个问题Block能做些什么？
+
+Block内部能够读取外部局部变量的值
+经过__block修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值
+Block可以用来作为控制器之间的一个通信
+Block可以作为方法的参数
+
+进一步深挖block的原理为什么不加__block修饰符就不能改变Block外部的局部变量?对于b">
+<meta property="og:updated_time" content="2017-06-06T08:24:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Block用法小结">
+<meta name="twitter:description" content="这篇博客将系统整理一下Block相关的知识
+首先，先思考一个问题Block能做些什么？
+
+Block内部能够读取外部局部变量的值
+经过__block修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值
+Block可以用来作为控制器之间的一个通信
+Block可以作为方法的参数
+
+进一步深挖block的原理为什么不加__block修饰符就不能改变Block外部的局部变量?对于b">
+  
+    <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Leafly</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/ca60cab2466b">我的简书</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中，愿自己永远对一切充满好奇~</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Leafly</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Leafly</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Block用法小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/06/Block用法小结/" class="article-date">
+      <time datetime="2017-06-06T08:20:01.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Block用法小结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这篇博客将系统整理一下Block相关的知识</p>
+<p>首先，先思考一个问题Block能做些什么？</p>
+<ul>
+<li>Block内部能够读取外部局部变量的值</li>
+<li>经过<code>__block</code>修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值</li>
+<li>Block可以用来作为控制器之间的一个通信</li>
+<li>Block可以作为方法的参数</li>
+</ul>
+<h2 id="进一步深挖block的原理"><a href="#进一步深挖block的原理" class="headerlink" title="进一步深挖block的原理"></a>进一步深挖block的原理</h2><h4 id="为什么不加-block修饰符就不能改变Block外部的局部变量"><a href="#为什么不加-block修饰符就不能改变Block外部的局部变量" class="headerlink" title="为什么不加__block修饰符就不能改变Block外部的局部变量?"></a>为什么不加__block修饰符就不能改变Block外部的局部变量?</h4><p>对于block外的变量引用，block默认是将其复制到其数据结构中实现访问的，对于用<strong>block修饰的外部变量引用，block是复制其引用地址来实现访问的，所以加上</strong>block就能改变block外部的变量</p>
+<h4 id="Block如何作为控制器之间的一个通信？"><a href="#Block如何作为控制器之间的一个通信？" class="headerlink" title="Block如何作为控制器之间的一个通信？"></a>Block如何作为控制器之间的一个通信？</h4><p>举例说明：</p>
+<ol>
+<li><p>页面B的.h文件中声明一个block变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">typedef void(^blo)(NSString *str);</div><div class="line">@property (nonatomic, copy) blo block;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">@property (nonatomic, copy) void (^blo)(NSString *str);</div></pre></td></tr></table></figure>
+</li>
+<li><p>页面A中创建B页面，并调用Block变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.block = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.blo = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在页面B中调用Block变量</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.block(&quot;string&quot;);</div></pre></td></tr></table></figure>
+<h4 id="为何A页面要用-weak修饰？"><a href="#为何A页面要用-weak修饰？" class="headerlink" title="为何A页面要用__weak修饰？"></a>为何A页面要用__weak修饰？</h4><p>使用<strong>weak修饰符是为了避免引起循环引用。如果在Block中使用了</strong>strong修饰符修饰的对象，那么当Block从栈复制到堆时，改对象为Block所有，这就容易引起循环引用，从而发生内存泄漏</p>
+<h4 id="如何使用Block作为方法的参数"><a href="#如何使用Block作为方法的参数" class="headerlink" title="如何使用Block作为方法的参数"></a>如何使用Block作为方法的参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)blockAsParameter:(void (^)())block &#123;</div><div class="line">    block(); // 执行block内部的代码</div><div class="line">&#125;</div><div class="line"></div><div class="line">[self blockAsParameter:^&#123;</div><div class="line">    NSLog(@&quot;&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h4 id="block的三种类型"><a href="#block的三种类型" class="headerlink" title="block的三种类型"></a>block的三种类型</h4><ol>
+<li>不管在ARC还是MRC环境下，block内部如果没有访问外部变量，这个block就是全局block <code>_NSConcreteGlobalBlock</code>，存储在内存中的代码区</li>
+<li>在MRC下，block内部如果访问外部变量，这个block就是栈block <code>_NSConcreteStackBlock</code>，存储在内存中的栈上，当函数返回时会被销毁</li>
+<li>在MRC下，block内部访问外部变量，同时对该block做一次copy操作，这个block就是堆block <code>_NSConcreteMallocBlock</code>，存储在内存的堆上，当引用计数为 0 时会被销毁</li>
+<li>在ARC下，block内部如果访问了外部变量，这个block就是堆block，因为在ARC下，默认对block做一次copy操作</li>
+</ol>
+<h3 id="总结一些block使用的注意点"><a href="#总结一些block使用的注意点" class="headerlink" title="总结一些block使用的注意点"></a>总结一些block使用的注意点</h3><p>1.默认情况下，block内部可以访问外部变量，但是不能修改外部变量，如果想要修改外部变量，可以给外部变量加上<code>__block</code>关键字，block是复制其引用地址来实现访问的</p>
+<ol>
+<li>block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。</li>
+</ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://chun.tips/2014/11/13/objc-block/" target="_blank" rel="external">黑幕背后的 __block 修饰符</a>–分析了为什么不加__block修饰符就不能改变Block外部的局部变量</p>
+<p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/06/Block用法小结/">Block用法小结</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
+        <p><span>发布时间:</span>2017年06月06日 - 16时20分</p>
+        <p><span>最后更新:</span>2017年06月06日 - 16时24分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/06/Block用法小结/" title="Block用法小结">http://www.ileafly.com/2017/06/06/Block用法小结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/06/06/Block用法小结/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入浅出Texture--高性能界面的解决方案</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进一步深挖block的原理"><span class="toc-number">1.</span> <span class="toc-text">进一步深挖block的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么不加-block修饰符就不能改变Block外部的局部变量"><span class="toc-number">1.0.1.</span> <span class="toc-text">为什么不加__block修饰符就不能改变Block外部的局部变量?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Block如何作为控制器之间的一个通信？"><span class="toc-number">1.0.2.</span> <span class="toc-text">Block如何作为控制器之间的一个通信？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为何A页面要用-weak修饰？"><span class="toc-number">1.0.3.</span> <span class="toc-text">为何A页面要用__weak修饰？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何使用Block作为方法的参数"><span class="toc-number">1.0.4.</span> <span class="toc-text">如何使用Block作为方法的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#block的三种类型"><span class="toc-number">1.0.5.</span> <span class="toc-text">block的三种类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结一些block使用的注意点"><span class="toc-number">1.1.</span> <span class="toc-text">总结一些block使用的注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">1.2.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="youyan" id="comments">
+  <div id="uyan_frame"></div>
+  <script src="http://v2.uyan.cc/code/uyan.js?uid=2134680"></script>
+</section>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/" title="下一篇: 深入浅出Texture--高性能界面的解决方案">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/06/Block用法小结/">Block用法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/11/自定义UIPageControl/">自定义UIPageControl</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/07/Bootstrap框架入门/">Bootstrap框架入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/PHP与iOS之间的AES加解密/">PHP与iOS之间的AES加解密</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/iOS开发小结之H5与OC交互/">iOS开发小结之H5与OC交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/Xcode统计整个项目代码行数/">Xcode统计整个项目代码行数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/3DTouch开发/">3DTouch开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/runtime机制/">runtime机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/28/iOS项目添加自定义字体/">iOS项目添加自定义字体</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/React-Native之Navigator/">React-Native之Navigator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/17/自动化打包IPA脚本/">自动化打包IPA脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/02/ReactNative入门/">ReactNative入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/01/iOS10系统下的推送开发/">iOS10系统下的推送开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/移除Pod管理的库后编译报Link错误/">移除Pod管理的库后编译报Link错误</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/iOS-让子View不响应父View的手势/">iOS--让子View不响应父View的手势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CocoaPods升级后问题解决/">CocoaPods升级后问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/自定义xopen命令打开工程/">自定义xopen命令打开工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">私有pod创建进阶--如何通过pod管理静态库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/git命令行入门/">git命令行入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/12/搭建私有Pod/">搭建私有Pod</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/如何搭建属于自己的博客/">如何搭建属于自己的博客？</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Leafly
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >网站到访量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
