@@ -9,10 +9,10 @@ categories: iOS
 
 ####添加字体
 首先，我们需要将需要自定义的字体文件添加到我们的项目中
-![添加字体](/images/iOS项目添加自定义字体_1.png)
+![添加字体](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_1.png)
 ####配置plist
 添加完成后就需要配置plist文件告诉项目你添加了自定义字体
-![配置plist](/images/iOS项目添加自定义字体_2.png)
+![配置plist](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_2.png)
 ####打印字体名称
 ```
 // 打印字体
@@ -26,7 +26,7 @@ categories: iOS
             }
         }
 ```
-![打印字体名称](/images/iOS项目添加自定义字体_3.png)
+![打印字体名称](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_3.png)
 ####使用新字体
 打印完所有的字体名称后，我们需要找到新字体的名称，这个比较考验眼力，需要说明的是导入的字体名称与你的字体文件名不存在必然关联，所以找起来比较麻烦，本项目中导入的字体名称是`Woxxdrgnxpjndtijvopiqfvieua` `Rlwnvqnxbaojotrussvqutrmalm` `Gjfhtoyvcitsqewokxubciqwsnn` `Daipwzrbqhqhabefqqcwoentynp`。
 调用方法：

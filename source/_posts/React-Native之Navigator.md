@@ -62,7 +62,7 @@ AppRegistry.registerComponent('YoDawgApp', () => YoDawgApp);
 
 ​      进行上述操作后运行项目来看一下效果：
 
-![React-Native之Navigator_1](/images/React-Native之Navigator_1.png)
+![React-Native之Navigator_1](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_1.png)
 
 显然，跟我们想要的效果差很远。       
 
@@ -99,7 +99,7 @@ AppRegistry.registerComponent('YoDawgApp', () => YoDawgApp);
 
    进行上述操作后我们再次运行项目：
 
-   ![React-Native之Navigator_2.png](/images/React-Native之Navigator_2.png)
+   ![React-Native之Navigator_2.png](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_2.png)
 
    比较两次的运行结果，似乎只是文案内容发生了改变，让我们继续下去看到更多的变化
 
@@ -191,7 +191,7 @@ AppRegistry.registerComponent('YoDawgApp', () => YoDawgApp);
 
    再次运行项目看一下效果：
 
-   ![React-Native之Navigator_3.png](/images/React-Native之Navigator_3.png)
+   ![React-Native之Navigator_3.png](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_3.png)
 
    点击`Tap me to load the next scene`能够push下一个页面
 
@@ -329,9 +329,9 @@ AppRegistry.registerComponent('YoDawgApp', () => YoDawgApp);
 
    我们来最后看一下效果：
 
-   ![React-Native之Navigator_4](/images/React-Native之Navigator_4.png)
+   ![React-Native之Navigator_4](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_4.png)
 
-   ![React-Native之Navigator_5](/images/React-Native之Navigator_5.png)
+   ![React-Native之Navigator_5](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_5.png)
 
    ​
 

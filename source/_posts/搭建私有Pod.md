@@ -21,7 +21,7 @@ categories: iOS
 ### 创建私有Spec Repo
  
 先来说第一步，什么是Spec Repo？它是所有的Pods的一个索引，就是一个容器，所有公开的Pods都在这个里面，我们常用的第三方库都是放在[Github](http://www.github.com)里开源的[Specs](https://github.com/CocoaPods/Specs)中，当我们使用CocoaPods后就会在~/.cocoapods/repos目录下生成一个官方的Spec Repo文件夹master。这个master目录的结构如图：
-![Foo](/images/spec_struct.png)
+![Spec Repo](https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/Pod/spec_struct.png)
 
 我们首先需要做的就是创建一个类似于master的私有Spec Repo：  
    1. 创建一个Git仓库  
