@@ -3,27 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo多台电脑同步 | Leafly</title>
+  <title>利用SDWebImage下载图片 | Leafly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。
-Hexo多台电脑同步方案
-创建两个分支：master和hexo
-设置hexo为默认分支，github的setting里可以">
+  <meta name="description" content="利用SDWebImage下载图片的原因近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过SDWebImage来动态的加载网络图片，能不能通过SDWebImage来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过SDWebImage预加载图片的 :)
+封装好的下载类为了能方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo多台电脑同步">
-<meta property="og:url" content="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/index.html">
+<meta property="og:title" content="利用SDWebImage下载图片">
+<meta property="og:url" content="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。
-Hexo多台电脑同步方案
-创建两个分支：master和hexo
-设置hexo为默认分支，github的setting里可以">
-<meta property="og:updated_time" content="2017-02-16T08:00:02.000Z">
+<meta property="og:description" content="利用SDWebImage下载图片的原因近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过SDWebImage来动态的加载网络图片，能不能通过SDWebImage来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过SDWebImage预加载图片的 :)
+封装好的下载类为了能方">
+<meta property="og:updated_time" content="2017-07-05T07:04:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo多台电脑同步">
-<meta name="twitter:description" content="使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。
-Hexo多台电脑同步方案
-创建两个分支：master和hexo
-设置hexo为默认分支，github的setting里可以">
+<meta name="twitter:title" content="利用SDWebImage下载图片">
+<meta name="twitter:description" content="利用SDWebImage下载图片的原因近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过SDWebImage来动态的加载网络图片，能不能通过SDWebImage来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过SDWebImage预加载图片的 :)
+封装好的下载类为了能方">
   
     <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
@@ -197,11 +191,11 @@ Hexo多台电脑同步方案
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Hexo多台电脑同步" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-利用SDWebImage下载图片" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/24/Hexo多台电脑同步/" class="article-date">
-      <time datetime="2016-10-24T07:00:08.000Z" itemprop="datePublished">2016-10-24</time>
+      <a href="/2017/07/05/利用SDWebImage下载图片/" class="article-date">
+      <time datetime="2017-07-05T07:04:20.000Z" itemprop="datePublished">2017-07-05</time>
 </a>
     </div>
   
@@ -214,7 +208,7 @@ Hexo多台电脑同步方案
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo多台电脑同步
+      利用SDWebImage下载图片
     </h1>
   
 
@@ -222,14 +216,10 @@ Hexo多台电脑同步方案
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/博客/">博客</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -239,22 +229,13 @@ Hexo多台电脑同步方案
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！<br>难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。</p>
-<h3 id="Hexo多台电脑同步方案"><a href="#Hexo多台电脑同步方案" class="headerlink" title="Hexo多台电脑同步方案"></a>Hexo多台电脑同步方案</h3><ol>
-<li>创建两个分支：master和hexo</li>
-<li>设置hexo为默认分支，<a href="https://www.github.com" target="_blank" rel="external">github</a>的setting里可以设置</li>
-<li>git clone 拷贝仓库</li>
-<li>进入仓库初始化hexo</li>
-<li>配置hexo <code>_config.yml</code> 可参考<a href="http://www.ileafly.com/2016/08/25/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">个人博客进阶–Hexo搭建博客</a></li>
-<li>依次执行 <code>git add .</code> <code>git commit -m &quot;message&quot;</code> <code>git push origin hexo</code> 提交相关文件</li>
-</ol>
-<p>这样，在你的博客项目里就存在两个分支，master分支用来存放生成的今天网页，hexo分支用来存放网站的原始文件</p>
-<h3 id="新电脑如何同步Hexo"><a href="#新电脑如何同步Hexo" class="headerlink" title="新电脑如何同步Hexo"></a>新电脑如何同步Hexo</h3><ol>
-<li>git clone 拷贝仓库</li>
-<li>已安装hexo则直接使用，未安装Hexo只需要安装Hexo即可</li>
-</ol>
-<h3 id="待尝试的同步方法"><a href="#待尝试的同步方法" class="headerlink" title="待尝试的同步方法"></a>待尝试的同步方法</h3><p>有大神写了一个同步的脚本，只需要执行<code>hexo b</code>就可以达到同步的目的，还没有尝试，<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">hexo-git-backup</a></p>
-<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="external">hexo多台电脑同步</a></p>
+        <h3 id="利用SDWebImage下载图片的原因"><a href="#利用SDWebImage下载图片的原因" class="headerlink" title="利用SDWebImage下载图片的原因"></a>利用SDWebImage下载图片的原因</h3><p>近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过<code>SDWebImage</code>来动态的加载网络图片，能不能通过<code>SDWebImage</code>来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过<code>SDWebImage</code>预加载图片的 :)</p>
+<h3 id="封装好的下载类"><a href="#封装好的下载类" class="headerlink" title="封装好的下载类"></a>封装好的下载类</h3><p>为了能方便的实现图片的下载，使用，移除等功能的调用，我封装了一个类<a href="https://github.com/luzhiyongGit/ZYImageDownloader" target="_blank" rel="external">ZYImageDownloader</a>，并且已经在github上开源，有兴趣的伙伴可以直接前往下载</p>
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>其实<code>SDWebImage</code>内部已经帮我们实现了图片下载的类，<code>SDWebImageDownloader</code>一个专门用来下载图片的类，<code>SDWebImagePrefetcher</code>一个专门用来批量下载图片的类</p>
+<p>这里我们主要就是使用了<code>SDWebImagePrefetcher</code>来下载图片，我们只需要将要下载的图片地址传入，<code>SDWebImagePrefetcher</code>就会帮我们将图片逐个下载下来，并且缓存在本地，缓存的方式和我们通常使用的动态加载图片一样以url为key存储</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:prefetchURLs progress:^(NSUInteger noOfFinishedUrls, NSUInteger noOfTotalUrls) &#123;</div><div class="line">        </div><div class="line">&#125; completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) &#123;</div><div class="line">        </div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>当我们需要使用对应地址的图片时，我们只需要以url为key来获取图片即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:imageURL]];</div><div class="line">    UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:key];</div><div class="line">    return image;</div></pre></td></tr></table></figure>
 
       
       
@@ -264,13 +245,13 @@ Hexo多台电脑同步方案
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/05/利用SDWebImage下载图片/">利用SDWebImage下载图片</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
-        <p><span>发布时间:</span>2016年10月24日 - 15时00分</p>
-        <p><span>最后更新:</span>2017年02月16日 - 16时00分</p>
+        <p><span>发布时间:</span>2017年07月05日 - 15时04分</p>
+        <p><span>最后更新:</span>2017年07月05日 - 15时04分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/24/Hexo多台电脑同步/" title="Hexo多台电脑同步">http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/05/利用SDWebImage下载图片/" title="利用SDWebImage下载图片">http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -283,18 +264,9 @@ Hexo多台电脑同步方案
 
 <nav id="article-nav">
   
-    <a href="/2016/11/01/iOS10系统下的推送开发/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS10系统下的推送开发
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">移除Pod管理的库后编译报Link错误</div>
+    <a href="/2017/06/08/iOS11开发者需要知道的改变/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS 11 开发者需要知道的改变</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -305,7 +277,7 @@ Hexo多台电脑同步方案
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo多台电脑同步方案"><span class="toc-number">1.</span> <span class="toc-text">Hexo多台电脑同步方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新电脑如何同步Hexo"><span class="toc-number">2.</span> <span class="toc-text">新电脑如何同步Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#待尝试的同步方法"><span class="toc-number">3.</span> <span class="toc-text">待尝试的同步方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考地址"><span class="toc-number">4.</span> <span class="toc-text">参考地址</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用SDWebImage下载图片的原因"><span class="toc-number">1.</span> <span class="toc-text">利用SDWebImage下载图片的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装好的下载类"><span class="toc-number">2.</span> <span class="toc-text">封装好的下载类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理分析"><span class="toc-number">3.</span> <span class="toc-text">原理分析</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -362,13 +334,11 @@ Hexo多台电脑同步方案
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/11/01/iOS10系统下的推送开发/" title="上一篇: iOS10系统下的推送开发">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/" title="下一篇: 移除Pod管理的库后编译报Link错误">
+            <a href="/2017/06/08/iOS11开发者需要知道的改变/" title="下一篇: iOS 11 开发者需要知道的改变">
                 <i class="fa fa-angle-right"></i>
             </a>
         

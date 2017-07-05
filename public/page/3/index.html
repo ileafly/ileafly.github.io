@@ -127,7 +127,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
                     </div>
                 </section>
                 
@@ -188,6 +188,70 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-CocoaPods升级后问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/09/CocoaPods升级后问题解决/" class="article-date">
+      <time datetime="2016-10-09T09:30:43.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/09/CocoaPods升级后问题解决/">CocoaPods升级后问题解决</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>升级<a href="https://cocoapods.org/" target="_blank" rel="external">CocoaPods</a>到<code>1.0.1</code>版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在<code>Podfile</code>里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。</p>
+<p>升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研找到了原因，因为iPhone 4或者iPhone 5模拟器是64位模拟器，也就是说在64位模拟器上编译不会通过，这是因为新版本的CocoaPods</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-自定义xopen命令打开工程" class="article article-type-post" itemscope itemprop="blogPost">
   
