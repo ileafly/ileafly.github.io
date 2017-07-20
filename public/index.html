@@ -127,7 +127,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/epub/" style="font-size: 10px;">epub</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
                     </div>
                 </section>
                 
@@ -188,6 +188,272 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-EPUB文件格式解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/20/EPUB文件格式解析/" class="article-date">
+      <time datetime="2017-07-20T09:45:54.000Z" itemprop="datePublished">2017-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h3><p><code>EPUB</code>是Electronic Publication的缩写，是一种电子图书标准，<code>EPUB</code>是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说<code>EPUB</code>格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。</p>
+<h3 id="文件组成"><a href="#文件组成" class="headerlink" title="文件组成"></a>文件组成</h3><p>一个未经加密处理的epub电子书由以下三部分组成：</p>
+<ol>
+<li>META-INF（文件夹，里面有一个container.xml文件）</li>
+<li>OEBPS （文件夹，包含images文件夹、很多xhtml文件、css文件和content.opf文件）</li>
+<li>mimetype</li>
+</ol>
+<h4 id="文件mimetype"><a href="#文件mimetype" class="headerlink" title="文件mimetype"></a>文件mimetype</h4><p>每个epub电子书均包含一个mimetype的文件，且内容不变，用以说明epub的文件格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">application/epub+zip</div></pre></td></tr></table></figure></p>
+<h4 id="文件夹META-INF"><a href="#文件夹META-INF" class="headerlink" title="文件夹META-INF"></a>文件夹META-INF</h4><p>META-INF用于存放容器信息，默认情况下此目录只包含一个文件container.xml，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</div><div class="line">&lt;container version=&quot;1.0&quot; xmlns=&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&gt;</div><div class="line">    &lt;rootfiles&gt;</div><div class="line">        &lt;rootfile full-path=&quot;OEBPS/content.opf&quot; media-type=&quot;application/oebps-package+xml&quot;/&gt;</div><div class="line">    &lt;/rootfiles&gt;</div><div class="line">&lt;/container&gt;</div></pre></td></tr></table></figure></p>
+<p>container.xml文件的主要功能用于告诉阅读器，电子书的根文件的路径和打开格式</p>
+<h4 id="文件夹OEBPS"><a href="#文件夹OEBPS" class="headerlink" title="文件夹OEBPS"></a>文件夹OEBPS</h4><p>OEBPS目录用于存放OPF文档、CSS文档、NCX文档</p>
+<h4 id="文件OPF"><a href="#文件OPF" class="headerlink" title="文件OPF"></a>文件OPF</h4><p>OPF文档是epub的核心文件，且是一个标准的xml文件，依据OPF规范，此文件的根元素为<code>&lt;package&gt;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;package xmlns=&quot;http://www.idpf.org/2007/opf&quot; version=&quot;2.0&quot; unique-identifier=&quot;uuid_id&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>其内容主要由五部分组成：</p>
+<ol>
+<li><p><metadata><br>元数据信息，这个标签里面是书籍的出版信息，由两个子元素组成</metadata></p>
+<ul>
+<li><dc-title> 标题</dc-title></li>
+<li><dc-creator> 责任人</dc-creator></li>
+<li><dc-subject> 主题词、关键词</dc-subject></li>
+<li><dc-descributor> 内容描述</dc-descributor></li>
+<li><dc-date> 日期</dc-date></li>
+<li><dc-type> 类型</dc-type></li>
+<li><dc-publisher> 出版者</dc-publisher></li>
+<li><dc-contributor> 发行者</dc-contributor></li>
+<li><dc-format> 格式</dc-format></li>
+<li><dc-identifier> 标识信息</dc-identifier></li>
+<li><dc-source> 来源信息</dc-source></li>
+<li><dc-language> 语言</dc-language></li>
+<li><dc-relation> 相关资料</dc-relation></li>
+<li><dc-coverage> 覆盖范围</dc-coverage></li>
+<li><dc-rights> 权限描述</dc-rights></li>
+</ul>
+</li>
+<li><p><manifest><br>文件列表，列出书籍出版的所有文件，但是不包括 mimetype、container.xml、content.opf，由一个个子元素构成</manifest></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;item id=&quot;&quot; href=&quot;&quot; media-type=&quot;&quot;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>id 文件的id号</li>
+<li>href 文件的相对路径</li>
+<li>media-type 文件的媒体类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;manifest&gt;</div><div class="line"> &lt;item id=&quot;ncx&quot; href=&quot;toc.ncx&quot; media-type=&quot;application/x-dtbncx+xml&quot; /&gt;</div><div class="line"> &lt;item href=&quot;cover.xhtml&quot; id=&quot;cover&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;copyright.xhtml&quot; id=&quot;copyright&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;catalog.xhtml&quot; id=&quot;catalog&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;chap0.xhtml&quot; id=&quot;chap0&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;/manifest&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><spine toc="ncx">
+
+<p>提供书籍的线性阅读次序，由一个个子元素构成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;itemref idref=&quot;copyright&quot;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>idref 即参考manifest列出的id</li>
+</ul>
+</spine></li>
+<li><p><guide><br>指南，一次列出电子书的特定页面</guide></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;guide&gt;</div><div class="line"> &lt;reference href=&quot;cover.xhtml&quot; type=&quot;text&quot; title=&quot;封面&quot;/&gt;</div><div class="line"> &lt;reference href=&quot;catalog.xhtml&quot; type=&quot;text&quot; title=&quot;目录&quot;/&gt;</div><div class="line">&lt;/guide&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p><tour><br> 导读，可以根据读者水平或阅读目的，按一定的次序，选择电子书的部分页面组成导读</tour></p>
+</li>
+</ol>
+<h4 id="NCX文件"><a href="#NCX文件" class="headerlink" title="NCX文件"></a>NCX文件</h4><p>NCX文件是epub电子书的另一个重要文件，用于制作电子书的目录。.ncx文件中最主要的节点是navMap,navMap节点是由许多navPoint节点组成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;ncx xmlns=&quot;http://www.daisy.org/z3986/2005/ncx/&quot; version=&quot;2005-1&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta content=&quot;178_0&quot; name=&quot;dtb:uid&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;2&quot; name=&quot;dtb:depth&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:totalPageCount&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:maxPageNumber&quot;/&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;docTitle&gt;</div><div class="line">        &lt;text&gt;1984&lt;/text&gt;</div><div class="line">    &lt;/docTitle&gt;</div><div class="line">    &lt;docAuthor&gt;</div><div class="line">        &lt;text&gt;[英] 乔治·奥威尔&lt;/text&gt;</div><div class="line">    &lt;/docAuthor&gt;</div><div class="line">    &lt;navMap&gt;</div><div class="line">        &lt;navPoint id=&quot;catalog&quot; playOrder=&quot;0&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;目录&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;catalog.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap0&quot; playOrder=&quot;1&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;前言&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap0.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap1&quot; playOrder=&quot;2&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第一部&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap1.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap2&quot; playOrder=&quot;3&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第1节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap2.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap3&quot; playOrder=&quot;4&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第2节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap3.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap4&quot; playOrder=&quot;5&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第3节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap4.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">    &lt;/navMap&gt;</div><div class="line">&lt;/ncx&gt;</div></pre></td></tr></table></figure>
+<h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>目前支持<code>EPUB</code>格式的开源阅读器有：</p>
+<h4 id="iOS-阅读器"><a href="#iOS-阅读器" class="headerlink" title="iOS 阅读器"></a>iOS 阅读器</h4><ul>
+<li><a href="https://github.com/GGGHub/Reader" target="_blank" rel="external">Reader</a>–一款基于CoreText实现的电子书阅读器，支持txt，epub格式</li>
+<li><a href="https://github.com/FolioReader/FolioReaderKit" target="_blank" rel="external">FolioReaderKit</a>–Swift版的ePub阅读器</li>
+<li><a href="https://github.com/ricobeck/KFEpubKit" target="_blank" rel="external">KFEpubKit</a>–支持iOS和OSX的epub阅读器</li>
+<li><a href="https://github.com/vfr/Reader" target="_blank" rel="external">Reader</a>–pdf阅读器</li>
+</ul>
+<h4 id="Android-阅读器"><a href="#Android-阅读器" class="headerlink" title="Android 阅读器"></a>Android 阅读器</h4><ul>
+<li><a href="https://github.com/JustWayward/BookReader" target="_blank" rel="external">BookReader</a>–一款比较完整的阅读器，支持txt/pdf/epub书籍阅读</li>
+<li><a href="https://github.com/geometer/FBReader" target="_blank" rel="external">FBReader</a>–C++项目，支持多平台的阅读器</li>
+<li><a href="https://github.com/FolioReader/FolioReader-Android" target="_blank" rel="external">FolioReader-Android</a>–FolioReader的android版本</li>
+</ul>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epub/">epub</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Swift开源项目ObjectMapper实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/20/Swift开源项目ObjectMapper实践/" class="article-date">
+      <time datetime="2017-07-20T09:42:43.000Z" itemprop="datePublished">2017-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/Swift开源项目ObjectMapper实践/">Swift开源项目ObjectMapper实践</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研</p>
+<p>今天就先从<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">ObjectMapper</a>入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star</p>
+<h3 id="先从官方文档入手，进行一个简单的介绍"><a href="#先从官方文档入手，进行一个简单的介绍" class="headerlink" title="先从官方文档入手，进行一个简单的介绍"></a>先从官方文档入手，进行一个简单的介绍</h3><h5 id="支持的功能"><a href="#支持的功能" class="headerlink" title="支持的功能"></a>支持的功能</h5><ul>
+<li>JSON向模型的转换</li>
+<li>模型向JSON的转换</li>
+<li>嵌套结构的解析</li>
+<li>mapping时的自定义转换</li>
+<li>结构体的支持</li>
+</ul>
+<h5 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h5><p>ObjectMapper中定义了一个协议<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mappable.swift" target="_blank" rel="external">Mappable</a></p>
+<p>Mappable协议中声明了两个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mutation func mapping(map: Map)</div><div class="line"></div><div class="line">init?(map: Map)</div></pre></td></tr></table></figure>
+<p>我们需要在模型中遵循这个协议，官方给出了一个参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [Any]?</div><div class="line">    var dictionary: [String : Any] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: Date?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line"></div><div class="line">    init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一旦我们的类或结构体如上面的示例一样实现了协议，我们就可以方便的进行JSON和模型之间的转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = user.toJSONString(prettyPrint: true)</div></pre></td></tr></table></figure>
+<p>当然也可以通过<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>类来进行转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = Mapper().toJSONString(user, prettyPrint: true)</div></pre></td></tr></table></figure>
+<h5 id="嵌套对象的映射"><a href="#嵌套对象的映射" class="headerlink" title="嵌套对象的映射"></a>嵌套对象的映射</h5><p>正如前面所列，ObjectMapper支持嵌套对象的映射</p>
+<p>列如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot; : &#123;</div><div class="line">        &quot;text&quot; : &quot;102&quot;,</div><div class="line">        &quot;value&quot; : 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们想要直接取出distance对象中的value值，可以设置如下mapping<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func mapping(map: Map) &#123;</div><div class="line">    distance &lt;- map[&quot;distance.value&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="自定义转换规则"><a href="#自定义转换规则" class="headerlink" title="自定义转换规则"></a>自定义转换规则</h5><p>ObjectMapper允许开发者在数据映射过程中指定转换规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class People: Mappable &#123;</div><div class="line">   var birthday: NSDate?</div><div class="line">   </div><div class="line">   required init?(_ map: Map) &#123;</div><div class="line">       </div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   func mapping(map: Map) &#123;</div><div class="line">       birthday &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   let JSON = &quot;\&quot;birthday\&quot;:1458117795332&quot;</div><div class="line">   let result = Mapper&lt;People&gt;().map(JSON)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于我们指定了<code>birthday</code>的转换规则，所以上述代码在解析JSON数据的时候会将long类型转换成Date类型</p>
+<p>除了使用ObjectMapper给我们提供的转换规则外，我们还可以通过实现<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformType.swift" target="_blank" rel="external">TransformType</a>协议来自定义我们的转换规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public protocol TransformType &#123;</div><div class="line">    typealias Object</div><div class="line">    typealias JSON</div><div class="line">    </div><div class="line">    func transformFromJSON(value: AnyObject?) -&gt; Object?</div><div class="line">    func transformToJSON(value: Object?) -&gt; JSON?</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ObjectMapper为我们提供了一个<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformOf.swift" target="_blank" rel="external">TransformOf</a>类来实现转换结果，TransformOf实际就是实现了TransformType协议的，TransformOf有两个类型的参数和两个闭包参数，类型表示参与转换的数据的类型，闭包表示转换的规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let transform = TransformOf&lt;Int, String&gt;(fromJSON: &#123; (value: String?) -&gt; Int? in </div><div class="line">&#125;, toJSON: &#123; (value: Int?) -&gt; String? in </div><div class="line">  // transform value from Int? to String?</div><div class="line">  if let value = value &#123;</div><div class="line">      return String(value)</div><div class="line">  &#125;</div><div class="line">  return nil</div><div class="line">&#125;)</div><div class="line"></div><div class="line">id &lt;- (map[&quot;id&quot;], transform)</div></pre></td></tr></table></figure>
+<h5 id="泛型对象"><a href="#泛型对象" class="headerlink" title="泛型对象"></a>泛型对象</h5><p>ObjectMapper同样可以处理泛型类型的参数，不过这个泛型类型需要在实现了Mappable协议的基础上才可以正常使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(_ map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Result&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line">    var result: T?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        result &lt;- map[&quot;result&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let JSON = &quot;&#123;\&quot;result\&quot;: &#123;\&quot;name\&quot;: \&quot;anenn\&quot;&#125;&#125;&quot;</div><div class="line">let result = Mapper&lt;Result&lt;User&gt;&gt;().map(JSON)</div></pre></td></tr></table></figure>
+<h3 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h3><p>ObjectMapper声明了一个Mappable协议，这个协议里声明了两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init?(map: Map)</div><div class="line"></div><div class="line">mutating func mapping(map: Map)</div></pre></td></tr></table></figure></p>
+<p>并且通过对Mappable协议的扩展，增加了JSON和模型之间的四个转换方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public extension BaseMappable &#123;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON String</div><div class="line">    public init?(JSONString: String, context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSONString: JSONString) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON Dictionary</div><div class="line">    public init?(JSON: [String: Any], context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSON: JSON) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON Dictionary for the object</div><div class="line">    public func toJSON() -&gt; [String: Any] &#123;</div><div class="line">        return Mapper().toJSON(self)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON String for the object</div><div class="line">    public func toJSONString(prettyPrint: Bool = false) -&gt; String? &#123;</div><div class="line">        return Mapper().toJSONString(self, prettyPrint: prettyPrint)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们在使用ObjectMapper进行转换时，首先需要让模型遵循Mappable协议，并且实现Mappable声明的两个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为ObjectMapper为Mappable增加了四个转换方法，所以User也继承了这四个转换方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div></pre></td></tr></table></figure>
+<p>这个方法的调用其实就是帮助我们执行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>因此，我们也可以直接通过如下方法进行转换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>接下来就是ObjectMapper的核心啦~<br>为什么通过Mapper类能完成转换呢？</p>
+<p>我们来逐步了解<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>的实现原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public final class Mapper&lt;N: BaseMappable&gt; &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正如上面的代码块所示，首先Mapper类定义了一个泛型N，N必须要遵循Mappable协议，也就是我们的模型User<br>继续往下看，我们选择一个常用的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public func map(JSONString: String) -&gt; N? &#123;</div><div class="line">        if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>没错，我们前面写的Mapper的转换方法正是使用的这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>那我们就来一层一层详细分析一下这个方法的内部实现吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 1. 调用Mapper的静态方法parseJSONStringIntoDictionary来将JSON转换成字典</div><div class="line">// 2. 调用map方法将转换后的字典转换成模型并返回</div><div class="line">if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div></pre></td></tr></table></figure>
+<p>先分解<code>parseJSONStringIntoDictionary</code>的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/// Convert a JSON String into a Dictionary&lt;String, Any&gt; using NSJSONSerialization</div><div class="line">    public static func parseJSONStringIntoDictionary(JSONString: String) -&gt; [String: Any]? &#123;</div><div class="line">        let parsedJSON: Any? = Mapper.parseJSONString(JSONString: JSONString)</div><div class="line">        return parsedJSON as? [String: Any]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /// Convert a JSON String into an Object using NSJSONSerialization</div><div class="line">    public static func parseJSONString(JSONString: String) -&gt; Any? &#123;</div><div class="line">        let data = JSONString.data(using: String.Encoding.utf8, allowLossyConversion: true)</div><div class="line">        if let data = data &#123;</div><div class="line">            let parsedJSON: Any?</div><div class="line">            do &#123;</div><div class="line">                parsedJSON = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                print(error)</div><div class="line">                parsedJSON = nil</div><div class="line">            &#125;</div><div class="line">            return parsedJSON</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>通过上述代码的逻辑不难发现，<code>parseJSONStringIntoDictionary</code>就是利用了系统的<code>JSONSerialization</code>将JSON字符串转换成字典</p>
+<p>理解了第一步，接下来我们就来看看第二步的实现原理</p>
+<p>我们先整体看一下map方法的实现代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/// Maps a JSON dictionary to an object that conforms to Mappable</div><div class="line">    public func map(JSON: [String: Any]) -&gt; N? &#123;</div><div class="line">        let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line">        </div><div class="line">        if let klass = N.self as? StaticMappable.Type &#123; // Check if object is StaticMappable</div><div class="line">            if var object = klass.objectForMapping(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? Mappable.Type &#123; // Check if object is Mappable</div><div class="line">            if var object = klass.init(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? ImmutableMappable.Type &#123; // Check if object is ImmutableMappable</div><div class="line">            do &#123;</div><div class="line">                return try klass.init(map: map) as? N</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                #if DEBUG</div><div class="line">                let exception: NSException</div><div class="line">                if let mapError = error as? MapError &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;MapError&quot;), reason: mapError.description, userInfo: nil)</div><div class="line">                &#125; else &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;ImmutableMappableError&quot;), reason: error.localizedDescription, userInfo: nil)</div><div class="line">                &#125;</div><div class="line">                exception.raise()</div><div class="line">                #else</div><div class="line">                NSLog(&quot;\(error)&quot;)</div><div class="line">                #endif</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            // Ensure BaseMappable is not implemented directly</div><div class="line">            assert(false, &quot;BaseMappable should not be implemented directly. Please implement Mappable, StaticMappable or ImmutableMappable&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们先忽略掉<code>StaticMappable</code>和<code>ImmutableMappable</code>这两种协议的处理逻辑，直接关注最重要的<code>Mappable</code>协议的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 根据传入的JSON字典等数据创建一个map对象</div><div class="line"></div><div class="line">let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line"></div><div class="line">// 判断要转换成的模型是不是 遵循的Mappable协议</div><div class="line">if let klass = N.self as? Mappable.Type </div><div class="line"></div><div class="line">// 创建一个N类型的对象</div><div class="line">var object = klass.init(map: map) as? N</div><div class="line"></div><div class="line">// 获取模型中定义的解析规则，完成解析</div><div class="line">object.mapping(map: map)</div><div class="line"></div><div class="line">// 返回生成好的模型</div><div class="line">return object</div></pre></td></tr></table></figure>
+<p>这里还留了一个疑问，为何执行完<code>object.mapping(map: map)</code>后，模型就能完成解析呢</p>
+<p>继续分析<a href="(https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift">Map</a>类</p>
+<p>原来在Map类中使用了<code>subscript</code>来自定义下标<br>同样我们直接来分析最重要的那个自定义下标的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public subscript(key: String, nested nested: Bool, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -&gt; Map &#123;</div><div class="line">        // save key and value associated to it</div><div class="line">        currentKey = key</div><div class="line">        keyIsNested = nested</div><div class="line">        nestedKeyDelimiter = delimiter</div><div class="line">        </div><div class="line">        if mappingType == .fromJSON &#123;</div><div class="line">            // check if a value exists for the current key</div><div class="line">            // do this pre-check for performance reasons</div><div class="line">            if nested == false &#123;</div><div class="line">                let object = JSON[key]</div><div class="line">                let isNSNull = object is NSNull</div><div class="line">                isKeyPresent = isNSNull ? true : object != nil</div><div class="line">                currentValue = isNSNull ? nil : object</div><div class="line">            &#125; else &#123;</div><div class="line">                // break down the components of the key that are separated by .</div><div class="line">                (isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            // update isKeyPresent if ignoreNil is true</div><div class="line">            if ignoreNil &amp;&amp; currentValue == nil &#123;</div><div class="line">                isKeyPresent = false</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return self</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>不难发现，在这方法中，我们从JSON字典中根据key获取了value，原来当我们调用<code>object.mapping(map: map)</code>时，就会依次根据我们配置的mapping值获取对应的value</p>
+<h4 id="ObjectMapper实践"><a href="#ObjectMapper实践" class="headerlink" title="ObjectMapper实践"></a>ObjectMapper实践</h4><p>分析完原理，我们还需要能够熟练的运用ObjectMapper来帮助我们完成解析功能，ObjectMapper能够帮助我们处理数据的方法有很多，这里我就先简单跟大家分享几种在项目中常用的方法，我已经将相关的<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>上传到github上，欢迎大家star</p>
+<h6 id="解析单一结构的模型"><a href="#解析单一结构的模型" class="headerlink" title="解析单一结构的模型"></a>解析单一结构的模型</h6><p>单一结构的模型解析比较简单，大家了解一下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;objectmapper&quot;,</div><div class="line">  &quot;age&quot;: 18,</div><div class="line">  &quot;nickname&quot;: &quot;mapper&quot;,</div><div class="line">  &quot;job&quot;: &quot;swifter&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当我们拿到如上所示的json数据时，只需要创建一个遵循<code>Mappable</code>的模型，并配置好解析路径即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    var age: Int?</div><div class="line">    var nickname: String?</div><div class="line">    var job: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">        age &lt;- map[&quot;age&quot;]</div><div class="line">        nickname &lt;- map[&quot;nickname&quot;]</div><div class="line">        job &lt;- map[&quot;job&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法</div><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
+<h6 id="解析模型中嵌套模型的情况"><a href="#解析模型中嵌套模型的情况" class="headerlink" title="解析模型中嵌套模型的情况"></a>解析模型中嵌套模型的情况</h6><p>有时候我们拿到的json数据嵌套了好几层的结构，而我们刚好也需要逐层解析拿到每个模型的数据，下面我就通过一个两层结构给大家演示一下处理的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;weather&quot;: &quot;sun&quot;,</div><div class="line">    &quot;temperature&quot;: &#123;</div><div class="line">        &quot;celsius&quot;: 70,</div><div class="line">        &quot;fahrenheit&quot;: 34</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正如上面的json数据所示，我们需要创建一个weather模型，同时包含一个temperature模型来解析json数据，这时我们就需要运用泛型来帮助我们达到嵌套的目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class Weather&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line"></div><div class="line">    var weather: String?</div><div class="line">    var temperature: T?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        weather &lt;- map[&quot;weather&quot;]</div><div class="line">        temperature &lt;- map[&quot;temperature&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Temperature: Mappable &#123;</div><div class="line">    </div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        celsius &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法如下</div><div class="line">let weather = Mapper&lt;Weather&lt;Temperature&gt;&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
+<h6 id="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"><a href="#解析模型中嵌套模型但是我们只需要拿到子模型的属性值" class="headerlink" title="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"></a>解析模型中嵌套模型但是我们只需要拿到子模型的属性值</h6><p>有些json数据嵌套的内容我们不需要分模型来获取，只需要将属性统一到一个模型中使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot;: &#123;</div><div class="line">        &quot;text&quot;: &quot;102 ft&quot;,</div><div class="line">        &quot;value&quot;: 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Distance: Mappable &#123;</div><div class="line">    var text: String?</div><div class="line">    var value: Int?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        text &lt;- map[&quot;distance.text&quot;]</div><div class="line">        value &lt;- map[&quot;distance.value&quot;]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>####### 解析指定的一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;status&quot;: &quot;200&quot;,</div><div class="line">    &quot;msg&quot;: &quot;success&quot;,</div><div class="line">    &quot;features&quot;: [</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;json解析&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;模型转换&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;数据处理&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;mapper进阶&quot;</div><div class="line">       &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过我们拿到的返回结果如上面的代码段所示，features是我们真正关心的数据，它是一个数组结构，我们期望能够得到的是一个数组，里面包含若干个feature模型</p>
+<p>首先我们必不可少的就是要创建一个Feature模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Feature: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在解析这个JSON数据时，我们可以忽略掉其他信息，先获取features对应的json数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let featureJson = json[&quot;features&quot;];</div></pre></td></tr></table></figure></p>
+<p>然后只需要使用Mapper的高级用法<code>mapArray</code>方法即可直接得到数组对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let features = Mapper&lt;Feature&gt;().mapArray(JSONString: featureJson.rawString()!)</div></pre></td></tr></table></figure></p>
+<p>ObjectMapper的高级用法还有很多，掌握上面的这些用法基本已经可以在项目中使用ObjectMapper达到我们的需求了，后面有时间我会在此博客和<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>基础上更新更多的用法供大家参考</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-利用SDWebImage下载图片" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -852,135 +1118,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Xcode统计整个项目代码行数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/20/Xcode统计整个项目代码行数/" class="article-date">
-      <time datetime="2017-02-20T03:55:37.000Z" itemprop="datePublished">2017-02-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/20/Xcode统计整个项目代码行数/">Xcode统计整个项目代码行数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>一行命令，统计出项目中每个源代码文件的行数以及总行数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . &quot;(&quot; -name &quot;*.m&quot; -or -name &quot;*.mm&quot; -or -name &quot;*.cpp&quot; -or -name &quot;*.h&quot; -or -name &quot;*.rss&quot; &quot;)&quot; -print | xargs wc -l</div></pre></td></tr></table></figure></p>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-UIWebView加载本地html" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/16/UIWebView加载本地html/" class="article-date">
-      <time datetime="2017-02-16T06:19:38.000Z" itemprop="datePublished">2017-02-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种</p>
-<h4 id="读取本地html内容，加载内容"><a href="#读取本地html内容，加载内容" class="headerlink" title="读取本地html内容，加载内容"></a>读取本地html内容，加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *htmlPath = [NSString stringWithFormat:@&quot;%@/index.html&quot;, mainBundlePath];</div><div class="line">NSString *htmlContent = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];</div><div class="line">[_webView loadHTMLString:htmlString baseURL:baseURL];</div></pre></td></tr></table></figure>
-<h4 id="通过本地html地址加载内容"><a href="#通过本地html地址加载内容" class="headerlink" title="通过本地html地址加载内容"></a>通过本地html地址加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:baseURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure>
-<p>有些情况下，我们不仅要能加载本地html，还需要给本地html传递参数，这种情况下我们只能通过方法二来进行参数传递<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *queryString = [NSString stringWithFormat:@&quot;%@/index.html?key=value&quot;, mainBundlePath];</div><div class="line">NSURL *queryURL = [NSURL URLWithString:queryString];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:queryURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure></p>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
     </div>
 
       

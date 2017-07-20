@@ -127,7 +127,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/epub/" style="font-size: 10px;">epub</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
                     </div>
                 </section>
                 
@@ -188,6 +188,135 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Xcode统计整个项目代码行数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/20/Xcode统计整个项目代码行数/" class="article-date">
+      <time datetime="2017-02-20T03:55:37.000Z" itemprop="datePublished">2017-02-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/20/Xcode统计整个项目代码行数/">Xcode统计整个项目代码行数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>一行命令，统计出项目中每个源代码文件的行数以及总行数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . &quot;(&quot; -name &quot;*.m&quot; -or -name &quot;*.mm&quot; -or -name &quot;*.cpp&quot; -or -name &quot;*.h&quot; -or -name &quot;*.rss&quot; &quot;)&quot; -print | xargs wc -l</div></pre></td></tr></table></figure></p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-UIWebView加载本地html" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/16/UIWebView加载本地html/" class="article-date">
+      <time datetime="2017-02-16T06:19:38.000Z" itemprop="datePublished">2017-02-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种</p>
+<h4 id="读取本地html内容，加载内容"><a href="#读取本地html内容，加载内容" class="headerlink" title="读取本地html内容，加载内容"></a>读取本地html内容，加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *htmlPath = [NSString stringWithFormat:@&quot;%@/index.html&quot;, mainBundlePath];</div><div class="line">NSString *htmlContent = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];</div><div class="line">[_webView loadHTMLString:htmlString baseURL:baseURL];</div></pre></td></tr></table></figure>
+<h4 id="通过本地html地址加载内容"><a href="#通过本地html地址加载内容" class="headerlink" title="通过本地html地址加载内容"></a>通过本地html地址加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:baseURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure>
+<p>有些情况下，我们不仅要能加载本地html，还需要给本地html传递参数，这种情况下我们只能通过方法二来进行参数传递<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *queryString = [NSString stringWithFormat:@&quot;%@/index.html?key=value&quot;, mainBundlePath];</div><div class="line">NSURL *queryURL = [NSURL URLWithString:queryString];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:queryURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure></p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-3DTouch开发" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -844,135 +973,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-移除Pod管理的库后编译报Link错误" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/" class="article-date">
-      <time datetime="2016-10-24T05:59:00.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/移除Pod管理的库后编译报Link错误/">移除Pod管理的库后编译报Link错误</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行<code>pod install</code>还是清除缓存，clean项目，都无法解决这个问题。<br>这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：</p>
-<ol>
-<li>点击项目工程文件进入Build Setting</li>
-<li>找到Other Linker Flags一栏</li>
-<li>删除到相关库的link</li>
-<li>重新编译即可</li>
-</ol>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS-让子View不响应父View的手势" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/iOS-让子View不响应父View的手势/" class="article-date">
-      <time datetime="2016-10-24T05:57:13.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/iOS-让子View不响应父View的手势/">iOS--让子View不响应父View的手势</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在项目中遇到一个问题，父View上添加的手势事件在子View中也会响应，通过搜索后找到了解决方案，接下来作一个小总结，方便以后遇到相同问题时查找。<br>解决思路：手势事件有一个代理方法，<code>- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch</code>，我们就是要通过这个代理方法屏蔽掉子View上的事件响应。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch &#123;</div><div class="line">   if ([touch.view isDescendantOfView:你想屏蔽掉手势的子视图]) &#123;</div><div class="line">    return NO;</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
     </div>
 
       

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swift开源项目ObjectMapper实践 | Leafly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研
+今天就先从ObjectMapper入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star
+先从官方文档入手，进行一个简单的介绍支持的功能
+JSON向模型的转换
+模型向JSON的转换
+嵌套结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift开源项目ObjectMapper实践">
+<meta property="og:url" content="http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/index.html">
+<meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研
+今天就先从ObjectMapper入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star
+先从官方文档入手，进行一个简单的介绍支持的功能
+JSON向模型的转换
+模型向JSON的转换
+嵌套结">
+<meta property="og:updated_time" content="2017-07-20T09:43:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift开源项目ObjectMapper实践">
+<meta name="twitter:description" content="近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研
+今天就先从ObjectMapper入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star
+先从官方文档入手，进行一个简单的介绍支持的功能
+JSON向模型的转换
+模型向JSON的转换
+嵌套结">
+  
+    <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.gif" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Leafly</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 15px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/epub/" style="font-size: 10px;">epub</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/ca60cab2466b">我的简书</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中，愿自己永远对一切充满好奇~</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Leafly</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.gif" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Leafly</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Swift开源项目ObjectMapper实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/20/Swift开源项目ObjectMapper实践/" class="article-date">
+      <time datetime="2017-07-20T09:42:43.000Z" itemprop="datePublished">2017-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Swift开源项目ObjectMapper实践
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研</p>
+<p>今天就先从<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">ObjectMapper</a>入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star</p>
+<h3 id="先从官方文档入手，进行一个简单的介绍"><a href="#先从官方文档入手，进行一个简单的介绍" class="headerlink" title="先从官方文档入手，进行一个简单的介绍"></a>先从官方文档入手，进行一个简单的介绍</h3><h5 id="支持的功能"><a href="#支持的功能" class="headerlink" title="支持的功能"></a>支持的功能</h5><ul>
+<li>JSON向模型的转换</li>
+<li>模型向JSON的转换</li>
+<li>嵌套结构的解析</li>
+<li>mapping时的自定义转换</li>
+<li>结构体的支持</li>
+</ul>
+<h5 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h5><p>ObjectMapper中定义了一个协议<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mappable.swift" target="_blank" rel="external">Mappable</a></p>
+<p>Mappable协议中声明了两个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mutation func mapping(map: Map)</div><div class="line"></div><div class="line">init?(map: Map)</div></pre></td></tr></table></figure>
+<p>我们需要在模型中遵循这个协议，官方给出了一个参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [Any]?</div><div class="line">    var dictionary: [String : Any] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: Date?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line"></div><div class="line">    init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一旦我们的类或结构体如上面的示例一样实现了协议，我们就可以方便的进行JSON和模型之间的转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = user.toJSONString(prettyPrint: true)</div></pre></td></tr></table></figure>
+<p>当然也可以通过<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>类来进行转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = Mapper().toJSONString(user, prettyPrint: true)</div></pre></td></tr></table></figure>
+<h5 id="嵌套对象的映射"><a href="#嵌套对象的映射" class="headerlink" title="嵌套对象的映射"></a>嵌套对象的映射</h5><p>正如前面所列，ObjectMapper支持嵌套对象的映射</p>
+<p>列如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot; : &#123;</div><div class="line">        &quot;text&quot; : &quot;102&quot;,</div><div class="line">        &quot;value&quot; : 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们想要直接取出distance对象中的value值，可以设置如下mapping<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func mapping(map: Map) &#123;</div><div class="line">    distance &lt;- map[&quot;distance.value&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="自定义转换规则"><a href="#自定义转换规则" class="headerlink" title="自定义转换规则"></a>自定义转换规则</h5><p>ObjectMapper允许开发者在数据映射过程中指定转换规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class People: Mappable &#123;</div><div class="line">   var birthday: NSDate?</div><div class="line">   </div><div class="line">   required init?(_ map: Map) &#123;</div><div class="line">       </div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   func mapping(map: Map) &#123;</div><div class="line">       birthday &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   let JSON = &quot;\&quot;birthday\&quot;:1458117795332&quot;</div><div class="line">   let result = Mapper&lt;People&gt;().map(JSON)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于我们指定了<code>birthday</code>的转换规则，所以上述代码在解析JSON数据的时候会将long类型转换成Date类型</p>
+<p>除了使用ObjectMapper给我们提供的转换规则外，我们还可以通过实现<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformType.swift" target="_blank" rel="external">TransformType</a>协议来自定义我们的转换规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public protocol TransformType &#123;</div><div class="line">    typealias Object</div><div class="line">    typealias JSON</div><div class="line">    </div><div class="line">    func transformFromJSON(value: AnyObject?) -&gt; Object?</div><div class="line">    func transformToJSON(value: Object?) -&gt; JSON?</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ObjectMapper为我们提供了一个<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformOf.swift" target="_blank" rel="external">TransformOf</a>类来实现转换结果，TransformOf实际就是实现了TransformType协议的，TransformOf有两个类型的参数和两个闭包参数，类型表示参与转换的数据的类型，闭包表示转换的规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let transform = TransformOf&lt;Int, String&gt;(fromJSON: &#123; (value: String?) -&gt; Int? in </div><div class="line">&#125;, toJSON: &#123; (value: Int?) -&gt; String? in </div><div class="line">  // transform value from Int? to String?</div><div class="line">  if let value = value &#123;</div><div class="line">      return String(value)</div><div class="line">  &#125;</div><div class="line">  return nil</div><div class="line">&#125;)</div><div class="line"></div><div class="line">id &lt;- (map[&quot;id&quot;], transform)</div></pre></td></tr></table></figure>
+<h5 id="泛型对象"><a href="#泛型对象" class="headerlink" title="泛型对象"></a>泛型对象</h5><p>ObjectMapper同样可以处理泛型类型的参数，不过这个泛型类型需要在实现了Mappable协议的基础上才可以正常使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(_ map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Result&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line">    var result: T?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        result &lt;- map[&quot;result&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let JSON = &quot;&#123;\&quot;result\&quot;: &#123;\&quot;name\&quot;: \&quot;anenn\&quot;&#125;&#125;&quot;</div><div class="line">let result = Mapper&lt;Result&lt;User&gt;&gt;().map(JSON)</div></pre></td></tr></table></figure>
+<h3 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h3><p>ObjectMapper声明了一个Mappable协议，这个协议里声明了两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init?(map: Map)</div><div class="line"></div><div class="line">mutating func mapping(map: Map)</div></pre></td></tr></table></figure></p>
+<p>并且通过对Mappable协议的扩展，增加了JSON和模型之间的四个转换方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public extension BaseMappable &#123;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON String</div><div class="line">    public init?(JSONString: String, context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSONString: JSONString) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON Dictionary</div><div class="line">    public init?(JSON: [String: Any], context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSON: JSON) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON Dictionary for the object</div><div class="line">    public func toJSON() -&gt; [String: Any] &#123;</div><div class="line">        return Mapper().toJSON(self)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON String for the object</div><div class="line">    public func toJSONString(prettyPrint: Bool = false) -&gt; String? &#123;</div><div class="line">        return Mapper().toJSONString(self, prettyPrint: prettyPrint)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们在使用ObjectMapper进行转换时，首先需要让模型遵循Mappable协议，并且实现Mappable声明的两个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为ObjectMapper为Mappable增加了四个转换方法，所以User也继承了这四个转换方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div></pre></td></tr></table></figure>
+<p>这个方法的调用其实就是帮助我们执行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>因此，我们也可以直接通过如下方法进行转换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>接下来就是ObjectMapper的核心啦~<br>为什么通过Mapper类能完成转换呢？</p>
+<p>我们来逐步了解<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>的实现原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public final class Mapper&lt;N: BaseMappable&gt; &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正如上面的代码块所示，首先Mapper类定义了一个泛型N，N必须要遵循Mappable协议，也就是我们的模型User<br>继续往下看，我们选择一个常用的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public func map(JSONString: String) -&gt; N? &#123;</div><div class="line">        if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>没错，我们前面写的Mapper的转换方法正是使用的这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
+<p>那我们就来一层一层详细分析一下这个方法的内部实现吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 1. 调用Mapper的静态方法parseJSONStringIntoDictionary来将JSON转换成字典</div><div class="line">// 2. 调用map方法将转换后的字典转换成模型并返回</div><div class="line">if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div></pre></td></tr></table></figure>
+<p>先分解<code>parseJSONStringIntoDictionary</code>的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/// Convert a JSON String into a Dictionary&lt;String, Any&gt; using NSJSONSerialization</div><div class="line">    public static func parseJSONStringIntoDictionary(JSONString: String) -&gt; [String: Any]? &#123;</div><div class="line">        let parsedJSON: Any? = Mapper.parseJSONString(JSONString: JSONString)</div><div class="line">        return parsedJSON as? [String: Any]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /// Convert a JSON String into an Object using NSJSONSerialization</div><div class="line">    public static func parseJSONString(JSONString: String) -&gt; Any? &#123;</div><div class="line">        let data = JSONString.data(using: String.Encoding.utf8, allowLossyConversion: true)</div><div class="line">        if let data = data &#123;</div><div class="line">            let parsedJSON: Any?</div><div class="line">            do &#123;</div><div class="line">                parsedJSON = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                print(error)</div><div class="line">                parsedJSON = nil</div><div class="line">            &#125;</div><div class="line">            return parsedJSON</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>通过上述代码的逻辑不难发现，<code>parseJSONStringIntoDictionary</code>就是利用了系统的<code>JSONSerialization</code>将JSON字符串转换成字典</p>
+<p>理解了第一步，接下来我们就来看看第二步的实现原理</p>
+<p>我们先整体看一下map方法的实现代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/// Maps a JSON dictionary to an object that conforms to Mappable</div><div class="line">    public func map(JSON: [String: Any]) -&gt; N? &#123;</div><div class="line">        let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line">        </div><div class="line">        if let klass = N.self as? StaticMappable.Type &#123; // Check if object is StaticMappable</div><div class="line">            if var object = klass.objectForMapping(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? Mappable.Type &#123; // Check if object is Mappable</div><div class="line">            if var object = klass.init(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? ImmutableMappable.Type &#123; // Check if object is ImmutableMappable</div><div class="line">            do &#123;</div><div class="line">                return try klass.init(map: map) as? N</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                #if DEBUG</div><div class="line">                let exception: NSException</div><div class="line">                if let mapError = error as? MapError &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;MapError&quot;), reason: mapError.description, userInfo: nil)</div><div class="line">                &#125; else &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;ImmutableMappableError&quot;), reason: error.localizedDescription, userInfo: nil)</div><div class="line">                &#125;</div><div class="line">                exception.raise()</div><div class="line">                #else</div><div class="line">                NSLog(&quot;\(error)&quot;)</div><div class="line">                #endif</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            // Ensure BaseMappable is not implemented directly</div><div class="line">            assert(false, &quot;BaseMappable should not be implemented directly. Please implement Mappable, StaticMappable or ImmutableMappable&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们先忽略掉<code>StaticMappable</code>和<code>ImmutableMappable</code>这两种协议的处理逻辑，直接关注最重要的<code>Mappable</code>协议的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 根据传入的JSON字典等数据创建一个map对象</div><div class="line"></div><div class="line">let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line"></div><div class="line">// 判断要转换成的模型是不是 遵循的Mappable协议</div><div class="line">if let klass = N.self as? Mappable.Type </div><div class="line"></div><div class="line">// 创建一个N类型的对象</div><div class="line">var object = klass.init(map: map) as? N</div><div class="line"></div><div class="line">// 获取模型中定义的解析规则，完成解析</div><div class="line">object.mapping(map: map)</div><div class="line"></div><div class="line">// 返回生成好的模型</div><div class="line">return object</div></pre></td></tr></table></figure>
+<p>这里还留了一个疑问，为何执行完<code>object.mapping(map: map)</code>后，模型就能完成解析呢</p>
+<p>继续分析<a href="(https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift">Map</a>类</p>
+<p>原来在Map类中使用了<code>subscript</code>来自定义下标<br>同样我们直接来分析最重要的那个自定义下标的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public subscript(key: String, nested nested: Bool, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -&gt; Map &#123;</div><div class="line">        // save key and value associated to it</div><div class="line">        currentKey = key</div><div class="line">        keyIsNested = nested</div><div class="line">        nestedKeyDelimiter = delimiter</div><div class="line">        </div><div class="line">        if mappingType == .fromJSON &#123;</div><div class="line">            // check if a value exists for the current key</div><div class="line">            // do this pre-check for performance reasons</div><div class="line">            if nested == false &#123;</div><div class="line">                let object = JSON[key]</div><div class="line">                let isNSNull = object is NSNull</div><div class="line">                isKeyPresent = isNSNull ? true : object != nil</div><div class="line">                currentValue = isNSNull ? nil : object</div><div class="line">            &#125; else &#123;</div><div class="line">                // break down the components of the key that are separated by .</div><div class="line">                (isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            // update isKeyPresent if ignoreNil is true</div><div class="line">            if ignoreNil &amp;&amp; currentValue == nil &#123;</div><div class="line">                isKeyPresent = false</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return self</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>不难发现，在这方法中，我们从JSON字典中根据key获取了value，原来当我们调用<code>object.mapping(map: map)</code>时，就会依次根据我们配置的mapping值获取对应的value</p>
+<h4 id="ObjectMapper实践"><a href="#ObjectMapper实践" class="headerlink" title="ObjectMapper实践"></a>ObjectMapper实践</h4><p>分析完原理，我们还需要能够熟练的运用ObjectMapper来帮助我们完成解析功能，ObjectMapper能够帮助我们处理数据的方法有很多，这里我就先简单跟大家分享几种在项目中常用的方法，我已经将相关的<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>上传到github上，欢迎大家star</p>
+<h6 id="解析单一结构的模型"><a href="#解析单一结构的模型" class="headerlink" title="解析单一结构的模型"></a>解析单一结构的模型</h6><p>单一结构的模型解析比较简单，大家了解一下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;objectmapper&quot;,</div><div class="line">  &quot;age&quot;: 18,</div><div class="line">  &quot;nickname&quot;: &quot;mapper&quot;,</div><div class="line">  &quot;job&quot;: &quot;swifter&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当我们拿到如上所示的json数据时，只需要创建一个遵循<code>Mappable</code>的模型，并配置好解析路径即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    var age: Int?</div><div class="line">    var nickname: String?</div><div class="line">    var job: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">        age &lt;- map[&quot;age&quot;]</div><div class="line">        nickname &lt;- map[&quot;nickname&quot;]</div><div class="line">        job &lt;- map[&quot;job&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法</div><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
+<h6 id="解析模型中嵌套模型的情况"><a href="#解析模型中嵌套模型的情况" class="headerlink" title="解析模型中嵌套模型的情况"></a>解析模型中嵌套模型的情况</h6><p>有时候我们拿到的json数据嵌套了好几层的结构，而我们刚好也需要逐层解析拿到每个模型的数据，下面我就通过一个两层结构给大家演示一下处理的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;weather&quot;: &quot;sun&quot;,</div><div class="line">    &quot;temperature&quot;: &#123;</div><div class="line">        &quot;celsius&quot;: 70,</div><div class="line">        &quot;fahrenheit&quot;: 34</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正如上面的json数据所示，我们需要创建一个weather模型，同时包含一个temperature模型来解析json数据，这时我们就需要运用泛型来帮助我们达到嵌套的目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class Weather&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line"></div><div class="line">    var weather: String?</div><div class="line">    var temperature: T?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        weather &lt;- map[&quot;weather&quot;]</div><div class="line">        temperature &lt;- map[&quot;temperature&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Temperature: Mappable &#123;</div><div class="line">    </div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        celsius &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法如下</div><div class="line">let weather = Mapper&lt;Weather&lt;Temperature&gt;&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
+<h6 id="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"><a href="#解析模型中嵌套模型但是我们只需要拿到子模型的属性值" class="headerlink" title="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"></a>解析模型中嵌套模型但是我们只需要拿到子模型的属性值</h6><p>有些json数据嵌套的内容我们不需要分模型来获取，只需要将属性统一到一个模型中使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot;: &#123;</div><div class="line">        &quot;text&quot;: &quot;102 ft&quot;,</div><div class="line">        &quot;value&quot;: 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Distance: Mappable &#123;</div><div class="line">    var text: String?</div><div class="line">    var value: Int?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        text &lt;- map[&quot;distance.text&quot;]</div><div class="line">        value &lt;- map[&quot;distance.value&quot;]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>####### 解析指定的一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;status&quot;: &quot;200&quot;,</div><div class="line">    &quot;msg&quot;: &quot;success&quot;,</div><div class="line">    &quot;features&quot;: [</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;json解析&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;模型转换&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;数据处理&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;mapper进阶&quot;</div><div class="line">       &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过我们拿到的返回结果如上面的代码段所示，features是我们真正关心的数据，它是一个数组结构，我们期望能够得到的是一个数组，里面包含若干个feature模型</p>
+<p>首先我们必不可少的就是要创建一个Feature模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Feature: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在解析这个JSON数据时，我们可以忽略掉其他信息，先获取features对应的json数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let featureJson = json[&quot;features&quot;];</div></pre></td></tr></table></figure></p>
+<p>然后只需要使用Mapper的高级用法<code>mapArray</code>方法即可直接得到数组对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let features = Mapper&lt;Feature&gt;().mapArray(JSONString: featureJson.rawString()!)</div></pre></td></tr></table></figure></p>
+<p>ObjectMapper的高级用法还有很多，掌握上面的这些用法基本已经可以在项目中使用ObjectMapper达到我们的需求了，后面有时间我会在此博客和<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>基础上更新更多的用法供大家参考</p>
+
+      
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/07/20/Swift开源项目ObjectMapper实践/">Swift开源项目ObjectMapper实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
+        <p><span>发布时间:</span>2017年07月20日 - 17时42分</p>
+        <p><span>最后更新:</span>2017年07月20日 - 17时43分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/20/Swift开源项目ObjectMapper实践/" title="Swift开源项目ObjectMapper实践">http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/07/20/EPUB文件格式解析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          EPUB文件格式解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/05/利用SDWebImage下载图片/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用SDWebImage下载图片</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先从官方文档入手，进行一个简单的介绍"><span class="toc-number">1.</span> <span class="toc-text">先从官方文档入手，进行一个简单的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#支持的功能"><span class="toc-number">1.0.1.</span> <span class="toc-text">支持的功能</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基础用法"><span class="toc-number">1.0.2.</span> <span class="toc-text">基础用法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#嵌套对象的映射"><span class="toc-number">1.0.3.</span> <span class="toc-text">嵌套对象的映射</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自定义转换规则"><span class="toc-number">1.0.4.</span> <span class="toc-text">自定义转换规则</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#泛型对象"><span class="toc-number">1.0.5.</span> <span class="toc-text">泛型对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理解析"><span class="toc-number">2.</span> <span class="toc-text">原理解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ObjectMapper实践"><span class="toc-number">2.1.</span> <span class="toc-text">ObjectMapper实践</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#解析单一结构的模型"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">解析单一结构的模型</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#解析模型中嵌套模型的情况"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">解析模型中嵌套模型的情况</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#解析模型中嵌套模型但是我们只需要拿到子模型的属性值"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">解析模型中嵌套模型但是我们只需要拿到子模型的属性值</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="youyan" id="comments">
+  <div id="uyan_frame"></div>
+  <script src="http://v2.uyan.cc/code/uyan.js?uid=2134680"></script>
+</section>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/07/20/EPUB文件格式解析/" title="上一篇: EPUB文件格式解析">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/07/05/利用SDWebImage下载图片/" title="下一篇: 利用SDWebImage下载图片">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/Swift开源项目ObjectMapper实践/">Swift开源项目ObjectMapper实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/利用SDWebImage下载图片/">利用SDWebImage下载图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/08/iOS11开发者需要知道的改变/">iOS 11 开发者需要知道的改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/06/Block用法小结/">Block用法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/11/自定义UIPageControl/">自定义UIPageControl</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/07/Bootstrap框架入门/">Bootstrap框架入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/PHP与iOS之间的AES加解密/">PHP与iOS之间的AES加解密</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/iOS开发小结之H5与OC交互/">iOS开发小结之H5与OC交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/Xcode统计整个项目代码行数/">Xcode统计整个项目代码行数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/3DTouch开发/">3DTouch开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/runtime机制/">runtime机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/28/iOS项目添加自定义字体/">iOS项目添加自定义字体</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/React-Native之Navigator/">React-Native之Navigator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/17/自动化打包IPA脚本/">自动化打包IPA脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/02/ReactNative入门/">ReactNative入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/01/iOS10系统下的推送开发/">iOS10系统下的推送开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/移除Pod管理的库后编译报Link错误/">移除Pod管理的库后编译报Link错误</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/iOS-让子View不响应父View的手势/">iOS--让子View不响应父View的手势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CocoaPods升级后问题解决/">CocoaPods升级后问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/自定义xopen命令打开工程/">自定义xopen命令打开工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">私有pod创建进阶--如何通过pod管理静态库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/git命令行入门/">git命令行入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/12/搭建私有Pod/">搭建私有Pod</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/如何搭建属于自己的博客/">如何搭建属于自己的博客？</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Leafly
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >网站到访量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

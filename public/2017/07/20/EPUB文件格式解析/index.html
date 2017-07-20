@@ -3,21 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>个人博客进阶--Hexo搭建博客 | Leafly</title>
+  <title>EPUB文件格式解析 | Leafly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
-安装Hexo安装Node.jshexo是一款基于Node.js的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的官网下载相应平台的最新版本，">
+  <meta name="description" content="背景知识EPUB是Electronic Publication的缩写，是一种电子图书标准，EPUB是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说EPUB格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。
+文件组成一个未经加密处理的epub电子书由以下三部分组成：
+
+META-INF（文件夹，里面有一个container.xml文件）
+OEBPS （文件夹，包含">
 <meta property="og:type" content="article">
-<meta property="og:title" content="个人博客进阶--Hexo搭建博客">
-<meta property="og:url" content="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/index.html">
+<meta property="og:title" content="EPUB文件格式解析">
+<meta property="og:url" content="http://www.ileafly.com/2017/07/20/EPUB文件格式解析/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
-安装Hexo安装Node.jshexo是一款基于Node.js的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的官网下载相应平台的最新版本，">
-<meta property="og:updated_time" content="2016-11-02T05:37:36.000Z">
+<meta property="og:description" content="背景知识EPUB是Electronic Publication的缩写，是一种电子图书标准，EPUB是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说EPUB格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。
+文件组成一个未经加密处理的epub电子书由以下三部分组成：
+
+META-INF（文件夹，里面有一个container.xml文件）
+OEBPS （文件夹，包含">
+<meta property="og:updated_time" content="2017-07-20T09:46:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="个人博客进阶--Hexo搭建博客">
-<meta name="twitter:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
-安装Hexo安装Node.jshexo是一款基于Node.js的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的官网下载相应平台的最新版本，">
+<meta name="twitter:title" content="EPUB文件格式解析">
+<meta name="twitter:description" content="背景知识EPUB是Electronic Publication的缩写，是一种电子图书标准，EPUB是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说EPUB格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。
+文件组成一个未经加密处理的epub电子书由以下三部分组成：
+
+META-INF（文件夹，里面有一个container.xml文件）
+OEBPS （文件夹，包含">
   
     <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
@@ -191,11 +200,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-个人博客进阶-Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-EPUB文件格式解析" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/25/个人博客进阶-Hexo搭建博客/" class="article-date">
-      <time datetime="2016-08-25T02:31:50.000Z" itemprop="datePublished">2016-08-25</time>
+      <a href="/2017/07/20/EPUB文件格式解析/" class="article-date">
+      <time datetime="2017-07-20T09:45:54.000Z" itemprop="datePublished">2017-07-20</time>
 </a>
     </div>
   
@@ -208,7 +217,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      个人博客进阶--Hexo搭建博客
+      EPUB文件格式解析
     </h1>
   
 
@@ -217,13 +226,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epub/">epub</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -233,53 +242,78 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Hexo</a>搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。</p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>hexo是一款基于<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
-<h4 id="正式安装Hexo"><a href="#正式安装Hexo" class="headerlink" title="正式安装Hexo"></a>正式安装Hexo</h4><p>1.执行安装Hexo命令</p>
-<pre><code>sudo npm install -g hexo
-</code></pre><p>2.创建blog文件夹并cd到blog文件夹内</p>
-<p>3.执行init命令初始化hexo</p>
-<pre><code>hexo init
-</code></pre><p>4.生成静态页面</p>
-<pre><code>hexo g
-</code></pre><p>5.本地启动服务器，进行文章预览</p>
-<pre><code>hexo server
-</code></pre><p>  在浏览器中输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可预览文章</p>
-<p>6.将github仓库与blog建立关联</p>
-<pre><code>vi _config.yml
+        <h3 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h3><p><code>EPUB</code>是Electronic Publication的缩写，是一种电子图书标准，<code>EPUB</code>是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说<code>EPUB</code>格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。</p>
+<h3 id="文件组成"><a href="#文件组成" class="headerlink" title="文件组成"></a>文件组成</h3><p>一个未经加密处理的epub电子书由以下三部分组成：</p>
+<ol>
+<li>META-INF（文件夹，里面有一个container.xml文件）</li>
+<li>OEBPS （文件夹，包含images文件夹、很多xhtml文件、css文件和content.opf文件）</li>
+<li>mimetype</li>
+</ol>
+<h4 id="文件mimetype"><a href="#文件mimetype" class="headerlink" title="文件mimetype"></a>文件mimetype</h4><p>每个epub电子书均包含一个mimetype的文件，且内容不变，用以说明epub的文件格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">application/epub+zip</div></pre></td></tr></table></figure></p>
+<h4 id="文件夹META-INF"><a href="#文件夹META-INF" class="headerlink" title="文件夹META-INF"></a>文件夹META-INF</h4><p>META-INF用于存放容器信息，默认情况下此目录只包含一个文件container.xml，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</div><div class="line">&lt;container version=&quot;1.0&quot; xmlns=&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&gt;</div><div class="line">    &lt;rootfiles&gt;</div><div class="line">        &lt;rootfile full-path=&quot;OEBPS/content.opf&quot; media-type=&quot;application/oebps-package+xml&quot;/&gt;</div><div class="line">    &lt;/rootfiles&gt;</div><div class="line">&lt;/container&gt;</div></pre></td></tr></table></figure></p>
+<p>container.xml文件的主要功能用于告诉阅读器，电子书的根文件的路径和打开格式</p>
+<h4 id="文件夹OEBPS"><a href="#文件夹OEBPS" class="headerlink" title="文件夹OEBPS"></a>文件夹OEBPS</h4><p>OEBPS目录用于存放OPF文档、CSS文档、NCX文档</p>
+<h4 id="文件OPF"><a href="#文件OPF" class="headerlink" title="文件OPF"></a>文件OPF</h4><p>OPF文档是epub的核心文件，且是一个标准的xml文件，依据OPF规范，此文件的根元素为<code>&lt;package&gt;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;package xmlns=&quot;http://www.idpf.org/2007/opf&quot; version=&quot;2.0&quot; unique-identifier=&quot;uuid_id&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>其内容主要由五部分组成：</p>
+<ol>
+<li><p><metadata><br>元数据信息，这个标签里面是书籍的出版信息，由两个子元素组成</metadata></p>
+<ul>
+<li><dc-title> 标题</dc-title></li>
+<li><dc-creator> 责任人</dc-creator></li>
+<li><dc-subject> 主题词、关键词</dc-subject></li>
+<li><dc-descributor> 内容描述</dc-descributor></li>
+<li><dc-date> 日期</dc-date></li>
+<li><dc-type> 类型</dc-type></li>
+<li><dc-publisher> 出版者</dc-publisher></li>
+<li><dc-contributor> 发行者</dc-contributor></li>
+<li><dc-format> 格式</dc-format></li>
+<li><dc-identifier> 标识信息</dc-identifier></li>
+<li><dc-source> 来源信息</dc-source></li>
+<li><dc-language> 语言</dc-language></li>
+<li><dc-relation> 相关资料</dc-relation></li>
+<li><dc-coverage> 覆盖范围</dc-coverage></li>
+<li><dc-rights> 权限描述</dc-rights></li>
+</ul>
+</li>
+<li><p><manifest><br>文件列表，列出书籍出版的所有文件，但是不包括 mimetype、container.xml、content.opf，由一个个子元素构成</manifest></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;item id=&quot;&quot; href=&quot;&quot; media-type=&quot;&quot;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>id 文件的id号</li>
+<li>href 文件的相对路径</li>
+<li>media-type 文件的媒体类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;manifest&gt;</div><div class="line"> &lt;item id=&quot;ncx&quot; href=&quot;toc.ncx&quot; media-type=&quot;application/x-dtbncx+xml&quot; /&gt;</div><div class="line"> &lt;item href=&quot;cover.xhtml&quot; id=&quot;cover&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;copyright.xhtml&quot; id=&quot;copyright&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;catalog.xhtml&quot; id=&quot;catalog&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;chap0.xhtml&quot; id=&quot;chap0&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;/manifest&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><spine toc="ncx">
 
-deploy:
-   type: git
-   repo: https://github.com/luzhiyongGit/luzhiyongGit.github.io
-   branch: master
-</code></pre><p>  执行配置命令</p>
-<pre><code>npm install hexo-deployer-git -S
-</code></pre><p>7.发布博客</p>
-<pre><code>hexo d
-</code></pre><p>  执行完毕后，你会发现你的github仓库内容已经发生了更改，同时打开<a href="https://luzhiyonggit.github.io" target="_blank" rel="external">https://luzhiyonggit.github.io</a>，能够看到一篇默认博客</p>
-<h3 id="利用hexo编写博客"><a href="#利用hexo编写博客" class="headerlink" title="利用hexo编写博客"></a>利用hexo编写博客</h3><p>1.新建一篇博客</p>
-<pre><code>hexo new 博客名称
-</code></pre><p>2.生成博客页面</p>
-<pre><code>hexo g
-</code></pre><p>3.发布博客</p>
-<pre><code>hexo d
-</code></pre><h3 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h3><p>Hexo有非常多的主题可以选择替换，替换流程也特别方便</p>
-<p>1.从<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">Hexo Themes</a>中找到一个你心仪的主题，本博客使用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">next</a></p>
-<p>2.在你的blog文件目录下，执行下面的命令</p>
-<pre><code>git clone https://github.com/iissnan/hexo-theme-next.git themes/next
-</code></pre><p>3.编辑配置信息</p>
-<pre><code>vi _config.yml
-
-# Extensions
-## Plugins: http://hexo.io/plugins/
-## Themes: http://hexo.io/themes/
-theme: next
-</code></pre><p>4.生成博客页面</p>
-<pre><code>hexo g
-</code></pre><p>5.发布博客</p>
-<pre><code>hexo d
-</code></pre><h3 id="特效配置"><a href="#特效配置" class="headerlink" title="特效配置"></a>特效配置</h3><pre><code>next主题有一个[next wiki](https://github.com/iissnan/hexo-theme-next/wiki/)提供了很多特性配置的方案，我们可以通过参考它完成很多特性配置
-</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.tuicool.com/articles/ueI7naV" target="_blank" rel="external">简洁轻便的博客平台: Hexo详解</a></p>
+<p>提供书籍的线性阅读次序，由一个个子元素构成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;itemref idref=&quot;copyright&quot;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>idref 即参考manifest列出的id</li>
+</ul>
+</spine></li>
+<li><p><guide><br>指南，一次列出电子书的特定页面</guide></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;guide&gt;</div><div class="line"> &lt;reference href=&quot;cover.xhtml&quot; type=&quot;text&quot; title=&quot;封面&quot;/&gt;</div><div class="line"> &lt;reference href=&quot;catalog.xhtml&quot; type=&quot;text&quot; title=&quot;目录&quot;/&gt;</div><div class="line">&lt;/guide&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p><tour><br> 导读，可以根据读者水平或阅读目的，按一定的次序，选择电子书的部分页面组成导读</tour></p>
+</li>
+</ol>
+<h4 id="NCX文件"><a href="#NCX文件" class="headerlink" title="NCX文件"></a>NCX文件</h4><p>NCX文件是epub电子书的另一个重要文件，用于制作电子书的目录。.ncx文件中最主要的节点是navMap,navMap节点是由许多navPoint节点组成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;ncx xmlns=&quot;http://www.daisy.org/z3986/2005/ncx/&quot; version=&quot;2005-1&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta content=&quot;178_0&quot; name=&quot;dtb:uid&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;2&quot; name=&quot;dtb:depth&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:totalPageCount&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:maxPageNumber&quot;/&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;docTitle&gt;</div><div class="line">        &lt;text&gt;1984&lt;/text&gt;</div><div class="line">    &lt;/docTitle&gt;</div><div class="line">    &lt;docAuthor&gt;</div><div class="line">        &lt;text&gt;[英] 乔治·奥威尔&lt;/text&gt;</div><div class="line">    &lt;/docAuthor&gt;</div><div class="line">    &lt;navMap&gt;</div><div class="line">        &lt;navPoint id=&quot;catalog&quot; playOrder=&quot;0&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;目录&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;catalog.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap0&quot; playOrder=&quot;1&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;前言&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap0.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap1&quot; playOrder=&quot;2&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第一部&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap1.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap2&quot; playOrder=&quot;3&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第1节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap2.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap3&quot; playOrder=&quot;4&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第2节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap3.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap4&quot; playOrder=&quot;5&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第3节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap4.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">    &lt;/navMap&gt;</div><div class="line">&lt;/ncx&gt;</div></pre></td></tr></table></figure>
+<h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>目前支持<code>EPUB</code>格式的开源阅读器有：</p>
+<h4 id="iOS-阅读器"><a href="#iOS-阅读器" class="headerlink" title="iOS 阅读器"></a>iOS 阅读器</h4><ul>
+<li><a href="https://github.com/GGGHub/Reader" target="_blank" rel="external">Reader</a>–一款基于CoreText实现的电子书阅读器，支持txt，epub格式</li>
+<li><a href="https://github.com/FolioReader/FolioReaderKit" target="_blank" rel="external">FolioReaderKit</a>–Swift版的ePub阅读器</li>
+<li><a href="https://github.com/ricobeck/KFEpubKit" target="_blank" rel="external">KFEpubKit</a>–支持iOS和OSX的epub阅读器</li>
+<li><a href="https://github.com/vfr/Reader" target="_blank" rel="external">Reader</a>–pdf阅读器</li>
+</ul>
+<h4 id="Android-阅读器"><a href="#Android-阅读器" class="headerlink" title="Android 阅读器"></a>Android 阅读器</h4><ul>
+<li><a href="https://github.com/JustWayward/BookReader" target="_blank" rel="external">BookReader</a>–一款比较完整的阅读器，支持txt/pdf/epub书籍阅读</li>
+<li><a href="https://github.com/geometer/FBReader" target="_blank" rel="external">FBReader</a>–C++项目，支持多平台的阅读器</li>
+<li><a href="https://github.com/FolioReader/FolioReader-Android" target="_blank" rel="external">FolioReader-Android</a>–FolioReader的android版本</li>
+</ul>
 
       
       
@@ -289,13 +323,13 @@ theme: next
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
-        <p><span>发布时间:</span>2016年08月25日 - 10时31分</p>
-        <p><span>最后更新:</span>2016年11月02日 - 13时37分</p>
+        <p><span>发布时间:</span>2017年07月20日 - 17时45分</p>
+        <p><span>最后更新:</span>2017年07月20日 - 17时46分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/25/个人博客进阶-Hexo搭建博客/" title="个人博客进阶--Hexo搭建博客">http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/20/EPUB文件格式解析/" title="EPUB文件格式解析">http://www.ileafly.com/2017/07/20/EPUB文件格式解析/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/07/20/EPUB文件格式解析/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -308,18 +342,9 @@ theme: next
 
 <nav id="article-nav">
   
-    <a href="/2016/08/31/git命令行入门/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          git命令行入门
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/12/搭建私有Pod/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">搭建私有Pod</div>
+    <a href="/2017/07/20/Swift开源项目ObjectMapper实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift开源项目ObjectMapper实践</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -330,7 +355,7 @@ theme: next
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Hexo"><span class="toc-number">1.</span> <span class="toc-text">安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装Node-js"><span class="toc-number">1.1.</span> <span class="toc-text">安装Node.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正式安装Hexo"><span class="toc-number">1.2.</span> <span class="toc-text">正式安装Hexo</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用hexo编写博客"><span class="toc-number">2.</span> <span class="toc-text">利用hexo编写博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客主题"><span class="toc-number">3.</span> <span class="toc-text">博客主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特效配置"><span class="toc-number">4.</span> <span class="toc-text">特效配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景知识"><span class="toc-number">1.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件组成"><span class="toc-number">2.</span> <span class="toc-text">文件组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件mimetype"><span class="toc-number">2.1.</span> <span class="toc-text">文件mimetype</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹META-INF"><span class="toc-number">2.2.</span> <span class="toc-text">文件夹META-INF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹OEBPS"><span class="toc-number">2.3.</span> <span class="toc-text">文件夹OEBPS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件OPF"><span class="toc-number">2.4.</span> <span class="toc-text">文件OPF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NCX文件"><span class="toc-number">2.5.</span> <span class="toc-text">NCX文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开源项目"><span class="toc-number">3.</span> <span class="toc-text">开源项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS-阅读器"><span class="toc-number">3.1.</span> <span class="toc-text">iOS 阅读器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-阅读器"><span class="toc-number">3.2.</span> <span class="toc-text">Android 阅读器</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -387,13 +412,11 @@ theme: next
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/31/git命令行入门/" title="上一篇: git命令行入门">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2016/08/12/搭建私有Pod/" title="下一篇: 搭建私有Pod">
+            <a href="/2017/07/20/Swift开源项目ObjectMapper实践/" title="下一篇: Swift开源项目ObjectMapper实践">
                 <i class="fa fa-angle-right"></i>
             </a>
         
