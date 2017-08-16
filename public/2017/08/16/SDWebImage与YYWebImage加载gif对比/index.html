@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>UIWebView加载本地html | Leafly</title>
+  <title>SDWebImage与YYWebImage加载gif对比 | Leafly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种
-读取本地html内容，加载内容12345NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];NSURL *baseURL = [NSURL URLWithString:mainBundlePath];NSString *htmlPath = [">
+  <meta name="description" content="很多应用为了丰富运营策略都需要支持gif图片，SDWebImage和YYWebImage已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现SDWebImage和YYWebImage在性能方面存在着较大的差距，这里就给大家进行一个对比
+SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中，通过animatedImageW">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UIWebView加载本地html">
-<meta property="og:url" content="http://www.ileafly.com/2017/02/16/UIWebView加载本地html/index.html">
+<meta property="og:title" content="SDWebImage与YYWebImage加载gif对比">
+<meta property="og:url" content="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种
-读取本地html内容，加载内容12345NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];NSURL *baseURL = [NSURL URLWithString:mainBundlePath];NSString *htmlPath = [">
-<meta property="og:updated_time" content="2017-02-16T13:22:34.000Z">
+<meta property="og:description" content="很多应用为了丰富运营策略都需要支持gif图片，SDWebImage和YYWebImage已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现SDWebImage和YYWebImage在性能方面存在着较大的差距，这里就给大家进行一个对比
+SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中，通过animatedImageW">
+<meta property="og:updated_time" content="2017-08-16T08:53:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UIWebView加载本地html">
-<meta name="twitter:description" content="UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种
-读取本地html内容，加载内容12345NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];NSURL *baseURL = [NSURL URLWithString:mainBundlePath];NSString *htmlPath = [">
+<meta name="twitter:title" content="SDWebImage与YYWebImage加载gif对比">
+<meta name="twitter:description" content="很多应用为了丰富运营策略都需要支持gif图片，SDWebImage和YYWebImage已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现SDWebImage和YYWebImage在性能方面存在着较大的差距，这里就给大家进行一个对比
+SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中，通过animatedImageW">
   
     <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
@@ -191,11 +191,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-UIWebView加载本地html" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SDWebImage与YYWebImage加载gif对比" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/16/UIWebView加载本地html/" class="article-date">
-      <time datetime="2017-02-16T06:19:38.000Z" itemprop="datePublished">2017-02-16</time>
+      <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" class="article-date">
+      <time datetime="2017-08-16T08:53:07.000Z" itemprop="datePublished">2017-08-16</time>
 </a>
     </div>
   
@@ -208,7 +208,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      UIWebView加载本地html
+      SDWebImage与YYWebImage加载gif对比
     </h1>
   
 
@@ -216,14 +216,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -233,10 +229,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种</p>
-<h4 id="读取本地html内容，加载内容"><a href="#读取本地html内容，加载内容" class="headerlink" title="读取本地html内容，加载内容"></a>读取本地html内容，加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *htmlPath = [NSString stringWithFormat:@&quot;%@/index.html&quot;, mainBundlePath];</div><div class="line">NSString *htmlContent = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];</div><div class="line">[_webView loadHTMLString:htmlString baseURL:baseURL];</div></pre></td></tr></table></figure>
-<h4 id="通过本地html地址加载内容"><a href="#通过本地html地址加载内容" class="headerlink" title="通过本地html地址加载内容"></a>通过本地html地址加载内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:baseURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure>
-<p>有些情况下，我们不仅要能加载本地html，还需要给本地html传递参数，这种情况下我们只能通过方法二来进行参数传递<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];</div><div class="line">NSURL *baseURL = [NSURL URLWithString:mainBundlePath];</div><div class="line">NSString *queryString = [NSString stringWithFormat:@&quot;%@/index.html?key=value&quot;, mainBundlePath];</div><div class="line">NSURL *queryURL = [NSURL URLWithString:queryString];</div><div class="line">NSURLRequest *request = [NSURLRequest requestWithURL:queryURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:(NSTimeInterval)10.0 ];</div><div class="line">[_webView loadRequest:request];</div></pre></td></tr></table></figure></p>
+        <p>很多应用为了丰富运营策略都需要支持gif图片，<code>SDWebImage</code>和<code>YYWebImage</code>已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现<code>SDWebImage</code>和<code>YYWebImage</code>在性能方面存在着较大的差距，这里就给大家进行一个对比</p>
+<h2 id="SDWebImage加载gif"><a href="#SDWebImage加载gif" class="headerlink" title="SDWebImage加载gif"></a>SDWebImage加载gif</h2><p><code>SDWebImage</code>将gif资源中的每一张image写入到内存中，通过<code>animatedImageWithImages</code>的方式播放动画，这样做的好处是gif轮播时直接从内存中读取资源就好，降低了CPU的使用，以空间换取流畅度，但是这也会导致当同时加载的gif数量增加时内存问题暴露的尤其明显</p>
+<h2 id="YYWebImage加载gif"><a href="#YYWebImage加载gif" class="headerlink" title="YYWebImage加载gif"></a>YYWebImage加载gif</h2><p><code>YYWebImage</code>是每次从缓存中读取需要展示的image，这样就不需要为gif的每一张image都开辟空间，每次都是从一份gif资源中读取每一张image，以一定的帧率从缓冲区中解析出当前的image，这必然需要消耗CPU，所以<code>YYWebImage</code>相比较<code>SDWebImage</code>更消耗CPU，但是这也带来了内存的大幅降低</p>
+<h2 id="通过Demo对比"><a href="#通过Demo对比" class="headerlink" title="通过Demo对比"></a>通过Demo对比</h2><p><a href="https://github.com/luzhiyongGit/WebImageDemo" target="_blank" rel="external">SDWebImage和YYWebImage加载gif图片对比Demo</a></p>
 
       
       
@@ -246,13 +242,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
-        <p><span>发布时间:</span>2017年02月16日 - 14时19分</p>
-        <p><span>最后更新:</span>2017年02月16日 - 21时22分</p>
+        <p><span>发布时间:</span>2017年08月16日 - 16时53分</p>
+        <p><span>最后更新:</span>2017年08月16日 - 16时53分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/16/UIWebView加载本地html/" title="UIWebView加载本地html">http://www.ileafly.com/2017/02/16/UIWebView加载本地html/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/02/16/UIWebView加载本地html/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" title="SDWebImage与YYWebImage加载gif对比">http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -265,18 +261,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/20/Xcode统计整个项目代码行数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Xcode统计整个项目代码行数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/12/30/3DTouch开发/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3DTouch开发</div>
+    <a href="/2017/07/20/EPUB文件格式解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">EPUB文件格式解析</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -287,7 +274,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#读取本地html内容，加载内容"><span class="toc-number">1.</span> <span class="toc-text">读取本地html内容，加载内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过本地html地址加载内容"><span class="toc-number">2.</span> <span class="toc-text">通过本地html地址加载内容</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SDWebImage加载gif"><span class="toc-number">1.</span> <span class="toc-text">SDWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YYWebImage加载gif"><span class="toc-number">2.</span> <span class="toc-text">YYWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Demo对比"><span class="toc-number">3.</span> <span class="toc-text">通过Demo对比</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -344,13 +331,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/20/Xcode统计整个项目代码行数/" title="上一篇: Xcode统计整个项目代码行数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2016/12/30/3DTouch开发/" title="下一篇: 3DTouch开发">
+            <a href="/2017/07/20/EPUB文件格式解析/" title="下一篇: EPUB文件格式解析">
                 <i class="fa fa-angle-right"></i>
             </a>
         
