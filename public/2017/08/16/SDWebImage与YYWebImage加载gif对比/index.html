@@ -19,189 +19,65 @@ SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中�
 <meta name="twitter:description" content="很多应用为了丰富运营策略都需要支持gif图片，SDWebImage和YYWebImage已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现SDWebImage和YYWebImage在性能方面存在着较大的差距，这里就给大家进行一个对比
 SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中，通过animatedImageW">
   
-    <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
   
-    <link rel="icon" href="/img/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+    
   
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+
 </head>
+
 <body>
   <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/avatar.gif" class="js-avatar">
-            
-        </a>
-
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">Leafly</a></h1>
-        </hgroup>
-
-        
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 13.33px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/epub/" style="font-size: 10px;">epub</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 13.33px;">博客</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/ca60cab2466b">我的简书</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中，愿自己永远对一切充满好奇~</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Leafly</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/avatar.gif" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">Leafly</a></h1>
-            </hgroup>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
-                    
-                </div>
-            </nav>
-        </header>                
-    </div>
-</nav>
-      <div class="body-wrap"><article id="post-SDWebImage与YYWebImage加载gif对比" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" class="article-date">
-      <time datetime="2017-08-16T08:53:07.000Z" itemprop="datePublished">2017-08-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
     
-      <input type="hidden" class="isFancy" />
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.ileafly.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leafly</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SDWebImage与YYWebImage加载gif对比" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" class="article-date">
+  <time datetime="2017-08-16T08:53:07.000Z" itemprop="datePublished">2017-08-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
     
     
       <header class="article-header">
@@ -213,253 +89,242 @@ SDWebImage加载gifSDWebImage将gif资源中的每一张image写入到内存中�
   
 
       </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
-          
+        <!-- Table of Contents -->
+        
         <p>很多应用为了丰富运营策略都需要支持gif图片，<code>SDWebImage</code>和<code>YYWebImage</code>已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现<code>SDWebImage</code>和<code>YYWebImage</code>在性能方面存在着较大的差距，这里就给大家进行一个对比</p>
 <h2 id="SDWebImage加载gif"><a href="#SDWebImage加载gif" class="headerlink" title="SDWebImage加载gif"></a>SDWebImage加载gif</h2><p><code>SDWebImage</code>将gif资源中的每一张image写入到内存中，通过<code>animatedImageWithImages</code>的方式播放动画，这样做的好处是gif轮播时直接从内存中读取资源就好，降低了CPU的使用，以空间换取流畅度，但是这也会导致当同时加载的gif数量增加时内存问题暴露的尤其明显</p>
 <h2 id="YYWebImage加载gif"><a href="#YYWebImage加载gif" class="headerlink" title="YYWebImage加载gif"></a>YYWebImage加载gif</h2><p><code>YYWebImage</code>是每次从缓存中读取需要展示的image，这样就不需要为gif的每一张image都开辟空间，每次都是从一份gif资源中读取每一张image，以一定的帧率从缓冲区中解析出当前的image，这必然需要消耗CPU，所以<code>YYWebImage</code>相比较<code>SDWebImage</code>更消耗CPU，但是这也带来了内存的大幅降低</p>
 <h2 id="通过Demo对比"><a href="#通过Demo对比" class="headerlink" title="通过Demo对比"></a>通过Demo对比</h2><p><a href="https://github.com/luzhiyongGit/WebImageDemo" target="_blank" rel="external">SDWebImage和YYWebImage加载gif图片对比Demo</a></p>
 
       
-      
     </div>
-    
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjb6e28a1000xnc7979f2rzh4" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
   </div>
   
     
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 Leafly 的个人博客">Leafly</a></p>
-        <p><span>发布时间:</span>2017年08月16日 - 16时53分</p>
-        <p><span>最后更新:</span>2017年08月16日 - 16时53分</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" title="SDWebImage与YYWebImage加载gif对比">http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/　　作者: Leafly" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
     </div>
+  </div>
 
-
-
+    
 <nav id="article-nav">
+  
+    <a href="/2017/12/14/自定义快捷代码片段/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          自定义快捷代码片段
+        
+      </div>
+    </a>
   
   
     <a href="/2017/07/20/EPUB文件格式解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">EPUB文件格式解析</div>
-      <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
 
   
 </article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SDWebImage加载gif"><span class="toc-number">1.</span> <span class="toc-text">SDWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YYWebImage加载gif"><span class="toc-number">2.</span> <span class="toc-text">YYWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Demo对比"><span class="toc-number">3.</span> <span class="toc-text">通过Demo对比</span></a></li></ol>
-</div>
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-        }
-    })
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-    }
-</script>
-
-
-
-
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-
+ 
+     
+  <div class="comments" id="comments">
     
-        <section class="youyan" id="comments">
-  <div id="uyan_frame"></div>
-  <script src="http://v2.uyan.cc/code/uyan.js?uid=2134680"></script>
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
 </section>
-
+           
+    <aside id="sidebar">
+  
     
 
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
-        
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-        
-            <a href="/2017/07/20/EPUB文件格式解析/" title="下一篇: EPUB文件格式解析">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SDWebImage加载gif"><span class="toc-number">1.</span> <span class="toc-text">SDWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YYWebImage加载gif"><span class="toc-number">2.</span> <span class="toc-text">YYWebImage加载gif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Demo对比"><span class="toc-number">3.</span> <span class="toc-text">通过Demo对比</span></a></li></ol>
+          </div>
+      </div>
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/20/Swift开源项目ObjectMapper实践/">Swift开源项目ObjectMapper实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/利用SDWebImage下载图片/">利用SDWebImage下载图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/08/iOS11开发者需要知道的改变/">iOS 11 开发者需要知道的改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/06/Block用法小结/">Block用法小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/11/自定义UIPageControl/">自定义UIPageControl</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/07/Bootstrap框架入门/">Bootstrap框架入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/06/PHP与iOS之间的AES加解密/">PHP与iOS之间的AES加解密</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/23/iOS开发小结之H5与OC交互/">iOS开发小结之H5与OC交互</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/20/Xcode统计整个项目代码行数/">Xcode统计整个项目代码行数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/16/UIWebView加载本地html/">UIWebView加载本地html</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/3DTouch开发/">3DTouch开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/runtime机制/">runtime机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/28/iOS项目添加自定义字体/">iOS项目添加自定义字体</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/React-Native之Navigator/">React-Native之Navigator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/17/自动化打包IPA脚本/">自动化打包IPA脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/02/ReactNative入门/">ReactNative入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/01/iOS10系统下的推送开发/">iOS10系统下的推送开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/移除Pod管理的库后编译报Link错误/">移除Pod管理的库后编译报Link错误</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/24/iOS-让子View不响应父View的手势/">iOS--让子View不响应父View的手势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CocoaPods升级后问题解决/">CocoaPods升级后问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/自定义xopen命令打开工程/">自定义xopen命令打开工程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">私有pod创建进阶--如何通过pod管理静态库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/31/git命令行入门/">git命令行入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/12/搭建私有Pod/">搭建私有Pod</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/如何搭建属于自己的博客/">如何搭建属于自己的博客？</a></li></ul>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-            }
-        })
-    </script>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
 
 
+  
+</aside>
 
-    <script>
-        
-    </script>
-</div>
+      </div>
       <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 Leafly
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >网站到访量: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2017 Leafly&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;luzhiyongmail@sohu.com
+    </div>
+  </div>
 </footer>
-
+ <script src="/jquery/jquery.min.js"></script>
     </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
 
+  
     <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
     </script>
 
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
 
 
+ <script src="/js/is.js"></script>
 
 
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
-
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
   </div>
 </body>
 </html>

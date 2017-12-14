@@ -12,194 +12,346 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leafly">
   
-    <link rel="alternative" href="/atom.xml" title="Leafly" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
   
-    <link rel="icon" href="/img/favicon.png">
+    <link rel="icon" href="/favicon.png">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+    
   
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
-    
-    
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: true,
-          isPost: false,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+
 </head>
+
 <body>
   <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/avatar.gif" class="js-avatar">
-            
-        </a>
-
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">Leafly</a></h1>
-        </hgroup>
-
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Bootstrap/" style="font-size: 10px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 10px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 13.33px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 10px;">Secret</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/epub/" style="font-size: 10px;">epub</a> <a href="/tags/iOS/" style="font-size: 16.67px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 20px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 10px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 13.33px;">博客</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/ca60cab2466b">我的简书</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中，愿自己永远对一切充满好奇~</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Leafly</a></h1>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.ileafly.com"></form>
       </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/avatar.gif" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">Leafly</a></h1>
-            </hgroup>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="github" target="_blank" href="https://github.com/luzhiyongGit" title="github">github</a>
-                    
-                </div>
-            </nav>
-        </header>                
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
     </div>
-</nav>
-      <div class="body-wrap">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leafly</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
   
-    <article id="post-如何搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/08/如何搭建属于自己的博客/" class="article-date">
-      <time datetime="2016-08-08T02:19:34.000Z" itemprop="datePublished">2016-08-08</time>
+    <article id="post-个人博客进阶-Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/25/个人博客进阶-Hexo搭建博客/" class="article-date">
+  <time datetime="2016-08-25T02:31:50.000Z" itemprop="datePublished">2016-08-25</time>
 </a>
-    </div>
-  
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </div>
+
+  </div>
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Hexo</a>搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>hexo是一款基于<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
+<h4 id="正式安装Hexo"><a href="#正式安装Hexo" class="headerlink" title="正式安装Hexo"></a>正式安装Hexo</h4><p>1.执行安装Hexo命令</p>
+<pre><code>sudo npm install -g hexo
+</code></pre><p>2.创建blog文件夹并cd到blog文件夹内</p>
+<p>3.执行init命令初始化hexo</p>
+<pre><code>hexo init
+</code></pre><p>4.生成静态页面</p>
+<pre><code>hexo g
+</code></pre><p>5.本地启动服务器，进行文章预览</p>
+<pre><code>hexo server
+</code></pre><p>  在浏览器中输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可预览文章</p>
+<p>6.将github仓库与blog建立关联</p>
+<pre><code>vi _config.yml
+
+deploy:
+   type: git
+   repo: https://github.com/luzhiyongGit/luzhiyongGit.github.io
+   branch: master
+</code></pre><p>  执行配置命令</p>
+<pre><code>npm install hexo-deployer-git -S
+</code></pre><p>7.发布博客</p>
+<pre><code>hexo d
+</code></pre><p>  执行完毕后，你会发现你的github仓库内容已经发生了更改，同时打开<a href="https://luzhiyonggit.github.io" target="_blank" rel="external">https://luzhiyonggit.github.io</a>，能够看到一篇默认博客</p>
+<h3 id="利用hexo编写博客"><a href="#利用hexo编写博客" class="headerlink" title="利用hexo编写博客"></a>利用hexo编写博客</h3><p>1.新建一篇博客</p>
+<pre><code>hexo new 博客名称
+</code></pre><p>2.生成博客页面</p>
+<pre><code>hexo g
+</code></pre><p>3.发布博客</p>
+<pre><code>hexo d
+</code></pre><h3 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h3><p>Hexo有非常多的主题可以选择替换，替换流程也特别方便</p>
+<p>1.从<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">Hexo Themes</a>中找到一个你心仪的主题，本博客使用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">next</a></p>
+<p>2.在你的blog文件目录下，执行下面的命令</p>
+<pre><code>git clone https://github.com/iissnan/hexo-theme-next.git themes/next
+</code></pre><p>3.编辑配置信息</p>
+<pre><code>vi _config.yml
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+## Themes: http://hexo.io/themes/
+theme: next
+</code></pre><p>4.生成博客页面</p>
+<pre><code>hexo g
+</code></pre><p>5.发布博客</p>
+<pre><code>hexo d
+</code></pre><h3 id="特效配置"><a href="#特效配置" class="headerlink" title="特效配置"></a>特效配置</h3><pre><code>next主题有一个[next wiki](https://github.com/iissnan/hexo-theme-next/wiki/)提供了很多特性配置的方案，我们可以通过参考它完成很多特性配置
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.tuicool.com/articles/ueI7naV" target="_blank" rel="external">简洁轻便的博客平台: Hexo详解</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjb6e28ah0021nc79vlbx8w8w" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-搭建私有Pod" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/搭建私有Pod/" class="article-date">
+  <time datetime="2016-08-12T02:21:11.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/12/搭建私有Pod/">搭建私有Pod</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://cocoapods.org/" target="_blank" rel="external">Cocoapods</a>是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。</p>
+<h3 id="创建一个私有Pod的步骤："><a href="#创建一个私有Pod的步骤：" class="headerlink" title="创建一个私有Pod的步骤："></a>创建一个私有Pod的步骤：</h3><ol>
+<li>创建并设置一个私有的 <strong>Spec Repo</strong></li>
+<li>创建Pod所需管理的项目</li>
+<li>创建Pod所对应的podspec文件</li>
+<li>本地测试配置好的podspec文件是否可用</li>
+<li>向私有的Spec Repo中提交podspec</li>
+<li>在个人项目中的Podfile中增加刚刚制作好的Pod并使用</li>
+<li>更新维护podspec</li>
+</ol>
+<h3 id="创建私有Spec-Repo"><a href="#创建私有Spec-Repo" class="headerlink" title="创建私有Spec Repo"></a>创建私有Spec Repo</h3><p>先来说第一步，什么是Spec Repo？它是所有的Pods的一个索引，就是一个容器，所有公开的Pods都在这个里面，我们常用的第三方库都是放在<a href="http://www.github.com" target="_blank" rel="external">Github</a>里开源的<a href="https://github.com/CocoaPods/Specs" target="_blank" rel="external">Specs</a>中，当我们使用CocoaPods后就会在~/.cocoapods/repos目录下生成一个官方的Spec Repo文件夹master。这个master目录的结构如图：<br><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/Pod/spec_struct.png" alt="Spec Repo"></p>
+<p>我们首先需要做的就是创建一个类似于master的私有Spec Repo：  </p>
+<ol>
+<li>创建一个Git仓库  </li>
+<li><p>创建完成之后再终端执行如下命令</p>
+<p>pod repo add [Private Repo Name] [Github Https clone URL]</p>
+</li>
+</ol>
+<h3 id="创建Pod项目工程文件"><a href="#创建Pod项目工程文件" class="headerlink" title="创建Pod项目工程文件"></a>创建Pod项目工程文件</h3><p>Cocoapods为我们提供了一个工具，用来创建Pod管理的项目，相关的文档介绍是<a href="http://guides.cocoapods.org/making/using-pod-lib-create" target="_blank" rel="external">using-pod-lib-create</a>，下面我们通过创建一个podDemoLibrary</p>
+<pre><code>pod lib create podDemoLibrary
+</code></pre><p>这段命令执行完之后，它会问你四个问题：</p>
+<p>1.是否需要一个例子工程</p>
+<p>2.选择一个测试框架</p>
+<p>3.是否基于View测试</p>
+<p>4.类的前缀</p>
+<p>根据你的实际需求回答这四个问题，通常我们都会选择需要一个例子工程，至于是否需要测试框架或者类的前缀都根据实际请求选择。</p>
+<p>回答完问题后，pod会自动帮你创建对应的目录结构，接下来你可以通过终端进入Example文件夹内执行<strong>pod install</strong>，然后打开<strong>podDemoLibrary.workspace</strong>，在Pods工程下面，会有一个Resources文件夹用来存放你的图片资源和一个Classes文件夹用来存放你的代码。至此，pod项目创建已经完成。</p>
+<h3 id="编辑Pod项目工程文件"><a href="#编辑Pod项目工程文件" class="headerlink" title="编辑Pod项目工程文件"></a>编辑Pod项目工程文件</h3><p>pod项目创建完之后你还需要修改它，已达到实现你的功能需求的目的，接下来就是如何编辑Pod文件。</p>
+<h4 id="如何添加代码"><a href="#如何添加代码" class="headerlink" title="如何添加代码"></a>如何添加代码</h4><p>添加代码的方法同正常的文件创建一样，只是在创建完成之后我们并不能直接使用它，我们需要重新在终端进入Example文件夹内执行<strong>pod install</strong></p>
+<h4 id="如何添加图片资源"><a href="#如何添加图片资源" class="headerlink" title="如何添加图片资源"></a>如何添加图片资源</h4><p>想要添加图片资源，首先，我们需要在Assets文件夹内存放图片资源，然后打开<strong>podDemoLibrary.podspec</strong>文件，找到如下代码：</p>
+<pre><code>s.resource_bundles = {
+  &apos;podDemoLibrary&apos; =&gt; [&apos;podDemoLibrary/Assets/*.png&apos;]
+} 
+</code></pre><p>放开注释，重新执行<strong>pod install</strong>，这样你就能在项目中看到Resource文件夹了。</p>
+<p>虽然，你已经能看到Resource文件夹，但是，你并不能直接通过</p>
+<pre><code>[UIImage imageWithNamed:@&quot;pic&quot;];
+</code></pre><p>加载图片。你可以通过一个宏定义方法加载图片，</p>
+<pre><code>#define SrcWithName(name) [@&quot;podDemoLibrary.bundle&quot; stringByAppendingPathComponent:name]
+[UIImage imageWithNamed:SrcWithName(@&quot;pic&quot;)];
+</code></pre><h4 id="如何添加依赖库"><a href="#如何添加依赖库" class="headerlink" title="如何添加依赖库"></a>如何添加依赖库</h4><p>依赖库的添加需要在<strong>podDemoLibrary.podspec</strong>中添加，s.frameworks 对应的是系统库，s.denpendency 对应的是第三方pod库</p>
+<h3 id="发布Pod项目"><a href="#发布Pod项目" class="headerlink" title="发布Pod项目"></a>发布Pod项目</h3><p>1.上传代码到git master</p>
+<pre><code>git add .
+git commit -m &quot;Initial Commit&quot;
+git push origin master
+</code></pre><p>2.tag标记</p>
+<pre><code>git tag -m &quot;first release&quot; 0.1.0
+git push --tags
+</code></pre><p>3.验证pod</p>
+<pre><code>pod lib lint
+</code></pre><p>4.发布pod</p>
+<pre><code>pod repo push Specs podDemoLibrary.podspec
+</code></pre><h3 id="查找Pod项目"><a href="#查找Pod项目" class="headerlink" title="查找Pod项目"></a>查找Pod项目</h3><pre><code>pod search podDemoLibrary
+</code></pre><p>如果你能查询到<strong>podDemoLibrary</strong>项目，说明你的pod创建成功了。</p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>在实际使用中遇到了各种零散的问题，这里将遇到的问题做一个总结。</p>
+<ol>
+<li><p>上传了一个错误的tag，需要删除已经上传的tag</p>
+<pre><code>git tag -d 0.1.0
+git push origin :refs/tags/0.1.0
+</code></pre></li>
+<li><p>pod lib lint时，发现存在warning</p>
+<pre><code>pod repo push Specs podDemoLibrary.podspec --allow-warnings
+</code></pre></li>
+<li><p>依赖库中有一个framework</p>
+<pre><code>pod repo push Specs podDemoLibrary.podspec --use-libraries
+</code></pre></li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/" target="_blank" rel="external">使用Cocoapods创建私有podspec</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/08/12/搭建私有Pod/" data-id="cjb6e28al002enc792kc35q3j" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Markdown语法初探" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/Markdown语法初探/" class="article-date">
+  <time datetime="2016-08-11T02:19:34.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：</p>
+<pre><code># 一级标题
+
+#### 四级标题
+</code></pre><p>另外，一级和二级标题还有一种写法：</p>
+<pre><code>一级标题
+=====================
+二级标题
+---------------------
+</code></pre><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>在文本中输入的换行会从最终生成的结果中删除，浏览器会根据可用空间自动换行。如果想强迫换行，可以在行尾插入<strong>至少两个空格</strong>。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
+<p>这是一段被引用的内容<br>引用结束</p>
+</blockquote>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><pre><code>[链接文案](链接地址)
+例如： [Markdown](https://zh.wikipedia.org/wiki/Markdown)
+</code></pre><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><pre><code>![Alt text](image url)
+</code></pre><p><img src="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png" alt="foo"></p>
+<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><pre><code>*斜体* 或 _斜体_  
+
+**加重强调** 或 __加重强调__
+</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">markdown语法参考</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown维基百科</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/" data-id="cjb6e289v000knc79w46at3bm" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-如何搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/08/如何搭建属于自己的博客/" class="article-date">
+  <time datetime="2016-08-08T02:19:34.000Z" itemprop="datePublished">2016-08-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
     
     
       <header class="article-header">
@@ -211,11 +363,11 @@
   
 
       </header>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
-          
+        <!-- Table of Contents -->
+        
         <p>本文主要介绍使用 Github、Jekyll 打造自己的免费独立博客的方法</p>
 <p><a href="http://www.github.com" target="_blank" rel="external">Github</a>是一个代码托管网站，现在很多开源项目都放在Github上。Github还提供了一个功能，叫Github Pages，利用这个功能，我们可以为项目建立网站，当然，这也意味着我们可以通过Github Pages建立自己的博客。</p>
 <p><a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a>是一个简单的，针对博客设计的静态网站生成器。通过结合使用Github和Jekyll，我们可以打造自己的独立博客，可以自由的定制网站风格，并且这一切都是免费的。</p>
@@ -232,139 +384,180 @@
 <p><a href="http://blog.csdn.net/on_1y/article/details/19259435" target="_blank" rel="external">使用Github、Jekyll打造自己的免费独立博客</a></p>
 
       
-      
     </div>
-    
-    <div class="article-info article-info-index">
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjb6e28aj0028nc79w5b4i8cg" class="article-share-link">分享</a>
       
       
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-    </div>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
 
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
+    </footer>
   </div>
   
 </article>
-
-
-
-
-
-
-
+ 
 
 
   
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
+    
+
   
-</div>
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/">NS_UNAVAILABLE和NS_DESIGNATED是什么</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/14/开发者账号批量导入设备号/">开发者账号批量导入设备号</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/14/自定义快捷代码片段/">自定义快捷代码片段</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
       <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 Leafly
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >网站到访量: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2017 Leafly&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;luzhiyongmail@sohu.com
+    </div>
+  </div>
 </footer>
-
+ <script src="/jquery/jquery.min.js"></script>
     </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
 
+  
     <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
     </script>
 
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
 
 
+ <script src="/js/is.js"></script>
 
 
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
-
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
   </div>
 </body>
 </html>
