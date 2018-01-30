@@ -65,6 +65,475 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-移除Pod管理的库后编译报Link错误" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/" class="article-date">
+  <time datetime="2016-10-24T05:59:00.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/移除Pod管理的库后编译报Link错误/">移除Pod管理的库后编译报Link错误</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行<code>pod install</code>还是清除缓存，clean项目，都无法解决这个问题。<br>这是因为虽然我们将库已经从pod管理中删除，但是我们的项目还在link这个库，我们需要去除掉这个link，具体移除步骤如下：</p>
+<ol>
+<li>点击项目工程文件进入Build Setting</li>
+<li>找到Other Linker Flags一栏</li>
+<li>删除到相关库的link</li>
+<li>重新编译即可</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/" data-id="cjd1d7760002uts798qyidmdq" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-iOS-让子View不响应父View的手势" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/24/iOS-让子View不响应父View的手势/" class="article-date">
+  <time datetime="2016-10-24T05:57:13.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/iOS-让子View不响应父View的手势/">iOS--让子View不响应父View的手势</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在项目中遇到一个问题，父View上添加的手势事件在子View中也会响应，通过搜索后找到了解决方案，接下来作一个小总结，方便以后遇到相同问题时查找。<br>解决思路：手势事件有一个代理方法，<code>- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch</code>，我们就是要通过这个代理方法屏蔽掉子View上的事件响应。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch &#123;</div><div class="line">   if ([touch.view isDescendantOfView:你想屏蔽掉手势的子视图]) &#123;</div><div class="line">    return NO;</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjd1d775a001ets79owo8fvqi" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-CocoaPods升级后问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/09/CocoaPods升级后问题解决/" class="article-date">
+  <time datetime="2016-10-09T09:30:43.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/09/CocoaPods升级后问题解决/">CocoaPods升级后问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>升级<a href="https://cocoapods.org/" target="_blank" rel="external">CocoaPods</a>到<code>1.0.1</code>版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在<code>Podfile</code>里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。</p>
+<p>升级完CocoaPods后，在iPhone 6模拟器中编译没有任何问题，但是在iPhone 4或者iPhone 5等模拟器中一直编译失败，通过调研找到了原因，因为iPhone 4或者iPhone 5模拟器是64位模拟器，也就是说在64位模拟器上编译不会通过，这是因为新版本的CocoaPods</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/" data-id="cjd1d774d0003ts791hbas0si" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-自定义xopen命令打开工程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/08/自定义xopen命令打开工程/" class="article-date">
+  <time datetime="2016-10-08T08:15:53.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/08/自定义xopen命令打开工程/">自定义xopen命令打开工程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>通常我们在终端中对代码进行版本控制或者使用CocoaPods命令安装完依赖库后，都需要手动去打开工程。对于追求快捷和逼格的我们来说怎样才能进一步提升我们的逼格呢？</p>
+<p>今天就跟大家分享一个通过ruby脚本来帮助我们在终端中直接打开工程的方法。</p>
+<p>如果大家足够细心的话应该能注意到CocoaPods管理的项目后缀是<code>projectname.xcworkspace</code>而普通工程的后缀是<code>projectname.xcodeproj</code>,下面我们就通过ruby脚本来判断后缀，帮助我们优先打开<code>projectname.xcworkspace</code>。</p>
+<pre><code>#!/usr/bin/env ruby
+
+require &apos;shellwords&apos;
+
+proj = Dir[&apos;*.xcworkspace&apos;].first
+proj = Dir[&apos;*.xcodeproj&apos;].first unless proj
+
+if proj
+  puts &quot;Opening #{proj}&quot;
+  `open #{proj}`
+else
+  puts &quot;No xcworkspace|xcproj file found&quot;
+end
+</code></pre><p>将以上内容命名为<code>xopen</code>保存，并将文件拷贝到<code>/usr/local/bin</code>目录下，添加权限：<code>chmod 777 xopen</code></p>
+<p>执行完以上操作后你就可以方便的使用<code>xopen</code>命令来打开工程啦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/" data-id="cjd1d77690034ts79sihfcgbt" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-私有pod创建进阶-如何通过pod管理静态库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" class="article-date">
+  <time datetime="2016-09-10T07:46:08.000Z" itemprop="datePublished">2016-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">私有pod创建进阶--如何通过pod管理静态库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>一文中我们已经总结了如何创建私有的Pod，这次来总结一下如果利用Pod生成和管理静态库。</p>
+<h2 id="创建并发布Pod项目"><a href="#创建并发布Pod项目" class="headerlink" title="创建并发布Pod项目"></a>创建并发布Pod项目</h2><p>首先，我们需要参考<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>创建一个pod项目至<strong>pod lib lint</strong>验证无误。</p>
+<h2 id="打包类库"><a href="#打包类库" class="headerlink" title="打包类库"></a>打包类库</h2><p>我们需要使用一个cocoapods的插件<a href="https://github.com/CocoaPods/cocoapods-packager" target="_blank" rel="external">cocoapods-packager</a>来完成类库的打包。当然也可以手动编译打包，只是过程会很繁琐。</p>
+<ol>
+<li><p>安装打包插件</p>
+<p>  sudo gem install cocoapods-packager</p>
+</li>
+<li><p>打包</p>
+<p>  pod package Lib.podspec –library –force</p>
+<p><strong>–library</strong>指定打包成 <strong>.a</strong> 文件，如果不带上将会打包成 <strong>.framework</strong> 文件。 <strong>–force</strong>是指强制覆盖。</p>
+</li>
+</ol>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错<br>造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在<code>podspec</code>文件里添加系统库的引用和开放头文件。</p>
+<pre><code>s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
+
+s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
+</code></pre><h2 id="管理类库"><a href="#管理类库" class="headerlink" title="管理类库"></a>管理类库</h2><p>打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。</p>
+<ol>
+<li>在项目根目录中建一个文件夹命名为Release，里面存放一个podspec文件和项目打包成功的.a文件以及.h文件</li>
+<li><p>修改podspec   </p>
+<pre><code>// 指定.h代码源文件地址
+s.source_files = &apos;Release/**/*.h&apos;
+// 指定.a库地址
+s.vendored_libraries = &apos;Release/Lib.a&apos;
+</code></pre></li>
+<li><p>上传Release代码到git master分支，并打上对应tag</p>
+</li>
+<li>发布pod</li>
+</ol>
+<p>贴上Demo中的podspec供参考</p>
+<pre><code>Pod::Spec.new do |s|
+   s.name             = &apos;ZYLib&apos;
+   s.version          = &apos;0.1.0&apos;
+   s.summary          = &apos;A short description of ZYLib.&apos;
+
+   s.homepage         = &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;
+   s.license          = { :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; }
+   s.author           = { &apos;luzy&apos; =&gt; &apos;luzy@2345.com&apos; }
+   s.source           = { :git =&gt; &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;, :tag =&gt; s.version.to_s }
+
+   s.ios.deployment_target = &apos;7.0&apos;
+
+   s.source_files = &apos;Release/**/*&apos;
+
+   s.vendored_frameworks = &apos;Release/ZYLib.a&apos;
+
+   #s.resource_bundles = {
+   #  &apos;ZYLib&apos; =&gt; [&apos;ZYLib/Assets/*.png&apos;]
+   #}
+
+   s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
+   s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
+   s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;
+end 
+</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/brycezhang/p/4117180.html" target="_blank" rel="external">使用CocoaPods开发并打包静态库</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" data-id="cjd1d775z002rts796keaw1qy" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-git命令行入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/31/git命令行入门/" class="article-date">
+  <time datetime="2016-08-31T11:43:02.000Z" itemprop="datePublished">2016-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/31/git命令行入门/">git命令行入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>本文结合项目开发中遇到的实际问题对git命令行的使用做一个简单的总结。</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
+<li><p>下载项目</p>
+<pre><code>git clone [url]
+</code></pre></li>
+<li><p>查看本地分支</p>
+<pre><code>git branch
+</code></pre></li>
+<li><p>查看远程分支</p>
+<pre><code>git branch -r
+</code></pre></li>
+<li><p>创建本地分支</p>
+<pre><code>git branch [branch]
+</code></pre></li>
+<li><p>切换本地分支</p>
+<pre><code>git checkout [branch]
+</code></pre></li>
+<li><p>拉取远程分支代码</p>
+<pre><code>git pull origin [remote-branch]
+</code></pre></li>
+<li><p>添加当前目录的所有文件到暂存区</p>
+<pre><code>git add .
+</code></pre></li>
+<li><p>提交暂存区到仓库区</p>
+<pre><code>git commit -m [message]
+</code></pre></li>
+<li><p>合并分支</p>
+<pre><code>git merge [branch]
+</code></pre></li>
+<li><p>提交本地分支代码</p>
+<p>  git push origin [remote-branch]</p>
+</li>
+</ol>
+<h3 id="tag命令"><a href="#tag命令" class="headerlink" title="tag命令"></a>tag命令</h3><ol>
+<li><p>列出所有tag</p>
+<pre><code>git tag
+</code></pre></li>
+<li><p>新建tag</p>
+<pre><code># 在当前commit新建一个tag
+git tag [tag]
+
+# 在指定commit新建一个tag
+git tag [tag] [commit]
+</code></pre></li>
+<li><p>删除本地tag</p>
+<pre><code>git tag -d [tag]
+</code></pre></li>
+<li><p>删除远程tag</p>
+<pre><code>git push origin :refs/tags/[tag]
+</code></pre></li>
+<li><p>提交指定tag</p>
+<pre><code>git push [remote] [tag]
+</code></pre></li>
+<li><p>提交所有tag</p>
+<pre><code>git push --tags
+</code></pre></li>
+<li><p>基于某个tag新建一个分支</p>
+<pre><code>git checkout -b [branch] [tag]
+</code></pre><p>​    </p>
+<h3 id="撤销命令"><a href="#撤销命令" class="headerlink" title="撤销命令"></a>撤销命令</h3></li>
+<li><p>恢复暂存区的指定文件到工作区</p>
+<pre><code>git checkout [file]
+</code></pre></li>
+<li><p>恢复某个commit的指定文件到工作区</p>
+<pre><code>git checkout [commit] [file]
+</code></pre></li>
+<li><p>恢复暂存区的所有文件到工作区</p>
+<pre><code>git checkout .
+</code></pre></li>
+<li><p>重置暂存区的指定文件，与上一次commit保持一致，但是工作区不变</p>
+<pre><code>git reset [file]
+</code></pre></li>
+<li><p>重置暂存区和工作区，与上次commit保持一致</p>
+<pre><code>git reset --hard       
+</code></pre><p>​    </p>
+<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3></li>
+<li><p>删除工作区的文件，并将这次删除放入暂存区</p>
+<pre><code>git rm [file1] [file2]  
+</code></pre></li>
+<li><p>停止追踪指定文件，但该文件会保留在工作区</p>
+<pre><code>git rm --cached [file]
+</code></pre></li>
+<li><p>删除本地分支</p>
+<pre><code>git branch -d [branch]
+</code></pre></li>
+<li><p>删除远程分支</p>
+<pre><code>git push origin --delete [remote-branch]
+
+git branch -dr [remore-branch]
+</code></pre></li>
+<li><p>删除本地tag</p>
+<pre><code>git tag -d [tag]
+</code></pre></li>
+<li><p>删除远程tag</p>
+<pre><code>git push origin :refs/tags/[tag]
+</code></pre></li>
+</ol>
+<h4 id="导出纯代码"><a href="#导出纯代码" class="headerlink" title="导出纯代码"></a>导出纯代码</h4><ol>
+<li>导出纯代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git archive --format zip --output &quot;./output.zip&quot; master -0</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h4><ol>
+<li><p>查看冲突</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择对方版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --theirs [conflict file]</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择本地版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --ours [conflict flie]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">常用Git命令清单</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjd1d775e001mts799lv78dq6" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git入门/">Git入门</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-个人博客进阶-Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/25/个人博客进阶-Hexo搭建博客/" class="article-date">
@@ -144,7 +613,7 @@ theme: next
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjb6e28ah0021nc79vlbx8w8w" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjd1d775r002bts791dagjros" class="article-share-link">分享</a>
       
       
       
@@ -257,7 +726,7 @@ git push origin :refs/tags/0.1.0
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/12/搭建私有Pod/" data-id="cjb6e28al002enc792kc35q3j" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/12/搭建私有Pod/" data-id="cjd1d775x002ots79rprlkh9n" class="article-share-link">分享</a>
       
       
       
@@ -326,7 +795,7 @@ git push origin :refs/tags/0.1.0
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/" data-id="cjb6e289v000knc79w46at3bm" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/" data-id="cjd1d774u000jts79n58fosw7" class="article-share-link">分享</a>
       
       
       
@@ -386,7 +855,7 @@ git push origin :refs/tags/0.1.0
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjb6e28aj0028nc79w5b4i8cg" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjd1d775s002fts790fzvjppf" class="article-share-link">分享</a>
       
       
       
@@ -426,23 +895,23 @@ git push origin :refs/tags/0.1.0
       <ul>
         
           <li>
-            <a href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/">NS_UNAVAILABLE和NS_DESIGNATED是什么</a>
+            <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
           </li>
         
           <li>
-            <a href="/2017/12/14/开发者账号批量导入设备号/">开发者账号批量导入设备号</a>
+            <a href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
           </li>
         
           <li>
-            <a href="/2017/12/14/自定义快捷代码片段/">自定义快捷代码片段</a>
+            <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
           </li>
         
           <li>
-            <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a>
+            <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
           </li>
         
           <li>
-            <a href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a>
+            <a href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
           </li>
         
       </ul>
@@ -466,7 +935,7 @@ git push origin :refs/tags/0.1.0
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2014 - 2017 Leafly&nbsp;|&nbsp;
+      &copy; 2014 - 2018 Leafly&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
      <div id="footer-right">

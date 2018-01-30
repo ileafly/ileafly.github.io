@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>轻松搞定状态栏颜色变化 | Leafly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iOS系统的状态栏颜色通常有白色和黑色两种，对应的就是UIStatusBarStyleLightContent和UIStatusBarStyleDefault两种样式，改变状态栏的颜色就是通过设置不同的样式来实现的。
+iOS为我们提供了两种设置状态栏的方式：统一设置app所有控制器的状态栏颜色和单独设置某个控制器的状态栏颜色
+统一设置app所有控制器的状态栏颜色首先，我们需要了解一下info.pl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轻松搞定状态栏颜色变化">
+<meta property="og:url" content="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/index.html">
+<meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="iOS系统的状态栏颜色通常有白色和黑色两种，对应的就是UIStatusBarStyleLightContent和UIStatusBarStyleDefault两种样式，改变状态栏的颜色就是通过设置不同的样式来实现的。
+iOS为我们提供了两种设置状态栏的方式：统一设置app所有控制器的状态栏颜色和单独设置某个控制器的状态栏颜色
+统一设置app所有控制器的状态栏颜色首先，我们需要了解一下info.pl">
+<meta property="og:updated_time" content="2018-01-30T08:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="轻松搞定状态栏颜色变化">
+<meta name="twitter:description" content="iOS系统的状态栏颜色通常有白色和黑色两种，对应的就是UIStatusBarStyleLightContent和UIStatusBarStyleDefault两种样式，改变状态栏的颜色就是通过设置不同的样式来实现的。
+iOS为我们提供了两种设置状态栏的方式：统一设置app所有控制器的状态栏颜色和单独设置某个控制器的状态栏颜色
+统一设置app所有控制器的状态栏颜色首先，我们需要了解一下info.pl">
+  
+    <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.ileafly.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leafly</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-轻松搞定状态栏颜色变化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/30/轻松搞定状态栏颜色变化/" class="article-date">
+  <time datetime="2018-01-30T08:08:42.000Z" itemprop="datePublished">2018-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      轻松搞定状态栏颜色变化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>iOS系统的状态栏颜色通常有白色和黑色两种，对应的就是<code>UIStatusBarStyleLightContent</code>和<code>UIStatusBarStyleDefault</code>两种样式，改变状态栏的颜色就是通过设置不同的样式来实现的。</p>
+<p>iOS为我们提供了两种设置状态栏的方式：统一设置app所有控制器的状态栏颜色和单独设置某个控制器的状态栏颜色</p>
+<h2 id="统一设置app所有控制器的状态栏颜色"><a href="#统一设置app所有控制器的状态栏颜色" class="headerlink" title="统一设置app所有控制器的状态栏颜色"></a>统一设置app所有控制器的状态栏颜色</h2><p>首先，我们需要了解一下<code>info.plist</code>里的<code>View Controller-based status bar appearance</code>属性，如果将该属性设为YES，则控制器对状态栏的设置优先级最高，可以在控制器中对颜色进行单独修改，如果将该属性设为NO，则以启动图设置为准，即app内部所有控制器view上的状态栏都与启动图上的保持一致，当然我们还可以通过<code>UIApplication</code>来进行管理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];</div></pre></td></tr></table></figure>
+<h2 id="单独设置某个控制器的状态栏颜色"><a href="#单独设置某个控制器的状态栏颜色" class="headerlink" title="单独设置某个控制器的状态栏颜色"></a>单独设置某个控制器的状态栏颜色</h2><p>单独设置某个控制器的状态栏颜色首先需要将<code>View Controller-based status bar appearance</code>属性设为YES，然后在对应的控制器中加入如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (UIStatusBarStyle)preferredStatusBarStyle &#123;</div><div class="line">    return UIStatusBarStyleLightContent;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里需要注意一点就是如果控制器在navigationController或tabBar中，通过自定义navigationController或tabBar重写如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (UIViewController *)childViewControllerForStatusBarStyle &#123;</div><div class="line">    return self.topViewController;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="如果随时更改状态栏颜色"><a href="#如果随时更改状态栏颜色" class="headerlink" title="如果随时更改状态栏颜色"></a>如果随时更改状态栏颜色</h2><p>有些特殊情况下，我们需要随时改变当前页面的状态栏颜色，这时就需要通过调用<code>setNeedsStatusBarAppearanceUpdate</code>方法，这个方法会通知系统去调用当前控制器的<code>preferredStatusBarStyle</code>方法，然后根据设置的方法来设置颜色。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjd1d776b0037ts79tewi709y" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/30/如何使用OmniPlan/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">如何使用OmniPlan</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#统一设置app所有控制器的状态栏颜色"><span class="toc-number">1.</span> <span class="toc-text">统一设置app所有控制器的状态栏颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单独设置某个控制器的状态栏颜色"><span class="toc-number">2.</span> <span class="toc-text">单独设置某个控制器的状态栏颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如果随时更改状态栏颜色"><span class="toc-number">3.</span> <span class="toc-text">如果随时更改状态栏颜色</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Leafly&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;luzhiyongmail@sohu.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

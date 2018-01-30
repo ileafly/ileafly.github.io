@@ -65,6 +65,358 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-轻松搞定状态栏颜色变化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/30/轻松搞定状态栏颜色变化/" class="article-date">
+  <time datetime="2018-01-30T08:08:42.000Z" itemprop="datePublished">2018-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>iOS系统的状态栏颜色通常有白色和黑色两种，对应的就是<code>UIStatusBarStyleLightContent</code>和<code>UIStatusBarStyleDefault</code>两种样式，改变状态栏的颜色就是通过设置不同的样式来实现的。</p>
+<p>iOS为我们提供了两种设置状态栏的方式：统一设置app所有控制器的状态栏颜色和单独设置某个控制器的状态栏颜色</p>
+<h2 id="统一设置app所有控制器的状态栏颜色"><a href="#统一设置app所有控制器的状态栏颜色" class="headerlink" title="统一设置app所有控制器的状态栏颜色"></a>统一设置app所有控制器的状态栏颜色</h2><p>首先，我们需要了解一下<code>info.plist</code>里的<code>View Controller-based status bar appearance</code>属性，如果将该属性设为YES，则控制器对状态栏的设置优先级最高，可以在控制器中对颜色进行单独修改，如果将该属性设为NO，则以启动图设置为准，即app内部所有控制器view上的状态栏都与启动图上的保持一致，当然我们还可以通过<code>UIApplication</code>来进行管理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];</div></pre></td></tr></table></figure>
+<h2 id="单独设置某个控制器的状态栏颜色"><a href="#单独设置某个控制器的状态栏颜色" class="headerlink" title="单独设置某个控制器的状态栏颜色"></a>单独设置某个控制器的状态栏颜色</h2><p>单独设置某个控制器的状态栏颜色首先需要将<code>View Controller-based status bar appearance</code>属性设为YES，然后在对应的控制器中加入如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (UIStatusBarStyle)preferredStatusBarStyle &#123;</div><div class="line">    return UIStatusBarStyleLightContent;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里需要注意一点就是如果控制器在navigationController或tabBar中，通过自定义navigationController或tabBar重写如下方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (UIViewController *)childViewControllerForStatusBarStyle &#123;</div><div class="line">    return self.topViewController;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="如果随时更改状态栏颜色"><a href="#如果随时更改状态栏颜色" class="headerlink" title="如果随时更改状态栏颜色"></a>如果随时更改状态栏颜色</h2><p>有些特殊情况下，我们需要随时改变当前页面的状态栏颜色，这时就需要通过调用<code>setNeedsStatusBarAppearanceUpdate</code>方法，这个方法会通知系统去调用当前控制器的<code>preferredStatusBarStyle</code>方法，然后根据设置的方法来设置颜色。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjd1d776b0037ts79tewi709y" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-如何使用OmniPlan" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/30/如何使用OmniPlan/" class="article-date">
+  <time datetime="2018-01-30T08:05:09.000Z" itemprop="datePublished">2018-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>近期项目组打算使用<code>OmniPlan</code>来制定版本开发计划，这里对如何使用<code>OmniPlan</code>进行一个简单的总结。</p>
+<h2 id="任务视图"><a href="#任务视图" class="headerlink" title="任务视图"></a>任务视图</h2><p>点击视图控件中的第一个按钮可以看到任务视图。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch02_02_taskview.png" alt=""></p>
+<p>任务视图包含两部分：任务大纲和甘特图，可以方便的在任务大纲创建、编辑和组合相关的任务，甘特图可以很好的表示任务的周期和关系。</p>
+<h2 id="资源视图"><a href="#资源视图" class="headerlink" title="资源视图"></a>资源视图</h2><p>点击视图控件的第二个按钮可以看到资源视图。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch02_03_resourceview.png" alt=""></p>
+<p>可以在资源视图里添加和管理人员、设备、材料。资源视图也分两部分：大纲和时间轴。可以在大纲里添加、分组和管理资源，在时间轴里可以通过拖拽、删除快速的给任务分配资源。</p>
+<h2 id="日历视图"><a href="#日历视图" class="headerlink" title="日历视图"></a>日历视图</h2><p>点击视图控件的第三个按钮可以看到日历视图。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch02_04_calendarview.png" alt=""></p>
+<p>日历视图分两部分：项目资源列表和编辑工作时间的日历，日历视图还进一步划分了正常时间、额外和业务时间两个模式。<br>在正常时间模式里，可以编辑整个项目的工作日历，单个人员的正常工作时间等等，一般用绿色块表示。<br>在额外和业余时间模式里，可以设置额外时间或假期时间等，分别用蓝色和红色表示。</p>
+<h2 id="网络视图"><a href="#网络视图" class="headerlink" title="网络视图"></a>网络视图</h2><p>点击视图控件的第四个按钮可以看到网络视图。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch02_05_networkview.png" alt=""></p>
+<p>网络视图提供了一个画布展示项目的任务和线路图。</p>
+<h2 id="样式视图"><a href="#样式视图" class="headerlink" title="样式视图"></a>样式视图</h2><p>点击视图控件的第五个按钮可以看到样式视图。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch02_06_stylesview.png" alt=""></p>
+<p>样式视图主要用于自定义样式风格。</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>选择<code>文件</code>-&gt;<code>创建</code><br><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_01_newfile.png" alt=""><br>创建一个全新的项目，并命名。</p>
+<h3 id="选择起止日期"><a href="#选择起止日期" class="headerlink" title="选择起止日期"></a>选择起止日期</h3><p>为项目选择起止时间，如果无法确定截止时间可以只选择起始时间。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_03_projectstart.png" alt=""></p>
+<h3 id="创建任务"><a href="#创建任务" class="headerlink" title="创建任务"></a>创建任务</h3><p>在任务视图按下<code>Enter</code>就可以创建一个任务，给每个任务设置持续时间</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_06_tasksandmilestones.png" alt=""></p>
+<h3 id="创建里程碑"><a href="#创建里程碑" class="headerlink" title="创建里程碑"></a>创建里程碑</h3><p>里程碑是项目的锚点，用来标记重要的节点，创建里程碑可以通过<code>结构</code>-&gt;<code>添加</code>-&gt;<code>里程碑</code>来创建或者将任务类型切换为里程碑。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_04_taskinfomilestone.png" alt=""></p>
+<h3 id="编辑工作周"><a href="#编辑工作周" class="headerlink" title="编辑工作周"></a>编辑工作周</h3><p>切换到日历视图，默认情况下工作时间是周一到周五的8:00 AM到5:00 PM，中间有一个小时的午饭时间，不过可以自定义工作时间。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_07_defaultcalendar.png" alt=""></p>
+<p>有时因为一些原因不会正常工作，这些时间就需要从我们的工作计划中排查，日历视图下有一个额外和业余时间的模式，通过这个模式可以方便的设置额外或假期时间。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_09_extraandoffhours.png" alt=""></p>
+<p>选择对应的日历，双击拖拽会产生一个蓝色区域，这个区域表示正常工作时数之外的可用时数。按住<code>Shift</code>然后拖拽会产生一个红色区域，这个区域会把正常工作时间标记为不可用。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_11_thanksgivingtimeoff.png" alt=""></p>
+<h3 id="组任务"><a href="#组任务" class="headerlink" title="组任务"></a>组任务</h3><p>如果任务关系精密或相互依赖，可以把他们放入一个组里。</p>
+<p><img src="https://support.omnigroup.com/doc-assets/OmniPlan-Mac/OmniPlan-Mac-v3.6.0.0/en/EPUB/art/op3mac_ch03_13_tasksselectedforgrouping.png" alt=""></p>
+<h3 id="链接任务依赖性"><a href="#链接任务依赖性" class="headerlink" title="链接任务依赖性"></a>链接任务依赖性</h3><p>我们不可能同时进行所有的任务，我们可以通过给任务直接建立依赖来排列我们的工作。</p>
+<p>选中需要建立依赖的两个任务，点击菜单栏上的<code>关联线</code>按钮，就能成功在两个任务之间建立好依赖。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/01/30/如何使用OmniPlan/" data-id="cjd1d775q0028ts79lnd1jhgg" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小积累/">小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-iOS复制字符串到剪贴板" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/iOS复制字符串到剪贴板/" class="article-date">
+  <time datetime="2017-12-14T11:22:16.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>最近有一个小功能，需要自动帮用户将一些字符串复制到剪贴板中，其实实现比较简单，因为这个功能相对比较生僻，做一个简单记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];</div><div class="line">pasteboard.string = @&quot;你需要复制的字符串内容&quot;;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/iOS复制字符串到剪贴板/" data-id="cjd1d775l001yts79kmrsblsv" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Mac搭建基于Eclipse的J2EE开发环境" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" class="article-date">
+  <time datetime="2017-12-14T11:21:27.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>虽然网上有各种Mac环境下搭建基于Eclipse的J2EE开发环境的博客，但是在实际参考中或多或少存在着一些偏差，经过一段时间的努力，总算是成功搭建完成并跑通了项目，这里做一个总结供大家参考。</p>
+<h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><ul>
+<li>打开终端输入<code>java -version</code>判断是否已安装java运行环境</li>
+<li>如果未安装则下载JDK并进行安装 <a href="http://www.oracle.com/technetwork/java/javaee/downloads/java-ee-sdk-7-jdk-7u21-downloads-1956231.html" target="_blank" rel="external">下载地址</a><h2 id="安装Tomcat"><a href="#安装Tomcat" class="headerlink" title="安装Tomcat"></a>安装Tomcat</h2></li>
+<li>在<a href="http://tomcat.apache.org" target="_blank" rel="external">Apache官网</a>下载最新的tomcat二进制包</li>
+<li>将二进制包解压后改名为Tomcat，并复制到你希望存放的目录，一般存放在<code>/Library</code>目录下</li>
+<li>通过终端修改Tomcat的权限 <code>sudo chmod 755 /Library/Tomcat</code></li>
+<li>执行<code>/Library/Tomcat/bin/startup.sh</code>启动Tomcat</li>
+<li>打开<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a>验证Tomcat是否安装成功</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/260268-fcc36bece30a4fbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
+<h2 id="安装Eclipse"><a href="#安装Eclipse" class="headerlink" title="安装Eclipse"></a>安装Eclipse</h2><ul>
+<li>访问<a href="http://www.eclipse.org/home/index.php" target="_blank" rel="external">Eclipse官方首页</a>下载安装包</li>
+<li>执行<code>Eclipse installer</code>，将Eclipse拖入应用程序中</li>
+<li>打开Eclipse设置工作空间</li>
+</ul>
+<h2 id="配置Eclipse"><a href="#配置Eclipse" class="headerlink" title="配置Eclipse"></a>配置Eclipse</h2><ul>
+<li>Eclipse 偏好设置</li>
+<li>java Installed JREs</li>
+<li>Add 选择<code>Standard VM</code></li>
+<li><p>Directory 选择本地安装的JDK的路径<br>JDK路径查询命令行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls -l `which java`</div></pre></td></tr></table></figure>
+</li>
+<li><p>选中新添加的JRE</p>
+</li>
+<li>右击项目</li>
+<li>选择<code>Java Build Path</code></li>
+<li>Add 选择<code>User Library</code></li>
+<li>选择Tomcat</li>
+<li>配置完成</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" data-id="cjd1d774r000fts792pqcnfsp" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-ZYLoading-自定义Loading控件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/ZYLoading-自定义Loading控件/" class="article-date">
+  <time datetime="2017-12-14T11:20:14.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>移动端项目的开发离不开loading控件，通常为了能快速在项目中实现loading效果我们有几个主流的开源库可以选择：<br><a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">MBProgressHUD</a>、<a href="https://github.com/SVProgressHUD/SVProgressHUD" target="_blank" rel="external">SVProgressHUD</a>等</p>
+<p>然后，为了能让整体项目的loading效果显得更加贴切我就想创建一个loading控件，希望此控件能够比较方便的开启、停止loading效果，而且能易于集成和更换logo。</p>
+<p>为了达到这个目的，我创建了一个名为<a href="https://github.com/luzhiyongGit/ZYLoading.git" target="_blank" rel="external">ZYLoading</a>的控件，下面就为大家分享一下我这个控件的原理以及使用方法。</p>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>此控件的核心思想是利用runtime机制给分类增加成员属性，通过给UIView扩展开启、停止loading的方法，从而实现任何UIView的实例都能方便的开启、停止loading动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#import &quot;UIView+ZYLoadingView.h&quot;</div><div class="line"></div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">static char LoadingViewKey;</div><div class="line"></div><div class="line">@implementation UIView (ZYLoadingView)</div><div class="line"></div><div class="line">#pragma mark - Setter</div><div class="line"></div><div class="line">// 将创建的ZYLoadingView实例关联到分类</div><div class="line">- (void)setLoadingView:(ZYLoadingView *)loadingView &#123;</div><div class="line">    [self willChangeValueForKey:@&quot;LoadingViewKey&quot;];</div><div class="line">    objc_setAssociatedObject(self, &amp;LoadingViewKey, loadingView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">    [self didChangeValueForKey:@&quot;LoadingViewKey&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 获取关联的ZYLoadingView</div><div class="line">- (ZYLoadingView *)loadingView &#123;</div><div class="line">    return objc_getAssociatedObject(self, &amp;LoadingViewKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 开启动画</div><div class="line">- (void)beginLoading &#123;</div><div class="line">    if (!self.loadingView) &#123;</div><div class="line">        self.loadingView = [[ZYLoadingView alloc] initWithFrame:self.bounds];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [self addSubview:self.loadingView];</div><div class="line">    </div><div class="line">    [self.loadingView startAnimation];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 停止动画</div><div class="line">- (void)endLoading &#123;</div><div class="line">    if (self.loadingView) &#123;</div><div class="line">        [self.loadingView stopAnimation];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h5 id="通过一组图片组合成动画"><a href="#通过一组图片组合成动画" class="headerlink" title="通过一组图片组合成动画"></a>通过一组图片组合成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择图片组合动画</div><div class="line">ZYLoadingConfigInstance.loadingType = ZYLoadingAnimateImages;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.animateImageName = @&quot;zy_loading_&quot;;</div><div class="line">// 图片尺寸</div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(37, 13);</div><div class="line">// 动画过渡时长</div><div class="line">ZYLoadingConfigInstance.duration = 1.f;</div></pre></td></tr></table></figure>
+<h5 id="通过一张图旋转形成动画"><a href="#通过一张图旋转形成动画" class="headerlink" title="通过一张图旋转形成动画"></a>通过一张图旋转形成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择通过旋转图片展现loading动画</div><div class="line">ZYLoadingConfigInstance.loadingType = ZYLoadingLoopImage;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.loopImage = [UIImage imageNamed:@&quot;loading_circle&quot;];</div><div class="line">// 图片尺寸    </div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(60, 60);</div><div class="line">// 动画过渡时长    </div><div class="line">ZYLoadingConfigInstance.duration = 0.25f;</div></pre></td></tr></table></figure>
+<h5 id="通过一张图片旋转，另一张图片渐隐渐显组合成动画"><a href="#通过一张图片旋转，另一张图片渐隐渐显组合成动画" class="headerlink" title="通过一张图片旋转，另一张图片渐隐渐显组合成动画"></a>通过一张图片旋转，另一张图片渐隐渐显组合成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择通过旋转图片展现loading动画    ZYLoadingConfigInstance.loadingType = ZYLoadingLoopImage;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.loopImage = [UIImage imageNamed:@&quot;loading_circle&quot;];</div><div class="line">// 图片尺寸    </div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(60, 60);</div><div class="line">// logo图片名称</div><div class="line">ZYLoadingConfigInstance.logoImage = [UIImage imageNamed:@&quot;loading_zhangyu&quot;];</div><div class="line">// logo图片尺寸</div><div class="line">ZYLoadingConfigInstance.logoImageSize = CGSizeMake(40, 40);</div><div class="line">// 动画过渡时长</div><div class="line">ZYLoadingConfigInstance.duration = 0.25f;</div></pre></td></tr></table></figure>
+<h5 id="开启、停止动画"><a href="#开启、停止动画" class="headerlink" title="开启、停止动画"></a>开启、停止动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 开启动画</div><div class="line">[self.view beginLoading];</div><div class="line"></div><div class="line">// 停止动画</div><div class="line">[self.view endLoading];</div></pre></td></tr></table></figure>
+<p>你也可以直接参考github上的<a href="https://github.com/luzhiyongGit/ZYLoading.git" target="_blank" rel="external">ZYLoading</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjd1d77560013ts79rzenk2sd" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Xcode9新特性汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/Xcode9新特性汇总/" class="article-date">
+  <time datetime="2017-12-14T11:19:49.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/Xcode9新特性汇总/">Xcode9新特性汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>新版的Xcode 9正式发布了，今天我也将Xcode进行了升级。这次的Xcode更新给我们带来了不少的新特性，这里我进行一个简单的汇总。</p>
+<h2 id="Main-Thread-Checker"><a href="#Main-Thread-Checker" class="headerlink" title="Main Thread Checker"></a>Main Thread Checker</h2><p>Xcode 9现在会自动检测UI操作是否在主线程了，一旦代码运行到在非主线程操作UI时就会警告提示，相关代码会高亮，特别方便定位</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-ae5b514cae24218c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9非主线程操作UI2.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-667852563144f730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9非主线程操作UI.png"></p>
+<p>以前遇到这种在非主线程操作UI的情况，问题定位相对比较难，需要排查才能找到，现在Xcode 9 给我们提供了非常方便的支持</p>
+<h2 id="Swift-Language-Version-支持-4-0和3-2"><a href="#Swift-Language-Version-支持-4-0和3-2" class="headerlink" title="Swift Language Version 支持 4.0和3.2"></a>Swift Language Version 支持 4.0和3.2</h2><p>Xcode 9使用Swift 4编译器，同时支持切换到Swift 3.2，开发者可以根据项目需要选择Swift语言版本</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-22e7d4510d174243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9swift语言选择.png"></p>
+<h2 id="项目文件路径与本地文件路径自动保持统一"><a href="#项目文件路径与本地文件路径自动保持统一" class="headerlink" title="项目文件路径与本地文件路径自动保持统一"></a>项目文件路径与本地文件路径自动保持统一</h2><p>在以前，为了保证项目文件路径和文件系统中的路径保持一致，我们通常是先在本地路径创建文件夹，然后添加到项目中，现在Xcode 9 将项目文件和文件系统进行了统一，我们可以直接在项目中创建文件或者直接拖拽改变文件位置时，也会相应的改变此文件在文件系统中的位置</p>
+<h2 id="Refactor功能改进"><a href="#Refactor功能改进" class="headerlink" title="Refactor功能改进"></a>Refactor功能改进</h2><p><code>Refactor</code>是Xcode一直都提供的一个功能，不过在Xcode 9中进行了优化，Xcode 9将相关代码直接铺在代码编辑器里面，只要滚动编辑框，就可以轻松的看到即将影响到的所有地方，非常的清晰</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-32674d7c60b80bf5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9refactor.png"></p>
+<h2 id="Named-Color"><a href="#Named-Color" class="headerlink" title="Named Color"></a>Named Color</h2><p>Xcode 9支持在xcassets里添加颜色，这样就可以直接在代码或Storyboard里引用这个颜色了，这就非常有利于项目主题颜色的更换</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-4fcc16fe299d6ba4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="named-colors.png"></p>
+<h2 id="模拟器升级"><a href="#模拟器升级" class="headerlink" title="模拟器升级"></a>模拟器升级</h2><p>Xcode 9模拟器又改回了之前的拟物化，而且现在支持多个模拟器同时运行，这就对多屏调试方便了很多</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-b9e5bf3b94af0fd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9simulator.png"></p>
+<h2 id="全新的构建系统"><a href="#全新的构建系统" class="headerlink" title="全新的构建系统"></a>全新的构建系统</h2><p>Xcode 9提供了一个全新的构建系统，这次的构建系统完全使用Swift语言写成，基于Apple的<a href="https://github.com/apple/swift-llbuild" target="_blank" rel="external">llbuild</a>引擎，新的构建系统默认是不开启的，我们可以通过File -&gt; Project Settings 或 File -&gt; Workspace Settings 来切换构建系统</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-58d40d4c79ce3d68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9build.png"></p>
+<h2 id="深度集成Github"><a href="#深度集成Github" class="headerlink" title="深度集成Github"></a>深度集成Github</h2><p>Xcode 9针对Github做了定制化的集成，在Xcode的Preference -&gt; Account 可以添加github账号，这样就能看到完整的项目记录和分支情况</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-7cab79d2f8ebe53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9github.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjd1d7759001bts79q0oj19sq" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-NS-UNAVAILABLE和NS-DESIGNATED是什么" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" class="article-date">
@@ -106,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjb6e289p0009nc79jf2qah41" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjd1d774v000lts795w6qb1jx" class="article-share-link">分享</a>
       
       
       
@@ -163,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjb6e28ak002bnc7920cje2fk" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjd1d775t002hts790ltu1xbk" class="article-share-link">分享</a>
       
       
       
@@ -321,7 +673,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/自定义快捷代码片段/" data-id="cjb6e28aw0032nc797l8lpxx1" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/自定义快捷代码片段/" data-id="cjd1d776g003ats79wepe7a9l" class="article-share-link">分享</a>
       
       
       
@@ -367,549 +719,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjb6e28a1000xnc7979f2rzh4" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjd1d776j003gts79x0vl6l3f" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-EPUB文件格式解析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/EPUB文件格式解析/" class="article-date">
-  <time datetime="2017-07-20T09:45:54.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h3 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h3><p><code>EPUB</code>是Electronic Publication的缩写，是一种电子图书标准，<code>EPUB</code>是一个自由的开发标准，属于一种可以自动重新编排的内容，也就是说<code>EPUB</code>格式的图书，它的文字内容可以根据阅读设备的特性，以最适于阅读的方式显示。</p>
-<h3 id="文件组成"><a href="#文件组成" class="headerlink" title="文件组成"></a>文件组成</h3><p>一个未经加密处理的epub电子书由以下三部分组成：</p>
-<ol>
-<li>META-INF（文件夹，里面有一个container.xml文件）</li>
-<li>OEBPS （文件夹，包含images文件夹、很多xhtml文件、css文件和content.opf文件）</li>
-<li>mimetype</li>
-</ol>
-<h4 id="文件mimetype"><a href="#文件mimetype" class="headerlink" title="文件mimetype"></a>文件mimetype</h4><p>每个epub电子书均包含一个mimetype的文件，且内容不变，用以说明epub的文件格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">application/epub+zip</div></pre></td></tr></table></figure></p>
-<h4 id="文件夹META-INF"><a href="#文件夹META-INF" class="headerlink" title="文件夹META-INF"></a>文件夹META-INF</h4><p>META-INF用于存放容器信息，默认情况下此目录只包含一个文件container.xml，文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</div><div class="line">&lt;container version=&quot;1.0&quot; xmlns=&quot;urn:oasis:names:tc:opendocument:xmlns:container&quot;&gt;</div><div class="line">    &lt;rootfiles&gt;</div><div class="line">        &lt;rootfile full-path=&quot;OEBPS/content.opf&quot; media-type=&quot;application/oebps-package+xml&quot;/&gt;</div><div class="line">    &lt;/rootfiles&gt;</div><div class="line">&lt;/container&gt;</div></pre></td></tr></table></figure></p>
-<p>container.xml文件的主要功能用于告诉阅读器，电子书的根文件的路径和打开格式</p>
-<h4 id="文件夹OEBPS"><a href="#文件夹OEBPS" class="headerlink" title="文件夹OEBPS"></a>文件夹OEBPS</h4><p>OEBPS目录用于存放OPF文档、CSS文档、NCX文档</p>
-<h4 id="文件OPF"><a href="#文件OPF" class="headerlink" title="文件OPF"></a>文件OPF</h4><p>OPF文档是epub的核心文件，且是一个标准的xml文件，依据OPF规范，此文件的根元素为<code>&lt;package&gt;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;package xmlns=&quot;http://www.idpf.org/2007/opf&quot; version=&quot;2.0&quot; unique-identifier=&quot;uuid_id&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>其内容主要由五部分组成：</p>
-<ol>
-<li><p><metadata><br>元数据信息，这个标签里面是书籍的出版信息，由两个子元素组成</metadata></p>
-<ul>
-<li><dc-title> 标题</dc-title></li>
-<li><dc-creator> 责任人</dc-creator></li>
-<li><dc-subject> 主题词、关键词</dc-subject></li>
-<li><dc-descributor> 内容描述</dc-descributor></li>
-<li><dc-date> 日期</dc-date></li>
-<li><dc-type> 类型</dc-type></li>
-<li><dc-publisher> 出版者</dc-publisher></li>
-<li><dc-contributor> 发行者</dc-contributor></li>
-<li><dc-format> 格式</dc-format></li>
-<li><dc-identifier> 标识信息</dc-identifier></li>
-<li><dc-source> 来源信息</dc-source></li>
-<li><dc-language> 语言</dc-language></li>
-<li><dc-relation> 相关资料</dc-relation></li>
-<li><dc-coverage> 覆盖范围</dc-coverage></li>
-<li><dc-rights> 权限描述</dc-rights></li>
-</ul>
-</li>
-<li><p><manifest><br>文件列表，列出书籍出版的所有文件，但是不包括 mimetype、container.xml、content.opf，由一个个子元素构成</manifest></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;item id=&quot;&quot; href=&quot;&quot; media-type=&quot;&quot;&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>id 文件的id号</li>
-<li>href 文件的相对路径</li>
-<li>media-type 文件的媒体类型</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;manifest&gt;</div><div class="line"> &lt;item id=&quot;ncx&quot; href=&quot;toc.ncx&quot; media-type=&quot;application/x-dtbncx+xml&quot; /&gt;</div><div class="line"> &lt;item href=&quot;cover.xhtml&quot; id=&quot;cover&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;copyright.xhtml&quot; id=&quot;copyright&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;catalog.xhtml&quot; id=&quot;catalog&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;item href=&quot;chap0.xhtml&quot; id=&quot;chap0&quot; media-type=&quot;application/xhtml+xml&quot;/&gt;</div><div class="line"> &lt;/manifest&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><spine toc="ncx">
-
-<p>提供书籍的线性阅读次序，由一个个子元素构成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;itemref idref=&quot;copyright&quot;&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>idref 即参考manifest列出的id</li>
-</ul>
-</spine></li>
-<li><p><guide><br>指南，一次列出电子书的特定页面</guide></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;guide&gt;</div><div class="line"> &lt;reference href=&quot;cover.xhtml&quot; type=&quot;text&quot; title=&quot;封面&quot;/&gt;</div><div class="line"> &lt;reference href=&quot;catalog.xhtml&quot; type=&quot;text&quot; title=&quot;目录&quot;/&gt;</div><div class="line">&lt;/guide&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p><tour><br> 导读，可以根据读者水平或阅读目的，按一定的次序，选择电子书的部分页面组成导读</tour></p>
-</li>
-</ol>
-<h4 id="NCX文件"><a href="#NCX文件" class="headerlink" title="NCX文件"></a>NCX文件</h4><p>NCX文件是epub电子书的另一个重要文件，用于制作电子书的目录。.ncx文件中最主要的节点是navMap,navMap节点是由许多navPoint节点组成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;ncx xmlns=&quot;http://www.daisy.org/z3986/2005/ncx/&quot; version=&quot;2005-1&quot;&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta content=&quot;178_0&quot; name=&quot;dtb:uid&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;2&quot; name=&quot;dtb:depth&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:totalPageCount&quot;/&gt;</div><div class="line">        &lt;meta content=&quot;0&quot; name=&quot;dtb:maxPageNumber&quot;/&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;docTitle&gt;</div><div class="line">        &lt;text&gt;1984&lt;/text&gt;</div><div class="line">    &lt;/docTitle&gt;</div><div class="line">    &lt;docAuthor&gt;</div><div class="line">        &lt;text&gt;[英] 乔治·奥威尔&lt;/text&gt;</div><div class="line">    &lt;/docAuthor&gt;</div><div class="line">    &lt;navMap&gt;</div><div class="line">        &lt;navPoint id=&quot;catalog&quot; playOrder=&quot;0&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;目录&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;catalog.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap0&quot; playOrder=&quot;1&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;前言&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap0.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap1&quot; playOrder=&quot;2&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第一部&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap1.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap2&quot; playOrder=&quot;3&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第1节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap2.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap3&quot; playOrder=&quot;4&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第2节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap3.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">        &lt;navPoint id=&quot;chap4&quot; playOrder=&quot;5&quot;&gt;</div><div class="line">            &lt;navLabel&gt;</div><div class="line">                &lt;text&gt;　　第3节&lt;/text&gt;</div><div class="line">            &lt;/navLabel&gt;</div><div class="line">            &lt;content src=&quot;chap4.xhtml&quot;/&gt;</div><div class="line">        &lt;/navPoint&gt;</div><div class="line">    &lt;/navMap&gt;</div><div class="line">&lt;/ncx&gt;</div></pre></td></tr></table></figure>
-<h3 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h3><p>目前支持<code>EPUB</code>格式的开源阅读器有：</p>
-<h4 id="iOS-阅读器"><a href="#iOS-阅读器" class="headerlink" title="iOS 阅读器"></a>iOS 阅读器</h4><ul>
-<li><a href="https://github.com/GGGHub/Reader" target="_blank" rel="external">Reader</a>–一款基于CoreText实现的电子书阅读器，支持txt，epub格式</li>
-<li><a href="https://github.com/FolioReader/FolioReaderKit" target="_blank" rel="external">FolioReaderKit</a>–Swift版的ePub阅读器</li>
-<li><a href="https://github.com/ricobeck/KFEpubKit" target="_blank" rel="external">KFEpubKit</a>–支持iOS和OSX的epub阅读器</li>
-<li><a href="https://github.com/vfr/Reader" target="_blank" rel="external">Reader</a>–pdf阅读器</li>
-</ul>
-<h4 id="Android-阅读器"><a href="#Android-阅读器" class="headerlink" title="Android 阅读器"></a>Android 阅读器</h4><ul>
-<li><a href="https://github.com/JustWayward/BookReader" target="_blank" rel="external">BookReader</a>–一款比较完整的阅读器，支持txt/pdf/epub书籍阅读</li>
-<li><a href="https://github.com/geometer/FBReader" target="_blank" rel="external">FBReader</a>–C++项目，支持多平台的阅读器</li>
-<li><a href="https://github.com/FolioReader/FolioReader-Android" target="_blank" rel="external">FolioReader-Android</a>–FolioReader的android版本</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/20/EPUB文件格式解析/" data-id="cjb6e289s000gnc7907nu9fmr" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epub/">epub</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-Swift开源项目ObjectMapper实践" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/Swift开源项目ObjectMapper实践/" class="article-date">
-  <time datetime="2017-07-20T09:42:43.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/Swift开源项目ObjectMapper实践/">Swift开源项目ObjectMapper实践</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研</p>
-<p>今天就先从<a href="https://github.com/Hearst-DD/ObjectMapper" target="_blank" rel="external">ObjectMapper</a>入手，ObjectMapper是一个由swift写的json和模型转换的开源库，目前已经有5950个star</p>
-<h3 id="先从官方文档入手，进行一个简单的介绍"><a href="#先从官方文档入手，进行一个简单的介绍" class="headerlink" title="先从官方文档入手，进行一个简单的介绍"></a>先从官方文档入手，进行一个简单的介绍</h3><h5 id="支持的功能"><a href="#支持的功能" class="headerlink" title="支持的功能"></a>支持的功能</h5><ul>
-<li>JSON向模型的转换</li>
-<li>模型向JSON的转换</li>
-<li>嵌套结构的解析</li>
-<li>mapping时的自定义转换</li>
-<li>结构体的支持</li>
-</ul>
-<h5 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h5><p>ObjectMapper中定义了一个协议<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mappable.swift" target="_blank" rel="external">Mappable</a></p>
-<p>Mappable协议中声明了两个方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mutation func mapping(map: Map)</div><div class="line"></div><div class="line">init?(map: Map)</div></pre></td></tr></table></figure>
-<p>我们需要在模型中遵循这个协议，官方给出了一个参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line">    var weight: Double!</div><div class="line">    var array: [Any]?</div><div class="line">    var dictionary: [String : Any] = [:]</div><div class="line">    var bestFriend: User?                       // Nested User object</div><div class="line">    var friends: [User]?                        // Array of Users</div><div class="line">    var birthday: Date?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">        weight      &lt;- map[&quot;weight&quot;]</div><div class="line">        array       &lt;- map[&quot;arr&quot;]</div><div class="line">        dictionary  &lt;- map[&quot;dict&quot;]</div><div class="line">        bestFriend  &lt;- map[&quot;best_friend&quot;]</div><div class="line">        friends     &lt;- map[&quot;friends&quot;]</div><div class="line">        birthday    &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Temperature: Mappable &#123;</div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line"></div><div class="line">    init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mutating func mapping(map: Map) &#123;</div><div class="line">        celsius     &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit  &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>一旦我们的类或结构体如上面的示例一样实现了协议，我们就可以方便的进行JSON和模型之间的转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = user.toJSONString(prettyPrint: true)</div></pre></td></tr></table></figure>
-<p>当然也可以通过<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>类来进行转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div><div class="line"></div><div class="line">let JSONString = Mapper().toJSONString(user, prettyPrint: true)</div></pre></td></tr></table></figure>
-<h5 id="嵌套对象的映射"><a href="#嵌套对象的映射" class="headerlink" title="嵌套对象的映射"></a>嵌套对象的映射</h5><p>正如前面所列，ObjectMapper支持嵌套对象的映射</p>
-<p>列如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot; : &#123;</div><div class="line">        &quot;text&quot; : &quot;102&quot;,</div><div class="line">        &quot;value&quot; : 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们想要直接取出distance对象中的value值，可以设置如下mapping<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func mapping(map: Map) &#123;</div><div class="line">    distance &lt;- map[&quot;distance.value&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h5 id="自定义转换规则"><a href="#自定义转换规则" class="headerlink" title="自定义转换规则"></a>自定义转换规则</h5><p>ObjectMapper允许开发者在数据映射过程中指定转换规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class People: Mappable &#123;</div><div class="line">   var birthday: NSDate?</div><div class="line">   </div><div class="line">   required init?(_ map: Map) &#123;</div><div class="line">       </div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   func mapping(map: Map) &#123;</div><div class="line">       birthday &lt;- (map[&quot;birthday&quot;], DateTransform())</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   let JSON = &quot;\&quot;birthday\&quot;:1458117795332&quot;</div><div class="line">   let result = Mapper&lt;People&gt;().map(JSON)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由于我们指定了<code>birthday</code>的转换规则，所以上述代码在解析JSON数据的时候会将long类型转换成Date类型</p>
-<p>除了使用ObjectMapper给我们提供的转换规则外，我们还可以通过实现<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformType.swift" target="_blank" rel="external">TransformType</a>协议来自定义我们的转换规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public protocol TransformType &#123;</div><div class="line">    typealias Object</div><div class="line">    typealias JSON</div><div class="line">    </div><div class="line">    func transformFromJSON(value: AnyObject?) -&gt; Object?</div><div class="line">    func transformToJSON(value: Object?) -&gt; JSON?</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>ObjectMapper为我们提供了一个<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/TransformOf.swift" target="_blank" rel="external">TransformOf</a>类来实现转换结果，TransformOf实际就是实现了TransformType协议的，TransformOf有两个类型的参数和两个闭包参数，类型表示参与转换的数据的类型，闭包表示转换的规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let transform = TransformOf&lt;Int, String&gt;(fromJSON: &#123; (value: String?) -&gt; Int? in </div><div class="line">&#125;, toJSON: &#123; (value: Int?) -&gt; String? in </div><div class="line">  // transform value from Int? to String?</div><div class="line">  if let value = value &#123;</div><div class="line">      return String(value)</div><div class="line">  &#125;</div><div class="line">  return nil</div><div class="line">&#125;)</div><div class="line"></div><div class="line">id &lt;- (map[&quot;id&quot;], transform)</div></pre></td></tr></table></figure>
-<h5 id="泛型对象"><a href="#泛型对象" class="headerlink" title="泛型对象"></a>泛型对象</h5><p>ObjectMapper同样可以处理泛型类型的参数，不过这个泛型类型需要在实现了Mappable协议的基础上才可以正常使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(_ map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Result&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line">    var result: T?</div><div class="line">    </div><div class="line">    required init?(_ map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        result &lt;- map[&quot;result&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let JSON = &quot;&#123;\&quot;result\&quot;: &#123;\&quot;name\&quot;: \&quot;anenn\&quot;&#125;&#125;&quot;</div><div class="line">let result = Mapper&lt;Result&lt;User&gt;&gt;().map(JSON)</div></pre></td></tr></table></figure>
-<h3 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h3><p>ObjectMapper声明了一个Mappable协议，这个协议里声明了两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init?(map: Map)</div><div class="line"></div><div class="line">mutating func mapping(map: Map)</div></pre></td></tr></table></figure></p>
-<p>并且通过对Mappable协议的扩展，增加了JSON和模型之间的四个转换方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public extension BaseMappable &#123;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON String</div><div class="line">    public init?(JSONString: String, context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSONString: JSONString) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Initializes object from a JSON Dictionary</div><div class="line">    public init?(JSON: [String: Any], context: MapContext? = nil) &#123;</div><div class="line">        if let obj: Self = Mapper(context: context).map(JSON: JSON) &#123;</div><div class="line">            self = obj</div><div class="line">        &#125; else &#123;</div><div class="line">            return nil</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON Dictionary for the object</div><div class="line">    public func toJSON() -&gt; [String: Any] &#123;</div><div class="line">        return Mapper().toJSON(self)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    /// Returns the JSON String for the object</div><div class="line">    public func toJSONString(prettyPrint: Bool = false) -&gt; String? &#123;</div><div class="line">        return Mapper().toJSONString(self, prettyPrint: prettyPrint)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们在使用ObjectMapper进行转换时，首先需要让模型遵循Mappable协议，并且实现Mappable声明的两个方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line">    var username: String?</div><div class="line">    var age: Int?</div><div class="line"></div><div class="line">    required init?(map: Map) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Mappable</div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        username    &lt;- map[&quot;username&quot;]</div><div class="line">        age         &lt;- map[&quot;age&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>因为ObjectMapper为Mappable增加了四个转换方法，所以User也继承了这四个转换方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = User(JSONString: JSONString)</div></pre></td></tr></table></figure>
-<p>这个方法的调用其实就是帮助我们执行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
-<p>因此，我们也可以直接通过如下方法进行转换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
-<p>接下来就是ObjectMapper的核心啦~<br>为什么通过Mapper类能完成转换呢？</p>
-<p>我们来逐步了解<a href="https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift" target="_blank" rel="external">Mapper</a>的实现原理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public final class Mapper&lt;N: BaseMappable&gt; &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>正如上面的代码块所示，首先Mapper类定义了一个泛型N，N必须要遵循Mappable协议，也就是我们的模型User<br>继续往下看，我们选择一个常用的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public func map(JSONString: String) -&gt; N? &#123;</div><div class="line">        if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>没错，我们前面写的Mapper的转换方法正是使用的这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mapper().map(JSONString: JSONString)</div></pre></td></tr></table></figure></p>
-<p>那我们就来一层一层详细分析一下这个方法的内部实现吧</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 1. 调用Mapper的静态方法parseJSONStringIntoDictionary来将JSON转换成字典</div><div class="line">// 2. 调用map方法将转换后的字典转换成模型并返回</div><div class="line">if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) &#123;</div><div class="line">            return map(JSON: JSON)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div></pre></td></tr></table></figure>
-<p>先分解<code>parseJSONStringIntoDictionary</code>的实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/// Convert a JSON String into a Dictionary&lt;String, Any&gt; using NSJSONSerialization</div><div class="line">    public static func parseJSONStringIntoDictionary(JSONString: String) -&gt; [String: Any]? &#123;</div><div class="line">        let parsedJSON: Any? = Mapper.parseJSONString(JSONString: JSONString)</div><div class="line">        return parsedJSON as? [String: Any]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /// Convert a JSON String into an Object using NSJSONSerialization</div><div class="line">    public static func parseJSONString(JSONString: String) -&gt; Any? &#123;</div><div class="line">        let data = JSONString.data(using: String.Encoding.utf8, allowLossyConversion: true)</div><div class="line">        if let data = data &#123;</div><div class="line">            let parsedJSON: Any?</div><div class="line">            do &#123;</div><div class="line">                parsedJSON = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                print(error)</div><div class="line">                parsedJSON = nil</div><div class="line">            &#125;</div><div class="line">            return parsedJSON</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>通过上述代码的逻辑不难发现，<code>parseJSONStringIntoDictionary</code>就是利用了系统的<code>JSONSerialization</code>将JSON字符串转换成字典</p>
-<p>理解了第一步，接下来我们就来看看第二步的实现原理</p>
-<p>我们先整体看一下map方法的实现代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">/// Maps a JSON dictionary to an object that conforms to Mappable</div><div class="line">    public func map(JSON: [String: Any]) -&gt; N? &#123;</div><div class="line">        let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line">        </div><div class="line">        if let klass = N.self as? StaticMappable.Type &#123; // Check if object is StaticMappable</div><div class="line">            if var object = klass.objectForMapping(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? Mappable.Type &#123; // Check if object is Mappable</div><div class="line">            if var object = klass.init(map: map) as? N &#123;</div><div class="line">                object.mapping(map: map)</div><div class="line">                return object</div><div class="line">            &#125;</div><div class="line">        &#125; else if let klass = N.self as? ImmutableMappable.Type &#123; // Check if object is ImmutableMappable</div><div class="line">            do &#123;</div><div class="line">                return try klass.init(map: map) as? N</div><div class="line">            &#125; catch let error &#123;</div><div class="line">                #if DEBUG</div><div class="line">                let exception: NSException</div><div class="line">                if let mapError = error as? MapError &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;MapError&quot;), reason: mapError.description, userInfo: nil)</div><div class="line">                &#125; else &#123;</div><div class="line">                    exception = NSException(name: .init(rawValue: &quot;ImmutableMappableError&quot;), reason: error.localizedDescription, userInfo: nil)</div><div class="line">                &#125;</div><div class="line">                exception.raise()</div><div class="line">                #else</div><div class="line">                NSLog(&quot;\(error)&quot;)</div><div class="line">                #endif</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            // Ensure BaseMappable is not implemented directly</div><div class="line">            assert(false, &quot;BaseMappable should not be implemented directly. Please implement Mappable, StaticMappable or ImmutableMappable&quot;)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return nil</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>我们先忽略掉<code>StaticMappable</code>和<code>ImmutableMappable</code>这两种协议的处理逻辑，直接关注最重要的<code>Mappable</code>协议的实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 根据传入的JSON字典等数据创建一个map对象</div><div class="line"></div><div class="line">let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line"></div><div class="line">// 判断要转换成的模型是不是 遵循的Mappable协议</div><div class="line">if let klass = N.self as? Mappable.Type </div><div class="line"></div><div class="line">// 创建一个N类型的对象</div><div class="line">var object = klass.init(map: map) as? N</div><div class="line"></div><div class="line">// 获取模型中定义的解析规则，完成解析</div><div class="line">object.mapping(map: map)</div><div class="line"></div><div class="line">// 返回生成好的模型</div><div class="line">return object</div></pre></td></tr></table></figure>
-<p>这里还留了一个疑问，为何执行完<code>object.mapping(map: map)</code>后，模型就能完成解析呢</p>
-<p>继续分析<a href="(https://github.com/Hearst-DD/ObjectMapper/blob/master/Sources/Mapper.swift">Map</a>类</p>
-<p>原来在Map类中使用了<code>subscript</code>来自定义下标<br>同样我们直接来分析最重要的那个自定义下标的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public subscript(key: String, nested nested: Bool, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -&gt; Map &#123;</div><div class="line">        // save key and value associated to it</div><div class="line">        currentKey = key</div><div class="line">        keyIsNested = nested</div><div class="line">        nestedKeyDelimiter = delimiter</div><div class="line">        </div><div class="line">        if mappingType == .fromJSON &#123;</div><div class="line">            // check if a value exists for the current key</div><div class="line">            // do this pre-check for performance reasons</div><div class="line">            if nested == false &#123;</div><div class="line">                let object = JSON[key]</div><div class="line">                let isNSNull = object is NSNull</div><div class="line">                isKeyPresent = isNSNull ? true : object != nil</div><div class="line">                currentValue = isNSNull ? nil : object</div><div class="line">            &#125; else &#123;</div><div class="line">                // break down the components of the key that are separated by .</div><div class="line">                (isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            // update isKeyPresent if ignoreNil is true</div><div class="line">            if ignoreNil &amp;&amp; currentValue == nil &#123;</div><div class="line">                isKeyPresent = false</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return self</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>不难发现，在这方法中，我们从JSON字典中根据key获取了value，原来当我们调用<code>object.mapping(map: map)</code>时，就会依次根据我们配置的mapping值获取对应的value</p>
-<h4 id="ObjectMapper实践"><a href="#ObjectMapper实践" class="headerlink" title="ObjectMapper实践"></a>ObjectMapper实践</h4><p>分析完原理，我们还需要能够熟练的运用ObjectMapper来帮助我们完成解析功能，ObjectMapper能够帮助我们处理数据的方法有很多，这里我就先简单跟大家分享几种在项目中常用的方法，我已经将相关的<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>上传到github上，欢迎大家star</p>
-<h6 id="解析单一结构的模型"><a href="#解析单一结构的模型" class="headerlink" title="解析单一结构的模型"></a>解析单一结构的模型</h6><p>单一结构的模型解析比较简单，大家了解一下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;objectmapper&quot;,</div><div class="line">  &quot;age&quot;: 18,</div><div class="line">  &quot;nickname&quot;: &quot;mapper&quot;,</div><div class="line">  &quot;job&quot;: &quot;swifter&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当我们拿到如上所示的json数据时，只需要创建一个遵循<code>Mappable</code>的模型，并配置好解析路径即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class User: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    var age: Int?</div><div class="line">    var nickname: String?</div><div class="line">    var job: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">        age &lt;- map[&quot;age&quot;]</div><div class="line">        nickname &lt;- map[&quot;nickname&quot;]</div><div class="line">        job &lt;- map[&quot;job&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法</div><div class="line">let user = Mapper&lt;User&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
-<h6 id="解析模型中嵌套模型的情况"><a href="#解析模型中嵌套模型的情况" class="headerlink" title="解析模型中嵌套模型的情况"></a>解析模型中嵌套模型的情况</h6><p>有时候我们拿到的json数据嵌套了好几层的结构，而我们刚好也需要逐层解析拿到每个模型的数据，下面我就通过一个两层结构给大家演示一下处理的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;weather&quot;: &quot;sun&quot;,</div><div class="line">    &quot;temperature&quot;: &#123;</div><div class="line">        &quot;celsius&quot;: 70,</div><div class="line">        &quot;fahrenheit&quot;: 34</div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>正如上面的json数据所示，我们需要创建一个weather模型，同时包含一个temperature模型来解析json数据，这时我们就需要运用泛型来帮助我们达到嵌套的目的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class Weather&lt;T: Mappable&gt;: Mappable &#123;</div><div class="line"></div><div class="line">    var weather: String?</div><div class="line">    var temperature: T?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        weather &lt;- map[&quot;weather&quot;]</div><div class="line">        temperature &lt;- map[&quot;temperature&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Temperature: Mappable &#123;</div><div class="line">    </div><div class="line">    var celsius: Double?</div><div class="line">    var fahrenheit: Double?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        celsius &lt;- map[&quot;celsius&quot;]</div><div class="line">        fahrenheit &lt;- map[&quot;fahrenheit&quot;]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 使用方法如下</div><div class="line">let weather = Mapper&lt;Weather&lt;Temperature&gt;&gt;().map(JSONString: json.rawString()!)</div></pre></td></tr></table></figure></p>
-<h6 id="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"><a href="#解析模型中嵌套模型但是我们只需要拿到子模型的属性值" class="headerlink" title="解析模型中嵌套模型但是我们只需要拿到子模型的属性值"></a>解析模型中嵌套模型但是我们只需要拿到子模型的属性值</h6><p>有些json数据嵌套的内容我们不需要分模型来获取，只需要将属性统一到一个模型中使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;distance&quot;: &#123;</div><div class="line">        &quot;text&quot;: &quot;102 ft&quot;,</div><div class="line">        &quot;value&quot;: 31</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Distance: Mappable &#123;</div><div class="line">    var text: String?</div><div class="line">    var value: Int?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        text &lt;- map[&quot;distance.text&quot;]</div><div class="line">        value &lt;- map[&quot;distance.value&quot;]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>####### 解析指定的一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;status&quot;: &quot;200&quot;,</div><div class="line">    &quot;msg&quot;: &quot;success&quot;,</div><div class="line">    &quot;features&quot;: [</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;json解析&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;模型转换&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;数据处理&quot;</div><div class="line">       &#125;,</div><div class="line">       &#123;</div><div class="line">         &quot;name&quot;: &quot;mapper进阶&quot;</div><div class="line">       &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过我们拿到的返回结果如上面的代码段所示，features是我们真正关心的数据，它是一个数组结构，我们期望能够得到的是一个数组，里面包含若干个feature模型</p>
-<p>首先我们必不可少的就是要创建一个Feature模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Feature: Mappable &#123;</div><div class="line"></div><div class="line">    var name: String?</div><div class="line">    </div><div class="line">    required init?(map: Map) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func mapping(map: Map) &#123;</div><div class="line">        name &lt;- map[&quot;name&quot;]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在解析这个JSON数据时，我们可以忽略掉其他信息，先获取features对应的json数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let featureJson = json[&quot;features&quot;];</div></pre></td></tr></table></figure></p>
-<p>然后只需要使用Mapper的高级用法<code>mapArray</code>方法即可直接得到数组对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let features = Mapper&lt;Feature&gt;().mapArray(JSONString: featureJson.rawString()!)</div></pre></td></tr></table></figure></p>
-<p>ObjectMapper的高级用法还有很多，掌握上面的这些用法基本已经可以在项目中使用ObjectMapper达到我们的需求了，后面有时间我会在此博客和<a href="https://github.com/luzhiyongGit/ObjectMapperDemo/tree/master" target="_blank" rel="external">Demo</a>基础上更新更多的用法供大家参考</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/" data-id="cjb6e28a2000znc794k6aaw80" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-利用SDWebImage下载图片" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/05/利用SDWebImage下载图片/" class="article-date">
-  <time datetime="2017-07-05T07:04:20.000Z" itemprop="datePublished">2017-07-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/05/利用SDWebImage下载图片/">利用SDWebImage下载图片</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h3 id="利用SDWebImage下载图片的原因"><a href="#利用SDWebImage下载图片的原因" class="headerlink" title="利用SDWebImage下载图片的原因"></a>利用SDWebImage下载图片的原因</h3><p>近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过<code>SDWebImage</code>来动态的加载网络图片，能不能通过<code>SDWebImage</code>来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过<code>SDWebImage</code>预加载图片的 :)</p>
-<h3 id="封装好的下载类"><a href="#封装好的下载类" class="headerlink" title="封装好的下载类"></a>封装好的下载类</h3><p>为了能方便的实现图片的下载，使用，移除等功能的调用，我封装了一个类<a href="https://github.com/luzhiyongGit/ZYImageDownloader" target="_blank" rel="external">ZYImageDownloader</a>，并且已经在github上开源，有兴趣的伙伴可以直接前往下载</p>
-<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>其实<code>SDWebImage</code>内部已经帮我们实现了图片下载的类，<code>SDWebImageDownloader</code>一个专门用来下载图片的类，<code>SDWebImagePrefetcher</code>一个专门用来批量下载图片的类</p>
-<p>这里我们主要就是使用了<code>SDWebImagePrefetcher</code>来下载图片，我们只需要将要下载的图片地址传入，<code>SDWebImagePrefetcher</code>就会帮我们将图片逐个下载下来，并且缓存在本地，缓存的方式和我们通常使用的动态加载图片一样以url为key存储</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:prefetchURLs progress:^(NSUInteger noOfFinishedUrls, NSUInteger noOfTotalUrls) &#123;</div><div class="line">        </div><div class="line">&#125; completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) &#123;</div><div class="line">        </div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>当我们需要使用对应地址的图片时，我们只需要以url为key来获取图片即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:imageURL]];</div><div class="line">    UIImage *image = [[SDImageCache sharedImageCache] imageFromCacheForKey:key];</div><div class="line">    return image;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/" data-id="cjb6e28ai0024nc79elnle8r6" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-iOS11开发者需要知道的改变" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/08/iOS11开发者需要知道的改变/" class="article-date">
-  <time datetime="2017-06-08T09:18:08.000Z" itemprop="datePublished">2017-06-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/08/iOS11开发者需要知道的改变/">iOS 11 开发者需要知道的改变</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>苹果在<code>WWDC 2017</code>披露了许多的iOS 11的新特性，作为iOS开发者有哪些改变是我们需要知道的呢？</p>
-<h2 id="iOS-11的发布时间"><a href="#iOS-11的发布时间" class="headerlink" title="iOS 11的发布时间"></a>iOS 11的发布时间</h2><p>在正式发布iOS 11之前，苹果通常会先提供一个可供开发者安装的版本，然后再进过几个版本公开发布的beta版，最终才会发布一个正式版本的iOS 11系统</p>
-<ul>
-<li>开发者beta版本： 已经发布</li>
-<li>公开发布的beta版本：六月底</li>
-<li>最终正式版本：秋季</li>
-</ul>
-<h2 id="iOS-11支持哪些设备"><a href="#iOS-11支持哪些设备" class="headerlink" title="iOS 11支持哪些设备"></a>iOS 11支持哪些设备</h2><ul>
-<li>iPhone 5S, 6, 6 Plus, 6S Plus, SE, 7, 7 Plus</li>
-<li>iPad Air and Air 2, iPad Mini 2, 3, 4, 5代 iPad，所有的 iPad Pro</li>
-<li>6代 iPod Touch</li>
-</ul>
-<h2 id="iOS-新增了哪些框架"><a href="#iOS-新增了哪些框架" class="headerlink" title="iOS 新增了哪些框架"></a>iOS 新增了哪些框架</h2><h3 id="Core-ML"><a href="#Core-ML" class="headerlink" title="Core ML"></a>Core ML</h3><p>iOS 11中苹果新增了一个机器学习框架<a href="https://developer.apple.com/machine-learning/" target="_blank" rel="external">Core ML</a>，同时Apple也提供了<a href="https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml" target="_blank" rel="external">一系列的工具</a>用来将各类机器学习的模型转换为Core ML可以理解的形式，从而帮助开发者轻松的在APP里使用前人训练出来的模型。</p>
-<h3 id="ARKit"><a href="#ARKit" class="headerlink" title="ARKit"></a>ARKit</h3><p><a href="https://developer.apple.com/documentation/arkit" target="_blank" rel="external">ARKit</a>帮助开发者更容易的在项目中使用AR功能，扩展了应用和游戏的应用场景，三年前我在开发带有AR功能的App时，相关的核心功能还需要像高通购买SDK才能实现。现在有了ARKit普通开发者也能够开发AR相关的功能了</p>
-<h2 id="其他值得注意的变更"><a href="#其他值得注意的变更" class="headerlink" title="其他值得注意的变更"></a>其他值得注意的变更</h2><ol>
-<li>在iOS 11系统中，在视频播放界面调节音量时将不会出现音量提示框，一个比之前更小的音量滑动条将会出现在屏幕的右上角<br><img src="https://resource.feng.com/resource/h061/h84/img201706072211540.jpg" alt=""></li>
-<li>由于AppStore的改版，原先在应用内设置的跳转评分的链接将不会正常加载到评分界面</li>
-<li>用户能够在AppStore中的产品页面里直接进行应用内购买，App必须支持新的<code>SKPaymentTransactionObserver</code>方法来支持AppStore内的应用内购买功能</li>
-<li>开发者能够在后台回复用户的评论了，再也不用愁无法跟AppStore里的用户进行沟通了</li>
-<li>由于我们在iTunes Connect后台只能提供一套产品信息，类如应用名称、图标、截图等，这就要求我们考虑到不同版本AppStore界面间的兼容</li>
-<li>新的Navigation title设计，iOS 11系统中大多app都采用了这个新的设计，放大了导航栏的标题字体。虽然个人感觉有点丑，但是如果想要采用这项设计的话，只需要设置<code>navigation bar</code>的<code>prefersLargeTitles</code>即可，当然前提是你的导航栏是用的原生的<code>navigation bar</code></li>
-<li>提供了<a href="https://developer.apple.com/documentation/fileprovider" target="_blank" rel="external">FileProvider</a>功能让App可以获取用户设备或云端上的文件</li>
-<li>iOS 11将不再支持32位的app，如果想要让程序运行在iOS 11设备上，进行64位的重新编译是必须步骤</li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://onevcat.com/2017/06/ios-11-sdk/" target="_blank" rel="external">开发者所需要知道的 iOS 11 SDK 新特性</a></p>
-<p><a href="https://developer.apple.com/app-store/product-page/" target="_blank" rel="external">AppStore官方说明</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/08/iOS11开发者需要知道的改变/" data-id="cjb6e28ab001mnc79hj2mcv3c" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS11/">iOS11</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-Block用法小结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/06/Block用法小结/" class="article-date">
-  <time datetime="2017-06-06T08:20:01.000Z" itemprop="datePublished">2017-06-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/06/Block用法小结/">Block用法小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>这篇博客将系统整理一下Block相关的知识</p>
-<p>首先，先思考一个问题Block能做些什么？</p>
-<ul>
-<li>Block内部能够读取外部局部变量的值</li>
-<li>经过<code>__block</code>修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值</li>
-<li>Block可以用来作为控制器之间的一个通信</li>
-<li>Block可以作为方法的参数</li>
-</ul>
-<h2 id="进一步深挖block的原理"><a href="#进一步深挖block的原理" class="headerlink" title="进一步深挖block的原理"></a>进一步深挖block的原理</h2><h4 id="为什么不加-block修饰符就不能改变Block外部的局部变量"><a href="#为什么不加-block修饰符就不能改变Block外部的局部变量" class="headerlink" title="为什么不加__block修饰符就不能改变Block外部的局部变量?"></a>为什么不加__block修饰符就不能改变Block外部的局部变量?</h4><p>对于block外的变量引用，block默认是将其复制到其数据结构中实现访问的，对于用<strong>block修饰的外部变量引用，block是复制其引用地址来实现访问的，所以加上</strong>block就能改变block外部的变量</p>
-<h4 id="Block如何作为控制器之间的一个通信？"><a href="#Block如何作为控制器之间的一个通信？" class="headerlink" title="Block如何作为控制器之间的一个通信？"></a>Block如何作为控制器之间的一个通信？</h4><p>举例说明：</p>
-<ol>
-<li><p>页面B的.h文件中声明一个block变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">typedef void(^blo)(NSString *str);</div><div class="line">@property (nonatomic, copy) blo block;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">@property (nonatomic, copy) void (^blo)(NSString *str);</div></pre></td></tr></table></figure>
-</li>
-<li><p>页面A中创建B页面，并调用Block变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.block = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.blo = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在页面B中调用Block变量</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.block(&quot;string&quot;);</div></pre></td></tr></table></figure>
-<h4 id="为何A页面要用-weak修饰？"><a href="#为何A页面要用-weak修饰？" class="headerlink" title="为何A页面要用__weak修饰？"></a>为何A页面要用__weak修饰？</h4><p>使用<strong>weak修饰符是为了避免引起循环引用。如果在Block中使用了</strong>strong修饰符修饰的对象，那么当Block从栈复制到堆时，改对象为Block所有，这就容易引起循环引用，从而发生内存泄漏</p>
-<h4 id="如何使用Block作为方法的参数"><a href="#如何使用Block作为方法的参数" class="headerlink" title="如何使用Block作为方法的参数"></a>如何使用Block作为方法的参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)blockAsParameter:(void (^)())block &#123;</div><div class="line">    block(); // 执行block内部的代码</div><div class="line">&#125;</div><div class="line"></div><div class="line">[self blockAsParameter:^&#123;</div><div class="line">    NSLog(@&quot;&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<h4 id="block的三种类型"><a href="#block的三种类型" class="headerlink" title="block的三种类型"></a>block的三种类型</h4><ol>
-<li>不管在ARC还是MRC环境下，block内部如果没有访问外部变量，这个block就是全局block <code>_NSConcreteGlobalBlock</code>，存储在内存中的代码区</li>
-<li>在MRC下，block内部如果访问外部变量，这个block就是栈block <code>_NSConcreteStackBlock</code>，存储在内存中的栈上，当函数返回时会被销毁</li>
-<li>在MRC下，block内部访问外部变量，同时对该block做一次copy操作，这个block就是堆block <code>_NSConcreteMallocBlock</code>，存储在内存的堆上，当引用计数为 0 时会被销毁</li>
-<li>在ARC下，block内部如果访问了外部变量，这个block就是堆block，因为在ARC下，默认对block做一次copy操作</li>
-</ol>
-<h3 id="总结一些block使用的注意点"><a href="#总结一些block使用的注意点" class="headerlink" title="总结一些block使用的注意点"></a>总结一些block使用的注意点</h3><p>1.默认情况下，block内部可以访问外部变量，但是不能修改外部变量，如果想要修改外部变量，可以给外部变量加上<code>__block</code>关键字，block是复制其引用地址来实现访问的</p>
-<ol>
-<li>block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。</li>
-</ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://chun.tips/2014/11/13/objc-block/" target="_blank" rel="external">黑幕背后的 __block 修饰符</a>–分析了为什么不加__block修饰符就不能改变Block外部的局部变量</p>
-<p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/06/Block用法小结/" data-id="cjb6e289m0006nc79aby6qb13" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-深入浅出Texture-高性能界面的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/" class="article-date">
-  <time datetime="2017-06-01T11:08:54.000Z" itemprop="datePublished">2017-06-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p><a href="https://github.com/texturegroup/texture/" target="_blank" rel="external">Texture</a>是由Facebook开源的<a href="https://github.com/facebookarchive/AsyncDisplayKit" target="_blank" rel="external">AsyncDisplayKit</a>演变而来</p>
-<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>Texture的基础单元是一个个node，ASDisplayNode是基于CALayer的一层抽象。不同于UIView对象，ASDisplayNode是线程安全的，它不仅仅可以用于主线程而且可以在辅线程中使用。</p>
-<p>使用Texture可以让我们在辅线程中进行图片的解析、文本的适应、约束等等UI操作，从而能够保证主线程及时对用户的操作做出反应</p>
-<h3 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h3><ul>
-<li><code>ASViewController</code>: 基于<code>UIViewController</code>封装的子类，能够方便的为我们提供node的管理</li>
-<li><code>ASNavigationController</code>: 可用于替代<code>UINavigationController</code>，遵循<code>ASVisibility</code>协议</li>
-<li><code>ASTabBarController</code>: 可用于替代<code>UITabBarController</code>，遵循<code>ASVisiblity</code>协议</li>
-<li><code>ASCollectionNode</code>、<code>ASTableNode</code>:等同于<code>UICollectionView</code>、<code>UITableView</code></li>
-<li><code>ASPagerNode</code>:基于<code>ASCollectionNode</code>封装的子类，能够像<code>UIPageViewController</code>一样给我们提供强大的滑动操作体验</li>
-<li><code>ASCellNode</code>:等同于<code>UITableViewCell</code>、<code>UICollectionViewCell</code>，需要强调的是它返回的是一个Block(ASCellNodeBlock)。</li>
-<li><code>ASScrollNode</code>: 代替<code>UIScrollView</code></li>
-<li><code>ASEditableTextNode</code>: 代替<code>UITextView</code></li>
-<li><code>ASTextNode</code>: 代替<code>UILabel</code></li>
-<li><code>ASImageNode</code>: 代替<code>UIImage</code></li>
-<li><code>ASNetworkImageNode</code>: 可以自动加载图片并进行内存管理，而且还支持逐步加载Jpeg和动态gif图片</li>
-<li><code>ASMultiplexImageNode</code>:</li>
-<li><code>ASVideoNode</code>: 代替<code>AVPlayerLayer</code></li>
-<li><code>ASVideoPlayerNode</code>: 代替<code>UIMoviePlayer</code></li>
-<li><code>ASControlNode</code>: 代替<code>UIControl</code></li>
-<li><code>ASButtonNode</code>: 代替<code>UIButton</code></li>
-<li><code>ASMapNode</code>: 代替<code>MKMapView</code></li>
-<li><code>ASStackLayoutSpec</code>: 堆放布局规则</li>
-<li><code>ASOverlayLayoutSpec</code>: 覆盖布局规则</li>
-<li><code>ASRelativeLayoutSpec</code>: 相对布局规则</li>
-<li><code>ASInsetLayoutSpec</code>: 插入布局规则</li>
-<li><code>ASBackgroundLayoutSpec</code>: 背景布局规则</li>
-<li><code>ASCenterLayoutSpec</code>: 中心布局规则</li>
-<li><code>ASAbsoluteLayoutSpec</code>: 绝对布局规则</li>
-<li><code>ASRatioLayoutSpec</code>: 比例布局规则</li>
-</ul>
-<h3 id="层级结构"><a href="#层级结构" class="headerlink" title="层级结构"></a>层级结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">ASDisplayNode--&gt;ASTableNode</div><div class="line">ASDisplayNode--&gt;ASCollectionNode</div><div class="line">ASDisplayNode--&gt;ASCellNode</div><div class="line">ASDisplayNode--&gt;ASScrollNode</div><div class="line">ASDisplayNode--&gt;ASEditableTextNode</div><div class="line">ASDisplayNode--&gt;ASControlNode</div><div class="line">ASCollectionNode--&gt;ASPagerNode</div><div class="line">ASControlNode--&gt;ASButtonNode</div><div class="line">ASControlNode--&gt;ASTextNode</div><div class="line">ASControlNode--&gt;ASMapNode</div><div class="line">ASControlNode--&gt;ASImageNode</div><div class="line">ASImageNode--&gt;ASNetworkImageNode</div><div class="line">ASImageNode--&gt;ASMultiplexImageNode</div><div class="line">ASNetworkImageNode--&gt;ASVideoNode</div></pre></td></tr></table></figure>
-<h3 id="批抓取进行无限滚动"><a href="#批抓取进行无限滚动" class="headerlink" title="批抓取进行无限滚动"></a>批抓取进行无限滚动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 将leadingScreensForBatching 设置为1.0表示当滚动到还剩下一个全屏时就开始抓取新的一批数据</div><div class="line">self.tableNode.view.leadingScreensForBatching = 1.0;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)shouldBatchFetchForTableNode:(ASTableNode *)tableNode &#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ASDK的容器"><a href="#ASDK的容器" class="headerlink" title="ASDK的容器"></a>ASDK的容器</h3><p>当在项目中替换使用AsyncDisplayKit的时候，应该把nodes节点，当做一个子节点添加到一个容器类里，这些容器类负责告诉所包含的节点，他们现在是什么状态，以便尽可能有效的加载数据和渲染，经常犯的一个错误是把node节点直接添加到一个现有的view中，这样做会导致节点在渲染的时候会闪烁一下。</p>
-<p>Texture为我们提供了以下这些节点容器：</p>
-<ul>
-<li><code>ASCollectionNode</code></li>
-<li><code>ASPagerNode</code></li>
-<li><code>ASTableNode</code></li>
-<li><code>ASViewController</code></li>
-<li><code>ASNavigationController</code></li>
-<li><code>ASTabBarController</code></li>
-</ul>
-<h4 id="使用节点容器的好处"><a href="#使用节点容器的好处" class="headerlink" title="使用节点容器的好处"></a>使用节点容器的好处</h4><p>节点容器能够自动为它的节点们管理高效的预加载，这就意味着节点容器中所有的节点的尺寸约束、数据请求、图片解析、渲染都将是异步进行</p>
-<h3 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h3><p>Texture模拟了Core Animation的机制，所有针对ASNode的修改和提交，总有些任务是必需放在主线程执行的，当这种任务出现的时候，ASNode就会把任务用<code>ASAsyncTransaction(Group)</code>封装并提交到一个全局的容器去。Texture在RunLoop中注册了一个Observer，监视的事件和CA一样，但是优先级比CA低。当RunLoop进入休眠前，CA处理完事件后，ASDK就会执行该loop内提交的所有任务</p>
-<p>利用这个机制，Texture可以在合适的机会把异步、并发的操作同步到主线程去，并且获得不错的性能</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
-<li><p>利用ASTableNode替代UITableView创建一个高性能的列表页面</p>
-</li>
-<li><p>利用ASLayoutSpec替代AutoLayout创建高效的页面约束</p>
-</li>
-</ol>
-<h3 id="疑问点"><a href="#疑问点" class="headerlink" title="疑问点"></a>疑问点</h3><ul>
-<li>为何使用<code>ASCellNode</code>不需要担心cell重用问题？</li>
-</ul>
-<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.bijishequ.com/detail/227995?p=" target="_blank" rel="external">AsyncDisplaykit2.0 使用</a>–主要讲解了LayoutSpec相关的知识</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/01/深入浅出Texture-高性能界面的解决方案/" data-id="cjb6e28ap002pnc79bdgzdicp" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
 
     </footer>
   </div>
@@ -963,7 +777,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 14px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 14px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 17.67px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 14px;">Secret</a> <a href="/tags/Swift/" style="font-size: 14px;">Swift</a> <a href="/tags/epub/" style="font-size: 14px;">epub</a> <a href="/tags/iOS/" style="font-size: 21.33px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 14px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 25px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 14px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 17.67px;">博客</a>
+      <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/Git入门/" style="font-size: 14px;">Git入门</a> <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/Markdown/" style="font-size: 14px;">Markdown</a> <a href="/tags/ReactNative/" style="font-size: 17.67px;">ReactNative</a> <a href="/tags/Secret/" style="font-size: 14px;">Secret</a> <a href="/tags/Swift/" style="font-size: 14px;">Swift</a> <a href="/tags/epub/" style="font-size: 14px;">epub</a> <a href="/tags/iOS/" style="font-size: 21.33px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 14px;">iOS11</a> <a href="/tags/iOS小积累/" style="font-size: 25px;">iOS小积累</a> <a href="/tags/iOS进阶/" style="font-size: 14px;">iOS进阶</a> <a href="/tags/博客/" style="font-size: 17.67px;">博客</a> <a href="/tags/小积累/" style="font-size: 14px;">小积累</a>
     </div>
   </div>
 
@@ -975,23 +789,23 @@
       <ul>
         
           <li>
-            <a href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/">NS_UNAVAILABLE和NS_DESIGNATED是什么</a>
+            <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
           </li>
         
           <li>
-            <a href="/2017/12/14/开发者账号批量导入设备号/">开发者账号批量导入设备号</a>
+            <a href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
           </li>
         
           <li>
-            <a href="/2017/12/14/自定义快捷代码片段/">自定义快捷代码片段</a>
+            <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
           </li>
         
           <li>
-            <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a>
+            <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
           </li>
         
           <li>
-            <a href="/2017/07/20/EPUB文件格式解析/">EPUB文件格式解析</a>
+            <a href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
           </li>
         
       </ul>
@@ -1003,7 +817,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -1039,7 +853,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2014 - 2017 Leafly&nbsp;|&nbsp;
+      &copy; 2014 - 2018 Leafly&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
      <div id="footer-right">
