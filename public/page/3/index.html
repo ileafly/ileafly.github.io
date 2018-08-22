@@ -65,6 +65,137 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP与iOS之间的AES加解密" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/06/PHP与iOS之间的AES加解密/" class="article-date">
+  <time datetime="2017-03-06T10:12:13.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/06/PHP与iOS之间的AES加解密/">PHP与iOS之间的AES加解密</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在项目开发过程中，为了保证传输数据的安全性，我们经常要对传输的内容进行加密处理，以增加别人破解的成本。常用的加密算法有很多，今天我们先围绕<code>AES</code>加密算法进行一个使用总结</p>
+<h3 id="AES算法介绍"><a href="#AES算法介绍" class="headerlink" title="AES算法介绍"></a>AES算法介绍</h3><p><code>AES</code>是高级加密标准(Advanced Encryption Standard)的缩写，在密码学中又被称为Rijndael加密法，如果想对<code>AES</code>的背景有更多的了解可以移步到<a href="https://zh.wikipedia.org/wiki/高级加密标准" target="_blank" rel="external">维基百科-高级加密标准</a></p>
+<p><code>AES</code>加密时需要统一四个参数：</p>
+<ul>
+<li>密钥长度 (Key Size)</li>
+<li>加密模式 (Cipher Mode)</li>
+<li>填充方式 (Padding)</li>
+<li>初始向量 (Initialization Vector)</li>
+</ul>
+<p>由于前后端开发所使用的语言不统一，导致经常出现前后端之间互相不能解密的情况出现，其实，无论什么语言系统，<code>AES</code>的算法总是相同的，导致结果不一致的原因在于<strong>上述的四个参数不一致</strong>，下面就来了解一下这四个参数的含义</p>
+<h4 id="密钥长度"><a href="#密钥长度" class="headerlink" title="密钥长度"></a>密钥长度</h4><p><code>AES</code>算法下，key的长度有三种：128、192、256 bits，三种不同密钥长度就需要我们传入的key传入不同长度的字符串，例如我们选择AES-128,那我们定的key需要是长度为16的字符串</p>
+<h4 id="加密模式"><a href="#加密模式" class="headerlink" title="加密模式"></a>加密模式</h4><p><code>AES</code>属于块加密，块加密中有CBC、ECB、CTR、OFB、CFB等几种工作模式，为了保持前后端统一，我们选择ECB模式</p>
+<h4 id="填充方式"><a href="#填充方式" class="headerlink" title="填充方式"></a>填充方式</h4><p>由于块加密只能对特定长度的数据块进行加密，因此CBC、ECB模式需要在最后一数据块加密前进行数据填充</p>
+<h4 id="初始向量"><a href="#初始向量" class="headerlink" title="初始向量"></a>初始向量</h4><p>使用除ECB以外的其他加密模式均需要传入一个初始向量，其大小与Block Size相等</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="PHP端代码实现"><a href="#PHP端代码实现" class="headerlink" title="PHP端代码实现"></a>PHP端代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">/*</div><div class="line"> * 定义类cryptAES 专用于AES加解密</div><div class="line"> * 初始化时传入密钥长度、加密Key、初始向量、加密模式四个字段</div><div class="line"> */</div><div class="line">class cryptAES</div><div class="line">&#123;</div><div class="line">    public $iv = null;</div><div class="line">    public $key = null;</div><div class="line">    public $bit = 128;</div><div class="line">    private $cipher;</div><div class="line"></div><div class="line">    public function __construct($bit, $key, $iv, $mode)</div><div class="line">    &#123;</div><div class="line">        if(empty($bit) || empty($key) || empty($iv) || empty($mode))</div><div class="line">        &#123;</div><div class="line">            return NULL;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $this-&gt;bit = $bit;</div><div class="line">        $this-&gt;key = $key;</div><div class="line">        $this-&gt;iv = $iv;</div><div class="line">        $this-&gt;mode = $mode;</div><div class="line"></div><div class="line">        switch($this-&gt;bit)</div><div class="line">        &#123;</div><div class="line">            case 192 : $this-&gt;cipher = MCRYPT_RIJNDAEL_192; break;</div><div class="line">            case 256 : $this-&gt;cipher = MCRYPT_RIJNDAEL_256; break;</div><div class="line">            default : $this-&gt;cipher = MCRYPT_RIJNDAEL_128;</div><div class="line">        &#125;</div><div class="line">        switch($this-&gt;mode)</div><div class="line">        &#123;</div><div class="line">            case &apos;ecb&apos; : $this-&gt;mode = MCRYPT_MODE_ECB; break;</div><div class="line">            case &apos;cfb&apos; : $this-&gt;mode = MCRYPT_MODE_CFB; break;</div><div class="line">            case &apos;ofb&apos; : $this-&gt;mode = MCRYPT_MODE_OFB; break;</div><div class="line">            case &apos;nofb&apos; : $this-&gt;mode = MCRYPT_MODE_NOFB; break;</div><div class="line">            default : $this-&gt;mode = MCRYPT_MODE_CBC;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">        /*</div><div class="line">         * 加密数据并返回</div><div class="line">         */</div><div class="line">    public function encrypt($data)</div><div class="line">    &#123;</div><div class="line">        $data = base64_encode(mcrypt_encrypt($this-&gt;cipher, $this-&gt;key, $data, $this-&gt;mode, $this-&gt;iv));</div><div class="line">        return $data;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">        /*</div><div class="line">         * 解密数据并返回</div><div class="line">         */</div><div class="line">    public function decrypt($data)</div><div class="line">    &#123;</div><div class="line">        $data = mcrypt_decrypt($this-&gt;cipher, $this-&gt;key, base64_decode($data), $this-&gt;mode, $this-&gt;iv);</div><div class="line">        $data = rtrim(rtrim($data), &quot;\x00..\x1F&quot;);</div><div class="line">        return $data;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="iOS端代码实现"><a href="#iOS端代码实现" class="headerlink" title="iOS端代码实现"></a>iOS端代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">// NSString+AESSecurity.h</div><div class="line">@interface NSString (AESSecurity)</div><div class="line"></div><div class="line">+ (NSString *)encrypyAES:(NSString *)content key:(NSString *)key;</div><div class="line"></div><div class="line">+ (NSString *)descryptAES:(NSString *)content key:(NSString *)key;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">// NSString+AESSecurity.m</div><div class="line">#import &quot;NSString+AESSecurity.h&quot;</div><div class="line"></div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line"></div><div class="line">// 初始向量</div><div class="line">NSString *const kInitVector = @&quot;0123456789&quot;;</div><div class="line"></div><div class="line">// 密钥长度</div><div class="line">size_t const kKeySize = kCCKeySizeAES128;</div><div class="line"></div><div class="line">@implementation NSString (AESSecurity)</div><div class="line"></div><div class="line">+ (NSString *)encrypyAES:(NSString *)content key:(NSString *)key &#123;</div><div class="line">    </div><div class="line">    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    NSUInteger dataLength = contentData.length;</div><div class="line">    </div><div class="line">    // 为结束符&apos;\\0&apos; +1</div><div class="line">    char keyPtr[kKeySize + 1];</div><div class="line">    memset(keyPtr, 0, sizeof(keyPtr));</div><div class="line">    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    size_t encryptSize = dataLength + kCCBlockSizeAES128;</div><div class="line">    void *encryptedBytes = malloc(encryptSize);</div><div class="line">    size_t actualOutSize = 0;</div><div class="line">    </div><div class="line">    NSData *initVector = [kInitVector dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,</div><div class="line">                                          kCCAlgorithmAES128,</div><div class="line">                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式</div><div class="line">                                          keyPtr,</div><div class="line">                                          kKeySize,</div><div class="line">                                          initVector.bytes,</div><div class="line">                                          contentData.bytes,</div><div class="line">                                          dataLength,</div><div class="line">                                          encryptedBytes,</div><div class="line">                                          encryptSize,</div><div class="line">                                          &amp;actualOutSize);</div><div class="line">    </div><div class="line">    if (cryptStatus == kCCSuccess) &#123;</div><div class="line">        // 对加密后的数据进行 base64 编码</div><div class="line">        return [[NSData dataWithBytesNoCopy:encryptedBytes length:actualOutSize] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];</div><div class="line">    &#125;</div><div class="line">    free(encryptedBytes);</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)descryptAES:(NSString *)content key:(NSString *)key &#123;//</div><div class="line">    // 把 base64 String 转换成 NSData</div><div class="line">    NSData *contentData = [[NSData alloc] initWithBase64EncodedString:content options:NSDataBase64DecodingIgnoreUnknownCharacters];</div><div class="line">    NSUInteger dataLength = contentData.length;</div><div class="line">    </div><div class="line">    char keyPtr[kKeySize + 1];</div><div class="line">    memset(keyPtr, 0, sizeof(keyPtr));</div><div class="line">    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    size_t decryptSize = dataLength + kCCBlockSizeAES128;</div><div class="line">    void *decryptedBytes = malloc(decryptSize);</div><div class="line">    size_t actualOutSize = 0;</div><div class="line">    </div><div class="line">    NSData *initVector = [kInitVector dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,</div><div class="line">                                          kCCAlgorithmAES,</div><div class="line">                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式</div><div class="line">                                          keyPtr,</div><div class="line">                                          kKeySize,</div><div class="line">                                          initVector.bytes,</div><div class="line">                                          contentData.bytes,</div><div class="line">                                          dataLength,</div><div class="line">                                          decryptedBytes,</div><div class="line">                                          decryptSize,</div><div class="line">                                          &amp;actualOutSize);</div><div class="line">    </div><div class="line">    if (cryptStatus == kCCSuccess) &#123;</div><div class="line">        return [[NSString alloc] initWithData:[NSData dataWithBytesNoCopy:decryptedBytes length:actualOutSize] encoding:NSUTF8StringEncoding];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    free(decryptedBytes);</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>在iOS上，字符串经过加解密后可能会在数据中添加一些<a href="http://baike.baidu.com/view/1112575.htm" target="_blank" rel="external">操作符</a>这会导致我们想进一步处理解密后的字符串时会处理失败，例如，当我们想将解密后的json字符串转成字典时，可能会抛出<code>Garbage at End</code>的错误，解决方案如下：</p>
+<ol>
+<li><p>将字符串中的所有控制符替换成空字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *newStr = [oldStr stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];</div></pre></td></tr></table></figure>
+</li>
+<li><p>将处理后的字符串进行json序列化操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSError *err = nil;</div><div class="line">            </div><div class="line">NSData *jsondata = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">            </div><div class="line">NSArray *arr = [NSJSONSerialization JSONObjectWithData:jsondata options:NSJSONReadingMutableLeaves error:&amp;err];</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>附上相关模块的代码</p>
+<p><a href="https://github.com/luzhiyongGit/AESSecurity-PHP" target="_blank" rel="external">AESSecurity-PHP</a></p>
+<p><a href="https://github.com/luzhiyongGit/AESSecurity-iOS" target="_blank" rel="external">AESSecurity-iOS</a></p>
+<p>欢迎star和fork~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/03/06/PHP与iOS之间的AES加解密/" data-id="cjl4p5mlv0013zw79avzpg9o6" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Secret/">Secret</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-iOS开发小结之H5与OC交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/23/iOS开发小结之H5与OC交互/" class="article-date">
+  <time datetime="2017-02-23T06:11:33.000Z" itemprop="datePublished">2017-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/23/iOS开发小结之H5与OC交互/">iOS开发小结之H5与OC交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h4 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h4><p>现在混合编程越来越多，为了能给用户提供一个完整的体验，我们就需要解决H5页面与原生程序直接的交互问题，闲话少说，我们直接上代码。我也已经将这篇博客相关的<a href="https://github.com/luzhiyongGit/OC_JS_BridgeDemo" target="_blank" rel="external">完整Demo</a>上传到了github上，大家也可以直接clone下来查看。</p>
+<h4 id="网页端"><a href="#网页端" class="headerlink" title="网页端"></a>网页端</h4><h5 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;demo&lt;/title&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        function loginAction() &#123;</div><div class="line">            var url = &quot;calloc://login?name=leafly&amp;password=123456&quot;;</div><div class="line">            document.location = url;</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;button onClick=&quot;loginAction()&quot;&gt;登录&lt;/button&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h5 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h5><p>在以上的h5代码中，我们主要做了两件事：</p>
+<ol>
+<li>页面展现</li>
+<li>点击事件的JS处理<br>当用户点击了登录按钮后，就会调用<code>loginAction()</code>方法，在这个方法里，我们加载了一个url，我们将这个url分割成三部分<code>calloc://</code>、<code>login?</code>、<code>name=leafly&amp;password=123456</code>，这三部分共同组成了一个完整的请求地址，第一部分我取了一个名字<code>calloc</code>来表达这个地址的核心作用是调起oc代码，当然也可以根据实际情况去修改，第二部分表达了这次调起主要是做login操作，第三部分是login需要的参数</li>
+</ol>
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><h5 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType &#123;</div><div class="line">    NSURL *url = [request URL];</div><div class="line">    if ([[url scheme] isEqualToString:@&quot;calloc&quot;]) &#123;</div><div class="line">        // JavaScript与Objective-C交互</div><div class="line">        if ([[url host] isEqualToString:@&quot;login&quot;]) &#123;</div><div class="line">            // 登录操作</div><div class="line">            // 得到一个参数字段</div><div class="line">            NSDictionary *params = [self getParams:[url query]];</div><div class="line">            [self login:params];</div><div class="line">            return NO;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="原理分析-1"><a href="#原理分析-1" class="headerlink" title="原理分析"></a>原理分析</h5><p>在UIWebView里，每次的地址请求都会触发<code>- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType</code>代理，而我们就是通过在这个代理方法里拦截请求地址来实现JS调起OC的作用。通过获取一个请求地址的<code>scheme</code>、<code>host</code>、<code>query</code>这三部分信息，来获取我们所需要的信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/02/23/iOS开发小结之H5与OC交互/" data-id="cjl4p5mm8001zzw79mdzn7601" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-Xcode统计整个项目代码行数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/20/Xcode统计整个项目代码行数/" class="article-date">
@@ -98,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/02/20/Xcode统计整个项目代码行数/" data-id="cjl4opxzu001ciq7918adtndw" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/02/20/Xcode统计整个项目代码行数/" data-id="cjl4p5mlx0018zw798o1cu7oo" class="article-share-link">分享</a>
       
       
       
@@ -148,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/02/16/UIWebView加载本地html/" data-id="cjl4opxzo000viq79afhx4qnj" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/02/16/UIWebView加载本地html/" data-id="cjl4p5mlt000zzw793ev1feq5" class="article-share-link">分享</a>
       
       
       
@@ -210,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/12/30/3DTouch开发/" data-id="cjl4opxz50003iq79gvxdvhtp" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/12/30/3DTouch开发/" data-id="cjl4p5mlh0009zw79grw1gjd3" class="article-share-link">分享</a>
       
       
       
@@ -282,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjl4opy0b001xiq79eq1qtqeq" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjl4p5mmg002izw79rz3duimn" class="article-share-link">分享</a>
       
       
       
@@ -334,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/28/iOS项目添加自定义字体/" data-id="cjl4opy0g002biq79adqjvzai" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/28/iOS项目添加自定义字体/" data-id="cjl4p5mmm002xzw799cx1k0hz" class="article-share-link">分享</a>
       
       
       
@@ -420,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/24/React-Native之Navigator/" data-id="cjl4opxzm000qiq79yea0sh65" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/24/React-Native之Navigator/" data-id="cjl4p5mlq000rzw791uuffr6x" class="article-share-link">分享</a>
       
       
       
@@ -501,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/17/自动化打包IPA脚本/" data-id="cjl4opy0z0034iq79rt891a75" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/17/自动化打包IPA脚本/" data-id="cjl4p5mmx003jzw79unpf6gac" class="article-share-link">分享</a>
       
       
       
@@ -576,7 +707,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/02/ReactNative入门/" data-id="cjl4opxzn000siq79vbi0u5e5" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/02/ReactNative入门/" data-id="cjl4p5mlq000tzw79ddpsa3tp" class="article-share-link">分享</a>
       
       
       
@@ -590,128 +721,10 @@
 
 
   
-    <article id="post-iOS10系统下的推送开发" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/01/iOS10系统下的推送开发/" class="article-date">
-  <time datetime="2016-11-01T03:39:00.000Z" itemprop="datePublished">2016-11-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/iOS10系统下的推送开发/">iOS10系统下的推送开发</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>iOS10系统发布后，推送功能发生了很多变化，作为iOS开发者就需要适配这些变化，这里对于如果结合极光推送适配iOS10系统进行一个简单的总结，方便在对其他项目进行适配时使用。</p>
-<h3 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h3><ol>
-<li><p>开启<code>Push Notifications</code>功能</p>
-<p><img src="/images/iOS之iOS10系统下的推送开发_1.png" alt="功能开关"></p>
-</li>
-<li><p>添加<code>UserNotifications.framework</code></p>
-<p><img src="/images/iOS之iOS10系统下的推送开发_2.png" alt="新增系统库"></p>
-</li>
-</ol>
-<h3 id="代码适配"><a href="#代码适配" class="headerlink" title="代码适配"></a>代码适配</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 注册推送通知</div><div class="line">// iOS8系统以前用来注册一个远程推送通知，当我们调用这个方法时，我们就在Apple Push Notification service上进行了设备注册</div><div class="line">    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];</div><div class="line">// iOS8 ~ iOS10 </div><div class="line">    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];</div><div class="line">    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];</div><div class="line">    [[UIApplication sharedApplication] registerForRemoteNotifications];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];</div><div class="line">    </div><div class="line">    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</div><div class="line">        if (!error) &#123;</div><div class="line">            NSLog(@&quot;request authorization success!&quot;);</div><div class="line">            [[UIApplication sharedApplication] registerForRemoteNotifications];</div><div class="line">        &#125;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 利用极光推送注册推送通知</div><div class="line">// iOS10 Before</div><div class="line">    </div><div class="line">    [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    </div><div class="line">    JPUSHRegisterEntity *entity = [[JPUSHRegisterEntity alloc] init];</div><div class="line">    entity.types = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;</div><div class="line">    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];</div><div class="line">    </div><div class="line">// 注册极光推送</div><div class="line">    [JPUSHService setupWithOption:launchOptions appKey:@&quot;&quot; channel:@&quot;&quot; apsForProduction:YES];</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/01/iOS10系统下的推送开发/" data-id="cjl4opxzy001liq79w7fcs57a" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-Hexo多台电脑同步" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/24/Hexo多台电脑同步/" class="article-date">
-  <time datetime="2016-10-24T07:00:08.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/博客/">博客</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！<br>难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。</p>
-<h3 id="Hexo多台电脑同步方案"><a href="#Hexo多台电脑同步方案" class="headerlink" title="Hexo多台电脑同步方案"></a>Hexo多台电脑同步方案</h3><ol>
-<li>创建两个分支：master和hexo</li>
-<li>设置hexo为默认分支，<a href="https://www.github.com" target="_blank" rel="external">github</a>的setting里可以设置</li>
-<li>git clone 拷贝仓库</li>
-<li>进入仓库初始化hexo</li>
-<li>配置hexo <code>_config.yml</code> 可参考<a href="http://www.ileafly.com/2016/08/25/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">个人博客进阶–Hexo搭建博客</a></li>
-<li>依次执行 <code>git add .</code> <code>git commit -m &quot;message&quot;</code> <code>git push origin hexo</code> 提交相关文件</li>
-</ol>
-<p>这样，在你的博客项目里就存在两个分支，master分支用来存放生成的今天网页，hexo分支用来存放网站的原始文件</p>
-<h3 id="新电脑如何同步Hexo"><a href="#新电脑如何同步Hexo" class="headerlink" title="新电脑如何同步Hexo"></a>新电脑如何同步Hexo</h3><ol>
-<li>git clone 拷贝仓库</li>
-<li>已安装hexo则直接使用，未安装Hexo只需要安装Hexo即可</li>
-</ol>
-<h3 id="待尝试的同步方法"><a href="#待尝试的同步方法" class="headerlink" title="待尝试的同步方法"></a>待尝试的同步方法</h3><p>有大神写了一个同步的脚本，只需要执行<code>hexo b</code>就可以达到同步的目的，还没有尝试，<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">hexo-git-backup</a></p>
-<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="external">hexo多台电脑同步</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjl4opxzg000diq79qtoem15v" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页&raquo;</a>
   </nav>
 </section>
            
@@ -734,6 +747,14 @@
       <ul>
         
           <li>
+            <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
           </li>
         
@@ -743,14 +764,6 @@
         
           <li>
             <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
           </li>
         
       </ul>

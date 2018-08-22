@@ -65,6 +65,111 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-引导用户设置支付方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/22/引导用户设置支付方式/" class="article-date">
+  <time datetime="2018-08-22T05:27:08.000Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>最近改版项目中的支付方式引导流程，参考了几个大厂他们的设置，发现大家都在引导页中添加了一个<code>去App Store设置</code>的按钮，用户点击后会帮用户自动跳转到App Store并打开用户的账户设置页，这样一来用户就能很方便的在App Store中添加支付宝或微信支付方式了。既然这个流程这么好当然我们也要实现啦。</p>
+<h2 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h2><p>网上各种姿势搜索如何帮助用户跳转App Store设置支付方式的页面，发现居然搜不到相关的问题。后来通过抓包分析了其他App调用的链接找到了跳转地址</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>拿到了跳转地址，后续的流程就简单了，只需要通过<code>openURL</code>方法调用即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/editAddress?mt=8&quot;]];</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/08/22/引导用户设置支付方式/" data-id="cjl4p5mmi002mzw79xqsbuq3k" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-iOS导航栏显示与隐藏控制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/22/iOS导航栏显示与隐藏控制/" class="article-date">
+  <time datetime="2018-08-22T05:20:48.000Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>最近打算整理优化一下项目中对导航栏的显示与隐藏控制</p>
+<h2 id="早期做法"><a href="#早期做法" class="headerlink" title="早期做法"></a>早期做法</h2><p>由于前期项目中需要隐藏导航栏的页面不多，早期采用的方案也比较简单，遵循谁要隐藏自己处理的原则，在需要隐藏的页面的<code>viewWillAppear</code>执行<code>[self.navigationController setNavigationBarHidden:YES animated:YES]</code>，<code>viewWillDisappear</code>执行<code>[self.navigationController setNavigationBarHidden:NO animated:YES]</code>，前期满足了需求，但是随着需要隐藏的页面越来越多，问题也逐渐暴露</p>
+<ul>
+<li>需要在<code>viewWillAppear</code>和<code>viewWillDisappear</code>控制导航栏的地方越来越多，不便于管理和维护</li>
+<li>容易出现人为疏忽，导致导航栏未按预期展现</li>
+<li>切换tabBar的情况下，导航栏有一个向上消失的动画</li>
+</ul>
+<h2 id="升级做法"><a href="#升级做法" class="headerlink" title="升级做法"></a>升级做法</h2><p>鉴于早期方案存在的问题，我打算整理一下导航栏的实现方案</p>
+<p>我考虑了两个方案</p>
+<ul>
+<li>放弃使用原生navigationBar，改用自定义view，灵活控制导航栏的展现</li>
+<li>优化现有导航栏显示隐藏方案</li>
+</ul>
+<p>由于项目已经比较大，现在改自定义view成本太高，所以我打算先从现有方案的优化开始</p>
+<h3 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h3><p>基于早期的<code>NavigationController</code>基类进行扩展</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">viewDidLoad() &#123;</div><div class="line">    super.viewDidLoad()</div><div class="line">    </div><div class="line">    self.delegate = self</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ZYNavigationController: UINavigationControllerDelegate &#123;</div><div class="line"></div><div class="line">    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) &#123;</div><div class="line">        // 判断要显示的控制器是否是自己</div><div class="line">        let isHidden = viewController.isKind(of: FourthViewController.self) || viewController.isKind(of: FirstViewController.self)</div><div class="line">        </div><div class="line">        self.setNavigationBarHidden(isHidden, animated: true)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>遵循<code>UINavigationControllerDelegate</code>，在<code>willShow viewController</code>方法内判断当前viewController是否需要隐藏导航栏，并根据判断结果设置。<br>这样就能达到，controller在被加载到navigationController内，将要展现前，判断并控制导航栏的显示或隐藏。<br>这里还有一个问题需要解决，那就是导航栏被隐藏后，手势返回功能就会失效，这里就需要我们支持，可以通过<code>interactivePopGestureRecognizer</code>来启动手势返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">viewDidLoad() &#123;</div><div class="line">    super.viewDidLoad()</div><div class="line">    </div><div class="line">    self.delegate = self</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ZYNavigationController: UINavigationControllerDelegate &#123;</div><div class="line"></div><div class="line">    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) &#123;</div><div class="line">        // 判断要显示的控制器是否是自己</div><div class="line">        let isHidden = viewController.isKind(of: FourthViewController.self) || viewController.isKind(of: FirstViewController.self)</div><div class="line">        </div><div class="line">        self.setNavigationBarHidden(isHidden, animated: true)</div><div class="line">        </div><div class="line">        if isHidden &#123;</div><div class="line">            self.interactivePopGestureRecognizer?.delegate = self</div><div class="line">            self.interactivePopGestureRecognizer?.isEnabled = true</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/08/22/iOS导航栏显示与隐藏控制/" data-id="cjl4p5mm90023zw79gguncs9e" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-轻松搞定状态栏颜色变化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/30/轻松搞定状态栏颜色变化/" class="article-date">
@@ -100,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjl4opy15003giq79b004mi7l" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjl4p5mmz003mzw79ccrea2km" class="article-share-link">分享</a>
       
       
       
@@ -175,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/01/30/如何使用OmniPlan/" data-id="cjl4opy0o002niq79gybz1s97" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/01/30/如何使用OmniPlan/" data-id="cjl4p5mmt003bzw79l0paabji" class="article-share-link">分享</a>
       
       
       
@@ -218,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/iOS复制字符串到剪贴板/" data-id="cjl4opy09001tiq79u4rg34a6" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/iOS复制字符串到剪贴板/" data-id="cjl4p5mm4001szw79bkffc3f2" class="article-share-link">分享</a>
       
       
       
@@ -291,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" data-id="cjl4opxzp000xiq79o7i3884v" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" data-id="cjl4p5mlo000nzw79mtt9eos0" class="article-share-link">分享</a>
       
       
       
@@ -343,7 +448,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjl4opxzv001eiq79jyfkj850" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjl4p5mly001dzw79suqpkiec" class="article-share-link">分享</a>
       
       
       
@@ -403,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjl4opxzt0019iq79sgnkhsrh" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjl4p5mlv0015zw790crpka9b" class="article-share-link">分享</a>
       
       
       
@@ -458,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjl4opxzk000miq79zhm8aoie" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjl4p5mln000kzw79iop5qcv3" class="article-share-link">分享</a>
       
       
       
@@ -515,211 +620,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjl4opy0n002liq792lmy83zh" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-自定义快捷代码片段" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/14/自定义快捷代码片段/" class="article-date">
-  <time datetime="2017-12-14T11:07:09.000Z" itemprop="datePublished">2017-12-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/14/自定义快捷代码片段/">自定义快捷代码片段</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>Xcode为我们提供了一种可以快速输入一段代码的快捷方式，这里对如何通过自定义快捷代码片段来提升开发效率进行一个总结</p>
-<h2 id="如何创建自定义代码片段"><a href="#如何创建自定义代码片段" class="headerlink" title="如何创建自定义代码片段"></a>如何创建自定义代码片段</h2><p>在Xcode的右下角有一个代码片段区域，如图所示：<br><img src="http://upload-images.jianshu.io/upload_images/1479547-77d2438767fb5b6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20171102-163351.png"><br>这里面已经有了很多代码片段，这些代码片段是Xcode为我们提前准备的。<br>我们先来看一看里面的结构，点开第一个代码片段<code>C Block typedef - Define a block as a type</code>，这个代码片段是我们通常用来给一个block声明一个别名的<br><img src="http://upload-images.jianshu.io/upload_images/1479547-a8ef0cc59ef647fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20171102-163706.png"></p>
-<p>如图所示的代码片段有很多很多，感兴趣的可以自己去看一看，接下来就是本文的重点，如何创建属于我们的代码片段呢？</p>
-<ul>
-<li>在编辑区写上你要添加的片段代码</li>
-<li>将代码选中拖拽到Code Snippets区域<br><img src="http://upload-images.jianshu.io/upload_images/1479547-d2155adf5857e5c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20171102-165121.png"></li>
-<li>在弹框里对代码片段进行编辑，将想要方便更换的内容以<code>&lt;# #&gt;</code>包裹，对应的内容就是可变内容啦<br><img src="http://upload-images.jianshu.io/upload_images/1479547-0896076c1ab410bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20171102-170317.png"></li>
-<li>在<code>Completion Shortcut</code>一栏中可以填入快捷标记</li>
-<li>完成以上步骤后，我们在需要使用相关代码片段时只需要输入快捷标记就能选中啦<br><img src="http://upload-images.jianshu.io/upload_images/1479547-9a97bed7868a1254.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20171102-170644.png"></li>
-</ul>
-<h2 id="常用代码片段"><a href="#常用代码片段" class="headerlink" title="常用代码片段"></a>常用代码片段</h2><p>腾讯QMUI Team开源了一个他们经常使用的代码片段，非常好用，大家可以直接去下载，存放在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>目录下</p>
-<p><a href="https://github.com/QMUI/QMUI_iOS_CodeSnippets" target="_blank" rel="external">qmui-ios-codesnippets</a></p>
-<h4 id="快捷键汇总"><a href="#快捷键汇总" class="headerlink" title="快捷键汇总"></a>快捷键汇总</h4><p><em>NSObject</em></p>
-<ul>
-<li><code>pa</code> - 定义一个 <code>assign</code> 的 property</li>
-<li><code>pc</code> - 定义一个 <code>copy</code> 的 property</li>
-<li><code>ps</code> - 定义一个 <code>strong</code> 的property</li>
-<li><code>psr</code> - 定义一个 <code>strong, readonly</code> 的property</li>
-<li><code>pw</code> - 定义一个 <code>weak</code> 的property</li>
-<li><code>propertySwizzleAssign</code> - 用 <code>swizzle</code> 的方式定义一个 <code>assign</code> 的property</li>
-<li><code>propertySwizzleCopy</code> - 用 <code>swizzle</code> 的方式定义一个 <code>copy</code> 的property</li>
-<li><code>propertySwizzleStrong</code> - 用 <code>swizzle</code> 的方式定义一个 <code>strong</code> 的property</li>
-<li><code>propertySwizzleWeak</code> - 用 <code>swizzle</code> 的方式定义一个 <code>weak</code> 的property</li>
-<li><code>sharedInstance</code> - 为当前类创建一个实现单例功能的 <code>sharedInstance</code> 方法</li>
-<li><code>replaceMethod</code> - 重写当前类的 <code>load</code> 方法并在其中用 <code>swizzle</code> 替换方法实现</li>
-<li><code>replaceMethod_QMUI</code> - QMUI 重写当前类的 <code>load</code> 方法并用 <code>ReplaceMethod()</code> 函数替换方法的实现</li>
-</ul>
-<p><em>Block</em></p>
-<ul>
-<li><code>blockArguments</code> - 声明一个用于方法参数的 block</li>
-<li><code>blockproperty</code> - 声明一个用于 property 的 block</li>
-<li><code>blocktypedef</code> - 用 <code>typedef</code> 定义一个 block</li>
-<li><code>blockvar</code> - 定义一个作为局部变量的 block</li>
-</ul>
-<p><em>Method &amp; Function</em></p>
-<ul>
-<li><code>fnv</code> - 定义一个返回值为 <code>void</code> 的方法</li>
-<li><code>fnv:</code> - 定义一个返回值为 <code>void</code> 且带参数的方法</li>
-<li><code>fnblock</code> - 定义一个返回值类型为 block 的方法</li>
-<li><code>fnv_handleEvent</code> - 定义一个用于 <code>UIControl</code> 事件回调的方法</li>
-<li><code>fnv_longPress</code> - 定义一个用于 <code>UILongPressGestureRecognizer</code> 的回调方法（你就不用每次都去拼写那个很长的手势名字了）</li>
-<li><code>fnv_pan</code> - 定义一个用于 <code>UIPanGestureRecognizer</code> 的回调方法</li>
-<li><code>fnv_tap</code> - 定义一个用于 <code>UITapGestureRecognizer</code> 的回调方法</li>
-</ul>
-<p><em>UIView</em></p>
-<ul>
-<li><code>setFrame</code> - 为 <code>UIView</code> 设置 <code>frame</code></li>
-<li><code>setFrame_QMUI</code> - QMUI 使用像素对齐的 <code>CGRectFlatMake()</code> 为 <code>UIView</code> 设置 <code>frame</code></li>
-<li><code>setFrameX</code> - QMUI 使用 <code>CGRectSetX()</code> 修改 <code>UIView</code> 的 <code>frame.origin.x</code></li>
-<li><code>setFrameY</code> - QMUI 使用 <code>CGRectSetY()</code> 修改 <code>UIView</code> 的 <code>frame.origin.y</code></li>
-<li><code>setFrameXY</code> - QMUI 使用 <code>CGRectSetXY()</code> 修改 <code>UIView</code> 的 <code>frame.origin</code></li>
-<li><code>sizeThatFits</code> - 为当前 view 创建 <code>sizeThatFits:</code> 方法</li>
-<li><code>layoutSubviews</code> - 展开 <code>layoutSubviews</code> 方法</li>
-<li><code>updateConstraints</code> - 展开 <code>updateConstraints</code> 方法</li>
-<li><code>getWidth</code> - 展开 <code>CGRectGetWidth()</code></li>
-<li><code>getHeight</code> - 展开 <code>CGRectGetHeight()</code></li>
-<li><code>getMinX</code> - 展开 <code>CGRectGetMinX()</code></li>
-<li><code>getMinY</code> - 展开 <code>CGRectGetMinY()</code></li>
-<li><code>addtarget</code> - 调用 <code>UIControl addTarget:action:forEvents:</code> 方法</li>
-<li><code>setImageForButton</code> - 为 <code>UIButton</code> 设置图片</li>
-<li><code>setTitleColorForButton</code> - 为 <code>UIButton</code> 设置文字颜色</li>
-<li><code>setTitleForButton</code> - 为 <code>UIButton</code> 设置文字</li>
-</ul>
-<p><em>UITableView</em></p>
-<ul>
-<li><code>initWithStyle</code> - 展开 <code>initWithStyle:</code> 方法</li>
-<li><code>initWithStyleForCell</code> - 展开 <code>UITableViewCell initWithStyle:reuseIdentifier:</code> 方法</li>
-<li><code>tableViewDelegate</code> - 展开常用的几个 <code>UITableViewDelegate</code> 方法</li>
-<li><code>numberOfSectionsInTableView</code> - 展开 <code>numberOfSectionsInTableView:</code>方法</li>
-<li><code>numberOfRowsInSection</code> - 展开 <code>tableView:numberOfRowsInSection:</code> 方法</li>
-<li><code>cellForRowAtIndexPath</code> - 展开 <code>tableView:cellForRowAtIndexPath:</code> 方法</li>
-<li><code>heightForRowAtIndexPath</code> - 展开 <code>tableView:heightForRowAtIndexPath:</code> 方法</li>
-<li><code>didSelectRowAtIndexPath</code> - 展开 <code>tableView:didSelectRowAtIndexPath:</code> 方法</li>
-</ul>
-<p><em>UICollectionView</em></p>
-<ul>
-<li><code>collectionViewDelegate</code> - 展开常用的几个<code>UICollectionViewDelegate</code> 方法</li>
-<li><code>numberOfSectionsInCollectionView</code> - 展开 <code>numberOfSectionsInCollectionView:</code></li>
-<li><code>numberOfItemsInSection</code> - 展开 <code>collectionView:numberOfItemsInSection:</code></li>
-<li><code>cellForItemAtIndexPath</code> - 展开 <code>collectionView:cellForItemAtIndexPath:</code></li>
-<li><code>sizeForItemAtIndexPath</code> - 展开 <code>collectionView:layout:sizeForItemAtIndexPath:</code> 方法</li>
-<li><code>didSelectItemAtIndexPath</code> - 展开 <code>collectionView:didSelectItemAtIndexPath:</code> 方法</li>
-<li><code>didDeselectItemAtIndexPath</code> - 展开 <code>collectionView:didDeselectItemAtIndexPath:</code> 方法</li>
-</ul>
-<p><em>UIViewController</em></p>
-<ul>
-<li><code>loadView</code> - 展开 <code>loadView</code> 方法</li>
-<li><code>viewDidLoad</code> - 展开 <code>viewDidLoad</code> 方法</li>
-<li><code>viewWillAppear</code> - 展开 <code>viewWillAppear:</code> 方法</li>
-<li><code>viewDidAppear</code> - 展开 <code>viewDidAppear:</code> 方法</li>
-<li><code>viewWillDisappear</code> - 展开 <code>viewWillDisappear:</code> 方法</li>
-<li><code>viewDidDisappear</code> - 展开 <code>viewDidDisappear:</code> 方法</li>
-<li><code>viewDidLayoutSubviews</code> - 展开 <code>viewDidLayoutSubviews:</code> 方法</li>
-<li><code>updateViewConstraints</code> - 展开 <code>updateViewConstraints:</code> 方法</li>
-<li><code>addChildViewController</code> - 在当前 <code>UIViewController</code> 里添加 <code>childViewController</code></li>
-<li><code>removeFromParentViewController</code> - 将 <code>childViewController</code> 从当前的 <code>UIViewController</code> 里移除</li>
-<li><code>initSubviews</code> - QMUI 展开 <code>initSubviews</code> 方法</li>
-<li><code>setNavigationItems</code> - QMUI 重写 <code>QMUICommonViewController</code> 里的 <code>setNavigationItemsIsInEditMode:animated:</code> 方法</li>
-<li><code>setToolbarItems</code> - QMUI 重写 <code>QMUICommonViewController</code> 里的 <code>setToolbarItemsIsInEditMode:animated:</code> 方法</li>
-<li><code>leftBarButtonItemImage</code> - QMUI 用 <code>QMUINavigationButton</code> 的方法创建一个用于 <code>navigationItem.leftBarButtonItem</code> 的 <code>UIBarButtonItem</code></li>
-<li><code>rightBarButtonItemImage</code> - QMUI 用 <code>QMUINavigationButton</code> 的方法创建一个用于 <code>navigationItem.rightBarButtonItem</code> 的 <code>UIBarButtonItem</code></li>
-</ul>
-<p><em>Other</em></p>
-<ul>
-<li><code>pragma</code> - 展开一个用于 Xcode 导航的 <code>#pragma mark -</code> 宏</li>
-<li><code>externRefInH</code> - 在 <code>*.h</code> 文件里声明一个 <code>extern const</code> 的指针</li>
-<li><code>externRefInM</code> - 在 <code>*.m</code> 文件里为一个 <code>extern const</code> 的指针赋值</li>
-<li><code>externValueInH</code> - 在 <code>*.h</code> 文件里声明一个 <code>extern const</code> 的值变量</li>
-<li><code>externValueInM</code> - 在 <code>*.m</code> 文件里为一个 <code>extern const</code> 的变量赋值</li>
-<li><code>static reference</code> - 定义一个 <code>static</code> 的指针</li>
-<li><code>static</code> - 定义一个 <code>static</code> 的值变量</li>
-<li><code>__weakSelf</code> - 定义一个 <code>weak</code> 的 <code>self</code> 指针</li>
-<li><code>__strongSelf</code> - 将 <code>weakSelf</code> 指针改为 <code>strong</code> 的 <code>self</code> 指针</li>
-<li><code>logCallStackSymbols</code> - 用 <code>NSLog</code> 打出当前的方法调用栈信息</li>
-<li><code>timeConsuming</code> - 展开一段用 <code>CACurrentMediaTime()</code> 来计算方法耗时的代码</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/自定义快捷代码片段/" data-id="cjl4opy13003ciq79z8x44ynr" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-SDWebImage与YYWebImage加载gif对比" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/" class="article-date">
-  <time datetime="2017-08-16T08:53:07.000Z" itemprop="datePublished">2017-08-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/16/SDWebImage与YYWebImage加载gif对比/">SDWebImage与YYWebImage加载gif对比</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>很多应用为了丰富运营策略都需要支持gif图片，<code>SDWebImage</code>和<code>YYWebImage</code>已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现<code>SDWebImage</code>和<code>YYWebImage</code>在性能方面存在着较大的差距，这里就给大家进行一个对比</p>
-<h2 id="SDWebImage加载gif"><a href="#SDWebImage加载gif" class="headerlink" title="SDWebImage加载gif"></a>SDWebImage加载gif</h2><p><code>SDWebImage</code>将gif资源中的每一张image写入到内存中，通过<code>animatedImageWithImages</code>的方式播放动画，这样做的好处是gif轮播时直接从内存中读取资源就好，降低了CPU的使用，以空间换取流畅度，但是这也会导致当同时加载的gif数量增加时内存问题暴露的尤其明显</p>
-<h2 id="YYWebImage加载gif"><a href="#YYWebImage加载gif" class="headerlink" title="YYWebImage加载gif"></a>YYWebImage加载gif</h2><p><code>YYWebImage</code>是每次从缓存中读取需要展示的image，这样就不需要为gif的每一张image都开辟空间，每次都是从一份gif资源中读取每一张image，以一定的帧率从缓冲区中解析出当前的image，这必然需要消耗CPU，所以<code>YYWebImage</code>相比较<code>SDWebImage</code>更消耗CPU，但是这也带来了内存的大幅降低</p>
-<h2 id="通过Demo对比"><a href="#通过Demo对比" class="headerlink" title="通过Demo对比"></a>通过Demo对比</h2><p><a href="https://github.com/luzhiyongGit/WebImageDemo" target="_blank" rel="external">SDWebImage和YYWebImage加载gif图片对比Demo</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjl4opxzs0015iq79rw2xtppc" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjl4p5mmj002pzw79dmpjuug4" class="article-share-link">分享</a>
       
       
       
@@ -736,7 +637,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页&raquo;</a>
   </nav>
 </section>
            
@@ -789,6 +690,14 @@
       <ul>
         
           <li>
+            <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
           </li>
         
@@ -800,14 +709,6 @@
             <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
           </li>
         
-          <li>
-            <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -817,7 +718,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 

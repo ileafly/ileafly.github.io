@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS导航栏显示与隐藏控制 | Leafly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近打算整理优化一下项目中对导航栏的显示与隐藏控制
+早期做法由于前期项目中需要隐藏导航栏的页面不多，早期采用的方案也比较简单，遵循谁要隐藏自己处理的原则，在需要隐藏的页面的viewWillAppear执行[self.navigationController setNavigationBarHidden:YES animated:YES]，viewWillDisappear执行[self.navig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS导航栏显示与隐藏控制">
+<meta property="og:url" content="http://www.ileafly.com/2018/08/22/iOS导航栏显示与隐藏控制/index.html">
+<meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="最近打算整理优化一下项目中对导航栏的显示与隐藏控制
+早期做法由于前期项目中需要隐藏导航栏的页面不多，早期采用的方案也比较简单，遵循谁要隐藏自己处理的原则，在需要隐藏的页面的viewWillAppear执行[self.navigationController setNavigationBarHidden:YES animated:YES]，viewWillDisappear执行[self.navig">
+<meta property="og:updated_time" content="2018-08-22T05:21:44.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS导航栏显示与隐藏控制">
+<meta name="twitter:description" content="最近打算整理优化一下项目中对导航栏的显示与隐藏控制
+早期做法由于前期项目中需要隐藏导航栏的页面不多，早期采用的方案也比较简单，遵循谁要隐藏自己处理的原则，在需要隐藏的页面的viewWillAppear执行[self.navigationController setNavigationBarHidden:YES animated:YES]，viewWillDisappear执行[self.navig">
+  
+    <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.ileafly.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leafly</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iOS导航栏显示与隐藏控制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/22/iOS导航栏显示与隐藏控制/" class="article-date">
+  <time datetime="2018-08-22T05:20:48.000Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS导航栏显示与隐藏控制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>最近打算整理优化一下项目中对导航栏的显示与隐藏控制</p>
+<h2 id="早期做法"><a href="#早期做法" class="headerlink" title="早期做法"></a>早期做法</h2><p>由于前期项目中需要隐藏导航栏的页面不多，早期采用的方案也比较简单，遵循谁要隐藏自己处理的原则，在需要隐藏的页面的<code>viewWillAppear</code>执行<code>[self.navigationController setNavigationBarHidden:YES animated:YES]</code>，<code>viewWillDisappear</code>执行<code>[self.navigationController setNavigationBarHidden:NO animated:YES]</code>，前期满足了需求，但是随着需要隐藏的页面越来越多，问题也逐渐暴露</p>
+<ul>
+<li>需要在<code>viewWillAppear</code>和<code>viewWillDisappear</code>控制导航栏的地方越来越多，不便于管理和维护</li>
+<li>容易出现人为疏忽，导致导航栏未按预期展现</li>
+<li>切换tabBar的情况下，导航栏有一个向上消失的动画</li>
+</ul>
+<h2 id="升级做法"><a href="#升级做法" class="headerlink" title="升级做法"></a>升级做法</h2><p>鉴于早期方案存在的问题，我打算整理一下导航栏的实现方案</p>
+<p>我考虑了两个方案</p>
+<ul>
+<li>放弃使用原生navigationBar，改用自定义view，灵活控制导航栏的展现</li>
+<li>优化现有导航栏显示隐藏方案</li>
+</ul>
+<p>由于项目已经比较大，现在改自定义view成本太高，所以我打算先从现有方案的优化开始</p>
+<h3 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h3><p>基于早期的<code>NavigationController</code>基类进行扩展</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">viewDidLoad() &#123;</div><div class="line">    super.viewDidLoad()</div><div class="line">    </div><div class="line">    self.delegate = self</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ZYNavigationController: UINavigationControllerDelegate &#123;</div><div class="line"></div><div class="line">    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) &#123;</div><div class="line">        // 判断要显示的控制器是否是自己</div><div class="line">        let isHidden = viewController.isKind(of: FourthViewController.self) || viewController.isKind(of: FirstViewController.self)</div><div class="line">        </div><div class="line">        self.setNavigationBarHidden(isHidden, animated: true)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>遵循<code>UINavigationControllerDelegate</code>，在<code>willShow viewController</code>方法内判断当前viewController是否需要隐藏导航栏，并根据判断结果设置。<br>这样就能达到，controller在被加载到navigationController内，将要展现前，判断并控制导航栏的显示或隐藏。<br>这里还有一个问题需要解决，那就是导航栏被隐藏后，手势返回功能就会失效，这里就需要我们支持，可以通过<code>interactivePopGestureRecognizer</code>来启动手势返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">viewDidLoad() &#123;</div><div class="line">    super.viewDidLoad()</div><div class="line">    </div><div class="line">    self.delegate = self</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ZYNavigationController: UINavigationControllerDelegate &#123;</div><div class="line"></div><div class="line">    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) &#123;</div><div class="line">        // 判断要显示的控制器是否是自己</div><div class="line">        let isHidden = viewController.isKind(of: FourthViewController.self) || viewController.isKind(of: FirstViewController.self)</div><div class="line">        </div><div class="line">        self.setNavigationBarHidden(isHidden, animated: true)</div><div class="line">        </div><div class="line">        if isHidden &#123;</div><div class="line">            self.interactivePopGestureRecognizer?.delegate = self</div><div class="line">            self.interactivePopGestureRecognizer?.isEnabled = true</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/08/22/iOS导航栏显示与隐藏控制/" data-id="cjl4p5mm90023zw79gguncs9e" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/22/引导用户设置支付方式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          引导用户设置支付方式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/30/轻松搞定状态栏颜色变化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">轻松搞定状态栏颜色变化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#早期做法"><span class="toc-number">1.</span> <span class="toc-text">早期做法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#升级做法"><span class="toc-number">2.</span> <span class="toc-text">升级做法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优化方案"><span class="toc-number">2.1.</span> <span class="toc-text">优化方案</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Leafly&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;luzhiyongmail@sohu.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

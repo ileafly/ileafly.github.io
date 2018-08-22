@@ -65,6 +65,124 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS10系统下的推送开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/01/iOS10系统下的推送开发/" class="article-date">
+  <time datetime="2016-11-01T03:39:00.000Z" itemprop="datePublished">2016-11-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/01/iOS10系统下的推送开发/">iOS10系统下的推送开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>iOS10系统发布后，推送功能发生了很多变化，作为iOS开发者就需要适配这些变化，这里对于如果结合极光推送适配iOS10系统进行一个简单的总结，方便在对其他项目进行适配时使用。</p>
+<h3 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h3><ol>
+<li><p>开启<code>Push Notifications</code>功能</p>
+<p><img src="/images/iOS之iOS10系统下的推送开发_1.png" alt="功能开关"></p>
+</li>
+<li><p>添加<code>UserNotifications.framework</code></p>
+<p><img src="/images/iOS之iOS10系统下的推送开发_2.png" alt="新增系统库"></p>
+</li>
+</ol>
+<h3 id="代码适配"><a href="#代码适配" class="headerlink" title="代码适配"></a>代码适配</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 注册推送通知</div><div class="line">// iOS8系统以前用来注册一个远程推送通知，当我们调用这个方法时，我们就在Apple Push Notification service上进行了设备注册</div><div class="line">    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];</div><div class="line">// iOS8 ~ iOS10 </div><div class="line">    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];</div><div class="line">    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];</div><div class="line">    [[UIApplication sharedApplication] registerForRemoteNotifications];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];</div><div class="line">    </div><div class="line">    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</div><div class="line">        if (!error) &#123;</div><div class="line">            NSLog(@&quot;request authorization success!&quot;);</div><div class="line">            [[UIApplication sharedApplication] registerForRemoteNotifications];</div><div class="line">        &#125;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 利用极光推送注册推送通知</div><div class="line">// iOS10 Before</div><div class="line">    </div><div class="line">    [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil];</div><div class="line">    </div><div class="line">// iOS10</div><div class="line">    </div><div class="line">    JPUSHRegisterEntity *entity = [[JPUSHRegisterEntity alloc] init];</div><div class="line">    entity.types = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;</div><div class="line">    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];</div><div class="line">    </div><div class="line">// 注册极光推送</div><div class="line">    [JPUSHService setupWithOption:launchOptions appKey:@&quot;&quot; channel:@&quot;&quot; apsForProduction:YES];</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/11/01/iOS10系统下的推送开发/" data-id="cjl4p5mma0026zw79jb3u0ohu" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS小积累/">iOS小积累</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Hexo多台电脑同步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/24/Hexo多台电脑同步/" class="article-date">
+  <time datetime="2016-10-24T07:00:08.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/博客/">博客</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/Hexo多台电脑同步/">Hexo多台电脑同步</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！<br>难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。</p>
+<h3 id="Hexo多台电脑同步方案"><a href="#Hexo多台电脑同步方案" class="headerlink" title="Hexo多台电脑同步方案"></a>Hexo多台电脑同步方案</h3><ol>
+<li>创建两个分支：master和hexo</li>
+<li>设置hexo为默认分支，<a href="https://www.github.com" target="_blank" rel="external">github</a>的setting里可以设置</li>
+<li>git clone 拷贝仓库</li>
+<li>进入仓库初始化hexo</li>
+<li>配置hexo <code>_config.yml</code> 可参考<a href="http://www.ileafly.com/2016/08/25/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">个人博客进阶–Hexo搭建博客</a></li>
+<li>依次执行 <code>git add .</code> <code>git commit -m &quot;message&quot;</code> <code>git push origin hexo</code> 提交相关文件</li>
+</ol>
+<p>这样，在你的博客项目里就存在两个分支，master分支用来存放生成的今天网页，hexo分支用来存放网站的原始文件</p>
+<h3 id="新电脑如何同步Hexo"><a href="#新电脑如何同步Hexo" class="headerlink" title="新电脑如何同步Hexo"></a>新电脑如何同步Hexo</h3><ol>
+<li>git clone 拷贝仓库</li>
+<li>已安装hexo则直接使用，未安装Hexo只需要安装Hexo即可</li>
+</ol>
+<h3 id="待尝试的同步方法"><a href="#待尝试的同步方法" class="headerlink" title="待尝试的同步方法"></a>待尝试的同步方法</h3><p>有大神写了一个同步的脚本，只需要执行<code>hexo b</code>就可以达到同步的目的，还没有尝试，<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">hexo-git-backup</a></p>
+<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="external">hexo多台电脑同步</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjl4p5mlj000dzw794q736hqe" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-移除Pod管理的库后编译报Link错误" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/24/移除Pod管理的库后编译报Link错误/" class="article-date">
@@ -100,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/" data-id="cjl4opy0w0030iq7968ve91fq" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/" data-id="cjl4p5mmr0037zw79qki507ca" class="article-share-link">分享</a>
       
       
       
@@ -148,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjl4opxzx001iiq79lr1uvwpl" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjl4p5mlz001gzw79p8vmxrq2" class="article-share-link">分享</a>
       
       
       
@@ -196,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/" data-id="cjl4opxz90007iq79cwh2wywv" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/" data-id="cjl4p5mld0006zw79ghqseilt" class="article-share-link">分享</a>
       
       
       
@@ -260,7 +378,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/" data-id="cjl4opy12003aiq79m220mrob" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/" data-id="cjl4p5mmu003ezw798s6pikc7" class="article-share-link">分享</a>
       
       
       
@@ -361,7 +479,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" data-id="cjl4opy0u002xiq79day6em8w" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" data-id="cjl4p5mmn0030zw792p2zl1ap" class="article-share-link">分享</a>
       
       
       
@@ -520,7 +638,7 @@ git branch -dr [remore-branch]
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjl4opy0f0027iq79cqwt56ty" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjl4p5mm6001vzw79bj5ifrrw" class="article-share-link">分享</a>
       
       
       
@@ -613,7 +731,7 @@ theme: next
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjl4opy0c0020iq79fhx6ij0d" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjl4p5mme002czw79plnz3f68" class="article-share-link">分享</a>
       
       
       
@@ -726,7 +844,7 @@ git push origin :refs/tags/0.1.0
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/12/搭建私有Pod/" data-id="cjl4opy0q002riq79sgus6itb" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/12/搭建私有Pod/" data-id="cjl4p5mmk002szw79qgq2wosr" class="article-share-link">分享</a>
       
       
       
@@ -740,139 +858,10 @@ git push origin :refs/tags/0.1.0
 
 
   
-    <article id="post-Markdown语法初探" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/Markdown语法初探/" class="article-date">
-  <time datetime="2016-08-11T02:19:34.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/Markdown语法初探/">Markdown语法初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>可以在标题内容前输入特定数量的#来实现对应级别的HTML样式的标题。列如：</p>
-<pre><code># 一级标题
-
-#### 四级标题
-</code></pre><p>另外，一级和二级标题还有一种写法：</p>
-<pre><code>一级标题
-=====================
-二级标题
----------------------
-</code></pre><h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><p>在文本中输入的换行会从最终生成的结果中删除，浏览器会根据可用空间自动换行。如果想强迫换行，可以在行尾插入<strong>至少两个空格</strong>。</p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>这是一段被引用的内容<br>引用结束</p>
-</blockquote>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><pre><code>[链接文案](链接地址)
-例如： [Markdown](https://zh.wikipedia.org/wiki/Markdown)
-</code></pre><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><pre><code>![Alt text](image url)
-</code></pre><p><img src="https://zh.wikipedia.org/static/images/project-logos/zhwiki.png" alt="foo"></p>
-<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><pre><code>*斜体* 或 _斜体_  
-
-**加重强调** 或 __加重强调__
-</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">markdown语法参考</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown维基百科</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/11/Markdown语法初探/" data-id="cjl4opxzh000fiq79kbzypt0l" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-如何搭建属于自己的博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/08/如何搭建属于自己的博客/" class="article-date">
-  <time datetime="2016-08-08T02:19:34.000Z" itemprop="datePublished">2016-08-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/08/如何搭建属于自己的博客/">如何搭建属于自己的博客？</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>本文主要介绍使用 Github、Jekyll 打造自己的免费独立博客的方法</p>
-<p><a href="http://www.github.com" target="_blank" rel="external">Github</a>是一个代码托管网站，现在很多开源项目都放在Github上。Github还提供了一个功能，叫Github Pages，利用这个功能，我们可以为项目建立网站，当然，这也意味着我们可以通过Github Pages建立自己的博客。</p>
-<p><a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a>是一个简单的，针对博客设计的静态网站生成器。通过结合使用Github和Jekyll，我们可以打造自己的独立博客，可以自由的定制网站风格，并且这一切都是免费的。</p>
-<h2 id="入门指引"><a href="#入门指引" class="headerlink" title="入门指引"></a>入门指引</h2><p><a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a>的主页提供了一个简单的入门指引，阅读并操作一遍，会有一个直观的认识。</p>
-<p>阮一峰的文章<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">搭建一个免费的，无限流量的Blog—Github Pages和Jekyll入门</a>是一篇特别好的入门文章。</p>
-<h2 id="建立自己的博客"><a href="#建立自己的博客" class="headerlink" title="建立自己的博客"></a>建立自己的博客</h2><p>在搭建独立博客时，通过有三种方式可以选择：</p>
-<ol>
-<li>完全自定义博客</li>
-<li>找一个框架，基于框架修改使用</li>
-<li>从Github上找一个比较好的源码，fork使用</li>
-</ol>
-<p>本博客选择的是第三种方法，在Github上有一个比较火的开源博客项目<a href="https://github.com/barryclark/jekyll-now" target="_blank" rel="external">jekyll-now</a>，这个项目的特点是，所有操作都是通过网页进行，不需要懂命令行，对于刚入门的新手来说非常实用。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html" target="_blank" rel="external">搭建一个免费的，无限流量的Blog—Github Pages和Jekyll入门</a></p>
-<p><a href="http://blog.csdn.net/on_1y/article/details/19259435" target="_blank" rel="external">使用Github、Jekyll打造自己的免费独立博客</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjl4opy0l002hiq79qejb51k0" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">下一页&raquo;</a>
   </nav>
 </section>
            
@@ -895,6 +884,14 @@ git push origin :refs/tags/0.1.0
       <ul>
         
           <li>
+            <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
           </li>
         
@@ -904,14 +901,6 @@ git push origin :refs/tags/0.1.0
         
           <li>
             <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/">Mac搭建基于Eclipse的J2EE开发环境</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
           </li>
         
       </ul>
