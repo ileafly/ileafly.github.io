@@ -1,8 +1,10 @@
----
 title: Markdown语法初探
-date: 2016-08-11 10:19:34
-tags: Markdown
-categories: 其他
+tags:
+  - Markdown
+categories:
+  - 工具
+  - ''
+date: 2016-08-11 10:19:00
 ---
 
 [Markdown](https://zh.wikipedia.org/wiki/Markdown)是一种轻量级标记语言，我打算利用Markdown语言来写博客，这就需要我能够熟悉Markdown的一些常用方法，这篇博客就是对常用Markdown用法的一些总结。

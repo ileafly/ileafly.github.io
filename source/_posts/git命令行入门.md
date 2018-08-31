@@ -1,8 +1,8 @@
----
 title: git命令行入门
-date: 2016-08-31 19:43:02
-tags: Git入门
-categories: Git
+tags: []
+categories:
+  - 工具
+date: 2016-08-31 19:43:00
 ---
 
 本文结合项目开发中遇到的实际问题对git命令行的使用做一个简单的总结。

@@ -1,8 +1,11 @@
----
 title: 移除Pod管理的库后编译报Link错误
-date: 2016-10-24 13:59:00
-tags: iOS小积累
+tags:
+  - iOS基础
+  - ''
 categries: iOS
+categories:
+  - iOS
+date: 2016-10-24 13:59:00
 ---
 
 在将项目中用pod管理的一个库移除后编译居然报错，查看了一下报错信息，编译时还会link被删除的那个库，但是无法link成功，不论是重新执行`pod install`还是清除缓存，clean项目，都无法解决这个问题。

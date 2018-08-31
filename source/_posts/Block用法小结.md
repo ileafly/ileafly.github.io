@@ -1,8 +1,10 @@
----
 title: Block用法小结
-date: 2017-06-06 16:20:01
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2017-06-06 16:20:00
 ---
 
 这篇博客将系统整理一下Block相关的知识

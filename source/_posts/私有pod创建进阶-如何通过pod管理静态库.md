@@ -1,8 +1,10 @@
----
 title: 私有pod创建进阶--如何通过pod管理静态库
-date: 2016-09-10 15:46:08
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS进阶
+  - ''
+categories:
+  - iOS
+date: 2016-09-10 15:46:00
 ---
 
 在[搭建私有Pod](http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/)一文中我们已经总结了如何创建私有的Pod，这次来总结一下如果利用Pod生成和管理静态库。

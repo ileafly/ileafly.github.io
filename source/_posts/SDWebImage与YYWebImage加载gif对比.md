@@ -1,7 +1,9 @@
----
 title: SDWebImage与YYWebImage加载gif对比
-date: 2017-08-16 16:53:07
-tags: iOS
+tags:
+  - iOS进阶
+categories:
+  - iOS
+date: 2017-08-16 16:53:00
 ---
 
 很多应用为了丰富运营策略都需要支持gif图片，`SDWebImage`和`YYWebImage`已经为我们提供了这方面的支持，我们只需要按照对应的文档进行支持即可。但是在实际使用中发现`SDWebImage`和`YYWebImage`在性能方面存在着较大的差距，这里就给大家进行一个对比

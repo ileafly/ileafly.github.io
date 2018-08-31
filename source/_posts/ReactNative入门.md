@@ -1,8 +1,9 @@
----
 title: ReactNative入门
-date: 2016-11-02 09:32:53
-tags: ReactNative
-categories: ReactNative
+tags:
+  - RN
+categories:
+  - ReactNative
+date: 2016-11-02 09:32:00
 ---
 
 ### 安装

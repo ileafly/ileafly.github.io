@@ -1,8 +1,10 @@
----
 title: CocoaPods升级后问题解决
-date: 2016-10-09 17:30:43
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS技巧
+  - ''
+categories:
+  - iOS
+date: 2016-10-09 17:30:00
 ---
 
 升级[CocoaPods](https://cocoapods.org/)到`1.0.1`版本遇到了两个问题，其中第一个比较简单，由于新版本强制要求设置target否则会出现错误，所以我们只需要在`Podfile`里按照新规范给每个Target都设置上就行了。而第二个问题让我寻找了很久，先来描述一下第二个问题。

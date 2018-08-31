@@ -1,8 +1,10 @@
----
 title: 搭建私有Pod
-date: 2016-08-12 10:21:11
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS进阶
+  - ''
+categories:
+  - iOS
+date: 2016-08-12 10:21:00
 ---
 
 [Cocoapods](http://cocoapods.org/)是一款非常好用的iOS依赖库管理工具，使用它可以方便的管理和更新项目中所使用到的第三方库。同时我们也可以将公司中的公共组件或者项目中的核心组件交由它去管理。本文就是给大家介绍一下，如何使用Cocoapods创建私有的Pod仓库。

@@ -1,8 +1,9 @@
----
 title: 深入浅出Texture--高性能界面的解决方案
-date: 2017-06-01 19:08:54
-tags: iOS进阶
-categories: iOS
+tags:
+  - iOS进阶
+categories:
+  - iOS
+date: 2017-06-01 19:08:00
 ---
 
 [Texture](https://github.com/texturegroup/texture/)是由Facebook开源的[AsyncDisplayKit](https://github.com/facebookarchive/AsyncDisplayKit)演变而来

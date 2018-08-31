@@ -1,7 +1,9 @@
----
 title: 如何使用OmniPlan
-date: 2018-01-30 16:05:09
-tags: 小积累
+tags:
+  - ''
+categories:
+  - 工具
+date: 2018-01-30 16:05:00
 ---
 
 近期项目组打算使用`OmniPlan`来制定版本开发计划，这里对如何使用`OmniPlan`进行一个简单的总结。

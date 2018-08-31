@@ -1,7 +1,10 @@
----
 title: Xcode9新特性汇总
-date: 2017-12-14 19:19:49
-tags: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2017-12-14 19:19:00
 ---
 新版的Xcode 9正式发布了，今天我也将Xcode进行了升级。这次的Xcode更新给我们带来了不少的新特性，这里我进行一个简单的汇总。
 

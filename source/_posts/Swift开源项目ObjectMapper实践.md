@@ -1,8 +1,11 @@
----
 title: Swift开源项目ObjectMapper实践
-date: 2017-07-20 17:42:43
-tags: Swift
-categories: iOS
+tags:
+  - Swift
+  - iOS进阶
+  - ''
+categories:
+  - iOS
+date: 2017-07-20 17:42:00
 ---
 近期项目打算全面向swift迁移，虽然两三年前有写过swift项目但是很长时间没有开发很多知识点已经模糊，最近打算就热门的几个第三方库的使用方法进行一个调研
 

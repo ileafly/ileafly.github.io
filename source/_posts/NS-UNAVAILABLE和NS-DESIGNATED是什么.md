@@ -1,7 +1,10 @@
----
 title: NS_UNAVAILABLE和NS_DESIGNATED是什么
-date: 2017-12-14 19:15:09
-tags: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2017-12-14 19:15:00
 ---
 经常我们在阅读一些开源项目的源码时会发现有时候作者会在声明的方法后面添加`NS_UNAVAILABLE`、`NS_EDSIGNATED_INITIALIZER`这样的关键字。这表示什么意思呢？
 

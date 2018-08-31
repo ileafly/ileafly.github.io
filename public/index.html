@@ -65,6 +65,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS的引用计数与循环引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/22/iOS的引用计数与循环引用/" class="article-date">
+  <time datetime="2018-08-22T05:36:00.000Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/22/iOS的引用计数与循环引用/">iOS的引用计数与循环引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="什么是引用计数？"><a href="#什么是引用计数？" class="headerlink" title="什么是引用计数？"></a>什么是引用计数？</h2><p>引用计数是一个简单而有效的管理对象生命周期的方式。</p>
+<ul>
+<li>当我们创建一个新对象时，它的引用计数为1</li>
+<li>当有一个新的指针指向这个对象时，我们将引用计数加1</li>
+<li>当某个指针不再指向这个对象时，我们将引用计数减1</li>
+<li>当对象的引用计数为0时，说明这个对象不再被任何指针指向了，就可以将对象销毁，回收内存</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-30385df644b8cd5a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="memory-ref-count.png.jpeg"></p>
+<h2 id="引用计数的运用场景"><a href="#引用计数的运用场景" class="headerlink" title="引用计数的运用场景"></a>引用计数的运用场景</h2><p>引用计数真正派上用场的场景是在面向对象的程序设计架构中，用于对象之间传递和共享数据。</p>
+<p>以对象M为例，哪些对象需要长时间使用这个对象，就把它的引用计数加1，使用完之后再把引用计数减1.所有对象都遵守这个规则的话，对象的生命周期管理就可以完全交给引用计数了。</p>
+<h2 id="ARC下的常见内存管理问题"><a href="#ARC下的常见内存管理问题" class="headerlink" title="ARC下的常见内存管理问题"></a>ARC下的常见内存管理问题</h2><h4 id="循环引用问题-Reference-Cycle"><a href="#循环引用问题-Reference-Cycle" class="headerlink" title="循环引用问题 (Reference Cycle)"></a>循环引用问题 (Reference Cycle)</h4><p>引用计数这种管理内存的方式虽然简单，但是有一个比较大的瑕疵，<code>它不能很好的解决循环引用问题</code></p>
+<ol>
+<li>什么是循环引用问题？</li>
+</ol>
+<p>对象A和对象B，相互引用了对方作为自己的成员变量，只有当自己销毁时，才会将成员变量的引用计数减1，这就导致了A的销毁依赖于B的销毁，同样B的销毁依赖于A的销毁，这样就造成了循环引用问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-121197b1f2cebf08.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="memory-cycle-1.png.jpeg"></p>
+<p>不仅仅只在两个对象中存在循环引用问题，多个对象依次持有对方，形成一个环状，也会造成循环引用问题。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-1943ef26038fcb19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="memory-cycle-2.png"></p>
+<ol>
+<li>如何解决循环引用问题？</li>
+</ol>
+<h6 id="主动断开循环引用"><a href="#主动断开循环引用" class="headerlink" title="主动断开循环引用"></a>主动断开循环引用</h6><p>在合理的位置主动断开环中的一个引用，使得对象得以回收。<br><img src="http://upload-images.jianshu.io/upload_images/1479547-f73d7d5934c88e1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="memory-cycle-3.png"><br>主动断开循环引用这种方式常见于各种与block相关的代码逻辑中。</p>
+<p>例如：网络请求的回调block是被持有的，如果这个block中又存在对于View Controller的引用，就容易产生循环引用。</p>
+<ul>
+<li>Controller 持有网络请求对象</li>
+<li>网络请求对象持有了回调的block</li>
+<li>回调的block里面使用了self，所以持有了Controller</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">// View Controller</div><div class="line"></div><div class="line">- (void)sendRequest &#123;</div><div class="line">// Controller 持有网络请求对象</div><div class="line">    Request *request = [Request alloc] initWithPath:@&quot;https://www.baidu.com&quot;];</div><div class="line">    [request startWithCompletionBlockWithSuccess:^(Block block) &#123;</div><div class="line">    // 回调的block里面使用了self，所以持有了Controller</div><div class="line">        [self reloadView];</div><div class="line">    &#125; failure:^(NSError *error) &#123;</div><div class="line">        [self toast];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Request</div><div class="line"></div><div class="line">// 网络请求对象持有了回调block</div><div class="line">- (void)startWithCompletionBlockWithSuccess:(void (^)(Block block))success failure:(void (^)(NSError *error) &#123;</div><div class="line">    self.successCompletionBlock = success;</div><div class="line">    self.failureCompletionBlock = failure;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解决这个问题的办法就是在网络请求结束后，主动释放对block的持有，打破循环引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)clearCompletionBlock &#123;</div><div class="line">    self.successCompletionBlock = nil;</div><div class="line">    self.failureCompletionBlock = nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="使用弱引用"><a href="#使用弱引用" class="headerlink" title="使用弱引用"></a>使用弱引用</h5><p>主动断开循环引用需要程序员能够准确发现循环引用，并知道什么时机断开循环引用，所以这种解决方法并不常见，更常见的办法是使用弱引用</p>
+<p>弱引用虽然持有对象，但是不增加引用计数，这样就避免了循环引用的产生。例如delegate模式中的weak声明。View Controller的delegate成员变量通常是一个弱引用，以避免两个View Controller互相引用对方造成循环引用。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-05e4202ef56b249c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="memory-cycle-4.png.jpeg"></p>
+<h5 id="弱引用的实现原理"><a href="#弱引用的实现原理" class="headerlink" title="弱引用的实现原理"></a>弱引用的实现原理</h5><p>系统对于每一个有弱引用的对象，都维护一个表来记录它所有的弱引用的指针地址。当一个对象的引用计数为0时，系统就通过这张表，找到所有的弱引用指针，将他们置为nil。<code>弱引用的使用是有额外的开销的，虽然这个开销很小，但是如果肯定不需要使用弱引用特性时，就不应该盲目使用弱引用</code></p>
+<h5 id="Block如何避免循环引用"><a href="#Block如何避免循环引用" class="headerlink" title="Block如何避免循环引用"></a>Block如何避免循环引用</h5><ul>
+<li>当block本身不被self持有，而被别的对象持有，同时不产生循环引用的时候，就不需要weakself，最常见的代码就是UIView的动画代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[UIView animateWithDuration:0.2 animations:^&#123;  </div><div class="line">  self.alpha = 1;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<ul>
+<li>通过weakSelf和strongSelf解决循环引用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">__weak __typeof (self)weakSelf = self;</div><div class="line"></div><div class="line">_observer = [[NSNotificationCenter defaultCenter] addObserverForName:@&quot;Change&quot; object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) &#123;</div><div class="line">    __strong __typeof(weakSelf)strongSelf = weakSelf;</div><div class="line">    if (strongSelf) &#123;</div><div class="line">        [strongSelf reload];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>在block之前定义对self的弱引用weakSelf,因为是弱引用，所以self被释放时weakSelf会变成nil</li>
+<li>在block中引用该弱引用，考虑到多线程情况，通过强引用strongSelf来引用该弱引用，如果self不为nil，就会retain self，以防在block内部使用过程中self被释放</li>
+<li>在block块中使用该强引用strongSelf，注意对strongSelf进行nil检测，因为多线程在弱引用weakSelf对强引用strongSelf赋值时，弱引用weakSelf可能已经为nil了</li>
+<li>强引用strongSelf在block作用域结束之后，自动释放</li>
+</ol>
+<ul>
+<li>weakSelf为什么需要strongSelf配合使用</li>
+</ul>
+<p>在block块中先写一个strongSelf，是为了避免在block的执行过程中，突然出现self被释放的情况。</p>
+<h5 id="weak与block的区别"><a href="#weak与block的区别" class="headerlink" title="weak与block的区别"></a><strong>weak与</strong>block的区别</h5><p><code>__weak</code>可以避免循环引用，<code>__block</code>不能避免循环引用，<code>__block</code>的作用是提升变量的作用域</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>引用计数是一种简单高效的管理对象生命周期的方法</li>
+<li>引用计数无法避免循环引用</li>
+<li>循环引用的解决分为弱引用（事先规避）和主动断开循环引用（事后补救）两个方案</li>
+<li><code>__weak</code> 可以避免循环引用，但是其存在外部对象释放后，block内部也访问不到这个对象的问题，所以我们通过在block内部声明一个 <code>__strong</code>的变量来指向weakObj，使得外部对象既能在block内部保持，又能避免循环引用的问题</li>
+<li><code>__block</code>无法避免循环引用的问题，它的作用是提升了变量的作用域，在block内外访问的都是同一个对象，如果想要在block中改变变量的值，就需要在变量声明的时候加上<code>__block</code>修饰符</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/08/22/iOS的引用计数与循环引用/" data-id="cjl4ph7vl0025bn794lh3tbam" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-引导用户设置支付方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/22/引导用户设置支付方式/" class="article-date">
@@ -97,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/08/22/引导用户设置支付方式/" data-id="cjl4p5mmi002mzw79xqsbuq3k" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/08/22/引导用户设置支付方式/" data-id="cjl4ph7vv002rbn79w9cc5v57" class="article-share-link">分享</a>
       
       
       
@@ -156,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/08/22/iOS导航栏显示与隐藏控制/" data-id="cjl4p5mm90023zw79gguncs9e" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/08/22/iOS导航栏显示与隐藏控制/" data-id="cjl4ph7vj001ybn79nneoz9gr" class="article-share-link">分享</a>
       
       
       
@@ -205,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjl4p5mmz003mzw79ccrea2km" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/01/30/轻松搞定状态栏颜色变化/" data-id="cjl4ph7wi003obn79v3ole9oj" class="article-share-link">分享</a>
       
       
       
@@ -280,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/01/30/如何使用OmniPlan/" data-id="cjl4p5mmt003bzw79l0paabji" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/01/30/如何使用OmniPlan/" data-id="cjl4ph7vr002ibn79mya6cnd1" class="article-share-link">分享</a>
       
       
       
@@ -323,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/iOS复制字符串到剪贴板/" data-id="cjl4p5mm4001szw79bkffc3f2" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/iOS复制字符串到剪贴板/" data-id="cjl4ph7vf001rbn79xudturb1" class="article-share-link">分享</a>
       
       
       
@@ -396,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" data-id="cjl4p5mlo000nzw79mtt9eos0" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/Mac搭建基于Eclipse的J2EE开发环境/" data-id="cjl4ph7uq000rbn7972899ikq" class="article-share-link">分享</a>
       
       
       
@@ -448,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjl4p5mly001dzw79suqpkiec" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjl4ph7uz001dbn793urpfduc" class="article-share-link">分享</a>
       
       
       
@@ -508,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjl4p5mlv0015zw790crpka9b" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjl4ph7uw0015bn793k8ael4y" class="article-share-link">分享</a>
       
       
       
@@ -563,64 +666,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjl4p5mln000kzw79iop5qcv3" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-开发者账号批量导入设备号" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/14/开发者账号批量导入设备号/" class="article-date">
-  <time datetime="2017-12-14T11:08:09.000Z" itemprop="datePublished">2017-12-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/14/开发者账号批量导入设备号/">开发者账号批量导入设备号</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>最近项目需要分发一个包给一批同事提前试用一下，如果通过testflight分发的话还需要提交苹果审核有点麻烦，通过adhoc分发不失为一个比较好的方法，这就需要我们往开发者账号里导入一批uuid。</p>
-<p>开发者账号后台为我们提供了一个批量上传的方案，这里为大家做一个简单的总结</p>
-<ul>
-<li><p>进入开发者账号后台，选择批量注册设备<br><img src="http://upload-images.jianshu.io/upload_images/1479547-6b88a99ac4141fae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="add_multiple_devices.png"></p>
-</li>
-<li><p>开发者账号后台为我们提供了批量导入设备的示范文件<br><img src="http://upload-images.jianshu.io/upload_images/1479547-38501221b45b8119.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="download_sample.png"></p>
-</li>
-<li><p>下载下来的示范文件包含三个文件，我们只需要打开<code>multiple-device-upload-ios.txt</code>即可<br><img src="http://upload-images.jianshu.io/upload_images/1479547-204b3479d305cf36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="sample_files.png"></p>
-</li>
-<li><p>参考示范格式，写入你的设备uuid和对应名称<br><img src="http://upload-images.jianshu.io/upload_images/1479547-a4b3d661fa8d62de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="upload_content.png"></p>
-</li>
-<li><p>上传文件注册成功后会显示如图界面<br><img src="http://upload-images.jianshu.io/upload_images/1479547-d2791809b4e981d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="upload_success.png"></p>
-</li>
-</ul>
-<p>根据系统提示操作直至完成。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjl4p5mmj002pzw79dmpjuug4" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjl4ph7un000kbn79mtnw1aw9" class="article-share-link">分享</a>
       
       
       
@@ -690,6 +736,10 @@
       <ul>
         
           <li>
+            <a href="/2018/08/22/iOS的引用计数与循环引用/">iOS的引用计数与循环引用</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
           </li>
         
@@ -705,10 +755,6 @@
             <a href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
           </li>
         
-          <li>
-            <a href="/2017/12/14/iOS复制字符串到剪贴板/">iOS复制字符串到剪贴板</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -718,7 +764,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 

@@ -1,8 +1,10 @@
----
 title: iOS 11 开发者需要知道的改变
-date: 2017-06-08 17:18:08
-tags: iOS11
-categories: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2017-06-08 17:18:00
 ---
 
 苹果在`WWDC 2017`披露了许多的iOS 11的新特性，作为iOS开发者有哪些改变是我们需要知道的呢？

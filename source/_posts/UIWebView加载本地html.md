@@ -1,8 +1,10 @@
----
 title: UIWebView加载本地html
-date: 2017-02-16 14:19:38
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2017-02-16 14:19:00
 ---
 
 UIWebView除了能加载网页地址外还可以加载本地html，加载的方式主要有两种

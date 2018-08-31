@@ -1,8 +1,10 @@
----
 title: 自定义UIPageControl
-date: 2017-04-11 11:46:41
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS进阶
+  - ''
+categories:
+  - iOS
+date: 2017-04-11 11:46:00
 ---
 
 近期项目中需要给UIPageControl自定义图片，为了方便使用也为了方便大家，建了一个轮子[ZYPageControl](https://github.com/luzhiyongGit/ZYPageControl)

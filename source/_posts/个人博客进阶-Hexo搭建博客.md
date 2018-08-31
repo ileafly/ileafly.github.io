@@ -1,8 +1,10 @@
----
 title: 个人博客进阶--Hexo搭建博客
-date: 2016-08-25 10:31:50
-tags: 博客
-categories: 其他
+tags:
+  - 博客
+categories:
+  - 工具
+  - ''
+date: 2016-08-25 10:31:00
 ---
 
 在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和[Hexo](https://github.com/hexojs/hexo)搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。

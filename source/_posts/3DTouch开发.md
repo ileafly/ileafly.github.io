@@ -1,8 +1,10 @@
----
 title: 3DTouch开发
-date: 2016-12-30 16:15:53
-tags: iOS小积累
-categories: iOS
+tags:
+  - iOS基础
+  - ''
+categories:
+  - iOS
+date: 2016-12-30 16:15:00
 ---
 
 ### 准备工作

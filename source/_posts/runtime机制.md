@@ -1,8 +1,11 @@
----
 title: runtime机制
-date: 2016-12-27 15:46:50
-tags: iOS小积累
+tags:
+  - iOS进阶
+  - ''
 catgories: iOS
+categories:
+  - iOS
+date: 2016-12-27 15:46:00
 ---
 ### runtime实现的机制是什么？
 runtime是一套比较底层的纯C语言API，属于一个C语言库，包含了很多底层的C语言API。平时我们编写的OC代码在程序运行过程时，最终都是转换成了runtime的C语言
