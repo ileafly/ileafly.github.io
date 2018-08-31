@@ -1,8 +1,6 @@
 title: runtime机制
 tags:
   - iOS进阶
-  - ''
-catgories: iOS
 categories:
   - iOS
 date: 2016-12-27 15:46:00
