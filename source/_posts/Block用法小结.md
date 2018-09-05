@@ -1,7 +1,6 @@
 title: Block用法小结
 tags:
   - iOS基础
-  - ''
 categories:
   - iOS
 date: 2017-06-06 16:20:00

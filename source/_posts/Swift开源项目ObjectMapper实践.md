@@ -2,7 +2,6 @@ title: Swift开源项目ObjectMapper实践
 tags:
   - Swift
   - iOS进阶
-  - ''
 categories:
   - iOS
 date: 2017-07-20 17:42:00

@@ -2,8 +2,7 @@ title: Markdown语法初探
 tags:
   - Markdown
 categories:
-  - 工具
-  - ''
+  - 其他
 date: 2016-08-11 10:19:00
 ---
 

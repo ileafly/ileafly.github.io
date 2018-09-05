@@ -1,7 +1,6 @@
 title: 搭建私有Pod
 tags:
   - iOS进阶
-  - ''
 categories:
   - iOS
 date: 2016-08-12 10:21:00

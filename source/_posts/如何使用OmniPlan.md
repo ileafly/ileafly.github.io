@@ -1,8 +1,8 @@
 title: 如何使用OmniPlan
 tags:
-  - ''
-categories:
   - 工具
+categories:
+  - 其他
 date: 2018-01-30 16:05:00
 ---
 

@@ -1,7 +1,6 @@
 title: 私有pod创建进阶--如何通过pod管理静态库
 tags:
   - iOS进阶
-  - ''
 categories:
   - iOS
 date: 2016-09-10 15:46:00

@@ -1,7 +1,6 @@
 title: NS_UNAVAILABLE和NS_DESIGNATED是什么
 tags:
   - iOS基础
-  - ''
 categories:
   - iOS
 date: 2017-12-14 19:15:00

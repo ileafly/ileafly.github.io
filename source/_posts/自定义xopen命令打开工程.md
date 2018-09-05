@@ -1,7 +1,6 @@
 title: 自定义xopen命令打开工程
 tags:
   - iOS技巧
-  - ''
 categories:
   - iOS
 date: 2016-10-08 16:15:00

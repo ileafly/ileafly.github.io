@@ -1,8 +1,6 @@
 title: 自动化打包IPA脚本
 tags:
   - iOS技巧
-  - ''
-catgories: iOS
 categories:
   - iOS
 date: 2016-11-17 09:29:00

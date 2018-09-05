@@ -1,6 +1,4 @@
 title: ReactNative入门
-tags:
-  - RN
 categories:
   - ReactNative
 date: 2016-11-02 09:32:00

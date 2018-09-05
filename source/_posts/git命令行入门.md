@@ -1,7 +1,8 @@
 title: git命令行入门
-tags: []
+tags: 
+  - 版本控制
 categories:
-  - 工具
+  - 其他
 date: 2016-08-31 19:43:00
 ---
 
