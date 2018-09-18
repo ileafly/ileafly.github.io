@@ -1,6 +1,5 @@
 title: Swift开源项目ObjectMapper实践
 tags:
-  - Swift
   - iOS进阶
 categories:
   - iOS

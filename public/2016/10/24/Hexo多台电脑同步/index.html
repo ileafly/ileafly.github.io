@@ -17,7 +17,7 @@ Hexo多台电脑同步方案
 Hexo多台电脑同步方案
 创建两个分支：master和hexo
 设置hexo为默认分支，github的setting里可以">
-<meta property="og:updated_time" content="2018-09-01T07:53:18.062Z">
+<meta property="og:updated_time" content="2018-09-18T06:13:13.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo多台电脑同步">
 <meta name="twitter:description" content="使用Hexo搭建个人博客已经有一段时间了，在使用中发现一个问题，github上存放的并非是原始的博客文件而是经过hexo处理的html文件，这就导致无法在两台电脑上协同工作，多么悲伤的事情！难道我需要单独创建一个git项目来存放? 通过调研找到了一个方便快捷的管理源码的方法。
@@ -124,11 +124,11 @@ Hexo多台电脑同步方案
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjlop7tyu000d8q79hw2hi6cd" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjm7e24qp000hbu79g14bn587" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
@@ -203,11 +203,11 @@ Hexo多台电脑同步方案
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -288,16 +288,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -309,6 +299,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

@@ -1,8 +1,8 @@
 title: 个人博客进阶--Hexo搭建博客
 tags:
-  - 博客
+  - Hexo
 categories:
-  - 工具
+  - 其他
 date: 2016-08-25 10:31:00
 ---
 

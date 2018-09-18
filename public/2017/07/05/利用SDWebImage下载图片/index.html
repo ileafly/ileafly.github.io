@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Leafly">
 <meta property="og:description" content="利用SDWebImage下载图片的原因近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过SDWebImage来动态的加载网络图片，能不能通过SDWebImage来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过SDWebImage预加载图片的 :)
 封装好的下载类为了能方">
-<meta property="og:updated_time" content="2018-08-31T09:57:51.954Z">
+<meta property="og:updated_time" content="2018-09-18T06:47:22.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用SDWebImage下载图片">
 <meta name="twitter:description" content="利用SDWebImage下载图片的原因近期项目中有一个关于开屏广告加的需求变更。需要客户端将一段时间内的开屏广告图都预先下载到本地，确保用户在网络不佳甚至断网的情况下都能看到我们的开屏广告。一般情况下我们都是通过SDWebImage来动态的加载网络图片，能不能通过SDWebImage来帮我们预先下载好图片呢？下面就来分享一下我是怎么通过SDWebImage预加载图片的 :)
@@ -109,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/" data-id="cjlop7u09003d8q79358h4wqh" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/" data-id="cjm7e24rs002lbu79b929tmzo" class="article-share-link">分享</a>
       
       
       
@@ -188,11 +188,11 @@
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -273,16 +273,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -294,6 +284,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

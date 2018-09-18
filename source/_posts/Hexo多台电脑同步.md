@@ -1,6 +1,6 @@
 title: Hexo多台电脑同步
 tags:
-  - 博客
+  - Hexo
 categories:
   - 其他
 date: 2016-10-24 15:00:00

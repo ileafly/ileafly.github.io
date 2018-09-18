@@ -27,7 +27,7 @@ Block可以用来作为控制器之间的一个通信
 Block可以作为方法的参数
 
 进一步深挖block的原理为什么不加__block修饰符就不能改变Block外部的局部变量?对于b">
-<meta property="og:updated_time" content="2018-09-01T07:53:16.544Z">
+<meta property="og:updated_time" content="2018-09-18T06:41:12.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block用法小结">
 <meta name="twitter:description" content="这篇博客将系统整理一下Block相关的知识
@@ -152,17 +152,16 @@ Block可以作为方法的参数
 <ol>
 <li>block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。</li>
 </ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://chun.tips/2014/11/13/objc-block/" target="_blank" rel="external">黑幕背后的 __block 修饰符</a>–分析了为什么不加__block修饰符就不能改变Block外部的局部变量</p>
-<p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/06/Block用法小结/" data-id="cjlop7tyi00028q796418vuey" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/06/06/Block用法小结/" data-id="cjm7e24qe0003bu79l0qrlx0p" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
 
     </footer>
   </div>
@@ -237,11 +236,11 @@ Block可以作为方法的参数
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -322,16 +321,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -343,6 +332,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

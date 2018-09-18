@@ -1,6 +1,6 @@
 title: CocoaPods升级后问题解决
 tags:
-  - iOS技巧
+  - 解决方案
 categories:
   - iOS
 date: 2016-10-09 17:30:00

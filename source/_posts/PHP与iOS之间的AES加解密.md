@@ -1,7 +1,6 @@
 title: PHP与iOS之间的AES加解密
 tags:
-  - iOS基础
-  - 加密
+  - iOS进阶
 categories:
   - iOS
 date: 2017-03-06 18:12:00
@@ -201,10 +200,12 @@ size_t const kKeySize = kCCKeySizeAES128;
 在iOS上，字符串经过加解密后可能会在数据中添加一些[操作符](http://baike.baidu.com/view/1112575.htm)这会导致我们想进一步处理解密后的字符串时会处理失败，例如，当我们想将解密后的json字符串转成字典时，可能会抛出`Garbage at End`的错误，解决方案如下：
 
 1. 将字符串中的所有控制符替换成空字符
+
 ```
 NSString *newStr = [oldStr stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
 ```
 2. 将处理后的字符串进行json序列化操作
+
 ```
 NSError *err = nil;
             

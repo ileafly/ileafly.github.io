@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/index.html">
 <meta property="og:site_name" content="Leafly">
 <meta property="og:description" content="在项目中遇到一个问题，父View上添加的手势事件在子View中也会响应，通过搜索后找到了解决方案，接下来作一个小总结，方便以后遇到相同问题时查找。解决思路：手势事件有一个代理方法，- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch，我们就是要通过">
-<meta property="og:updated_time" content="2018-09-01T07:53:19.840Z">
+<meta property="og:updated_time" content="2018-09-18T06:47:14.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS--让子View不响应父View的手势">
 <meta name="twitter:description" content="在项目中遇到一个问题，父View上添加的手势事件在子View中也会响应，通过搜索后找到了解决方案，接下来作一个小总结，方便以后遇到相同问题时查找。解决思路：手势事件有一个代理方法，- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch，我们就是要通过">
@@ -101,11 +101,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjlop7tzf001j8q79o7n03s02" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjm7e24r2001gbu79lf4z4hic" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解决方案/">解决方案</a></li></ul>
 
     </footer>
   </div>
@@ -180,11 +180,11 @@
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -283,16 +283,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -304,6 +294,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

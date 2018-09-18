@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Leafly">
 <meta property="og:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
 安装Hexo安装Node.jshexo是一款基于Node.js的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的官网下载相应平台的最新版本，">
-<meta property="og:updated_time" content="2018-08-31T09:57:46.113Z">
+<meta property="og:updated_time" content="2018-09-18T06:47:21.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人博客进阶--Hexo搭建博客">
 <meta name="twitter:description" content="在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和Hexo搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。
@@ -77,7 +77,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
+    <a class="article-category-link" href="/categories/其他/">其他</a>
   </div>
 
   </div>
@@ -149,11 +149,11 @@ theme: next
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjlop7tzt002g8q7915b7aq56" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjm7e24rq002fbu795lssxw7e" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
@@ -228,11 +228,11 @@ theme: next
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -313,16 +313,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -334,6 +324,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

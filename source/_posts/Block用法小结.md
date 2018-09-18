@@ -1,6 +1,6 @@
 title: Block用法小结
 tags:
-  - iOS基础
+  - iOS进阶
 categories:
   - iOS
 date: 2017-06-06 16:20:00
@@ -90,7 +90,5 @@ self.block("string");
 2. block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。
 
 ### 参考文献
-
-[黑幕背后的 __block 修饰符](http://chun.tips/2014/11/13/objc-block/)--分析了为什么不加__block修饰符就不能改变Block外部的局部变量
 
 [谈Objective-C block的实现](http://blog.devtang.com/2013/07/28/a-look-inside-blocks/)

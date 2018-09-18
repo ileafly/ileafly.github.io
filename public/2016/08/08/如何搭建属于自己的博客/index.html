@@ -15,7 +15,7 @@ Jekyll是一个简单的，针对博客设计的静态网站生成器。通过�
 <meta property="og:description" content="本文主要介绍使用 Github、Jekyll 打造自己的免费独立博客的方法
 Github是一个代码托管网站，现在很多开源项目都放在Github上。Github还提供了一个功能，叫Github Pages，利用这个功能，我们可以为项目建立网站，当然，这也意味着我们可以通过Github Pages建立自己的博客。
 Jekyll是一个简单的，针对博客设计的静态网站生成器。通过结合使用Github和Jek">
-<meta property="og:updated_time" content="2018-09-01T07:53:08.357Z">
+<meta property="og:updated_time" content="2018-09-18T06:47:23.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建属于自己的博客？">
 <meta name="twitter:description" content="本文主要介绍使用 Github、Jekyll 打造自己的免费独立博客的方法
@@ -119,11 +119,11 @@ Jekyll是一个简单的，针对博客设计的静态网站生成器。通过�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjlop7u0500348q792c3gons0" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/08/如何搭建属于自己的博客/" data-id="cjm7e24rt002obu79ecm44nvq" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
@@ -193,11 +193,11 @@ Jekyll是一个简单的，针对博客设计的静态网站生成器。通过�
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -278,16 +278,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -299,6 +289,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

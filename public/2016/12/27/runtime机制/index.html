@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://www.ileafly.com/2016/12/27/runtime机制/index.html">
 <meta property="og:site_name" content="Leafly">
 <meta property="og:description" content="runtime实现的机制是什么？runtime是一套比较底层的纯C语言API，属于一个C语言库，包含了很多底层的C语言API。平时我们编写的OC代码在程序运行过程时，最终都是转换成了runtime的C语言12OC: [[User alloc] init]runtime: objc_msgSend(objc_msgSend(&amp;quot;User&amp;quot;, &amp;quot;alloc&amp;quot;),">
-<meta property="og:updated_time" content="2018-08-31T09:58:03.588Z">
+<meta property="og:updated_time" content="2018-09-18T06:47:18.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="runtime机制">
 <meta name="twitter:description" content="runtime实现的机制是什么？runtime是一套比较底层的纯C语言API，属于一个C语言库，包含了很多底层的C语言API。平时我们编写的OC代码在程序运行过程时，最终都是转换成了runtime的C语言12OC: [[User alloc] init]runtime: objc_msgSend(objc_msgSend(&amp;quot;User&amp;quot;, &amp;quot;alloc&amp;quot;),">
@@ -129,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjlop7tzz002v8q79j61vdfws" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjm7e24ro0029bu797bt8nk5k" class="article-share-link">分享</a>
       
       
       
@@ -208,11 +208,11 @@
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -293,16 +293,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -314,6 +304,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

@@ -72,7 +72,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
+    <a class="article-category-link" href="/categories/Web前端/">Web前端</a>
   </div>
 
   </div>
@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/04/07/Bootstrap框架入门/" data-id="cjlop7tyw000f8q79hh1mzzsr" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/04/07/Bootstrap框架入门/" data-id="cjm7e24qb0001bu7978yy48i6" class="article-share-link">分享</a>
       
       
       
@@ -124,7 +124,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/PHP/">PHP</a>
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
   </div>
 
   </div>
@@ -163,13 +163,13 @@
 <h3 id="iOS端代码实现"><a href="#iOS端代码实现" class="headerlink" title="iOS端代码实现"></a>iOS端代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">// NSString+AESSecurity.h</div><div class="line">@interface NSString (AESSecurity)</div><div class="line"></div><div class="line">+ (NSString *)encrypyAES:(NSString *)content key:(NSString *)key;</div><div class="line"></div><div class="line">+ (NSString *)descryptAES:(NSString *)content key:(NSString *)key;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">// NSString+AESSecurity.m</div><div class="line">#import &quot;NSString+AESSecurity.h&quot;</div><div class="line"></div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line"></div><div class="line">// 初始向量</div><div class="line">NSString *const kInitVector = @&quot;0123456789&quot;;</div><div class="line"></div><div class="line">// 密钥长度</div><div class="line">size_t const kKeySize = kCCKeySizeAES128;</div><div class="line"></div><div class="line">@implementation NSString (AESSecurity)</div><div class="line"></div><div class="line">+ (NSString *)encrypyAES:(NSString *)content key:(NSString *)key &#123;</div><div class="line">    </div><div class="line">    NSData *contentData = [content dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    NSUInteger dataLength = contentData.length;</div><div class="line">    </div><div class="line">    // 为结束符&apos;\\0&apos; +1</div><div class="line">    char keyPtr[kKeySize + 1];</div><div class="line">    memset(keyPtr, 0, sizeof(keyPtr));</div><div class="line">    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    size_t encryptSize = dataLength + kCCBlockSizeAES128;</div><div class="line">    void *encryptedBytes = malloc(encryptSize);</div><div class="line">    size_t actualOutSize = 0;</div><div class="line">    </div><div class="line">    NSData *initVector = [kInitVector dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,</div><div class="line">                                          kCCAlgorithmAES128,</div><div class="line">                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式</div><div class="line">                                          keyPtr,</div><div class="line">                                          kKeySize,</div><div class="line">                                          initVector.bytes,</div><div class="line">                                          contentData.bytes,</div><div class="line">                                          dataLength,</div><div class="line">                                          encryptedBytes,</div><div class="line">                                          encryptSize,</div><div class="line">                                          &amp;actualOutSize);</div><div class="line">    </div><div class="line">    if (cryptStatus == kCCSuccess) &#123;</div><div class="line">        // 对加密后的数据进行 base64 编码</div><div class="line">        return [[NSData dataWithBytesNoCopy:encryptedBytes length:actualOutSize] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];</div><div class="line">    &#125;</div><div class="line">    free(encryptedBytes);</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)descryptAES:(NSString *)content key:(NSString *)key &#123;//</div><div class="line">    // 把 base64 String 转换成 NSData</div><div class="line">    NSData *contentData = [[NSData alloc] initWithBase64EncodedString:content options:NSDataBase64DecodingIgnoreUnknownCharacters];</div><div class="line">    NSUInteger dataLength = contentData.length;</div><div class="line">    </div><div class="line">    char keyPtr[kKeySize + 1];</div><div class="line">    memset(keyPtr, 0, sizeof(keyPtr));</div><div class="line">    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    size_t decryptSize = dataLength + kCCBlockSizeAES128;</div><div class="line">    void *decryptedBytes = malloc(decryptSize);</div><div class="line">    size_t actualOutSize = 0;</div><div class="line">    </div><div class="line">    NSData *initVector = [kInitVector dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    </div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,</div><div class="line">                                          kCCAlgorithmAES,</div><div class="line">                                          kCCOptionPKCS7Padding | kCCOptionECBMode, // 加密模式</div><div class="line">                                          keyPtr,</div><div class="line">                                          kKeySize,</div><div class="line">                                          initVector.bytes,</div><div class="line">                                          contentData.bytes,</div><div class="line">                                          dataLength,</div><div class="line">                                          decryptedBytes,</div><div class="line">                                          decryptSize,</div><div class="line">                                          &amp;actualOutSize);</div><div class="line">    </div><div class="line">    if (cryptStatus == kCCSuccess) &#123;</div><div class="line">        return [[NSString alloc] initWithData:[NSData dataWithBytesNoCopy:decryptedBytes length:actualOutSize] encoding:NSUTF8StringEncoding];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    free(decryptedBytes);</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>在iOS上，字符串经过加解密后可能会在数据中添加一些<a href="http://baike.baidu.com/view/1112575.htm" target="_blank" rel="external">操作符</a>这会导致我们想进一步处理解密后的字符串时会处理失败，例如，当我们想将解密后的json字符串转成字典时，可能会抛出<code>Garbage at End</code>的错误，解决方案如下：</p>
 <ol>
-<li><p>将字符串中的所有控制符替换成空字符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *newStr = [oldStr stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];</div></pre></td></tr></table></figure>
-</li>
-<li><p>将处理后的字符串进行json序列化操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSError *err = nil;</div><div class="line">            </div><div class="line">NSData *jsondata = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">            </div><div class="line">NSArray *arr = [NSJSONSerialization JSONObjectWithData:jsondata options:NSJSONReadingMutableLeaves error:&amp;err];</div></pre></td></tr></table></figure>
-</li>
+<li>将字符串中的所有控制符替换成空字符</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *newStr = [oldStr stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];</div></pre></td></tr></table></figure>
+<ol>
+<li>将处理后的字符串进行json序列化操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSError *err = nil;</div><div class="line">            </div><div class="line">NSData *jsondata = [str dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">            </div><div class="line">NSArray *arr = [NSJSONSerialization JSONObjectWithData:jsondata options:NSJSONReadingMutableLeaves error:&amp;err];</div></pre></td></tr></table></figure>
 <hr>
 <p>附上相关模块的代码</p>
 <p><a href="https://github.com/luzhiyongGit/AESSecurity-PHP" target="_blank" rel="external">AESSecurity-PHP</a></p>
@@ -179,11 +179,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/03/06/PHP与iOS之间的AES加解密/" data-id="cjlop7tz3000s8q79awl4r11h" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/03/06/PHP与iOS之间的AES加解密/" data-id="cjm7e24qu000tbu7936268j5y" class="article-share-link">分享</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密/">加密</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
 
     </footer>
   </div>
@@ -234,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/02/23/iOS开发小结之H5与OC交互/" data-id="cjlop7tzl001z8q79hdc1yoz9" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/02/23/iOS开发小结之H5与OC交互/" data-id="cjm7e24rl0023bu7912nfi1y1" class="article-share-link">分享</a>
       
       
       
@@ -281,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/02/20/Xcode统计整个项目代码行数/" data-id="cjlop7tzd001b8q79svlf44x7" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/02/20/Xcode统计整个项目代码行数/" data-id="cjm7e24qy0014bu79706wsh9h" class="article-share-link">分享</a>
       
       
       
@@ -331,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/02/16/UIWebView加载本地html/" data-id="cjlop7tz700118q795uhpbolg" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/02/16/UIWebView加载本地html/" data-id="cjm7e24qv000wbu79sl5rawcw" class="article-share-link">分享</a>
       
       
       
@@ -393,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/12/30/3DTouch开发/" data-id="cjlop7tyd00008q7925duhmr6" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/12/30/3DTouch开发/" data-id="cjm7e24qi0007bu79ry27ox5y" class="article-share-link">分享</a>
       
       
       
@@ -469,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjlop7tzz002v8q79j61vdfws" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/12/27/runtime机制/" data-id="cjm7e24ro0029bu797bt8nk5k" class="article-share-link">分享</a>
       
       
       
@@ -521,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/28/iOS项目添加自定义字体/" data-id="cjlop7tzq00298q793yzgnu4k" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/28/iOS项目添加自定义字体/" data-id="cjm7e24rp002cbu79x5alrvqo" class="article-share-link">分享</a>
       
       
       
@@ -607,7 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/24/React-Native之Navigator/" data-id="cjlop7tz4000w8q79t9dzyvfk" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/24/React-Native之Navigator/" data-id="cjm7e24qs000nbu79s79ej0t5" class="article-share-link">分享</a>
       
       
       
@@ -690,7 +690,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/17/自动化打包IPA脚本/" data-id="cjlop7u0600378q79dj1bee1x" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/17/自动化打包IPA脚本/" data-id="cjm7e24s4003dbu791lcq4cu2" class="article-share-link">分享</a>
       
       
       
@@ -803,16 +803,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -824,6 +814,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 

@@ -2,7 +2,7 @@ title: Bootstrap框架入门
 tags:
   - Bootstrap
 categories:
-  - 前端
+  - Web前端
 date: 2017-04-07 16:47:00
 ---
 ### 前言

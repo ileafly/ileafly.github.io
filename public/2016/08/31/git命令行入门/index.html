@@ -47,7 +47,7 @@ git checkout [branch]
 
 拉取远程分支代码
 git pull origin [remote-branc">
-<meta property="og:updated_time" content="2018-09-01T07:53:17.697Z">
+<meta property="og:updated_time" content="2018-09-18T06:50:21.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git命令行入门">
 <meta name="twitter:description" content="本文结合项目开发中遇到的实际问题对git命令行的使用做一个简单的总结。
@@ -266,7 +266,7 @@ git branch -dr [remore-branch]
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjlop7tzh001n8q792f8ax88h" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjm7e24r0001cbu791n6tf16u" class="article-share-link">分享</a>
       
       
       
@@ -345,11 +345,11 @@ git branch -dr [remore-branch]
     
      
        
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
        
       
       
+           <div id="gitment_comments"></div>
+    
   </div>
  
   
@@ -430,16 +430,6 @@ window.onload = function() {
       
 
   
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "e2fb4051c49842688ce669e634bc983f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-    
 
   
 
@@ -451,6 +441,22 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'luzhiyongGit',
+    repo: 'luzhiyongGit.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
 
 <!-- author:forvoid end -->
 
