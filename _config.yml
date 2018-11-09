@@ -69,5 +69,5 @@ theme: cafe
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/luzhiyongGit/luzhiyongGit.github.io
+  repo: https://github.com/luzhiyongGit/blog
   branch: master

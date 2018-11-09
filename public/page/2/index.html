@@ -65,6 +65,185 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ZYLoading-自定义Loading控件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/ZYLoading-自定义Loading控件/" class="article-date">
+  <time datetime="2017-12-14T11:20:00.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/ZYLoading-自定义Loading控件/">ZYLoading--自定义Loading控件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>移动端项目的开发离不开loading控件，通常为了能快速在项目中实现loading效果我们有几个主流的开源库可以选择：<br><a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">MBProgressHUD</a>、<a href="https://github.com/SVProgressHUD/SVProgressHUD" target="_blank" rel="external">SVProgressHUD</a>等</p>
+<p>然后，为了能让整体项目的loading效果显得更加贴切我就想创建一个loading控件，希望此控件能够比较方便的开启、停止loading效果，而且能易于集成和更换logo。</p>
+<p>为了达到这个目的，我创建了一个名为<a href="https://github.com/luzhiyongGit/ZYLoading.git" target="_blank" rel="external">ZYLoading</a>的控件，下面就为大家分享一下我这个控件的原理以及使用方法。</p>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>此控件的核心思想是利用runtime机制给分类增加成员属性，通过给UIView扩展开启、停止loading的方法，从而实现任何UIView的实例都能方便的开启、停止loading动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#import &quot;UIView+ZYLoadingView.h&quot;</div><div class="line"></div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">static char LoadingViewKey;</div><div class="line"></div><div class="line">@implementation UIView (ZYLoadingView)</div><div class="line"></div><div class="line">#pragma mark - Setter</div><div class="line"></div><div class="line">// 将创建的ZYLoadingView实例关联到分类</div><div class="line">- (void)setLoadingView:(ZYLoadingView *)loadingView &#123;</div><div class="line">    [self willChangeValueForKey:@&quot;LoadingViewKey&quot;];</div><div class="line">    objc_setAssociatedObject(self, &amp;LoadingViewKey, loadingView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">    [self didChangeValueForKey:@&quot;LoadingViewKey&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 获取关联的ZYLoadingView</div><div class="line">- (ZYLoadingView *)loadingView &#123;</div><div class="line">    return objc_getAssociatedObject(self, &amp;LoadingViewKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 开启动画</div><div class="line">- (void)beginLoading &#123;</div><div class="line">    if (!self.loadingView) &#123;</div><div class="line">        self.loadingView = [[ZYLoadingView alloc] initWithFrame:self.bounds];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [self addSubview:self.loadingView];</div><div class="line">    </div><div class="line">    [self.loadingView startAnimation];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 停止动画</div><div class="line">- (void)endLoading &#123;</div><div class="line">    if (self.loadingView) &#123;</div><div class="line">        [self.loadingView stopAnimation];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h5 id="通过一组图片组合成动画"><a href="#通过一组图片组合成动画" class="headerlink" title="通过一组图片组合成动画"></a>通过一组图片组合成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择图片组合动画</div><div class="line">ZYLoadingConfigInstance.loadingType = ZYLoadingAnimateImages;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.animateImageName = @&quot;zy_loading_&quot;;</div><div class="line">// 图片尺寸</div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(37, 13);</div><div class="line">// 动画过渡时长</div><div class="line">ZYLoadingConfigInstance.duration = 1.f;</div></pre></td></tr></table></figure>
+<h5 id="通过一张图旋转形成动画"><a href="#通过一张图旋转形成动画" class="headerlink" title="通过一张图旋转形成动画"></a>通过一张图旋转形成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择通过旋转图片展现loading动画</div><div class="line">ZYLoadingConfigInstance.loadingType = ZYLoadingLoopImage;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.loopImage = [UIImage imageNamed:@&quot;loading_circle&quot;];</div><div class="line">// 图片尺寸    </div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(60, 60);</div><div class="line">// 动画过渡时长    </div><div class="line">ZYLoadingConfigInstance.duration = 0.25f;</div></pre></td></tr></table></figure>
+<h5 id="通过一张图片旋转，另一张图片渐隐渐显组合成动画"><a href="#通过一张图片旋转，另一张图片渐隐渐显组合成动画" class="headerlink" title="通过一张图片旋转，另一张图片渐隐渐显组合成动画"></a>通过一张图片旋转，另一张图片渐隐渐显组合成动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 通过枚举选择通过旋转图片展现loading动画    ZYLoadingConfigInstance.loadingType = ZYLoadingLoopImage;</div><div class="line">// 图片名称</div><div class="line">ZYLoadingConfigInstance.loopImage = [UIImage imageNamed:@&quot;loading_circle&quot;];</div><div class="line">// 图片尺寸    </div><div class="line">ZYLoadingConfigInstance.loopImageSize = CGSizeMake(60, 60);</div><div class="line">// logo图片名称</div><div class="line">ZYLoadingConfigInstance.logoImage = [UIImage imageNamed:@&quot;loading_zhangyu&quot;];</div><div class="line">// logo图片尺寸</div><div class="line">ZYLoadingConfigInstance.logoImageSize = CGSizeMake(40, 40);</div><div class="line">// 动画过渡时长</div><div class="line">ZYLoadingConfigInstance.duration = 0.25f;</div></pre></td></tr></table></figure>
+<h5 id="开启、停止动画"><a href="#开启、停止动画" class="headerlink" title="开启、停止动画"></a>开启、停止动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 开启动画</div><div class="line">[self.view beginLoading];</div><div class="line"></div><div class="line">// 停止动画</div><div class="line">[self.view endLoading];</div></pre></td></tr></table></figure>
+<p>你也可以直接参考github上的<a href="https://github.com/luzhiyongGit/ZYLoading.git" target="_blank" rel="external">ZYLoading</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/ZYLoading-自定义Loading控件/" data-id="cjo9ob3pv00165979zo2orune" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Xcode9新特性汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/Xcode9新特性汇总/" class="article-date">
+  <time datetime="2017-12-14T11:19:00.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/Xcode9新特性汇总/">Xcode9新特性汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>新版的Xcode 9正式发布了，今天我也将Xcode进行了升级。这次的Xcode更新给我们带来了不少的新特性，这里我进行一个简单的汇总。</p>
+<h2 id="Main-Thread-Checker"><a href="#Main-Thread-Checker" class="headerlink" title="Main Thread Checker"></a>Main Thread Checker</h2><p>Xcode 9现在会自动检测UI操作是否在主线程了，一旦代码运行到在非主线程操作UI时就会警告提示，相关代码会高亮，特别方便定位</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-ae5b514cae24218c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9非主线程操作UI2.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-667852563144f730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9非主线程操作UI.png"></p>
+<p>以前遇到这种在非主线程操作UI的情况，问题定位相对比较难，需要排查才能找到，现在Xcode 9 给我们提供了非常方便的支持</p>
+<h2 id="Swift-Language-Version-支持-4-0和3-2"><a href="#Swift-Language-Version-支持-4-0和3-2" class="headerlink" title="Swift Language Version 支持 4.0和3.2"></a>Swift Language Version 支持 4.0和3.2</h2><p>Xcode 9使用Swift 4编译器，同时支持切换到Swift 3.2，开发者可以根据项目需要选择Swift语言版本</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-22e7d4510d174243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode9swift语言选择.png"></p>
+<h2 id="项目文件路径与本地文件路径自动保持统一"><a href="#项目文件路径与本地文件路径自动保持统一" class="headerlink" title="项目文件路径与本地文件路径自动保持统一"></a>项目文件路径与本地文件路径自动保持统一</h2><p>在以前，为了保证项目文件路径和文件系统中的路径保持一致，我们通常是先在本地路径创建文件夹，然后添加到项目中，现在Xcode 9 将项目文件和文件系统进行了统一，我们可以直接在项目中创建文件或者直接拖拽改变文件位置时，也会相应的改变此文件在文件系统中的位置</p>
+<h2 id="Refactor功能改进"><a href="#Refactor功能改进" class="headerlink" title="Refactor功能改进"></a>Refactor功能改进</h2><p><code>Refactor</code>是Xcode一直都提供的一个功能，不过在Xcode 9中进行了优化，Xcode 9将相关代码直接铺在代码编辑器里面，只要滚动编辑框，就可以轻松的看到即将影响到的所有地方，非常的清晰</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-32674d7c60b80bf5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9refactor.png"></p>
+<h2 id="Named-Color"><a href="#Named-Color" class="headerlink" title="Named Color"></a>Named Color</h2><p>Xcode 9支持在xcassets里添加颜色，这样就可以直接在代码或Storyboard里引用这个颜色了，这就非常有利于项目主题颜色的更换</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-4fcc16fe299d6ba4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="named-colors.png"></p>
+<h2 id="模拟器升级"><a href="#模拟器升级" class="headerlink" title="模拟器升级"></a>模拟器升级</h2><p>Xcode 9模拟器又改回了之前的拟物化，而且现在支持多个模拟器同时运行，这就对多屏调试方便了很多</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-b9e5bf3b94af0fd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9simulator.png"></p>
+<h2 id="全新的构建系统"><a href="#全新的构建系统" class="headerlink" title="全新的构建系统"></a>全新的构建系统</h2><p>Xcode 9提供了一个全新的构建系统，这次的构建系统完全使用Swift语言写成，基于Apple的<a href="https://github.com/apple/swift-llbuild" target="_blank" rel="external">llbuild</a>引擎，新的构建系统默认是不开启的，我们可以通过File -&gt; Project Settings 或 File -&gt; Workspace Settings 来切换构建系统</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-58d40d4c79ce3d68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9build.png"></p>
+<h2 id="深度集成Github"><a href="#深度集成Github" class="headerlink" title="深度集成Github"></a>深度集成Github</h2><p>Xcode 9针对Github做了定制化的集成，在Xcode的Preference -&gt; Account 可以添加github账号，这样就能看到完整的项目记录和分支情况</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-7cab79d2f8ebe53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xcode9github.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/Xcode9新特性汇总/" data-id="cjo9ob3pz001h5979lvtj5mgv" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-NS-UNAVAILABLE和NS-DESIGNATED是什么" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" class="article-date">
+  <time datetime="2017-12-14T11:15:00.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/">NS_UNAVAILABLE和NS_DESIGNATED是什么</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>经常我们在阅读一些开源项目的源码时会发现有时候作者会在声明的方法后面添加<code>NS_UNAVAILABLE</code>、<code>NS_EDSIGNATED_INITIALIZER</code>这样的关键字。这表示什么意思呢？</p>
+<p>其实，这两个关键字是苹果提供给我们来约束定义方式，使得接口更加清晰的。</p>
+<p>下面就来跟大家解释一下这两个字段的具体作用：</p>
+<h2 id="NS-UNAVAILABLE"><a href="#NS-UNAVAILABLE" class="headerlink" title="NS_UNAVAILABLE"></a>NS_UNAVAILABLE</h2><p><code>NS_UNAVAILABLE</code>的作用是直接禁止此方法的使用，一般常见用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)new NS_UNAVAILABLE;</div><div class="line">+ (instancetype)init NS_UNAVAILABLE;</div></pre></td></tr></table></figure></p>
+<p>这样就不能直接使用这两种创建实例的方法，而需要使用开源库自定义的初始化方法，从而确保了创建实例的统一性</p>
+<h2 id="NS-EDSIGNATED-INITIALIZER"><a href="#NS-EDSIGNATED-INITIALIZER" class="headerlink" title="NS_EDSIGNATED_INITIALIZER"></a>NS_EDSIGNATED_INITIALIZER</h2><p><code>NS_EDSIGNATED_INITIALIZER</code>的作用是指定构造器，通常来说指定初始化函数对一个类来说非常重要，参数也会比较多，为了适应不同的初始化需求就有了便利初始化函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithName:(NSString *)name NS_EDSIGNATED_INITIALIZER;</div></pre></td></tr></table></figure>
+<p>声明指定构造器函数的一个目的是帮助规范代码，找到程序中潜在问题。</p>
+<p>在Objective-C中，指定初始化函数的使用有一些规范：</p>
+<ul>
+<li>子类如果有指定初始化函数，那么指定初始化函数实现时必须调用它的直接父类的指定初始化函数</li>
+<li>如果子类有指定初始化函数，那么便利初始化函数必须调用自己的其他初始化函数，不能调用super的初始化函数。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2017/12/14/NS-UNAVAILABLE和NS-DESIGNATED是什么/" data-id="cjo9ob3pn000o5979pluqhvyz" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-开发者账号批量导入设备号" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/12/14/开发者账号批量导入设备号/" class="article-date">
@@ -112,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjm7e24rv002ubu79k7dgx9ia" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/开发者账号批量导入设备号/" data-id="cjo9ob3ql00345979965191vk" class="article-share-link">分享</a>
       
       
       
@@ -274,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/12/14/自定义快捷代码片段/" data-id="cjm7e24s8003mbu79me4zhqrg" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/12/14/自定义快捷代码片段/" data-id="cjo9ob3r6003v59790v9i6cj8" class="article-share-link">分享</a>
       
       
       
@@ -324,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjm7e24r5001obu7935piggrh" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/08/16/SDWebImage与YYWebImage加载gif对比/" data-id="cjo9ob3pq000v59797wn1wyx3" class="article-share-link">分享</a>
       
       
       
@@ -442,7 +621,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/20/EPUB文件格式解析/" data-id="cjm7e24qj0008bu795cme1e48" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/07/20/EPUB文件格式解析/" data-id="cjo9ob3pc000759793o2rcaq8" class="article-share-link">分享</a>
       
       
       
@@ -558,7 +737,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/" data-id="cjm7e24r3001kbu79w5ggzkfw" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/07/20/Swift开源项目ObjectMapper实践/" data-id="cjo9ob3pw001a59795kw3dopu" class="article-share-link">分享</a>
       
       
       
@@ -611,7 +790,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/" data-id="cjm7e24rs002lbu79b929tmzo" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/07/05/利用SDWebImage下载图片/" data-id="cjo9ob3qf002o59795qq93oii" class="article-share-link">分享</a>
       
       
       
@@ -683,260 +862,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/08/iOS11开发者需要知道的改变/" data-id="cjm7e24r6001sbu79pwwhe3b1" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2017/06/08/iOS11开发者需要知道的改变/" data-id="cjo9ob3q5001w5979exy4djzd" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-Block用法小结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/06/Block用法小结/" class="article-date">
-  <time datetime="2017-06-06T08:20:00.000Z" itemprop="datePublished">2017-06-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/06/Block用法小结/">Block用法小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>这篇博客将系统整理一下Block相关的知识</p>
-<p>首先，先思考一个问题Block能做些什么？</p>
-<ul>
-<li>Block内部能够读取外部局部变量的值</li>
-<li>经过<code>__block</code>修饰符修饰的变量，Block内部不仅能够读取它的值，而且可以改变这个变量的值</li>
-<li>Block可以用来作为控制器之间的一个通信</li>
-<li>Block可以作为方法的参数</li>
-</ul>
-<h2 id="进一步深挖block的原理"><a href="#进一步深挖block的原理" class="headerlink" title="进一步深挖block的原理"></a>进一步深挖block的原理</h2><h4 id="为什么不加-block修饰符就不能改变Block外部的局部变量"><a href="#为什么不加-block修饰符就不能改变Block外部的局部变量" class="headerlink" title="为什么不加__block修饰符就不能改变Block外部的局部变量?"></a>为什么不加__block修饰符就不能改变Block外部的局部变量?</h4><p>对于block外的变量引用，block默认是将其复制到其数据结构中实现访问的，对于用<strong>block修饰的外部变量引用，block是复制其引用地址来实现访问的，所以加上</strong>block就能改变block外部的变量</p>
-<h4 id="Block如何作为控制器之间的一个通信？"><a href="#Block如何作为控制器之间的一个通信？" class="headerlink" title="Block如何作为控制器之间的一个通信？"></a>Block如何作为控制器之间的一个通信？</h4><p>举例说明：</p>
-<ol>
-<li><p>页面B的.h文件中声明一个block变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">typedef void(^blo)(NSString *str);</div><div class="line">@property (nonatomic, copy) blo block;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">@property (nonatomic, copy) void (^blo)(NSString *str);</div></pre></td></tr></table></figure>
-</li>
-<li><p>页面A中创建B页面，并调用Block变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 方法一</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.block = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 方法二</div><div class="line"></div><div class="line">B *b = [[B alloc] init];</div><div class="line"></div><div class="line">__weak A *weakself = self;</div><div class="line">b.blo = ^(NSString *str) &#123;</div><div class="line">    weakself.str = str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在页面B中调用Block变量</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.block(&quot;string&quot;);</div></pre></td></tr></table></figure>
-<h4 id="为何A页面要用-weak修饰？"><a href="#为何A页面要用-weak修饰？" class="headerlink" title="为何A页面要用__weak修饰？"></a>为何A页面要用__weak修饰？</h4><p>使用<strong>weak修饰符是为了避免引起循环引用。如果在Block中使用了</strong>strong修饰符修饰的对象，那么当Block从栈复制到堆时，改对象为Block所有，这就容易引起循环引用，从而发生内存泄漏</p>
-<h4 id="如何使用Block作为方法的参数"><a href="#如何使用Block作为方法的参数" class="headerlink" title="如何使用Block作为方法的参数"></a>如何使用Block作为方法的参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)blockAsParameter:(void (^)())block &#123;</div><div class="line">    block(); // 执行block内部的代码</div><div class="line">&#125;</div><div class="line"></div><div class="line">[self blockAsParameter:^&#123;</div><div class="line">    NSLog(@&quot;&quot;);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<h4 id="block的三种类型"><a href="#block的三种类型" class="headerlink" title="block的三种类型"></a>block的三种类型</h4><ol>
-<li>不管在ARC还是MRC环境下，block内部如果没有访问外部变量，这个block就是全局block <code>_NSConcreteGlobalBlock</code>，存储在内存中的代码区</li>
-<li>在MRC下，block内部如果访问外部变量，这个block就是栈block <code>_NSConcreteStackBlock</code>，存储在内存中的栈上，当函数返回时会被销毁</li>
-<li>在MRC下，block内部访问外部变量，同时对该block做一次copy操作，这个block就是堆block <code>_NSConcreteMallocBlock</code>，存储在内存的堆上，当引用计数为 0 时会被销毁</li>
-<li>在ARC下，block内部如果访问了外部变量，这个block就是堆block，因为在ARC下，默认对block做一次copy操作</li>
-</ol>
-<h3 id="总结一些block使用的注意点"><a href="#总结一些block使用的注意点" class="headerlink" title="总结一些block使用的注意点"></a>总结一些block使用的注意点</h3><p>1.默认情况下，block内部可以访问外部变量，但是不能修改外部变量，如果想要修改外部变量，可以给外部变量加上<code>__block</code>关键字，block是复制其引用地址来实现访问的</p>
-<ol>
-<li>block作为属性应该用copy修饰，如果我们使用weak、assign来修饰block属性，block访问外部变量时类型就是栈block，而保存在栈中的block在其所在的函数、方法返回时，该block就会被销毁，在其他方法内部调用改block时，就会引发野指针错误。</li>
-</ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">谈Objective-C block的实现</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/06/Block用法小结/" data-id="cjm7e24qe0003bu79l0qrlx0p" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-深入浅出Texture-高性能界面的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/" class="article-date">
-  <time datetime="2017-06-01T11:08:00.000Z" itemprop="datePublished">2017-06-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/01/深入浅出Texture-高性能界面的解决方案/">深入浅出Texture--高性能界面的解决方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p><a href="https://github.com/texturegroup/texture/" target="_blank" rel="external">Texture</a>是由Facebook开源的<a href="https://github.com/facebookarchive/AsyncDisplayKit" target="_blank" rel="external">AsyncDisplayKit</a>演变而来</p>
-<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>Texture的基础单元是一个个node，ASDisplayNode是基于CALayer的一层抽象。不同于UIView对象，ASDisplayNode是线程安全的，它不仅仅可以用于主线程而且可以在辅线程中使用。</p>
-<p>使用Texture可以让我们在辅线程中进行图片的解析、文本的适应、约束等等UI操作，从而能够保证主线程及时对用户的操作做出反应</p>
-<h3 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h3><ul>
-<li><code>ASViewController</code>: 基于<code>UIViewController</code>封装的子类，能够方便的为我们提供node的管理</li>
-<li><code>ASNavigationController</code>: 可用于替代<code>UINavigationController</code>，遵循<code>ASVisibility</code>协议</li>
-<li><code>ASTabBarController</code>: 可用于替代<code>UITabBarController</code>，遵循<code>ASVisiblity</code>协议</li>
-<li><code>ASCollectionNode</code>、<code>ASTableNode</code>:等同于<code>UICollectionView</code>、<code>UITableView</code></li>
-<li><code>ASPagerNode</code>:基于<code>ASCollectionNode</code>封装的子类，能够像<code>UIPageViewController</code>一样给我们提供强大的滑动操作体验</li>
-<li><code>ASCellNode</code>:等同于<code>UITableViewCell</code>、<code>UICollectionViewCell</code>，需要强调的是它返回的是一个Block(ASCellNodeBlock)。</li>
-<li><code>ASScrollNode</code>: 代替<code>UIScrollView</code></li>
-<li><code>ASEditableTextNode</code>: 代替<code>UITextView</code></li>
-<li><code>ASTextNode</code>: 代替<code>UILabel</code></li>
-<li><code>ASImageNode</code>: 代替<code>UIImage</code></li>
-<li><code>ASNetworkImageNode</code>: 可以自动加载图片并进行内存管理，而且还支持逐步加载Jpeg和动态gif图片</li>
-<li><code>ASMultiplexImageNode</code>:</li>
-<li><code>ASVideoNode</code>: 代替<code>AVPlayerLayer</code></li>
-<li><code>ASVideoPlayerNode</code>: 代替<code>UIMoviePlayer</code></li>
-<li><code>ASControlNode</code>: 代替<code>UIControl</code></li>
-<li><code>ASButtonNode</code>: 代替<code>UIButton</code></li>
-<li><code>ASMapNode</code>: 代替<code>MKMapView</code></li>
-<li><code>ASStackLayoutSpec</code>: 堆放布局规则</li>
-<li><code>ASOverlayLayoutSpec</code>: 覆盖布局规则</li>
-<li><code>ASRelativeLayoutSpec</code>: 相对布局规则</li>
-<li><code>ASInsetLayoutSpec</code>: 插入布局规则</li>
-<li><code>ASBackgroundLayoutSpec</code>: 背景布局规则</li>
-<li><code>ASCenterLayoutSpec</code>: 中心布局规则</li>
-<li><code>ASAbsoluteLayoutSpec</code>: 绝对布局规则</li>
-<li><code>ASRatioLayoutSpec</code>: 比例布局规则</li>
-</ul>
-<h3 id="层级结构"><a href="#层级结构" class="headerlink" title="层级结构"></a>层级结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">ASDisplayNode--&gt;ASTableNode</div><div class="line">ASDisplayNode--&gt;ASCollectionNode</div><div class="line">ASDisplayNode--&gt;ASCellNode</div><div class="line">ASDisplayNode--&gt;ASScrollNode</div><div class="line">ASDisplayNode--&gt;ASEditableTextNode</div><div class="line">ASDisplayNode--&gt;ASControlNode</div><div class="line">ASCollectionNode--&gt;ASPagerNode</div><div class="line">ASControlNode--&gt;ASButtonNode</div><div class="line">ASControlNode--&gt;ASTextNode</div><div class="line">ASControlNode--&gt;ASMapNode</div><div class="line">ASControlNode--&gt;ASImageNode</div><div class="line">ASImageNode--&gt;ASNetworkImageNode</div><div class="line">ASImageNode--&gt;ASMultiplexImageNode</div><div class="line">ASNetworkImageNode--&gt;ASVideoNode</div></pre></td></tr></table></figure>
-<h3 id="批抓取进行无限滚动"><a href="#批抓取进行无限滚动" class="headerlink" title="批抓取进行无限滚动"></a>批抓取进行无限滚动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 将leadingScreensForBatching 设置为1.0表示当滚动到还剩下一个全屏时就开始抓取新的一批数据</div><div class="line">self.tableNode.view.leadingScreensForBatching = 1.0;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (BOOL)shouldBatchFetchForTableNode:(ASTableNode *)tableNode &#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ASDK的容器"><a href="#ASDK的容器" class="headerlink" title="ASDK的容器"></a>ASDK的容器</h3><p>当在项目中替换使用AsyncDisplayKit的时候，应该把nodes节点，当做一个子节点添加到一个容器类里，这些容器类负责告诉所包含的节点，他们现在是什么状态，以便尽可能有效的加载数据和渲染，经常犯的一个错误是把node节点直接添加到一个现有的view中，这样做会导致节点在渲染的时候会闪烁一下。</p>
-<p>Texture为我们提供了以下这些节点容器：</p>
-<ul>
-<li><code>ASCollectionNode</code></li>
-<li><code>ASPagerNode</code></li>
-<li><code>ASTableNode</code></li>
-<li><code>ASViewController</code></li>
-<li><code>ASNavigationController</code></li>
-<li><code>ASTabBarController</code></li>
-</ul>
-<h4 id="使用节点容器的好处"><a href="#使用节点容器的好处" class="headerlink" title="使用节点容器的好处"></a>使用节点容器的好处</h4><p>节点容器能够自动为它的节点们管理高效的预加载，这就意味着节点容器中所有的节点的尺寸约束、数据请求、图片解析、渲染都将是异步进行</p>
-<h3 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h3><p>Texture模拟了Core Animation的机制，所有针对ASNode的修改和提交，总有些任务是必需放在主线程执行的，当这种任务出现的时候，ASNode就会把任务用<code>ASAsyncTransaction(Group)</code>封装并提交到一个全局的容器去。Texture在RunLoop中注册了一个Observer，监视的事件和CA一样，但是优先级比CA低。当RunLoop进入休眠前，CA处理完事件后，ASDK就会执行该loop内提交的所有任务</p>
-<p>利用这个机制，Texture可以在合适的机会把异步、并发的操作同步到主线程去，并且获得不错的性能</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
-<li><p>利用ASTableNode替代UITableView创建一个高性能的列表页面</p>
-</li>
-<li><p>利用ASLayoutSpec替代AutoLayout创建高效的页面约束</p>
-</li>
-</ol>
-<h3 id="疑问点"><a href="#疑问点" class="headerlink" title="疑问点"></a>疑问点</h3><ul>
-<li>为何使用<code>ASCellNode</code>不需要担心cell重用问题？</li>
-</ul>
-<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="http://www.bijishequ.com/detail/227995?p=" target="_blank" rel="external">AsyncDisplaykit2.0 使用</a>–主要讲解了LayoutSpec相关的知识</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/06/01/深入浅出Texture-高性能界面的解决方案/" data-id="cjm7e24s00034bu79sbbyerwm" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-自定义UIPageControl" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/11/自定义UIPageControl/" class="article-date">
-  <time datetime="2017-04-11T03:46:00.000Z" itemprop="datePublished">2017-04-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/11/自定义UIPageControl/">自定义UIPageControl</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>近期项目中需要给UIPageControl自定义图片，为了方便使用也为了方便大家，建了一个轮子<a href="https://github.com/luzhiyongGit/ZYPageControl" target="_blank" rel="external">ZYPageControl</a></p>
-<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ol>
-<li>继承至UIView创建一个ZYPageControl</li>
-<li>为ZYPageControl类添加<code>currentPage</code>、<code>numberOfPages</code>等PageControl控件常用的属性</li>
-<li>添加设置图片的方法</li>
-<li>在<code>- (void)layoutSubviews</code>方法里 绘制pageControl</li>
-</ol>
-<h3 id="支持功能"><a href="#支持功能" class="headerlink" title="支持功能"></a>支持功能</h3><ul>
-<li>设置PageControl的默认图和高亮图</li>
-<li>灵活设置PageControl间距</li>
-<li>灵活设置PageControl的大小</li>
-<li>灵活设置PageControl的位置</li>
-</ul>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="手动集成"><a href="#手动集成" class="headerlink" title="手动集成"></a>手动集成</h4><ol>
-<li>下载ZYPageControl的代码</li>
-<li>将ZYPageControl类添加到项目中</li>
-<li>与UIPageControl用法一样，创建一个ZYPageControl对象并添加到View上</li>
-<li>设置你想要的图片作为默认图</li>
-<li>设置你想要的PageControl间距</li>
-</ol>
-<h4 id="Pod集成"><a href="#Pod集成" class="headerlink" title="Pod集成"></a>Pod集成</h4><p>等待发布支持~</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2017/04/11/自定义UIPageControl/" data-id="cjm7e24s5003gbu79sott3kgq" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
 
     </footer>
   </div>
@@ -972,23 +902,23 @@
       <ul>
         
           <li>
+            <a href="/2018/11/05/iPhoneX隐藏底部Home条/">iPhoneX隐藏底部Home条</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/28/react-native-vector-icons的使用/">react-native-vector-icons的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/18/深拷贝、浅拷贝的理解与使用场景/">深拷贝、浅拷贝的理解与使用场景</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/22/iOS的引用计数与循环引用/">iOS的引用计数与循环引用</a>
           </li>
         
           <li>
             <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
           </li>
         
       </ul>
@@ -1056,22 +986,6 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
-
-  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
-  <script>
-  var gitment = new Gitment({
-    // id: '页面 ID', // 可选。默认为 location.href
-    owner: 'luzhiyongGit',
-    repo: 'luzhiyongGit.github.io',
-    oauth: {
-    client_id: '7e5dd6cdb9xxaxa4cf91a',
-    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
-    }
-  })
-  gitment.render(document.getElementById("gitment_comments"))
-</script>
-
 
 <!-- author:forvoid end -->
 

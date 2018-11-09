@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深拷贝、浅拷贝的理解与使用场景 | Leafly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是深拷贝、浅拷贝？通俗解释：深拷贝是内容拷贝，浅拷贝是地址拷贝
+区别点：
+深拷贝会创建一个新的内存空间，拷贝的值是一样的，但是内存地址不一样。浅拷贝只是拷贝指向原来对象的地址，使原对象的引用计数+1
+容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？什么是容器类对象？什么是非容器类对象？像NSString、NSNumber这些不能包含其他对象的叫做非容器类对象像NSArray、NSDict">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深拷贝、浅拷贝的理解与使用场景">
+<meta property="og:url" content="http://www.ileafly.com/2018/09/18/深拷贝、浅拷贝的理解与使用场景/index.html">
+<meta property="og:site_name" content="Leafly">
+<meta property="og:description" content="什么是深拷贝、浅拷贝？通俗解释：深拷贝是内容拷贝，浅拷贝是地址拷贝
+区别点：
+深拷贝会创建一个新的内存空间，拷贝的值是一样的，但是内存地址不一样。浅拷贝只是拷贝指向原来对象的地址，使原对象的引用计数+1
+容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？什么是容器类对象？什么是非容器类对象？像NSString、NSNumber这些不能包含其他对象的叫做非容器类对象像NSArray、NSDict">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1479547-31cfdb879b4b0200?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1479547-a508acdae7cdd83c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1479547-d2575957910acdd3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1479547-010cb64b8cc583d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-18T07:32:12.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深拷贝、浅拷贝的理解与使用场景">
+<meta name="twitter:description" content="什么是深拷贝、浅拷贝？通俗解释：深拷贝是内容拷贝，浅拷贝是地址拷贝
+区别点：
+深拷贝会创建一个新的内存空间，拷贝的值是一样的，但是内存地址不一样。浅拷贝只是拷贝指向原来对象的地址，使原对象的引用计数+1
+容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？什么是容器类对象？什么是非容器类对象？像NSString、NSNumber这些不能包含其他对象的叫做非容器类对象像NSArray、NSDict">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1479547-31cfdb879b4b0200?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.ileafly.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leafly</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-深拷贝、浅拷贝的理解与使用场景" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/18/深拷贝、浅拷贝的理解与使用场景/" class="article-date">
+  <time datetime="2018-09-18T07:31:26.000Z" itemprop="datePublished">2018-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深拷贝、浅拷贝的理解与使用场景
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="什么是深拷贝、浅拷贝？"><a href="#什么是深拷贝、浅拷贝？" class="headerlink" title="什么是深拷贝、浅拷贝？"></a>什么是深拷贝、浅拷贝？</h2><p>通俗解释：深拷贝是内容拷贝，浅拷贝是地址拷贝</p>
+<p>区别点：</p>
+<p>深拷贝会创建一个新的内存空间，拷贝的值是一样的，但是内存地址不一样。<br>浅拷贝只是拷贝指向原来对象的地址，使原对象的引用计数+1</p>
+<h2 id="容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？"><a href="#容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？" class="headerlink" title="容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？"></a>容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？</h2><h4 id="什么是容器类对象？什么是非容器类对象？"><a href="#什么是容器类对象？什么是非容器类对象？" class="headerlink" title="什么是容器类对象？什么是非容器类对象？"></a>什么是容器类对象？什么是非容器类对象？</h4><p>像NSString、NSNumber这些不能包含其他对象的叫做非容器类对象<br>像NSArray、NSDictionary这些可以包含其他对象的叫容器类对象</p>
+<h4 id="不可变对象NSString"><a href="#不可变对象NSString" class="headerlink" title="不可变对象NSString"></a>不可变对象NSString</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSString *string1 = @&quot;helloworld&quot;;  </div><div class="line">NSString *string2 = [string1 copy]; // 浅拷贝  </div><div class="line">NSString *string3 = [string1 mutableCopy]; // 深拷贝  </div><div class="line">NSMutableString *string4 = [string1 copy]; // 浅拷贝  此处需要注意copy返回的是不可变对象，string4不能被修改 否则会发生崩溃</div><div class="line">NSMutableString *string5 = [string1 mutableCopy]; // 深拷贝  </div><div class="line">  </div><div class="line">NSLog(@&quot;string1 = %d;string2 = %d&quot;,string1,string2);  </div><div class="line">NSLog(@&quot;string1 = %d;string3 = %d&quot;,string1,string3);  </div><div class="line">NSLog(@&quot;string1 = %d;string4 = %d&quot;,string1,string4);  </div><div class="line">NSLog(@&quot;string1 = %d;string5 = %d&quot;,string1,string5);</div></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-31cfdb879b4b0200?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>通过对比不难发现：</p>
+<ul>
+<li>如果右侧是copy则是浅拷贝</li>
+<li>如果右侧是mutableCopy则是深拷贝</li>
+</ul>
+<h4 id="可变对象NSMutableString"><a href="#可变对象NSMutableString" class="headerlink" title="可变对象NSMutableString"></a>可变对象NSMutableString</h4><p>上面我们使用的是不可变的NSString，下面我们再使用可变的NSMutableString对比一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 如果是一个MutableString，那么无论是copy，mutableCopy，都会创建一个新对象。  </div><div class="line">   NSMutableString *string1 = [NSMutableString stringWithString:@&quot;helloworld&quot;];  </div><div class="line">   NSString *string2 = [string1 copy]; // 深拷贝  </div><div class="line">   NSString *string3 = [string1 mutableCopy]; // 深拷贝  </div><div class="line">   NSMutableString *string4 = [string1 copy]; // 深拷贝  此处需要注意copy返回的是不可变对象，string4不能被修改 否则会发生崩溃</div><div class="line">   NSMutableString *string5 = [string1 mutableCopy]; // 深拷贝  </div><div class="line">  </div><div class="line">   NSLog(@&quot;string1 = %d;string2 = %d&quot;,string1,string2);  </div><div class="line">   NSLog(@&quot;string1 = %d;string3 = %d&quot;,string1,string3);  </div><div class="line">   NSLog(@&quot;string1 = %d;string4 = %d&quot;,string1,string4);  </div><div class="line">   NSLog(@&quot;string1 = %d;string5 = %d&quot;,string1,string5);</div></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-a508acdae7cdd83c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>不难发现，对于NSMutableString, 无论是copy还是mutableCopy都会创建一个新对象，属于深拷贝</p>
+<h4 id="不可变对象NSArray"><a href="#不可变对象NSArray" class="headerlink" title="不可变对象NSArray"></a>不可变对象NSArray</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSArray *array01 = [NSArray arrayWithObjects:@&quot;a&quot;,@&quot;b&quot;,@&quot;c&quot;, nil nil];  </div><div class="line">NSArray *copyArray01 = [array01 copy];  </div><div class="line">NSMutableArray *mutableCopyArray01 = [array01 mutableCopy];  </div><div class="line">   </div><div class="line">NSLog(@&quot;array01 = %d,copyArray01 = %d&quot;,array01,copyArray01);  </div><div class="line">NSLog(@&quot;array01 = %d,mutableCopyArray01 = %d&quot;,array01,mutableCopyArray01);  </div><div class="line">  </div><div class="line">NSLog(@&quot;array01[0] = %d,array01[1] = %d,array01[2] = %d&quot;,array01[0],array01[1],array01[2]);  </div><div class="line">NSLog(@&quot;copyArray01[0] = %d,copyArray01[1] = %d,copyArray01[2] = %d&quot;,copyArray01[0],copyArray01[1],copyArray01[2]);  </div><div class="line">NSLog(@&quot;mutableCopyArray01[0] = %d,mutableCopyArray01[1] = %d,mutableCopyArray01[2] = %d&quot;,mutableCopyArray01[0],mutableCopyArray01[1],mutableCopyArray01[2]);</div></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-d2575957910acdd3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>不难发现，copy是浅拷贝，mutableCopy是深拷贝，不过需要注意的是容器对象的成员元素都指向相同的地址</p>
+<h4 id="可变对象NSMutableArray"><a href="#可变对象NSMutableArray" class="headerlink" title="可变对象NSMutableArray"></a>可变对象NSMutableArray</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSMutableArray *array01 = [NSMutableArray arrayWithObjects:@&quot;a&quot;,@&quot;b&quot;,@&quot;c&quot;, nil nil];  </div><div class="line">NSArray *copyArray01 = [array01 copy];  </div><div class="line">NSMutableArray *mutableCopyArray01 = [array01 mutableCopy];  </div><div class="line"></div><div class="line">NSLog(@&quot;array01 = %d,copyArray01 = %d&quot;,array01,copyArray01);  </div><div class="line">NSLog(@&quot;array01 = %d,mutableCopyArray01 = %d&quot;,array01,mutableCopyArray01);  </div><div class="line">NSLog(@&quot;array01[0] = %d,array01[1] = %d,array01[2] = %d&quot;,array01[0],array01[1],array01[2]);  </div><div class="line">NSLog(@&quot;copyArray01[0] = %d,copyArray01[1] = %d,copyArray01[2] = %d&quot;,copyArray01[0],copyArray01[1],copyArray01[2]);  </div><div class="line">NSLog(@&quot;mutableCopyArray01[0] = %d,mutableCopyArray01[1] = %d,mutableCopyArray01[2] = %d&quot;,mutableCopyArray01[0],mutableCopyArray01[1],mutableCopyArray01[2]);</div></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1479547-010cb64b8cc583d0?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>对比可见，容器对象与非容器对象类似，可变对象的复制都是深拷贝，不可变对象copy是浅拷贝，mutableCopy是深拷贝<br>需要注意的是对容器而言，元素对象始终是指针复制</p>
+<h2 id="如何实现容器对象的完全深拷贝？"><a href="#如何实现容器对象的完全深拷贝？" class="headerlink" title="如何实现容器对象的完全深拷贝？"></a>如何实现容器对象的完全深拷贝？</h2><p>正如前面所说，容器对象中的元素对象无论是copy还是mutableCopy都是指针复制，如何实现容器对象的完全深拷贝呢？</p>
+<h4 id="系统API"><a href="#系统API" class="headerlink" title="系统API"></a>系统API</h4><p>系统为我们实现容器对象的完全深拷贝提供了方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithArray:(NSArray&lt;ObjectType&gt; *)array copyItems:(BOOL)flag</div><div class="line"></div><div class="line">// 使用方式如下：</div><div class="line"></div><div class="line">- (void)fullCopy &#123;</div><div class="line">    NSMutableArray *marray1 = [[NSMutableArray alloc] init];</div><div class="line">    </div><div class="line">    NSMutableString *mstr1 = [[NSMutableString alloc]initWithString:@&quot;value1&quot;];</div><div class="line">    NSMutableString *mstr2 = [[NSMutableString alloc]initWithString:@&quot;value2&quot;];</div><div class="line">    </div><div class="line">    [marry1 addObject:mstr1];</div><div class="line">    [marry1 addObject:mstr2];</div><div class="line">    </div><div class="line">    NSArray *marray2 = [[NSArray alloc] initWithArray:marry1 copyItems:YES];</div><div class="line">    </div><div class="line">    NSLog(@&quot;marry1:%p - %@ \r\n&quot;,marry1,marry1);</div><div class="line">    NSLog(@&quot;marry2:%p - %@ \r\n&quot;,marray2,marray2);</div><div class="line">    NSLog(@&quot;数组元素地址:value1:%p - value2:%p \r\n&quot;,marry1[0],marry1[1]);</div><div class="line">    NSLog(@&quot;数组元素地址:value1:%p - value2:%p \r\n&quot;,marray2[0],marray2[1]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="归档解档方法"><a href="#归档解档方法" class="headerlink" title="归档解档方法"></a>归档解档方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (void) deplyFullCopy</div><div class="line">&#123;</div><div class="line">    NSMutableArray *marry1 = [[NSMutableArray alloc] init];</div><div class="line">    </div><div class="line">    NSMutableString *mstr1 = [[NSMutableString alloc]initWithString:@&quot;value1&quot;];</div><div class="line">    NSMutableString *mstr2 = [[NSMutableString alloc]initWithString:@&quot;value2&quot;];</div><div class="line">    </div><div class="line">    [marry1 addObject:mstr1];</div><div class="line">    [marry1 addObject:mstr2];</div><div class="line">    </div><div class="line">    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:marry1];</div><div class="line">    NSArray *marray2 = [NSKeyedUnarchiver unarchiveTopLevelObjectWithData:data error:nil];</div><div class="line">    </div><div class="line">    NSLog(@&quot;marry1:%p - %@ \r\n&quot;,marry1,marry1);</div><div class="line">    NSLog(@&quot;marry2:%p - %@ \r\n&quot;,marray2,marray2);</div><div class="line">    NSLog(@&quot;数组元素地址:value1:%p - value2:%p \r\n&quot;,marry1[0],marry1[1]);</div><div class="line">    NSLog(@&quot;数组元素地址:value1:%p - value2:%p \r\n&quot;,marray2[0],marray2[1]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="自定义类如何实现深、浅拷贝"><a href="#自定义类如何实现深、浅拷贝" class="headerlink" title="自定义类如何实现深、浅拷贝"></a>自定义类如何实现深、浅拷贝</h2><ul>
+<li>要想实现对象的自定义拷贝，必须实现NSCopying，NSMutableCopying协议，实现该协议的copyWithZone方法和mutableCopyWithZone方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@interface Person()&lt;NSCopying, NSMutableCopying&gt;  </div><div class="line">  </div><div class="line">@end  </div><div class="line">  </div><div class="line">@implementation Person  </div><div class="line">  </div><div class="line">// 对应copy方法  </div><div class="line">- (id)copyWithZone:(NSZone *)zone  </div><div class="line">&#123;  </div><div class="line">    Person *person = [[Person allocWithZone:zone] init];  </div><div class="line">    person.name = self.name; // 这里的self就是被copy的对象  </div><div class="line">    person.age = self.age;  </div><div class="line">    return person;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">- (id)mutableCopyWithZone:(NSZone *)zone  </div><div class="line">&#123;  </div><div class="line">    Person *person = [[Person allocWithZone:zone] init];  </div><div class="line">    person.name = self.name;  </div><div class="line">    person.age = self.age;  </div><div class="line">    return person;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>在声明字符串属性时尽量使用copy，如果使用strong声明属性，那么当源字符串发生改变时，对应的属性值也会发生改变，因为他们指向同一个地址，而使用copy就能杜绝这种情况，因为对于可变字符串进行copy是深拷贝，而strong只表示持有对象，引用计数加一。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2018/09/18/深拷贝、浅拷贝的理解与使用场景/" data-id="cjo9ob3qt003d5979jd7glxqr" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/28/react-native-vector-icons的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          react-native-vector-icons的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/22/iOS的引用计数与循环引用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">iOS的引用计数与循环引用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是深拷贝、浅拷贝？"><span class="toc-number">1.</span> <span class="toc-text">什么是深拷贝、浅拷贝？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？"><span class="toc-number">2.</span> <span class="toc-text">容器类对象与非容器类对象在深拷贝、浅拷贝方面的异同点？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是容器类对象？什么是非容器类对象？"><span class="toc-number">2.0.1.</span> <span class="toc-text">什么是容器类对象？什么是非容器类对象？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不可变对象NSString"><span class="toc-number">2.0.2.</span> <span class="toc-text">不可变对象NSString</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变对象NSMutableString"><span class="toc-number">2.0.3.</span> <span class="toc-text">可变对象NSMutableString</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不可变对象NSArray"><span class="toc-number">2.0.4.</span> <span class="toc-text">不可变对象NSArray</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可变对象NSMutableArray"><span class="toc-number">2.0.5.</span> <span class="toc-text">可变对象NSMutableArray</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现容器对象的完全深拷贝？"><span class="toc-number">3.</span> <span class="toc-text">如何实现容器对象的完全深拷贝？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#系统API"><span class="toc-number">3.0.1.</span> <span class="toc-text">系统API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归档解档方法"><span class="toc-number">3.0.2.</span> <span class="toc-text">归档解档方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义类如何实现深、浅拷贝"><span class="toc-number">4.</span> <span class="toc-text">自定义类如何实现深、浅拷贝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用场景"><span class="toc-number">5.</span> <span class="toc-text">使用场景</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 Leafly&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;luzhiyongmail@sohu.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

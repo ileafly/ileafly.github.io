@@ -65,6 +65,227 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS项目添加自定义字体" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/28/iOS项目添加自定义字体/" class="article-date">
+  <time datetime="2016-11-28T03:23:00.000Z" itemprop="datePublished">2016-11-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/28/iOS项目添加自定义字体/">iOS项目添加自定义字体</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>有时候系统的字体无法满足我们的要求，这时就需要我们添加自定义字体，下面就来总结一下添加自定义字体的流程和注意点。</p>
+<p>####添加字体<br>首先，我们需要将需要自定义的字体文件添加到我们的项目中<br><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_1.png" alt="添加字体"></p>
+<p>####配置plist<br>添加完成后就需要配置plist文件告诉项目你添加了自定义字体<br><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_2.png" alt="配置plist"></p>
+<p>####打印字体名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 打印字体</div><div class="line">        let familyNames: Array = UIFont.familyNames()</div><div class="line">        </div><div class="line">        for familyName in familyNames &#123;</div><div class="line">            let fontNames = UIFont.fontNamesForFamilyName(familyName)</div><div class="line">            </div><div class="line">            for fontName in fontNames &#123;</div><div class="line">                print(&quot;Font:&quot;+fontName)</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/iOS项目添加自定义字体/iOS项目添加自定义字体_3.png" alt="打印字体名称"></p>
+<p>####使用新字体<br>打印完所有的字体名称后，我们需要找到新字体的名称，这个比较考验眼力，需要说明的是导入的字体名称与你的字体文件名不存在必然关联，所以找起来比较麻烦，本项目中导入的字体名称是<code>Woxxdrgnxpjndtijvopiqfvieua</code> <code>Rlwnvqnxbaojotrussvqutrmalm</code> <code>Gjfhtoyvcitsqewokxubciqwsnn</code> <code>Daipwzrbqhqhabefqqcwoentynp</code>。<br>调用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[UIFont fontWithName:@&quot;Woxxdrgnxpjndtijvopiqfvieua&quot; size:9];</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/11/28/iOS项目添加自定义字体/" data-id="cjo9ob3q800255979eyoccehe" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS基础/">iOS基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-React-Native之Navigator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/24/React-Native之Navigator/" class="article-date">
+  <time datetime="2016-11-24T03:26:00.000Z" itemprop="datePublished">2016-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ReactNative/">ReactNative</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/24/React-Native之Navigator/">React-Native之Navigator</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h4 id="结合官方文档，简单使用Navigator"><a href="#结合官方文档，简单使用Navigator" class="headerlink" title="结合官方文档，简单使用Navigator"></a>结合官方文档，简单使用Navigator</h4><p>React Native内置了navigation组件，在<a href="http://facebook.github.io/react-native/docs/using-navigators.html" target="_blank" rel="external">官方文档</a>中对于如何使用Navigator有了一个简要的说明，下面就让我们跟随文档进行学习。 </p>
+<ol>
+<li><p>页面搭建</p>
+<p>根据文档的描述，我们需要先创建一个文件命名为<code>MyScene.js</code>，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要使用的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; View, Text, Navigator &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明MyScene类，并设置为外部可以引用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyScene</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> get defaultProps() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">title</span>: <span class="string">'MyScene'</span></div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 绘制界面</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;View style=&#123;&#123;height: 200, top: 64&#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Hi! My name is &#123;this.props.title&#125;.&lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​      创建完<code>MyScene.js</code>后我们就需要进入到<code>index.ios.js</code>中进行更改。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;MyScene /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
+<p>​      进行上述操作后运行项目来看一下效果：</p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_1.png" alt="React-Native之Navigator_1"></p>
+<p>显然，跟我们想要的效果差很远。       </p>
+<ol>
+<li><p>使用Navigator</p>
+<p>接下来我们就需要利用<code>Navigator</code>组件，修改<code>index.ios.js</code>文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
+<p>进行上述操作后我们再次运行项目：</p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_2.png" alt="React-Native之Navigator_2.png"></p>
+<p>比较两次的运行结果，似乎只是文案内容发生了改变，让我们继续下去看到更多的变化</p>
+</li>
+<li><p>加入<code>push</code> <code>pop</code> </p>
+<p><code>navigator</code>给我们提供了<code>push</code> <code>pop</code> 操作，我们来继续修改<code>index.ios.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry, Navigator, Text, StyleSheet, View, TouchableOpacity &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; </div><div class="line">              // push操作调用函数</div><div class="line">               onForward=&#123; () =&gt; &#123;</div><div class="line">                 const nextIndex = route.index + 1;</div><div class="line">                 navigator.push(&#123;</div><div class="line">                    title: 'Scene ' + nextIndex,</div><div class="line">                    index: nextIndex,</div><div class="line">                 &#125;);</div><div class="line">               &#125;&#125;</div><div class="line">  </div><div class="line">              // pop操作调用函数</div><div class="line">               onBack=&#123; () =&gt; &#123;</div><div class="line">                 if (route.index &gt; 0) &#123;</div><div class="line">                   navigator.pop();</div><div class="line">                 &#125;</div><div class="line">               &#125;&#125;</div><div class="line">           /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
+<p>现在我们在<code>MyScene.js</code> 里添加上点击事件，并调用<code>onForward</code>和<code>onBack</code>方法看看会有怎样的效果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要使用的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; View, Text, Navigator, TouchableHighlight &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明MyScene类，并设置为外部可以引用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyScene</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">static</span> get defaultProps() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">title</span>: <span class="string">'MyScene'</span></div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 绘制界面</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;View style=&#123;&#123;height: 200, top: 64&#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Hi! My name is &#123;this.props.title&#125;.&lt;/Text&gt;</div><div class="line">      // 添加两个可点击区域，分别用于push和pop</div><div class="line">        &lt;TouchableHighlight onPress=&#123;this.props.onForward&#125;&gt;</div><div class="line">           &lt;Text&gt;Tap me to load the next scene&lt;/Text&gt;</div><div class="line">        &lt;/TouchableHighlight&gt;</div><div class="line">        &lt;TouchableHighlight onPress=&#123;this.props.onBack&#125;&gt;</div><div class="line">           &lt;Text&gt;Tap me to go back&lt;/Text&gt;</div><div class="line">        &lt;/TouchableHighlight&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyScene.propTypes = &#123;</div><div class="line">  <span class="attr">title</span>: PropTypes.string.isRequired,</div><div class="line">  <span class="attr">onForward</span>: PropTypes.func.isRequired,</div><div class="line">  <span class="attr">onBack</span>: PropTypes.func.isRequired,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>再次运行项目看一下效果：</p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_3.png" alt="React-Native之Navigator_3.png"></p>
+<p>点击<code>Tap me to load the next scene</code>能够push下一个页面</p>
+<p>点击<code>Tap me to go back</code>能够pop到上一个页面</p>
+<p>看来我们已经顺利集成了<code>Navigator</code> ,不过，似乎还缺少什么？</p>
+</li>
+<li><p>显示Navigator Bar</p>
+<p>通过上述操作我们能够正常实现<code>Navigator</code> 的<code>push</code> 和<code>pop</code> 操作啦，但是，我们一直没有看到导航栏，这是因为在<code>React Native</code>中我们需要额外设置才能够展现<code>Navigator Bar</code> ，下面就让我们来继续修改<code>index.ios.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 导入需要用到的组件</span></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; AppRegistry, Navigator, Text, StyleSheet, View, TouchableOpacity &#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 导入需要引用的文件</span></div><div class="line"><span class="keyword">import</span> MyScene <span class="keyword">from</span> <span class="string">'./MyScene'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明入口类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoDawgApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// 绘制界面，通过加载 MyScene</span></div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="comment">// 创建一个Navigator 并嵌套 MyScene</span></div><div class="line">      &lt;Navigator</div><div class="line">         initialRoute=&#123;&#123; <span class="attr">title</span>: <span class="string">'My Initial Scene'</span>, <span class="attr">index</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">         renderScene=&#123;(route, navigator) =&gt; &#123;</div><div class="line">           <span class="keyword">return</span> &lt;MyScene title=&#123;route.title&#125; </div><div class="line">              // push操作调用函数</div><div class="line">               onForward=&#123; () =&gt; &#123;</div><div class="line">                 const nextIndex = route.index + 1;</div><div class="line">                 navigator.push(&#123;</div><div class="line">                    title: 'Scene ' + nextIndex,</div><div class="line">                    index: nextIndex,</div><div class="line">                 &#125;);</div><div class="line">               &#125;&#125;</div><div class="line">  </div><div class="line">              // pop操作调用函数</div><div class="line">               onBack=&#123; () =&gt; &#123;</div><div class="line">                 if (route.index &gt; 0) &#123;</div><div class="line">                   navigator.pop();</div><div class="line">                 &#125;</div><div class="line">               &#125;&#125;</div><div class="line">           /&gt;</div><div class="line">         &#125;&#125;</div><div class="line">         // 增加navigationBar</div><div class="line">          navigationBar=&#123;</div><div class="line">                  	&lt;Navigator.NavigationBar</div><div class="line">                       routeMapper=&#123;NavigationBarRouteMapper&#125;</div><div class="line">                       style=&#123;&#123;backgroundColor:'#fff',</div><div class="line">                               borderColor:'#dddddd',</div><div class="line">                               borderWidth:1,</div><div class="line">                               height: 64&#125;&#125;</div><div class="line">                  	/&gt;</div><div class="line">         &#125;</div><div class="line">      /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 导航栏的Mapper</div><div class="line">var NavigationBarRouteMapper = &#123;</div><div class="line">  // 左键</div><div class="line">  LeftButton(route, navigator, index, navState) &#123;</div><div class="line">    if (index &gt; 0) &#123;</div><div class="line">      return (</div><div class="line">        &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">          &lt;TouchableOpacity</div><div class="line">            underlayColor='transparent'</div><div class="line">            onPress=&#123;() =&gt; &#123;if (index &gt; 0) &#123;navigator.pop()&#125;&#125;&#125;&gt;</div><div class="line">            &lt;Text style=&#123;styles.leftNavButtonText&#125;&gt;</div><div class="line">              后退</div><div class="line">            &lt;/Text&gt;</div><div class="line">          &lt;/TouchableOpacity&gt;</div><div class="line">        &lt;/View&gt;</div><div class="line">      );</div><div class="line">    &#125; else &#123;</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  // 右键</div><div class="line">  RightButton(route, navigator, index, navState) &#123;</div><div class="line">    if (route.onPress)</div><div class="line">      return (</div><div class="line">        &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">          &lt;TouchableOpacity</div><div class="line">            onPress=&#123;() =&gt; route.onPress()&#125;&gt;</div><div class="line">            &lt;Text style=&#123;styles.rightNavButtonText&#125;&gt;</div><div class="line">              &#123;route.rightText || '右键'&#125;</div><div class="line">            &lt;/Text&gt;</div><div class="line">          &lt;/TouchableOpacity&gt;</div><div class="line">        &lt;/View&gt;</div><div class="line">      );</div><div class="line">  &#125;,</div><div class="line">  // 标题</div><div class="line">  Title(route, navigator, index, navState) &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.navContainer&#125;&gt;</div><div class="line">        &lt;Text style=&#123;styles.title&#125;&gt;</div><div class="line">          应用标题</div><div class="line">        &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var styles = StyleSheet.create(&#123;</div><div class="line">  navBar: &#123;</div><div class="line">      backgroundColor:'#fff',</div><div class="line">      borderColor:'#dddddd',</div><div class="line">      borderWidth:1,</div><div class="line">      height: 64</div><div class="line">  &#125;,</div><div class="line">  navBarTitleText: &#123;</div><div class="line">    fontWeight: '500',</div><div class="line">  &#125;,</div><div class="line">  navBarLeftButton: &#123;</div><div class="line">    paddingLeft: 5,</div><div class="line">  &#125;,</div><div class="line">  navBarRightButton: &#123;</div><div class="line">      marginRight:5,</div><div class="line">  &#125;,</div><div class="line">  icon: &#123;</div><div class="line">      width:30,</div><div class="line">      height:30,</div><div class="line">      marginTop:6,</div><div class="line">      textAlign:'center'</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 注册入口类</div><div class="line">AppRegistry.registerComponent('YoDawgApp', () =&gt; YoDawgApp);</div></pre></td></tr></table></figure>
+<p>我们来最后看一下效果：</p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_4.png" alt="React-Native之Navigator_4"></p>
+<p><img src="https://github.com/luzhiyongGit/luzhiyongGit.github.io/raw/hexo/images/ReactNative/React-Native之Navigator_5.png" alt="React-Native之Navigator_5"></p>
+<p>​</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/11/24/React-Native之Navigator/" data-id="cjo9ob3pt00135979oqglst37" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-自动化打包IPA脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/自动化打包IPA脚本/" class="article-date">
+  <time datetime="2016-11-17T01:29:00.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/自动化打包IPA脚本/">自动化打包IPA脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="自动化打包IPA原理"><a href="#自动化打包IPA原理" class="headerlink" title="自动化打包IPA原理"></a>自动化打包IPA原理</h3><p>当我们用Xcode编译项目时，其实是Xcode执行了<code>xcodebuild</code>这条命令。</p>
+<p>当我们用Xcode打包项目时，其实是Xcode执行了<code>xcrun</code>这条命令。</p>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><ol>
+<li><p>xcodebuild -list</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -list [[-project ]|[-workspace ]] [-json]</div></pre></td></tr></table></figure>
+</li>
+<li><p>xcodebuild -project</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild [-project] [[-target]...|-alltargets] [-configuration] [-arch]... [-sdk [|]] [-showBuildSettings] [=]... []...</div></pre></td></tr></table></figure>
+</li>
+<li><p>xcodebuild -workspace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -workspace -scheme [-destination]...[-configuration] [-arch]...[-sdk [|]] [-showBuildSettings] [=]</div></pre></td></tr></table></figure>
+</li>
+<li><p>xcodebuild -exportArchive</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace xxx.xcworkspace -scheme xx -archivePath xxx.xcarchive</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath xx.xcarchive -exportPath xx -exportFormat ipa</div></pre></td></tr></table></figure>
+</li>
+<li><p>xcrun</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcrun -sdk iphoneos PackageApplication build/Release -iphoneos/xx.app -o ~/Desktop/xx.ipa</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>根据上述命令我们有两种方法来生成我们需要的ipa包。</p>
+<ol>
+<li><p>使用<code>xcodebuild</code>命令来编译我们的项目生成app，然后再用<code>xcrun</code>将app转成ipa</p>
+</li>
+<li><p>使用<code>xcodebuild archive</code>命令来直接生成我们需要的ipa</p>
+<p>由于在 macos10.12和xcode8的环境下，使用<code>xcrun</code>方法会出现一个警告</p>
+<p><code>warning: PackageApplication is deprecated, use xcodebuild -exportArchive instead.</code></p>
+<p>说明<code>PackageApplication</code>已经被弃用了，所以建议选择第二种方法来打包。</p>
+</li>
+</ol>
+<h5 id="项目实践"><a href="#项目实践" class="headerlink" title="项目实践"></a>项目实践</h5><h6 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">SCHEMENAME=项目的Scheme Name</div><div class="line"></div><div class="line">DATE=`date +%Y%m%d_%H%M`</div><div class="line">SOURCEPATH=$( cd &quot;$( dirname %0)&quot; &amp;&amp; pwd)</div><div class="line">IPAPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE</div><div class="line">ARCHIVEPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE/项目名称_$DATE.xcarchive</div><div class="line">IPANAME=项目名称_$DATE.ipa</div><div class="line"></div><div class="line">PYG_DOMAIN=&quot;http://www.pgyer.com&quot;</div><div class="line">PGY_UPLOAD_URL=&quot;$PYG_DOMAIN/apiv1/app/upload&quot;</div><div class="line">PGY_UKEY=&quot;你的蒲公英账号的ukey&quot;</div><div class="line">PGY_API_KEY=&quot;你的蒲公英账号的api key&quot;</div><div class="line"></div><div class="line"># build </div><div class="line">xcodebuild archive -workspace $SOURCEPATH/项目名称.xcworkspace \</div><div class="line">-scheme $SCHEMENAME \</div><div class="line">-configuration Release \</div><div class="line">-archivePath $ARCHIVEPATH</div><div class="line"></div><div class="line">if [ -e $ARCHIVEPATH ]; then</div><div class="line">	echo &quot;xcodebuild Successful&quot;</div><div class="line">else </div><div class="line">	echo &quot;error:Build Failed!&quot;</div><div class="line">	exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># exportArchive ipa</div><div class="line">xcodebuild -exportArchive -archivePath $ARCHIVEPATH \</div><div class="line">-exportPath $IPAPATH -exportFormat ipa </div><div class="line"></div><div class="line"># xcrun .ipa</div><div class="line"># xcrun -sdk iphoneos PackageApplication \</div><div class="line">#       -v $IPAPATH/Build/Products/Release-iphoneos/$SCHEMENAME.app \</div><div class="line">#       -o $IPAPATH/$IPANAME</div><div class="line"></div><div class="line">if [ -e $IPAPATH ]; then</div><div class="line">	echo &quot;Create IPA Success!&quot;</div><div class="line">	open $IPAPATH</div><div class="line">else </div><div class="line">	echo &quot;error: Create IPA failed!&quot;</div><div class="line">fi</div><div class="line"></div><div class="line"># upload ipa  上传ipa到蒲公英发布平台</div><div class="line">echo &quot;Uploading the ipa file...&quot;</div><div class="line">echo $IPAPATH</div><div class="line">response=`curl -F &quot;file=@$IPAPATH&quot; -F &quot;uKey=$PGY_UKEY&quot; -F &quot;_api_key=$PGY_API_KEY&quot; $PGY_UPLOAD_URL`</div><div class="line">echo $response</div><div class="line"></div><div class="line"># send email 邮件通知同事让他们之间去下载</div><div class="line">echo &quot;蒲公英网站上的APP已更新，欢迎更新.下载地址：https://www.pgyer.com/****&quot; | mail -s &quot;ipa更新&quot; ****@163.com,****@163.com,****@163.com,****@163.com</div></pre></td></tr></table></figure>
+<h6 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">SCHEMENAME=项目的Scheme Name</div><div class="line"></div><div class="line">DATE=`date +%Y%m%d_%H%M`</div><div class="line">SOURCEPATH=$( cd &quot;$( dirname %0)&quot; &amp;&amp; pwd)</div><div class="line"># IPAPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE/CinemaForiPhoneEnterprise_$DATE.ipa</div><div class="line">IPAPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE</div><div class="line">ARCHIVEPATH=$SOURCEPATH/AUTOBUILDIPA/$DATE/项目名称_$DATE.xcarchive</div><div class="line">IPANAME=项目名称_$DATE.ipa</div><div class="line"></div><div class="line">PYG_DOMAIN=&quot;http://www.pgyer.com&quot;</div><div class="line">PGY_UPLOAD_URL=&quot;$PYG_DOMAIN/apiv1/app/upload&quot;</div><div class="line">PGY_UKEY=&quot;你的蒲公英账号的ukey&quot;</div><div class="line">PGY_API_KEY=&quot;你的蒲公英账号的api key&quot;</div><div class="line"></div><div class="line"># build </div><div class="line">xcodebuild -workspace $SOURCEPATH/项目.xcworkspace \</div><div class="line">-scheme $SCHEMENAME \</div><div class="line">-configuration Release \</div><div class="line">clean \</div><div class="line">build \</div><div class="line">-derivedDataPath $IPAPATH</div><div class="line"></div><div class="line">if [ -e $IPAPATH ]; then</div><div class="line">	echo &quot;xcodebuild Successful&quot;</div><div class="line">else </div><div class="line">	echo &quot;error:Build Failed!&quot;</div><div class="line">	exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># xcrun .ipa</div><div class="line">xcrun -sdk iphoneos PackageApplication \</div><div class="line">-v $IPAPATH/Build/Products/Release-iphoneos/$SCHEMENAME.app \</div><div class="line">-o $IPAPATH/$IPANAME</div><div class="line"></div><div class="line">if [ -e $IPAPATH ]; then</div><div class="line">   echo &quot;Create IPA Success!&quot;</div><div class="line">    open $IPAPATH</div><div class="line">	# upload ipa</div><div class="line">   echo &quot;Uploading the ipa file...&quot;</div><div class="line">   echo $IPAPATH</div><div class="line">      response=`curl -F &quot;file=@$IPAPATH/$IPANAME&quot; -F &quot;uKey=$PGY_UKEY&quot; -F &quot;_api_key=$PGY_API_KEY&quot; $PGY_UPLOAD_URL`</div><div class="line">   echo $response</div><div class="line"></div><div class="line">   # send email</div><div class="line">   echo &quot;蒲公英网站上的APP已更新，欢迎更新.下载地址：https://www.pgyer.com/****&quot; | mail -s &quot;ipa更新&quot; ****@163.com,****@163.com,****@163.com,****@163.com</div><div class="line">else </div><div class="line">	echo &quot;error: Create IPA failed!&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>写好已经脚本后，将它拷贝到<code>/usr/local/bin</code>目录下，添加权限：<code>chmod 777 xbuild</code></p>
+<p>执行完以上操作后，就可以在项目目录下直接执行xbuild打包</p>
+<p>通过实践发现方案二可以正常使用，方案一打出来的企业版ipa不能正常安装，应该是证书配置问题，还需要调研。</p>
+<h5 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h5><p><a href="http://www.jianshu.com/p/97c97c2ec1ca" target="_blank" rel="external">从零开始写个自动打包IPA脚本</a></p>
+<p><a href="http://www.jianshu.com/p/3f43370437d2" target="_blank" rel="external">iOS 自动构建命令——xcodebuild</a></p>
+<p><a href="http://ios.jobbole.com/90259/" target="_blank" rel="external">关于 iOS 批量打包的总结</a></p>
+<p><a href="http://stackoverflow.com/questions/1822425/sending-mail-from-a-bash-shell-script?rq=1" target="_blank" rel="external">脚本发送邮件的实现方法</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.ileafly.com/2016/11/17/自动化打包IPA脚本/" data-id="cjo9ob3r1003p5979yhfk7n4g" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS技巧/">iOS技巧</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-ReactNative入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/02/ReactNative入门/" class="article-date">
@@ -126,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/02/ReactNative入门/" data-id="cjm7e24qs000pbu79kz2u084s" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/02/ReactNative入门/" data-id="cjo9ob3po000q5979psa4w74j" class="article-share-link">分享</a>
       
       
       
@@ -180,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/11/01/iOS10系统下的推送开发/" data-id="cjm7e24ra0020bu79oqywwvjg" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/11/01/iOS10系统下的推送开发/" data-id="cjo9ob3q3001s5979brhi9o89" class="article-share-link">分享</a>
       
       
       
@@ -242,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjm7e24qp000hbu79g14bn587" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/Hexo多台电脑同步/" data-id="cjo9ob3pf000b59792b8lvprs" class="article-share-link">分享</a>
       
       
       
@@ -295,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/" data-id="cjm7e24s3003abu79j8uj18u2" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/移除Pod管理的库后编译报Link错误/" data-id="cjo9ob3qy003j5979bamrp0v7" class="article-share-link">分享</a>
       
       
       
@@ -343,7 +564,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjm7e24r2001gbu79lf4z4hic" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/24/iOS-让子View不响应父View的手势/" data-id="cjo9ob3q2001p5979w5p63okr" class="article-share-link">分享</a>
       
       
       
@@ -391,7 +612,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/" data-id="cjm7e24qh0006bu7923kclxra" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/09/CocoaPods升级后问题解决/" data-id="cjo9ob3pb00065979tc46hfow" class="article-share-link">分享</a>
       
       
       
@@ -455,364 +676,11 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/" data-id="cjm7e24s6003jbu79hwva59zo" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2016/10/08/自定义xopen命令打开工程/" data-id="cjo9ob3r0003m5979xgcqd85y" class="article-share-link">分享</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS技巧/">iOS技巧</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-私有pod创建进阶-如何通过pod管理静态库" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" class="article-date">
-  <time datetime="2016-09-10T07:46:00.000Z" itemprop="datePublished">2016-09-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/">私有pod创建进阶--如何通过pod管理静态库</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>在<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>一文中我们已经总结了如何创建私有的Pod，这次来总结一下如果利用Pod生成和管理静态库。</p>
-<h2 id="创建并发布Pod项目"><a href="#创建并发布Pod项目" class="headerlink" title="创建并发布Pod项目"></a>创建并发布Pod项目</h2><p>首先，我们需要参考<a href="http://www.ileafly.com/2016/08/12/%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Pod/">搭建私有Pod</a>创建一个pod项目至<strong>pod lib lint</strong>验证无误。</p>
-<h2 id="打包类库"><a href="#打包类库" class="headerlink" title="打包类库"></a>打包类库</h2><p>我们需要使用一个cocoapods的插件<a href="https://github.com/CocoaPods/cocoapods-packager" target="_blank" rel="external">cocoapods-packager</a>来完成类库的打包。当然也可以手动编译打包，只是过程会很繁琐。</p>
-<ol>
-<li><p>安装打包插件</p>
-<p>  sudo gem install cocoapods-packager</p>
-</li>
-<li><p>打包</p>
-<p>  pod package Lib.podspec –library –force</p>
-<p><strong>–library</strong>指定打包成 <strong>.a</strong> 文件，如果不带上将会打包成 <strong>.framework</strong> 文件。 <strong>–force</strong>是指强制覆盖。</p>
-</li>
-</ol>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>打包完成后我们就能在当前工程的目录下找到类库文件，将类库拖拽到项目中集成遇到了编译报错<br>造成编译通不过的原因是无法找到类库中使用的一些系统方法，这是因为我们没有在<code>podspec</code>文件里添加系统库的引用和开放头文件。</p>
-<pre><code>s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
-
-s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
-</code></pre><h2 id="管理类库"><a href="#管理类库" class="headerlink" title="管理类库"></a>管理类库</h2><p>打包完成之后，我们能够在对应项目根目录里找到打包好的文件，我们可以直接将他们拖拽到项目中使用。当然，我们也可以利用Pod来帮我们管理打包好的类库。</p>
-<ol>
-<li>在项目根目录中建一个文件夹命名为Release，里面存放一个podspec文件和项目打包成功的.a文件以及.h文件</li>
-<li><p>修改podspec   </p>
-<pre><code>// 指定.h代码源文件地址
-s.source_files = &apos;Release/**/*.h&apos;
-// 指定.a库地址
-s.vendored_libraries = &apos;Release/Lib.a&apos;
-</code></pre></li>
-<li><p>上传Release代码到git master分支，并打上对应tag</p>
-</li>
-<li>发布pod</li>
-</ol>
-<p>贴上Demo中的podspec供参考</p>
-<pre><code>Pod::Spec.new do |s|
-   s.name             = &apos;ZYLib&apos;
-   s.version          = &apos;0.1.0&apos;
-   s.summary          = &apos;A short description of ZYLib.&apos;
-
-   s.homepage         = &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;
-   s.license          = { :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; }
-   s.author           = { &apos;luzy&apos; =&gt; &apos;luzy@2345.com&apos; }
-   s.source           = { :git =&gt; &apos;https://coding.net/u/ileafly/p/ZYLib/git&apos;, :tag =&gt; s.version.to_s }
-
-   s.ios.deployment_target = &apos;7.0&apos;
-
-   s.source_files = &apos;Release/**/*&apos;
-
-   s.vendored_frameworks = &apos;Release/ZYLib.a&apos;
-
-   #s.resource_bundles = {
-   #  &apos;ZYLib&apos; =&gt; [&apos;ZYLib/Assets/*.png&apos;]
-   #}
-
-   s.public_header_files = &apos;ZYLib/Classes/**/*.h&apos;
-   s.frameworks = &apos;UIKit&apos;, &apos;CoreFoundation&apos;, &apos;QuartzCore&apos;, &apos;AssetsLibrary&apos;, &apos;ImageIO&apos;, &apos;Accelerate&apos;, &apos;MobileCoreServices&apos;, &apos;sqlite3&apos;, &apos;libz&apos;
-   s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;
-end 
-</code></pre><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/brycezhang/p/4117180.html" target="_blank" rel="external">使用CocoaPods开发并打包静态库</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/09/10/私有pod创建进阶-如何通过pod管理静态库/" data-id="cjm7e24s10037bu79o4y0daga" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS进阶/">iOS进阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-git命令行入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/31/git命令行入门/" class="article-date">
-  <time datetime="2016-08-31T11:43:00.000Z" itemprop="datePublished">2016-08-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/31/git命令行入门/">git命令行入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>本文结合项目开发中遇到的实际问题对git命令行的使用做一个简单的总结。</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
-<li><p>下载项目</p>
-<pre><code>git clone [url]
-</code></pre></li>
-<li><p>查看本地分支</p>
-<pre><code>git branch
-</code></pre></li>
-<li><p>查看远程分支</p>
-<pre><code>git branch -r
-</code></pre></li>
-<li><p>创建本地分支</p>
-<pre><code>git branch [branch]
-</code></pre></li>
-<li><p>切换本地分支</p>
-<pre><code>git checkout [branch]
-</code></pre></li>
-<li><p>拉取远程分支代码</p>
-<pre><code>git pull origin [remote-branch]
-</code></pre></li>
-<li><p>添加当前目录的所有文件到暂存区</p>
-<pre><code>git add .
-</code></pre></li>
-<li><p>提交暂存区到仓库区</p>
-<pre><code>git commit -m [message]
-</code></pre></li>
-<li><p>合并分支</p>
-<pre><code>git merge [branch]
-</code></pre></li>
-<li><p>提交本地分支代码</p>
-<p>  git push origin [remote-branch]</p>
-</li>
-</ol>
-<h3 id="tag命令"><a href="#tag命令" class="headerlink" title="tag命令"></a>tag命令</h3><ol>
-<li><p>列出所有tag</p>
-<pre><code>git tag
-</code></pre></li>
-<li><p>新建tag</p>
-<pre><code># 在当前commit新建一个tag
-git tag [tag]
-
-# 在指定commit新建一个tag
-git tag [tag] [commit]
-</code></pre></li>
-<li><p>删除本地tag</p>
-<pre><code>git tag -d [tag]
-</code></pre></li>
-<li><p>删除远程tag</p>
-<pre><code>git push origin :refs/tags/[tag]
-</code></pre></li>
-<li><p>提交指定tag</p>
-<pre><code>git push [remote] [tag]
-</code></pre></li>
-<li><p>提交所有tag</p>
-<pre><code>git push --tags
-</code></pre></li>
-<li><p>基于某个tag新建一个分支</p>
-<pre><code>git checkout -b [branch] [tag]
-</code></pre><p>​    </p>
-<h3 id="撤销命令"><a href="#撤销命令" class="headerlink" title="撤销命令"></a>撤销命令</h3></li>
-<li><p>恢复暂存区的指定文件到工作区</p>
-<pre><code>git checkout [file]
-</code></pre></li>
-<li><p>恢复某个commit的指定文件到工作区</p>
-<pre><code>git checkout [commit] [file]
-</code></pre></li>
-<li><p>恢复暂存区的所有文件到工作区</p>
-<pre><code>git checkout .
-</code></pre></li>
-<li><p>重置暂存区的指定文件，与上一次commit保持一致，但是工作区不变</p>
-<pre><code>git reset [file]
-</code></pre></li>
-<li><p>重置暂存区和工作区，与上次commit保持一致</p>
-<pre><code>git reset --hard       
-</code></pre><p>​    </p>
-<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3></li>
-<li><p>删除工作区的文件，并将这次删除放入暂存区</p>
-<pre><code>git rm [file1] [file2]  
-</code></pre></li>
-<li><p>停止追踪指定文件，但该文件会保留在工作区</p>
-<pre><code>git rm --cached [file]
-</code></pre></li>
-<li><p>删除本地分支</p>
-<pre><code>git branch -d [branch]
-</code></pre></li>
-<li><p>删除远程分支</p>
-<pre><code>git push origin --delete [remote-branch]
-
-git branch -dr [remore-branch]
-</code></pre></li>
-<li><p>删除本地tag</p>
-<pre><code>git tag -d [tag]
-</code></pre></li>
-<li><p>删除远程tag</p>
-<pre><code>git push origin :refs/tags/[tag]
-</code></pre></li>
-</ol>
-<h4 id="导出纯代码"><a href="#导出纯代码" class="headerlink" title="导出纯代码"></a>导出纯代码</h4><ol>
-<li>导出纯代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git archive --format zip --output &quot;./output.zip&quot; master -0</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h4><ol>
-<li><p>查看冲突</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff</div></pre></td></tr></table></figure>
-</li>
-<li><p>选择对方版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --theirs [conflict file]</div></pre></td></tr></table></figure>
-</li>
-<li><p>选择本地版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --ours [conflict flie]</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">常用Git命令清单</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/31/git命令行入门/" data-id="cjm7e24r0001cbu791n6tf16u" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-个人博客进阶-Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/25/个人博客进阶-Hexo搭建博客/" class="article-date">
-  <time datetime="2016-08-25T02:31:00.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/个人博客进阶-Hexo搭建博客/">个人博客进阶--Hexo搭建博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>在结合Github、Jekyll搭建好自己的博客后，发现无法方便的更换主题和给文章进行分类，通过调查发现很多精美的博客都是结合Github和<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Hexo</a>搭建的，本文就是分享一下我是如何利用Hexo搭建自己的博客的。</p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h4><p>hexo是一款基于<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>的静态博客框架，所以想要安装Hexo，我们首先需要安装Node.js库。我们可以到Node.js的<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
-<h4 id="正式安装Hexo"><a href="#正式安装Hexo" class="headerlink" title="正式安装Hexo"></a>正式安装Hexo</h4><p>1.执行安装Hexo命令</p>
-<pre><code>sudo npm install -g hexo
-</code></pre><p>2.创建blog文件夹并cd到blog文件夹内</p>
-<p>3.执行init命令初始化hexo</p>
-<pre><code>hexo init
-</code></pre><p>4.生成静态页面</p>
-<pre><code>hexo g
-</code></pre><p>5.本地启动服务器，进行文章预览</p>
-<pre><code>hexo server
-</code></pre><p>  在浏览器中输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可预览文章</p>
-<p>6.将github仓库与blog建立关联</p>
-<pre><code>vi _config.yml
-
-deploy:
-   type: git
-   repo: https://github.com/luzhiyongGit/luzhiyongGit.github.io
-   branch: master
-</code></pre><p>  执行配置命令</p>
-<pre><code>npm install hexo-deployer-git -S
-</code></pre><p>7.发布博客</p>
-<pre><code>hexo d
-</code></pre><p>  执行完毕后，你会发现你的github仓库内容已经发生了更改，同时打开<a href="https://luzhiyonggit.github.io" target="_blank" rel="external">https://luzhiyonggit.github.io</a>，能够看到一篇默认博客</p>
-<h3 id="利用hexo编写博客"><a href="#利用hexo编写博客" class="headerlink" title="利用hexo编写博客"></a>利用hexo编写博客</h3><p>1.新建一篇博客</p>
-<pre><code>hexo new 博客名称
-</code></pre><p>2.生成博客页面</p>
-<pre><code>hexo g
-</code></pre><p>3.发布博客</p>
-<pre><code>hexo d
-</code></pre><h3 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h3><p>Hexo有非常多的主题可以选择替换，替换流程也特别方便</p>
-<p>1.从<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">Hexo Themes</a>中找到一个你心仪的主题，本博客使用的是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">next</a></p>
-<p>2.在你的blog文件目录下，执行下面的命令</p>
-<pre><code>git clone https://github.com/iissnan/hexo-theme-next.git themes/next
-</code></pre><p>3.编辑配置信息</p>
-<pre><code>vi _config.yml
-
-# Extensions
-## Plugins: http://hexo.io/plugins/
-## Themes: http://hexo.io/themes/
-theme: next
-</code></pre><p>4.生成博客页面</p>
-<pre><code>hexo g
-</code></pre><p>5.发布博客</p>
-<pre><code>hexo d
-</code></pre><h3 id="特效配置"><a href="#特效配置" class="headerlink" title="特效配置"></a>特效配置</h3><pre><code>next主题有一个[next wiki](https://github.com/iissnan/hexo-theme-next/wiki/)提供了很多特性配置的方案，我们可以通过参考它完成很多特性配置
-</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.tuicool.com/articles/ueI7naV" target="_blank" rel="external">简洁轻便的博客平台: Hexo详解</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2016/08/25/个人博客进阶-Hexo搭建博客/" data-id="cjm7e24rq002fbu795lssxw7e" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
     </footer>
   </div>
@@ -848,23 +716,23 @@ theme: next
       <ul>
         
           <li>
+            <a href="/2018/11/05/iPhoneX隐藏底部Home条/">iPhoneX隐藏底部Home条</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/28/react-native-vector-icons的使用/">react-native-vector-icons的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/18/深拷贝、浅拷贝的理解与使用场景/">深拷贝、浅拷贝的理解与使用场景</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/22/iOS的引用计数与循环引用/">iOS的引用计数与循环引用</a>
           </li>
         
           <li>
             <a href="/2018/08/22/引导用户设置支付方式/">引导用户设置支付方式</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/22/iOS导航栏显示与隐藏控制/">iOS导航栏显示与隐藏控制</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/30/轻松搞定状态栏颜色变化/">轻松搞定状态栏颜色变化</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/30/如何使用OmniPlan/">如何使用OmniPlan</a>
           </li>
         
       </ul>
@@ -932,22 +800,6 @@ window.onload = function() {
 
 <!-- author:forvoid begin -->
 <!-- author:forvoid begin -->
-
-  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
-  <script>
-  var gitment = new Gitment({
-    // id: '页面 ID', // 可选。默认为 location.href
-    owner: 'luzhiyongGit',
-    repo: 'luzhiyongGit.github.io',
-    oauth: {
-    client_id: '7e5dd6cdb9xxaxa4cf91a',
-    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
-    }
-  })
-  gitment.render(document.getElementById("gitment_comments"))
-</script>
-
 
 <!-- author:forvoid end -->
 
