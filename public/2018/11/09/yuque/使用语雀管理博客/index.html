@@ -5,17 +5,17 @@
   
   <title>使用语雀管理博客 | Leafly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Test">
+  <meta name="description" content="之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用hexo-admin，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客静态博客使用语雀编辑器，文中介绍了如何利用语雀管理博客，决定一试。 Hexo搭建博客首先需要先利用hexo搭建博客，具体的搭建流程可以参考Github+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用语雀管理博客">
 <meta property="og:url" content="http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/index.html">
 <meta property="og:site_name" content="Leafly">
-<meta property="og:description" content="Test">
+<meta property="og:description" content="之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用hexo-admin，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客静态博客使用语雀编辑器，文中介绍了如何利用语雀管理博客，决定一试。 Hexo搭建博客首先需要先利用hexo搭建博客，具体的搭建流程可以参考Github+">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-09T13:44:16.124Z">
+<meta property="og:updated_time" content="2018-11-10T03:13:41.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用语雀管理博客">
-<meta name="twitter:description" content="Test">
+<meta name="twitter:description" content="之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用hexo-admin，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客静态博客使用语雀编辑器，文中介绍了如何利用语雀管理博客，决定一试。 Hexo搭建博客首先需要先利用hexo搭建博客，具体的搭建流程可以参考Github+">
   
     <link rel="alternate" href="/atom.xml" title="Leafly" type="application/atom+xml">
   
@@ -92,11 +92,26 @@
       
         <!-- Table of Contents -->
         
-        <h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a><a name="uxirrk"></a>Test</h2>
+        <p>之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用<a href="https://jaredforsyth.com/hexo-admin/" target="_blank" rel="noopener">hexo-admin</a>，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客<a href="https://www.yuque.com/page/luan.ma/yuque2blog" target="_blank" rel="noopener">静态博客使用语雀编辑器</a>，文中介绍了如何利用语雀管理博客，决定一试。</p>
+<h4 id="Hexo搭建博客"><a href="#Hexo搭建博客" class="headerlink" title="Hexo搭建博客"></a><a name="x43bcd"></a>Hexo搭建博客</h4><p>首先需要先利用<a href="https://hexo.io/zh-cn/index.html" target="_blank" rel="noopener">hexo</a>搭建博客，具体的搭建流程可以参考<a href="http://www.ileafly.com/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></p>
+<h4 id="安装语雀插件"><a href="#安装语雀插件" class="headerlink" title="安装语雀插件"></a><a name="wgwlfo"></a>安装语雀插件</h4><p><a href="https://github.com/x-cold/yuque-hexo/" target="_blank" rel="noopener">yuque-hexo</a>是一个Node.js环境下的语雀下载器。</p>
+<ol>
+<li>安装yuque-hexo</li>
+<li>注册语雀，创建知识库，公开知识库，获得博客知识库的地址，比如我的<a href="https://www.yuque.com/leafly/blog" target="_blank" rel="noopener">语雀知识库地址</a></li>
+<li><p>在Hexo博客的目录下面找到package.json文件，进入如下配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"name": "hexo-blog", // 这里一般原来就有，直接添加下面的内容即可</span><br><span class="line">"yuqueConfig": &#123;</span><br><span class="line">    "baseUrl": "https://www.yuque.com/api/v2",</span><br><span class="line">    "login": "leafly",</span><br><span class="line">    "repo": "blog",</span><br><span class="line">    "postPath": "source/_posts/yuque"</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步文章</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yuque-hexo sync</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>执行完毕，会自动将语雀上的文章同步到<code>source/_post/yuque</code>文件夹下<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
+<p>将博客内容同步到github。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/" data-id="cjoa2p2kv0003g0790ix0qiox" class="article-share-link">分享</a>
+      <a data-url="http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/" data-id="cjoavlizv0003kd79e6r9v7d6" class="article-share-link">分享</a>
       
       
       
@@ -146,6 +161,20 @@
   </div>
 
     
+<nav id="article-nav">
+  
+    <a href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Github+Hexo搭建个人博客详细教程
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
  
@@ -175,7 +204,7 @@
       
         <strong class="toc-title">文章目录</strong>
         <div class="toc-widget-list">
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Test"><span class="toc-number">1.</span> <span class="toc-text">Test</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hexo搭建博客"><span class="toc-number">1.</span> <span class="toc-text">Hexo搭建博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装语雀插件"><span class="toc-number">2.</span> <span class="toc-text">安装语雀插件</span></a></li></ol>
           </div>
       </div>
     </div>

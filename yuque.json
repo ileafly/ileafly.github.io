@@ -23,6 +23,32 @@
       "updated_at": "2018-11-09T13:31:57.000Z",
       "_serializer": "v2.user"
     },
-    "body": "## <a name=\"uxirrk\"></a>Test\n\n"
+    "body": "之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用[hexo-admin](https://jaredforsyth.com/hexo-admin/)，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客[静态博客使用语雀编辑器](https://www.yuque.com/page/luan.ma/yuque2blog)，文中介绍了如何利用语雀管理博客，决定一试。\n\n#### <a name=\"x43bcd\"></a>Hexo搭建博客\n首先需要先利用[hexo](https://hexo.io/zh-cn/index.html)搭建博客，具体的搭建流程可以参考[Github+Hexo搭建个人博客详细教程](http://www.ileafly.com/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/)\n\n#### <a name=\"wgwlfo\"></a>安装语雀插件\n[yuque-hexo](https://github.com/x-cold/yuque-hexo/)是一个Node.js环境下的语雀下载器。\n1. 安装yuque-hexo\n2. 注册语雀，创建知识库，公开知识库，获得博客知识库的地址，比如我的[语雀知识库地址](https://www.yuque.com/leafly/blog)\n3. 在Hexo博客的目录下面找到package.json文件，进入如下配置：\n```json\n{\n\"name\": \"hexo-blog\", // 这里一般原来就有，直接添加下面的内容即可\n\"yuqueConfig\": {\n    \"baseUrl\": \"https://www.yuque.com/api/v2\",\n    \"login\": \"leafly\",\n    \"repo\": \"blog\",\n    \"postPath\": \"source/_posts/yuque\"\n  },\n}\n```\n4. 同步文章\n```powershell\n$ yuque-hexo sync\n```\n执行完毕，会自动将语雀上的文章同步到`source/_post/yuque`文件夹下\n```powershell\n$ hexo g\n$ hexo d\n```\n将博客内容同步到github。\n"
+  },
+  {
+    "title": "Github+Hexo搭建个人博客详细教程",
+    "description": "安装Node.js安装nvm$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash 安装node$ nvm install node 验证node是否安装成功$  node -v...",
+    "created_at": "2018-11-10T01:14:00.000Z",
+    "updated_at": "2018-11-10T02:45:15.000Z",
+    "published_at": "2018-11-10T02:45:15.000Z",
+    "format": "asl",
+    "slug": "nhbulg",
+    "last_editor": {
+      "id": 183307,
+      "type": "User",
+      "login": "leafly",
+      "name": "leafly",
+      "description": null,
+      "avatar_url": "https://gw.alipayobjects.com/zos/rmsportal/wYnHWSXDmBhiEmuwXsym.png",
+      "large_avatar_url": "https://gw.alipayobjects.com/zos/rmsportal/wYnHWSXDmBhiEmuwXsym.png?x-oss-process=image/resize,m_fill,w_320,h_320",
+      "medium_avatar_url": "https://gw.alipayobjects.com/zos/rmsportal/wYnHWSXDmBhiEmuwXsym.png?x-oss-process=image/resize,m_fill,w_160,h_160",
+      "small_avatar_url": "https://gw.alipayobjects.com/zos/rmsportal/wYnHWSXDmBhiEmuwXsym.png?x-oss-process=image/resize,m_fill,w_80,h_80",
+      "followers_count": 0,
+      "following_count": 0,
+      "created_at": "2018-09-27T09:52:55.000Z",
+      "updated_at": "2018-11-09T13:31:57.000Z",
+      "_serializer": "v2.user"
+    },
+    "body": "#### <a name=\"sl6tws\"></a>安装Node.js\n1. 安装nvm\n```powershell\n$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash\n```\n2. 安装node\n```powershell\n$ nvm install node\n```\n3. 验证node是否安装成功\n```powershell\n$  node -v\n$  v8.12.0\n```\n#### <a name=\"t8a8gr\"></a>安装Hexo\n```powershell\n$ npm install -g hexo\n```\n安装完成后，进入一个文件夹，执行\n```powershell\n$ hexo init\n$ npm install hexo --save\n```\n#### <a name=\"ua2lyy\"></a>Github创建个人仓库\n在Github上创建一个新仓库，并命名为  `你的github用户名.github.io`\n#### <a name=\"oefdft\"></a>配置\\_config.yml\n```plain\ndeploy:\n   type: git\n   repository: https://github.com/username/username.github.io\n   branch: master\n```\n#### <a name=\"s6t5gs\"></a>编写博客\n```plain\n$ hexo new post '文章标题'\n```\n在source/\\_posts/ 文件夹下新建了博客，文件格式为markdown，编辑此文件。\n#### <a name=\"ybauhr\"></a>推送站点\n```powershell\n$ hexo g\n$ hexo d\n```\n上传成功后，访问[https://username.github.io](https://username.github.io)\n\n---\n\n接下来再介绍一些进阶用法：\n#### <a name=\"padgfi\"></a>多台电脑管理hexo博客\n利用github管理博客内容，进行多台电脑的同步，既可以新建一个仓库单独进行博客内容的管理，也可以在现有仓库的基础上新建一个分支进行管理，相比较而言新建分支管理更加便捷。\n1. 新建分支 hexo\n2. 在设置里将hexo设置为默认分支\n3. clone代码到本地，在hexo分支下进行博客的编写，利用hexo d同步到master分支，同时手动同步到hexo分支\n4. 新电脑需要重新安装hexo环境，安装完成后clone代码到本地\n#### <a name=\"xhgmdd\"></a>绑定个人域名\n拥有自己的独立域名能瞬间提升博客的逼格，接下来就是绑定个人域名的流程\n1. 购买域名\n      一般去阿里云购买，具体流程网上很多，就不再细说\n2. 配置DNS地址\n      在阿里云后台配置DNS信息，将[https://username.github.io](https://username.github.io)的ip绑定到你想要绑定的域名上\n3. 配置hexo文件\n      在source目录下，新建文件，命名为`CNAME`，填入域名地址。\n4. 发布到github\n我的博客地址是[http://www.ileafly.com](http://www.ileafly.com)\n#### <a name=\"yst3oh\"></a>绑定语雀管理博客内容\n可以利用语雀管理博客内容，非常方便，详细流程可参考[使用语雀管理博客](http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/)。\n\n"
   }
 ]
