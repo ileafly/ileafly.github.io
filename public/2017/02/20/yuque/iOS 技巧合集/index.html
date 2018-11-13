@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Leafly的博客">
+    <meta name="keyword" content="undefined">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        iOS 技巧合集 - Leafly的博客 | Leafly&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> talk is cheap, show me the code </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpeg">
+        </div>
+        <div class="name">
+            <i>Leafly</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一行命令，统计OC项目中每个源代码文件的行数以及总行数"><span class="toc-text">一行命令，统计OC项目中每个源代码文件的行数以及总行数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制字符串到剪贴板"><span class="toc-text">复制字符串到剪贴板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让子view不响应父view的手势"><span class="toc-text">让子view不响应父view的手势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义xopen快捷打开工程"><span class="toc-text">自定义xopen快捷打开工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CUICatalog-Invalid-asset-name-supplied"><span class="toc-text">CUICatalog Invalid asset name supplied</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS导航栏显示与隐藏"><span class="toc-text">iOS导航栏显示与隐藏</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> talk is cheap, show me the code </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        iOS 技巧合集
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-02-20 11:55:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#iOS" title="iOS">iOS</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h4 id="一行命令，统计OC项目中每个源代码文件的行数以及总行数"><a href="#一行命令，统计OC项目中每个源代码文件的行数以及总行数" class="headerlink" title="一行命令，统计OC项目中每个源代码文件的行数以及总行数"></a><a name="tf2kgf"></a>一行命令，统计OC项目中每个源代码文件的行数以及总行数</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . <span class="string">"("</span> -name <span class="string">"*.m"</span> -or -name <span class="string">"*.mm"</span> -or -name <span class="string">"*.cpp"</span> -or -name <span class="string">"*.h"</span> -or -name <span class="string">"*.rss"</span> <span class="string">")"</span> -print | xargs wc -l</span><br></pre></td></tr></table></figure>
+<h4 id="复制字符串到剪贴板"><a href="#复制字符串到剪贴板" class="headerlink" title="复制字符串到剪贴板"></a><a name="8wricr"></a>复制字符串到剪贴板</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIPasteboard</span> *pasteboard = [<span class="built_in">UIPasteboard</span>  generalPasteboard];</span><br><span class="line">pasteborad.string = <span class="string">@"你需要复制的字符串"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="让子view不响应父view的手势"><a href="#让子view不响应父view的手势" class="headerlink" title="让子view不响应父view的手势"></a><a name="s16fhl"></a>让子view不响应父view的手势</h4><p>正常情况下，父view的手势在子view上点击也会响应，想要在子view中屏蔽父view的手势有以下方法：</p>
+<ol>
+<li>子view中再次添加手势，拦截掉父view的手势</li>
+<li>实现父view的手势代理，在代理中拦截父view手势<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)gestureRecognizer:(<span class="built_in">UIGestureRecognizer</span>  *)gestureRecognizer shouldReceiveTouch:(<span class="built_in">UITouch</span> *)touch &#123;</span><br><span class="line">    <span class="keyword">if</span> ([touch.view  isDescendantOfView:subview]) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="自定义xopen快捷打开工程"><a href="#自定义xopen快捷打开工程" class="headerlink" title="自定义xopen快捷打开工程"></a><a name="nognoh"></a>自定义xopen快捷打开工程</h4><p>利用ruby脚本在终端快速打开工程，ruby脚本内容如下：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'shellwords'</span></span><br><span class="line"></span><br><span class="line">proj = Dir[<span class="string">'*.xcworkspace'</span>].first</span><br><span class="line">proj = Dir[<span class="string">'*.xcodeproj'</span>].first <span class="keyword">unless</span> proj</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> proj</span><br><span class="line">   puts <span class="string">"Opening  <span class="subst">#&#123;proj&#125;</span>"</span></span><br><span class="line">   <span class="string">`open <span class="subst">#&#123;proj&#125;</span>`</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  puts <span class="string">"No  xcworkspace|xcproj  file  found"</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>将脚本文件保存为<code>xopen</code>，拷贝到<code>/usr/local/bin</code>目录下，添加权限：<code>chmod 777 xopen</code><br>在终端中任何需要打开项目的位置，执行xopen即可。</p>
+<h4 id="CUICatalog-Invalid-asset-name-supplied"><a href="#CUICatalog-Invalid-asset-name-supplied" class="headerlink" title="CUICatalog Invalid asset name supplied"></a><a name="fqw2ll"></a><span data-type="color" style="color:rgb(57, 57, 57)">CUICatalog Invalid asset name supplied</span></h4><p>项目中最近在打印<span data-type="color" style="color:rgb(57, 57, 57)"><code>CUICatalog Invalid asset name supplied</code></span><span data-type="color" style="color:rgb(57, 57, 57)">，调研发现之所以输出这个log是因为传了一个空字符串来获取image，如果项目这种情况比较多，可以添加一个</span><span data-type="color" style="color:rgb(57, 57, 57)"><code>symbolic breakpoint</code></span><span data-type="color" style="color:rgb(57, 57, 57)">来定位。</span></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2018/png/183307/1541845301865-3989fad5-4209-460a-8ec8-af444c4a9643.png" alt="ATz38.png | center | 536x257"></p>
+<p>需要说明一下，\$arg3用于模拟器，\$r0用于真机，除了传入值是nil的情况，还可能是@””，这种情况的判断规则是<code>[$arg3  length] == 0</code></p>
+<h4 id="iOS导航栏显示与隐藏"><a href="#iOS导航栏显示与隐藏" class="headerlink" title="iOS导航栏显示与隐藏"></a><a name="nim5dg"></a>iOS导航栏显示与隐藏</h4><p>项目中可能存在需要特殊隐藏导航栏的页面，通常情况下我们只需要在特殊页面执行<code>viewWillAppear</code>时隐藏导航栏，再在<code>viewWillDisapper</code>时显示导航栏以确保不对需要正常显示导航栏的页面产生影响。不过在实际项目中，页面之间的情况远比我们想象的复杂，我们以A、B两个页面为例：</p>
+<ul>
+<li>A 显示 B 隐藏  这种情况下我们按照上述操作是没有问题的</li>
+<li>A 隐藏 B 显示  这种情况下我们按照上述操作是没有问题的</li>
+<li>A 隐藏 B 隐藏  这种情况下就会存在连续执行先显示、再隐藏的情况，频繁操作就会存在导航栏异常的情况<br>为了解决这个问题，最佳方案应该是每个页面根据自身需要执行显示或隐藏导航栏的操作，如果让每个页面无形增加了代码量，而且不利于维护。为了进一步优化，我们可以利用<code>UINavigationControllerDelegate</code>做些文章。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ZYNavigationController</span>: <span class="title">UINavigationControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">navigationController</span><span class="params">(<span class="number">_</span> navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 判断要显示的控制器是否是自己</span></span><br><span class="line">        <span class="keyword">let</span> isHidden = viewController.isKind(of: <span class="type">FourthViewController</span>.<span class="keyword">self</span>) || viewController.isKind(of: <span class="type">FirstViewController</span>.<span class="keyword">self</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.setNavigationBarHidden(isHidden, animated: <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/luzhiyongGit">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

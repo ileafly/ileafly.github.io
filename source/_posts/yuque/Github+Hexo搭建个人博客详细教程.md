@@ -1,9 +1,10 @@
 
 title: Github+Hexo搭建个人博客详细教程
 date: 2018-11-10 09:14:00 +0800
-tags: []
-categories: 
+tags: [Hexo]
+categories: 教程
 ---
+
 #### <a name="sl6tws"></a>安装Node.js
 1. 安装nvm
 ```powershell
@@ -69,5 +70,12 @@ $ hexo d
 我的博客地址是[http://www.ileafly.com](http://www.ileafly.com)
 #### <a name="yst3oh"></a>绑定语雀管理博客内容
 可以利用语雀管理博客内容，非常方便，详细流程可参考[使用语雀管理博客](http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/)。
+
+
+---
+
+未完待续~
+* 如何更换主题
+* 如何配置评论
 
 
