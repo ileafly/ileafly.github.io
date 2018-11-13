@@ -82,7 +82,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一行命令，统计OC项目中每个源代码文件的行数以及总行数"><span class="toc-text">一行命令，统计OC项目中每个源代码文件的行数以及总行数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制字符串到剪贴板"><span class="toc-text">复制字符串到剪贴板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让子view不响应父view的手势"><span class="toc-text">让子view不响应父view的手势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义xopen快捷打开工程"><span class="toc-text">自定义xopen快捷打开工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CUICatalog-Invalid-asset-name-supplied"><span class="toc-text">CUICatalog Invalid asset name supplied</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS导航栏显示与隐藏"><span class="toc-text">iOS导航栏显示与隐藏</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一行命令，统计OC项目中每个源代码文件的行数以及总行数"><span class="toc-text">一行命令，统计OC项目中每个源代码文件的行数以及总行数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制字符串到剪贴板"><span class="toc-text">复制字符串到剪贴板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让子view不响应父view的手势"><span class="toc-text">让子view不响应父view的手势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义xopen快捷打开工程"><span class="toc-text">自定义xopen快捷打开工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CUICatalog-Invalid-asset-name-supplied"><span class="toc-text">CUICatalog Invalid asset name supplied</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS导航栏显示与隐藏"><span class="toc-text">iOS导航栏显示与隐藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iPhoneX-隐藏底部的Home条"><span class="toc-text">iPhoneX 隐藏底部的Home条</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#轻松搞定状态栏变化"><span class="toc-text">轻松搞定状态栏变化</span></a></li></ol>
 </div>
     
 </div>
@@ -150,7 +150,9 @@
 <li>A 隐藏 B 隐藏  这种情况下就会存在连续执行先显示、再隐藏的情况，频繁操作就会存在导航栏异常的情况<br>为了解决这个问题，最佳方案应该是每个页面根据自身需要执行显示或隐藏导航栏的操作，如果让每个页面无形增加了代码量，而且不利于维护。为了进一步优化，我们可以利用<code>UINavigationControllerDelegate</code>做些文章。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ZYNavigationController</span>: <span class="title">UINavigationControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">navigationController</span><span class="params">(<span class="number">_</span> navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 判断要显示的控制器是否是自己</span></span><br><span class="line">        <span class="keyword">let</span> isHidden = viewController.isKind(of: <span class="type">FourthViewController</span>.<span class="keyword">self</span>) || viewController.isKind(of: <span class="type">FirstViewController</span>.<span class="keyword">self</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.setNavigationBarHidden(isHidden, animated: <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-
+<h4 id="iPhoneX-隐藏底部的Home条"><a href="#iPhoneX-隐藏底部的Home条" class="headerlink" title="iPhoneX 隐藏底部的Home条"></a><a name="i5bdgx"></a>iPhoneX 隐藏底部的Home条</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)prefersHomeIndicatorAutoHidden &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><span data-type="color" style="color:#F5222D">需要注意，Home条并不会立刻消失，而是延迟1~2秒后缓慢消失</span></p>
+<h4 id="轻松搞定状态栏变化"><a href="#轻松搞定状态栏变化" class="headerlink" title="轻松搞定状态栏变化"></a><a name="hhsehy"></a>轻松搞定状态栏变化</h4>
         
         <br>
         <div id="comment-container">
@@ -216,5 +218,24 @@
 
 
 
+
+    <script type="text/javascript">
+       (function() {
+           if (typeof LivereTower === 'function') { return; }
+
+           var j, d = document.getElementById('lv-container');
+
+           d.setAttribute('data-id','city');
+           d.setAttribute('data-uid' , 'MTAyMC80MTAwNC8xNzUyOQ==');
+
+           j = document.createElement('script');
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           d.appendChild(j);
+       })();
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
 
 </html>

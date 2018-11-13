@@ -74,4 +74,15 @@ extension ZYNavigationController: UINavigationControllerDelegate {
 }
 ```
 
+#### <a name="i5bdgx"></a>iPhoneX 隐藏底部的Home条
+```objectivec
+- (BOOL)prefersHomeIndicatorAutoHidden {
+      return YES;
+}
+```
+<span data-type="color" style="color:#F5222D">需要注意，Home条并不会立刻消失，而是延迟1~2秒后缓慢消失</span>
+
+#### <a name="hhsehy"></a>轻松搞定状态栏变化
+
+
 

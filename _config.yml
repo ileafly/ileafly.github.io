@@ -30,6 +30,11 @@ anchorjs: true
 
 sidebar-avatar: img/avatar.jpeg
 
+comment:
+  type: livere
+  livere_id: 'city'
+  livere_uid: 'MTAyMC80MTAwNC8xNzUyOQ=='
+
 # 文章样式（是否首行缩进）：
 post_style:
   indent: default

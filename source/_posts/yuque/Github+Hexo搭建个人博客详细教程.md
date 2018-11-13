@@ -70,12 +70,29 @@ $ hexo d
 我的博客地址是[http://www.ileafly.com](http://www.ileafly.com)
 #### <a name="yst3oh"></a>绑定语雀管理博客内容
 可以利用语雀管理博客内容，非常方便，详细流程可参考[使用语雀管理博客](http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/)。
+#### <a name="qvkuep"></a>自定义主题
+Hexo有非常非常多的主题，你可以在[Themes | Hexo](https://hexo.io/themes/index.html)浏览这些主题，选择你喜欢的主题进行使用。
+我比较喜欢的主题是[Anisina](https://github.com/haojen/hexo-theme-Anisina)和[cafe](https://github.com/giscafer/hexo-theme-cafe)，这里就以[cafe](https://github.com/giscafer/hexo-theme-cafe)为例简述一下集成的流程。
+```
+# 安装
+$ git clone https://github.com/giscafer/hexo-theme-cafe.git themes/cafe
 
+# 修改博客配置文件 `_config.yml` 主题属性 theme 为 `cafe`.
 
----
+# 更新cafe文件
+cd themes/cafe
+git pull
 
-未完待续~
-* 如何更换主题
-* 如何配置评论
+# 主题 themes/cafe/_config.yml 文件内容参考说明配置 https://github.com/giscafer/hexo-theme-cafe/blob/master/_config.yml
+```
+#### <a name="ctisce"></a>集成评论
+目前比较好用的评论是[LiveRe](https://www.livere.com)，注册并按照City版，获取uid。在\_\_config.yml作如下配置：
+```ruby
+comment:
+   type: livere
+   livere_id: 'city'
+   livere_uid: '*******'
+```
+
 
 
