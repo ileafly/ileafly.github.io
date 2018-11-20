@@ -1,7 +1,7 @@
 
 title: ZYLoading--自定义loading控件
 date: 2017-12-14 19:20:00 +0800
-tags: [ZYLoading]
+tags: [iOS、ZYLoading]
 categories: 组件
 ---
 

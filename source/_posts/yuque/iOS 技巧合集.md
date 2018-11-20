@@ -83,6 +83,22 @@ extension ZYNavigationController: UINavigationControllerDelegate {
 <span data-type="color" style="color:#F5222D">需要注意，Home条并不会立刻消失，而是延迟1~2秒后缓慢消失</span>
 
 #### <a name="hhsehy"></a>轻松搞定状态栏变化
+#### <a name="sydfiq"></a>引导用户跳转AppStore设置支付方式
+```objectivec
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/editAddress?mt=8"]];
+```
+#### <a name="rgslgc"></a>自定义代码片段
+#### <a name="30i5og"></a>Xcode控制台杂乱信息屏蔽
+Xcode升级后，运行项目会打印一堆杂乱的log信息，虽然不影响App的功能，但是会对问题定位产生影响。为了解决这个我们可以在scheme里设置`os_activity_mode`为disable。这里有两个注意点：
+1. NSLog打印的信息也会被一并屏蔽掉  解决方案：使用printf替代NSLog 
+```objectivec
+#ifdef DEBUG
+#define NSLog(format, ...) printf("\n[%s] %s [第%d行] %s\n", __TIME__, __FUNCTION__, __LINE__, [[NSString stringWithFormat:format, ## __VA_ARGS__] UTF8String]);
+#else
+#define NSLog(format, ...)
+#endif
+```
+2. swift的print打印信息不受影响
 
 
 
