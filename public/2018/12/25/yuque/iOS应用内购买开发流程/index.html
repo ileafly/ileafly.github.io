@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Leafly的博客">
+    <meta name="keyword" content="undefined">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        iOS应用内购买开发流程 - Leafly的博客 | Leafly&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> talk is cheap, show me the code </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpeg">
+        </div>
+        <div class="name">
+            <i>Leafly</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期准备"><span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端代码流程"><span class="toc-text">客户端代码流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端代码流程"><span class="toc-text">服务端代码流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动续期订阅的注意点"><span class="toc-text">自动续期订阅的注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#恢复购买"><span class="toc-text">恢复购买</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏单、退单的处理"><span class="toc-text">漏单、退单的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> talk is cheap, show me the code </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        iOS应用内购买开发流程
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-12-25 10:30:27</span></span>
+        
+        
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p><a name="o659uw"></a></p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a><a href="#o659uw"></a>前期准备</h2><ol>
+<li><p>完善协议、税务和银行业务等信息 <a href="https://juejin.im/post/5a7b0e97f265da4e8e784c9e" target="_blank" rel="noopener">具体可参考此文章</a></p>
+</li>
+<li><p>为app添加内购产品 一般而言产品ID使用bundleId+产品信息</p>
+</li>
+<li><p>添加沙箱技术测试员</p>
+</li>
+</ol>
+<p><a name="3za6sp"></a></p>
+<h2 id="客户端代码流程"><a href="#客户端代码流程" class="headerlink" title="客户端代码流程"></a><a href="#3za6sp"></a>客户端代码流程</h2><ol>
+<li><p>封装内购单例 AppDelegate中应用启动时调用</p>
+</li>
+<li><p>在单例的init方法中注册对购买结果的监听</p>
+</li>
+<li><p>用户点击充值时，调用SKProductsRequest发起一个请求，请求商品信息</p>
+</li>
+<li><p>商品信息查询成功，请求支付</p>
+</li>
+<li><p>处理payment的监听回调</p>
+</li>
+<li><p>交易完成 向服务器端发送凭证</p>
+</li>
+</ol>
+<p><a name="yp2bsd"></a></p>
+<h2 id="服务端代码流程"><a href="#服务端代码流程" class="headerlink" title="服务端代码流程"></a><a href="#yp2bsd"></a>服务端代码流程</h2><ol>
+<li><p>接受iOS端发送过来的购买凭证</p>
+</li>
+<li><p>判断凭证是否已经存在或验证过，存储凭证</p>
+</li>
+<li><p>将凭证发送到苹果服务器验证</p>
+</li>
+<li><p>根据验证结果修改用户的会员权限</p>
+</li>
+</ol>
+<p><a name="7cg3rw"></a></p>
+<h2 id="自动续期订阅的注意点"><a href="#自动续期订阅的注意点" class="headerlink" title="自动续期订阅的注意点"></a><a href="#7cg3rw"></a>自动续期订阅的注意点</h2><ol>
+<li><p>启动针对自动续期订阅的服务器通知 </p>
+</li>
+<li><p>客户端启动时可能会收到苹果给的续期成功的回调</p>
+</li>
+</ol>
+<p><a name="gax1xn"></a></p>
+<h2 id="恢复购买"><a href="#恢复购买" class="headerlink" title="恢复购买"></a><a href="#gax1xn"></a>恢复购买</h2><p><a name="fcq5mb"></a></p>
+<h2 id="漏单、退单的处理"><a href="#漏单、退单的处理" class="headerlink" title="漏单、退单的处理"></a><a href="#fcq5mb"></a>漏单、退单的处理</h2><p><a name="8gvxvb"></a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a><a href="#8gvxvb"></a>参考文章</h2><p><a href="https://juejin.im/post/5c204bdf5188256d98331363" target="_blank" rel="noopener">链接</a></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/luzhiyongGit">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script type="text/javascript">
+       (function() {
+           if (typeof LivereTower === 'function') { return; }
+
+           var j, d = document.getElementById('lv-container');
+
+           d.setAttribute('data-id','city');
+           d.setAttribute('data-uid' , 'MTAyMC80MTAwNC8xNzUyOQ==');
+
+           j = document.createElement('script');
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           d.appendChild(j);
+       })();
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+</html>

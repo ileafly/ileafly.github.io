@@ -11,5 +11,6 @@ title: "关于"
     - Vue
     - mini-program
     - RN
+    - Flutter
 
 stay hungry stay foolish

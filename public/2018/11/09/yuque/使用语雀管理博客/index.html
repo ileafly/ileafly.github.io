@@ -131,21 +131,27 @@
     </div>
     <div class="post-content ">
         <p>之前一直使用hexo搭建自己的个人博客，用的久了就发现随着博客数量的增加，管理越来越麻烦，之前也尝试过使用<a href="https://jaredforsyth.com/hexo-admin/" target="_blank" rel="noopener">hexo-admin</a>，hexo-admin虽然能够达到管理博客的目的，不过界面有点丑，不能忍，一直想找一个替代方案，最近在语雀中读到了一篇博客<a href="https://www.yuque.com/page/luan.ma/yuque2blog" target="_blank" rel="noopener">静态博客使用语雀编辑器</a>，文中介绍了如何利用语雀管理博客，决定一试。</p>
-<h4 id="Hexo搭建博客"><a href="#Hexo搭建博客" class="headerlink" title="Hexo搭建博客"></a><a name="x43bcd"></a>Hexo搭建博客</h4><p>首先需要先利用<a href="https://hexo.io/zh-cn/index.html" target="_blank" rel="noopener">hexo</a>搭建博客，具体的搭建流程可以参考<a href="http://www.ileafly.com/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></p>
-<h4 id="安装语雀插件"><a href="#安装语雀插件" class="headerlink" title="安装语雀插件"></a><a name="wgwlfo"></a>安装语雀插件</h4><p><a href="https://github.com/x-cold/yuque-hexo/" target="_blank" rel="noopener">yuque-hexo</a>是一个Node.js环境下的语雀下载器。</p>
+<p><a name="x43bcd"></a></p>
+<h4 id="Hexo搭建博客"><a href="#Hexo搭建博客" class="headerlink" title="Hexo搭建博客"></a><a href="#x43bcd"></a>Hexo搭建博客</h4><p>首先需要先利用<a href="https://hexo.io/zh-cn/index.html" target="_blank" rel="noopener">hexo</a>搭建博客，具体的搭建流程可以参考<a href="http://www.ileafly.com/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></p>
+<p><a name="wgwlfo"></a></p>
+<h4 id="安装语雀插件"><a href="#安装语雀插件" class="headerlink" title="安装语雀插件"></a><a href="#wgwlfo"></a>安装语雀插件</h4><p><a href="https://github.com/x-cold/yuque-hexo/" target="_blank" rel="noopener">yuque-hexo</a>是一个Node.js环境下的语雀下载器。</p>
 <ol>
-<li>安装yuque-hexo</li>
-<li>注册语雀，创建知识库，公开知识库，获得博客知识库的地址，比如我的<a href="https://www.yuque.com/leafly/blog" target="_blank" rel="noopener">语雀知识库地址</a></li>
-<li><p>在Hexo博客的目录下面找到package.json文件，进入如下配置：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"name": "hexo-blog", // 这里一般原来就有，直接添加下面的内容即可</span><br><span class="line">"yuqueConfig": &#123;</span><br><span class="line">    "baseUrl": "https://www.yuque.com/api/v2",</span><br><span class="line">    "login": "leafly",</span><br><span class="line">    "repo": "blog",</span><br><span class="line">    "postPath": "source/_posts/yuque"</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>安装yuque-hexo</p>
 </li>
-<li><p>同步文章</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yuque-hexo sync</span><br></pre></td></tr></table></figure>
+<li><p>注册语雀，创建知识库，公开知识库，获得博客知识库的地址，比如我的<a href="https://www.yuque.com/leafly/blog" target="_blank" rel="noopener">语雀知识库地址</a></p>
+</li>
+<li><p>在Hexo博客的目录下面找到package.json文件，进入如下配置：</p>
 </li>
 </ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">"name": "hexo-blog", // 这里一般原来就有，直接添加下面的内容即可</span><br><span class="line">"yuqueConfig": &#123;</span><br><span class="line">    "baseUrl": "https://www.yuque.com/api/v2",</span><br><span class="line">    "login": "leafly",</span><br><span class="line">    "repo": "blog",</span><br><span class="line">    "postPath": "source/_posts/yuque"</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>同步文章</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yuque-hexo sync</span><br></pre></td></tr></table></figure>
 <p>执行完毕，会自动将语雀上的文章同步到<code>source/_post/yuque</code>文件夹下<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
 <p>将博客内容同步到github。</p>
-<h4 id="如何添加分类、标签、创建时间"><a href="#如何添加分类、标签、创建时间" class="headerlink" title="如何添加分类、标签、创建时间"></a><a name="ol3liq"></a>如何添加分类、标签、创建时间</h4><p>插件支持Front-matter，在文章顶部添加分类、标签、创建时间等信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags: [Hexo]</span><br><span class="line">categories: 教程</span><br><span class="line">date: 2018-10-10 15:43:50</span><br></pre></td></tr></table></figure></p>
+<p><a name="ol3liq"></a></p>
+<h4 id="如何添加分类、标签、创建时间"><a href="#如何添加分类、标签、创建时间" class="headerlink" title="如何添加分类、标签、创建时间"></a><a href="#ol3liq"></a>如何添加分类、标签、创建时间</h4><p>插件支持Front-matter，在文章顶部添加分类、标签、创建时间等信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags: [Hexo]</span><br><span class="line">categories: 教程</span><br><span class="line">date: 2018-10-10 15:43:50</span><br></pre></td></tr></table></figure></p>
 
         
         <br>

@@ -130,40 +130,65 @@
 
     </div>
     <div class="post-content ">
-        <h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a><a name="sl6tws"></a>安装Node.js</h4><ol>
-<li><p>安装nvm</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">30.2</span>/install.sh | bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装node</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install node</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证node是否安装成功</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$  node -v</span><br><span class="line">$  v8.<span class="number">12.0</span></span><br></pre></td></tr></table></figure>
-</li>
+        <p><a name="sl6tws"></a></p>
+<h4 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a><a href="#sl6tws"></a>安装Node.js</h4><ol>
+<li>安装nvm</li>
 </ol>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a><a name="t8a8gr"></a>安装Hexo</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">30.2</span>/install.sh | bash</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装node</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install node</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>验证node是否安装成功</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$  node -v</span><br><span class="line">$  v8.<span class="number">12.0</span></span><br></pre></td></tr></table></figure>
+<p><a name="t8a8gr"></a></p>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a><a href="#t8a8gr"></a>安装Hexo</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo</span><br></pre></td></tr></table></figure>
 <p>安装完成后，进入一个文件夹，执行<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">$ npm install hexo --save</span><br></pre></td></tr></table></figure></p>
-<h4 id="Github创建个人仓库"><a href="#Github创建个人仓库" class="headerlink" title="Github创建个人仓库"></a><a name="ua2lyy"></a>Github创建个人仓库</h4><p>在Github上创建一个新仓库，并命名为  <code>你的github用户名.github.io</code></p>
-<h4 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a><a name="oefdft"></a>配置_config.yml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line">   repository: https://github.com/username/username.github.io</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
-<h4 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a><a name="s6t5gs"></a>编写博客</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &apos;文章标题&apos;</span><br></pre></td></tr></table></figure>
-<p>在source/_posts/ 文件夹下新建了博客，文件格式为markdown，编辑此文件。</p>
-<h4 id="推送站点"><a href="#推送站点" class="headerlink" title="推送站点"></a><a name="ybauhr"></a>推送站点</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p><a name="ua2lyy"></a></p>
+<h4 id="Github创建个人仓库"><a href="#Github创建个人仓库" class="headerlink" title="Github创建个人仓库"></a><a href="#ua2lyy"></a>Github创建个人仓库</h4><p>在Github上创建一个新仓库，并命名为  <code>你的github用户名.github.io</code><br><a name="oefdft"></a></p>
+<h4 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a><a href="#oefdft"></a>配置_config.yml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line">   repository: https://github.com/username/username.github.io</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+<p><a name="s6t5gs"></a></p>
+<h4 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a><a href="#s6t5gs"></a>编写博客</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post &apos;文章标题&apos;</span><br></pre></td></tr></table></figure>
+<p>在source/_posts/ 文件夹下新建了博客，文件格式为markdown，编辑此文件。<br><a name="ybauhr"></a></p>
+<h4 id="推送站点"><a href="#推送站点" class="headerlink" title="推送站点"></a><a href="#ybauhr"></a>推送站点</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 <p>上传成功后，访问<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a></p>
 <hr>
-<p>接下来再介绍一些进阶用法：</p>
-<h4 id="多台电脑管理hexo博客"><a href="#多台电脑管理hexo博客" class="headerlink" title="多台电脑管理hexo博客"></a><a name="padgfi"></a>多台电脑管理hexo博客</h4><p>利用github管理博客内容，进行多台电脑的同步，既可以新建一个仓库单独进行博客内容的管理，也可以在现有仓库的基础上新建一个分支进行管理，相比较而言新建分支管理更加便捷。</p>
+<p>接下来再介绍一些进阶用法：<br><a name="padgfi"></a></p>
+<h4 id="多台电脑管理hexo博客"><a href="#多台电脑管理hexo博客" class="headerlink" title="多台电脑管理hexo博客"></a><a href="#padgfi"></a>多台电脑管理hexo博客</h4><p>利用github管理博客内容，进行多台电脑的同步，既可以新建一个仓库单独进行博客内容的管理，也可以在现有仓库的基础上新建一个分支进行管理，相比较而言新建分支管理更加便捷。</p>
 <ol>
-<li>新建分支 hexo</li>
-<li>在设置里将hexo设置为默认分支</li>
-<li>clone代码到本地，在hexo分支下进行博客的编写，利用hexo d同步到master分支，同时手动同步到hexo分支</li>
-<li>新电脑需要重新安装hexo环境，安装完成后clone代码到本地<h4 id="绑定个人域名"><a href="#绑定个人域名" class="headerlink" title="绑定个人域名"></a><a name="xhgmdd"></a>绑定个人域名</h4>拥有自己的独立域名能瞬间提升博客的逼格，接下来就是绑定个人域名的流程</li>
-<li>购买域名<br>   一般去阿里云购买，具体流程网上很多，就不再细说</li>
-<li>配置DNS地址<br>   在阿里云后台配置DNS信息，将<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a>的ip绑定到你想要绑定的域名上</li>
-<li>配置hexo文件<br>   在source目录下，新建文件，命名为<code>CNAME</code>，填入域名地址。</li>
-<li>发布到github<br>我的博客地址是<a href="http://www.ileafly.com">http://www.ileafly.com</a><h4 id="绑定语雀管理博客内容"><a href="#绑定语雀管理博客内容" class="headerlink" title="绑定语雀管理博客内容"></a><a name="yst3oh"></a>绑定语雀管理博客内容</h4>可以利用语雀管理博客内容，非常方便，详细流程可参考<a href="http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/">使用语雀管理博客</a>。<h4 id="自定义主题"><a href="#自定义主题" class="headerlink" title="自定义主题"></a><a name="qvkuep"></a>自定义主题</h4>Hexo有非常非常多的主题，你可以在<a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">Themes | Hexo</a>浏览这些主题，选择你喜欢的主题进行使用。<br>我比较喜欢的主题是<a href="https://github.com/haojen/hexo-theme-Anisina" target="_blank" rel="noopener">Anisina</a>和<a href="https://github.com/giscafer/hexo-theme-cafe" target="_blank" rel="noopener">cafe</a>，这里就以<a href="https://github.com/giscafer/hexo-theme-cafe" target="_blank" rel="noopener">cafe</a>为例简述一下集成的流程。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">$ git clone https://github.com/giscafer/hexo-theme-cafe.git themes/cafe</span><br><span class="line"></span><br><span class="line"># 修改博客配置文件 `_config.yml` 主题属性 theme 为 `cafe`.</span><br><span class="line"></span><br><span class="line"># 更新cafe文件</span><br><span class="line">cd themes/cafe</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"># 主题 themes/cafe/_config.yml 文件内容参考说明配置 https://github.com/giscafer/hexo-theme-cafe/blob/master/_config.yml</span><br></pre></td></tr></table></figure>
+<li><p>新建分支 hexo</p>
+</li>
+<li><p>在设置里将hexo设置为默认分支</p>
+</li>
+<li><p>clone代码到本地，在hexo分支下进行博客的编写，利用hexo d同步到master分支，同时手动同步到hexo分支</p>
+</li>
+<li><p>新电脑需要重新安装hexo环境，安装完成后clone代码到本地</p>
 </li>
 </ol>
-<h4 id="集成评论"><a href="#集成评论" class="headerlink" title="集成评论"></a><a name="ctisce"></a>集成评论</h4><p>目前比较好用的评论是<a href="https://www.livere.com" target="_blank" rel="noopener">LiveRe</a>，注册并按照City版，获取uid。在__config.yml作如下配置：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">comment:</span></span><br><span class="line">   <span class="symbol">type:</span> livere</span><br><span class="line">   <span class="symbol">livere_id:</span> <span class="string">'city'</span></span><br><span class="line">   <span class="symbol">livere_uid:</span> <span class="string">'*******'</span></span><br></pre></td></tr></table></figure></p>
+<p><a name="xhgmdd"></a></p>
+<h4 id="绑定个人域名"><a href="#绑定个人域名" class="headerlink" title="绑定个人域名"></a><a href="#xhgmdd"></a>绑定个人域名</h4><p>拥有自己的独立域名能瞬间提升博客的逼格，接下来就是绑定个人域名的流程</p>
+<ol>
+<li>购买域名</li>
+</ol>
+<pre><code>一般去阿里云购买，具体流程网上很多，就不再细说
+</code></pre><ol start="2">
+<li>配置DNS地址</li>
+</ol>
+<pre><code>在阿里云后台配置DNS信息，将[https://username.github.io](https://username.github.io)的ip绑定到你想要绑定的域名上
+</code></pre><ol start="3">
+<li>配置hexo文件</li>
+</ol>
+<pre><code>在source目录下，新建文件，命名为`CNAME`，填入域名地址。
+</code></pre><ol start="4">
+<li>发布到github</li>
+</ol>
+<p>我的博客地址是<a href="http://www.ileafly.com">http://www.ileafly.com</a><br><a name="yst3oh"></a></p>
+<h4 id="绑定语雀管理博客内容"><a href="#绑定语雀管理博客内容" class="headerlink" title="绑定语雀管理博客内容"></a><a href="#yst3oh"></a>绑定语雀管理博客内容</h4><p>可以利用语雀管理博客内容，非常方便，详细流程可参考<a href="http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/">使用语雀管理博客</a>。<br><a name="qvkuep"></a></p>
+<h4 id="自定义主题"><a href="#自定义主题" class="headerlink" title="自定义主题"></a><a href="#qvkuep"></a>自定义主题</h4><p>Hexo有非常非常多的主题，你可以在<a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">Themes | Hexo</a>浏览这些主题，选择你喜欢的主题进行使用。<br>我比较喜欢的主题是<a href="https://github.com/haojen/hexo-theme-Anisina" target="_blank" rel="noopener">Anisina</a>和<a href="https://github.com/giscafer/hexo-theme-cafe" target="_blank" rel="noopener">cafe</a>，这里就以<a href="https://github.com/giscafer/hexo-theme-cafe" target="_blank" rel="noopener">cafe</a>为例简述一下集成的流程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">$ git clone https://github.com/giscafer/hexo-theme-cafe.git themes/cafe</span><br><span class="line"></span><br><span class="line"># 修改博客配置文件 `_config.yml` 主题属性 theme 为 `cafe`.</span><br><span class="line"></span><br><span class="line"># 更新cafe文件</span><br><span class="line">cd themes/cafe</span><br><span class="line">git pull</span><br><span class="line"></span><br><span class="line"># 主题 themes/cafe/_config.yml 文件内容参考说明配置 https://github.com/giscafer/hexo-theme-cafe/blob/master/_config.yml</span><br></pre></td></tr></table></figure></p>
+<p><a name="ctisce"></a></p>
+<h4 id="集成评论"><a href="#集成评论" class="headerlink" title="集成评论"></a><a href="#ctisce"></a>集成评论</h4><p>目前比较好用的评论是<a href="https://www.livere.com" target="_blank" rel="noopener">LiveRe</a>，注册并按照City版，获取uid。在__config.yml作如下配置：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">comment:</span></span><br><span class="line">   <span class="symbol">type:</span> livere</span><br><span class="line">   <span class="symbol">livere_id:</span> <span class="string">'city'</span></span><br><span class="line">   <span class="symbol">livere_uid:</span> <span class="string">'*******'</span></span><br></pre></td></tr></table></figure></p>
 
         
         <br>
