@@ -1,9 +1,10 @@
 
 title: 深入浅出CoreStore
 date: 2019-01-07 09:59:44 +0800
-tags: []
-categories: 
+categories: iOS
 ---
+
+
 [CoreStore](https://github.com/JohnEstropia/CoreStore)是一个使用Swift包装CoreData的框架，号称利用Swift语言的特性，优雅而又安全的释放CoreData的真正潜力。
 
 <a name="c666ad11"></a>

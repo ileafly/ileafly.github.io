@@ -1,130 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Leafly的博客">
-    <meta name="keyword" content="undefined">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>
-        
-        Flutter--状态管理 - Leafly的博客 | Leafly&#39;s Blog
-        
-    </title>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/aircloud.css">
-    <link rel="stylesheet" href="/css/gitment.css">
-    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
-    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-<body>
-
-<div class="site-nav-toggle" id="site-nav-toggle">
-    <button>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-    </button>
-</div>
-
-<div class="index-about">
-    <i> talk is cheap, show me the code </i>
-</div>
-
-<div class="index-container">
-    
-    <div class="index-left">
-        
-<div class="nav" id="nav">
-    <div class="avatar-name">
-        <div class="avatar">
-            <img src="/img/avatar.jpeg">
-        </div>
-        <div class="name">
-            <i>Leafly</i>
-        </div>
-    </div>
-    <div class="contents" id="nav-content">
-        <ul>
-            <li>
-                <a href="/">
-                    <i class="iconfont icon-shouye1"></i>
-                    <span>主页</span>
-                </a>
-            </li>
-            <li>
-                <a href="/tags">
-                    <i class="iconfont icon-biaoqian1"></i>
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="/archives">
-                    <i class="iconfont icon-guidang2"></i>
-                    <span>存档</span>
-                </a>
-            </li>
-            <li>
-                <a href="/about/">
-                    <i class="iconfont icon-guanyu2"></i>
-                    <span>关于</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    
-        <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个有状态的widget"><span class="toc-text">创建一个有状态的widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#管理状态"><span class="toc-text">管理状态</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常见的状态管理方法有："><span class="toc-text">常见的状态管理方法有：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#如何决定使用哪种管理方法？"><span class="toc-text">如何决定使用哪种管理方法？</span></a></li></ol></li></ol>
-</div>
-    
-</div>
-
-
-<div class="search-field" id="search-field">
-    <div class="search-container">
-        <div class="search-input">
-            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
-            <input id="search-input">
-            <span id="begin-search">搜索</span>
-        </div>
-        <div class="search-result-container" id="search-result-container">
-
-        </div>
-    </div>
-</div>
-        <div class="index-about-mobile">
-            <i> talk is cheap, show me the code </i>
-        </div>
-    </div>
-    
-    <div class="index-middle">
-        <!-- Main Content -->
-        
-
-
-<div class="post-container">
-    <div class="post-title">
-        Flutter--状态管理
-    </div>
-
-    <div class="post-meta">
-        <span class="attr">发布于：<span>2019-01-07 14:24:28</span></span>
-        
-        
-        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
-</span>
-
-    </div>
-    <div class="post-content ">
-        <blockquote>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Leafly的博客"><title>Flutter--状态管理 | Leafly</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Flutter--状态管理</h1><a id="logo" href="/.">Leafly</a><p class="description">talk is cheap, show me the code</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Flutter--状态管理</h1><div class="post-meta">Jan 7, 2019<span> | </span><span class="category"><a href="/categories/Flutter/">Flutter</a></span></div><div class="post-content"><blockquote>
 <p>重点知识</p>
 <ul>
 <li>有些widgets是有状态的，有些是无状态的</li>
@@ -133,6 +7,7 @@
 <li>当widget状态改变时，State对象调用setState()，告诉框架去重绘widget</li>
 </ul>
 </blockquote>
+<p><a name="37c07438"></a></p>
 <h4 id="创建一个有状态的widget"><a href="#创建一个有状态的widget" class="headerlink" title="创建一个有状态的widget"></a>创建一个有状态的widget</h4><blockquote>
 <ul>
 <li>要创建一个自定义有状态的widget，需要创建两个类：StatefullWidget和State</li>
@@ -141,6 +16,7 @@
 </ul>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class MyApp extends StatefulWidget &#123;</span><br><span class="line">  @override</span><br><span class="line">  State&lt;StatefulWidget&gt; createState() &#123;</span><br><span class="line">    // TODO: implement createState</span><br><span class="line">    return _MyAppState();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class _MyAppState extends State&lt;MyApp&gt; &#123;</span><br><span class="line"></span><br><span class="line">  int counter;</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  void initState() &#123;</span><br><span class="line">    // TODO: implement initState</span><br><span class="line">    super.initState();</span><br><span class="line">    counter = counter ?? 0;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  void _decrementCounter(_) &#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      counter--;</span><br><span class="line">      print(&apos;decrement: $counter&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  void _incrementCounter(_) &#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      counter++;</span><br><span class="line">      print(&apos;increment: $counter&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    // TODO: implement build</span><br><span class="line">    return MaterialApp(</span><br><span class="line">      title: &quot;flutter_app&quot;,</span><br><span class="line">      home: new Home(</span><br><span class="line">        title: &apos;My Home Page&apos;,</span><br><span class="line">        counter: counter,</span><br><span class="line">        decrementCounter: _decrementCounter,</span><br><span class="line">        incrementCounter: _incrementCounter,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="6f17667e"></a></p>
 <h4 id="管理状态"><a href="#管理状态" class="headerlink" title="管理状态"></a>管理状态</h4><blockquote>
 <ul>
 <li>有多种方法可以管理状态</li>
@@ -148,97 +24,14 @@
 <li>如果不是很清楚时，那就在父widget中管理状态吧</li>
 </ul>
 </blockquote>
+<p><a name="161fbf07"></a></p>
 <h5 id="常见的状态管理方法有："><a href="#常见的状态管理方法有：" class="headerlink" title="常见的状态管理方法有："></a>常见的状态管理方法有：</h5><ol>
 <li>widget管理自己的state</li>
 <li>父widget管理widget状态</li>
-<li>混搭管理<h5 id="如何决定使用哪种管理方法？"><a href="#如何决定使用哪种管理方法？" class="headerlink" title="如何决定使用哪种管理方法？"></a>如何决定使用哪种管理方法？</h5></li>
-<li>如果状态是用户数据，如复选框的选中状态、滑块的位置等，该状态最好由父widget管理</li>
+<li><p>混搭管理<br><a name="37812ab7"></a></p>
+<h5 id="如何决定使用哪种管理方法？"><a href="#如何决定使用哪种管理方法？" class="headerlink" title="如何决定使用哪种管理方法？"></a>如何决定使用哪种管理方法？</h5></li>
+<li><p>如果状态是用户数据，如复选框的选中状态、滑块的位置等，该状态最好由父widget管理</p>
+</li>
 <li>如果状态是有关界面外观效果的，如动画，该状态最好由widget本身管理</li>
 </ol>
-
-        
-        <br>
-        <div id="comment-container">
-        </div>
-        <div id="disqus_thread"></div>
-
-        <div id="lv-container">
-        </div>
-
-    </div>
-</div>
-    </div>
-</div>
-
-
-<footer class="footer">
-    <ul class="list-inline text-center">
-        
-        
-
-        
-
-        
-
-        
-        <li>
-            <a target="_blank" href="https://github.com/luzhiyongGit">
-                            <span class="fa-stack fa-lg">
-                                <i class="iconfont icon-github"></i>
-                            </span>
-            </a>
-        </li>
-        
-
-        
-
-    </ul>
-    
-    <p>
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span>PV
-        </span>
-        <span id="busuanzi_container_site_uv">
-            <span id="busuanzi_value_site_uv"></span>UV
-        </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
-</footer>
-
-
-
-
-</body>
-
-<script>
-    // We expose some of the variables needed by the front end
-    window.hexo_search_path = ""
-    window.hexo_root = "/"
-    window.isPost = true
-</script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-    <script type="text/javascript">
-       (function() {
-           if (typeof LivereTower === 'function') { return; }
-
-           var j, d = document.getElementById('lv-container');
-
-           d.setAttribute('data-id','city');
-           d.setAttribute('data-uid' , 'MTAyMC80MTAwNC8xNzUyOQ==');
-
-           j = document.createElement('script');
-           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-           j.async = true;
-
-           d.appendChild(j);
-       })();
-    </script>
-    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-    </div>
-
-</html>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/2019/01/07/yuque/深入浅出CoreStore/">深入浅出CoreStore</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://ileafly.github.io/ileafly"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/实战/" style="font-size: 15px;">实战</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/01/07/yuque/Flutter--状态管理/">Flutter--状态管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/07/yuque/深入浅出CoreStore/">深入浅出CoreStore</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/25/yuque/iOS应用内购买开发流程/">iOS应用内购买开发流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/21/yuque/ZYRouterManager--Swift/">ZYRouterManager--Swift</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/21/yuque/Instrument三板斧/">Instrument三板斧</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/20/yuque/导航栏隐藏白条问题调研/">导航栏隐藏白条问题调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/09/yuque/使用语雀管理博客/">使用语雀管理博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/yuque/fastlane指南/">fastlane指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/14/yuque/ZYLoading--自定义loading控件/">ZYLoading--自定义loading控件</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Leafly.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

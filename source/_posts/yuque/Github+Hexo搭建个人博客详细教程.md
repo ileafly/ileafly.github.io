@@ -1,8 +1,7 @@
 
 title: Github+Hexo搭建个人博客详细教程
 date: 2018-11-10 09:14:00 +0800
-tags: [Hexo]
-categories: 教程
+categories: Hexo
 ---
 
 <a name="sl6tws"></a>
@@ -83,17 +82,17 @@ $ hexo d
 1. 购买域名
 
 
-      一般去阿里云购买，具体流程网上很多，就不再细说
+     一般去阿里云购买，具体流程网上很多，就不再细说
 
 2. 配置DNS地址
 
 
-      在阿里云后台配置DNS信息，将[https://username.github.io](https://username.github.io)的ip绑定到你想要绑定的域名上
+     在阿里云后台配置DNS信息，将[https://username.github.io](https://username.github.io)的ip绑定到你想要绑定的域名上
 
 3. 配置hexo文件
 
 
-      在source目录下，新建文件，命名为`CNAME`，填入域名地址。
+     在source目录下，新建文件，命名为`CNAME`，填入域名地址。
 
 4. 发布到github
 

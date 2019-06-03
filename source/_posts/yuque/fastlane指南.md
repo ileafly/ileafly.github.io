@@ -1,8 +1,7 @@
 
 title: fastlane指南
 date: 2018-11-08 10:20:01 +0800
-tags: [自动化]
-categories: 教程
+categories: iOS
 ---
 
 [fastlane](https://github.com/fastlane/fastlane)是一套使用Ruby写的自动化工具集，为iOS和Android开发者提供了自动化构建工具，可以帮助开发者将App打包、签名、测试、发布、信息整理、提供AppStore等工作连接起来，实现完全自动化的工作流。<br />[fastlane-doc](https://docs.fastlane.tools) 参考文档。
@@ -106,9 +105,9 @@ fastlane集成了`mailgun` 进行邮件发送，在终端里输入fastlane mailg
 1. 注册mailgun
 
 
- [mailgun](https://www.mailgun.com)是一个开发人员的电子邮件服务，提供了强大的API，每个月可免费发送10000封邮件，而且还可以进行跟踪日志等操作。按照流程注册完后会有一个测试domain，利用测试domain可以发送邮件，不过需要添加收件邮箱的验证，通过添加自定义域名可以使用更强大的功能。
+[mailgun](https://www.mailgun.com)是一个开发人员的电子邮件服务，提供了强大的API，每个月可免费发送10000封邮件，而且还可以进行跟踪日志等操作。按照流程注册完后会有一个测试domain，利用测试domain可以发送邮件，不过需要添加收件邮箱的验证，通过添加自定义域名可以使用更强大的功能。
 
-1.  在Gemfile中添加`gem "rest-client"`
+1. 在Gemfile中添加`gem "rest-client"`
 
 2. 在Fastfile中添加mailgun的配置
 
@@ -166,7 +165,7 @@ fastlane集成了`mailgun` 进行邮件发送，在终端里输入fastlane mailg
 - [x] fastlane 支持pod install
 - [x] fastlane 上传蒲公英后邮件通知测试人员
 - [ ] fastlane 上传Testflight
-- [ ] fastlane 上传AppStore 
+- [ ] fastlane 上传AppStore
 
 <a name="6yx6gx"></a>
 ### [](#6yx6gx)使用过程中的一些坑

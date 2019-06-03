@@ -1,11 +1,7 @@
 
 title: iOS 技巧合集
 date: 2017-02-20 11:55:00 +0800
-tags: [iOS]
-categories: 开发技巧
----
-tags: [iOS]<br />categories: 开发技巧<br />date: 2017-02-20 11:55:00
-
+categories: iOS
 ---
 
 <a name="tf2kgf"></a>
@@ -59,7 +55,7 @@ end
 
 <a name="fqw2ll"></a>
 #### [](#fqw2ll)CUICatalog Invalid asset name supplied
-项目中最近在打印`CUICatalog Invalid asset name supplied`，调研发现之所以输出这个log是因为传了一个空字符串来获取image，如果项目这种情况比较多，可以添加一个`symbolic breakpoint`来定位。<br />![](https://cdn.nlark.com/yuque/0/2018/png/183307/1541845301865-3989fad5-4209-460a-8ec8-af444c4a9643.png#width=536)
+项目中最近在打印`CUICatalog Invalid asset name supplied`，调研发现之所以输出这个log是因为传了一个空字符串来获取image，如果项目这种情况比较多，可以添加一个`symbolic breakpoint`来定位。<br />![](https://cdn.nlark.com/yuque/0/2018/png/183307/1541845301865-3989fad5-4209-460a-8ec8-af444c4a9643.png#align=left&display=inline&height=257&originHeight=271&originWidth=565&status=done&width=536)
 
 需要说明一下，$arg3用于模拟器，$r0用于真机，除了传入值是nil的情况，还可能是@""，这种情况的判断规则是`[$arg3  length] == 0`
 
@@ -137,7 +133,7 @@ Xcode可以添加一段代码的快捷方式：
 #### [](#30i5og)Xcode控制台杂乱信息屏蔽
 Xcode升级后，运行项目会打印一堆杂乱的log信息，虽然不影响App的功能，但是会对问题定位产生影响。为了解决这个我们可以在scheme里设置`os_activity_mode`为disable。这里有两个注意点：
 
-1. NSLog打印的信息也会被一并屏蔽掉  解决方案：使用printf替代NSLog 
+1. NSLog打印的信息也会被一并屏蔽掉  解决方案：使用printf替代NSLog
 
 ```objectivec
 #ifdef DEBUG

@@ -1,11 +1,7 @@
 
 title: Instrument三板斧
 date: 2018-11-21 11:55:00 +0800
-tags: [iOS]
-categories: 开发技巧
----
-tags: [iOS]<br />categories: 开发技巧<br />date: 2018-11-21 11:55:00
-
+categories: iOS
 ---
 
 作为开发，不仅仅要会开发功能，还需要关注产品的性能，苹果为我们提供了强大的性能检测功能Instrument。这里总结一下Instrument的三个常用功能。
@@ -14,7 +10,7 @@ tags: [iOS]<br />categories: 开发技巧<br />date: 2018-11-21 11:55:00
 #### [](#u7avsg)CPU性能
 Instrument有一个**Timer Profiler**选项，选择**Timer Profiler**模块运行你想要检测的应用即可得到它的CPU性能的结果：
 
-![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548062488952-32b82364-c834-417d-be0e-5c6c065f6e53.png#width=747)
+![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548062488952-32b82364-c834-417d-be0e-5c6c065f6e53.png#align=left&display=inline&height=442&originHeight=532&originWidth=900&status=done&width=747)
 
 - 可以在时间轴里选择一段时间查看该段时间更为细节的CPU性能
 
@@ -25,9 +21,9 @@ Instrument有一个**Timer Profiler**选项，选择**Timer Profiler**模块运�
 
 <a name="bysosy"></a>
 #### [](#bysosy)图形性能
-图形性能方面最关注的应该就是「帧率」了，也就是我们常说的FPS。在Instrument中使用**Core Animation** + **Time Profiler**来评估图形性能。<br />除了观察时间轴上的FPS情况，也可以在控制台中选择Core Animation FPS Measurements来观察FPS的情况，在屏幕滑动时，FPS越高表示性能越好，帧率过低则意味着屏幕可能会出现卡顿。<br />![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548063371611-be58f216-99e0-49fa-9920-e631f3771c5a.png#width=747)
+图形性能方面最关注的应该就是「帧率」了，也就是我们常说的FPS。在Instrument中使用**Core Animation** + **Time Profiler**来评估图形性能。<br />除了观察时间轴上的FPS情况，也可以在控制台中选择Core Animation FPS Measurements来观察FPS的情况，在屏幕滑动时，FPS越高表示性能越好，帧率过低则意味着屏幕可能会出现卡顿。<br />![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548063371611-be58f216-99e0-49fa-9920-e631f3771c5a.png#align=left&display=inline&height=512&originHeight=548&originWidth=800&status=done&width=747)
 
-除了FPS还有很多选项可以检测图形性能，在Xcode 9之前这些选项在右下角的区域（如上图），Xcode 9之后这些选择在Xcode的Debug菜单中<br />![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548064256231-96434508-1f01-4d2b-b52e-cbfba03a1ddf.png#width=747)
+除了FPS还有很多选项可以检测图形性能，在Xcode 9之前这些选项在右下角的区域（如上图），Xcode 9之后这些选择在Xcode的Debug菜单中<br />![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548064256231-96434508-1f01-4d2b-b52e-cbfba03a1ddf.png#align=left&display=inline&height=387&originHeight=676&originWidth=1306&status=done&width=747)
 
 下面着重介绍一下这些选项的作用：
 
@@ -60,7 +56,7 @@ Instrument有一个**Timer Profiler**选项，选择**Timer Profiler**模块运�
 - 僵尸对象：对应的内存已经被释放并且不再会使用到，但是程序依然指向它的引用
 
 
-![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548068035204-9b36b29a-e575-4149-a2db-f9500e7fbf32.png#width=747)
+![](https://cdn.nlark.com/yuque/0/2019/png/183307/1548068035204-9b36b29a-e575-4149-a2db-f9500e7fbf32.png#align=left&display=inline&height=479&originHeight=513&originWidth=800&status=done&width=747)
 <a name="uxuyny"></a>
 #### [](#uxuyny)注意点
 

@@ -1,28 +1,32 @@
 
 title: iOS自动化打包脚本
 date: 2017-04-20 11:55:00 +0800
-tags: [iOS]
-categories: 开发技巧
+categories: iOS
 ---
 
-<span data-type="color" style="color:#F5222D">注意：</span>此方案打包OC项目没有问题，打包swift pod的项目，在export时会失败，目前还没找到解决方案，建议使用fastlane进行打包。[fastlane指南](http://www.ileafly.com/2018/11/08/yuque/fastlane指南/)
+注意：此方案打包OC项目没有问题，打包swift pod的项目，在export时会失败，目前还没找到解决方案，建议使用fastlane进行打包。[fastlane指南](http://www.ileafly.com/2018/11/08/yuque/fastlane指南/)
 
 iOS自动打包主要使用`xcodebuild`，在终端输入`xcodebuid --help`可以查看`xcodebuild`的参数。
 
-#### <a name="opaffn"></a>xcodebuild核心语法
-##### <a name="80i4av"></a>无workspace的工程
+<a name="opaffn"></a>
+#### [](#opaffn)xcodebuild核心语法
+<a name="80i4av"></a>
+##### [](#80i4av)无workspace的工程
 ```powershell
 xcodebuild [-project  name.xcodeproj][[-target targetname]...|-alltargets][-configuration  configurationname][-sdk  [sdkfullpath  |  sdkname]][action  ...][buildsetting=value  ...][-userdefault=value  ...]
 
 xcodebuild [-project  name.xcodeproj] -scheme schemename [[-destination  destinationspecifier]...][-destination-timeout  value][-configuration  configurationname][-sdk  [sdkfullpath  |  sdkname][action  ...][buildsetting =value  ...][-userdefault=value  ...]
 ```
-##### <a name="sh64gz"></a>有workspace的工程
+<a name="sh64gz"></a>
+##### [](#sh64gz)有workspace的工程
 ```powershell
 xcodebuild -workspace name.xcworkspace -scheme schemename [[-destination  destinationspecifier]...][-destination-timeout  value][-configuration  configurationname][-sdk  [sdkfullpath  |  sdkname]][action  ...][buidsetting=value  ...][-userdefault=value  ...]
 ```
 
-## <a name="z4urwc"></a>具体shell脚本
-#### <a name="chqbxy"></a>无workspace的工程
+<a name="z4urwc"></a>
+## [](#z4urwc)具体shell脚本
+<a name="chqbxy"></a>
+#### [](#chqbxy)无workspace的工程
 ```powershell
 #author by leafly
 
@@ -114,10 +118,11 @@ if [ -e $IpaPath ]; then
   echo "蒲公英网站上的APP已更新，欢迎更新.下载地址：https://www.pgyer.com/xxxx" | mail -s "测试包更新成功" lu.zhiyong@sohu.com
 else
   echo "创建ipa失败"
-fi 
+fi
 ```
 
-#### <a name="uxwfdr"></a>有workspace的工程
+<a name="uxwfdr"></a>
+#### [](#uxwfdr)有workspace的工程
 ```powershell
 #author by leafly
 
@@ -221,10 +226,11 @@ if [ -e $IpaPath ]; then
   echo "蒲公英网站上的APP已更新，欢迎更新.下载地址：https://www.pgyer.com/xxxx" | mail -s "测试包更新成功" lu.zhiyong@sohu.com
  else
   echo "创建ipa失败"
- fi 
+ fi
 ```
 
-### <a name="bkeyhl"></a>plist文件
+<a name="bkeyhl"></a>
+### [](#bkeyhl)plist文件
 ```html
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -241,7 +247,8 @@ if [ -e $IpaPath ]; then
 </plist>
 ```
 
-### <a name="2afoai"></a>用法
+<a name="2afoai"></a>
+### [](#2afoai)用法
 将shell脚本命名为`xpublish`，将文件存放到`/usr/local/bin`目录下，`chmod 777 xpublish`修改`xpublish`的权限。进入项目目录，执行`xpublish`即可。
 
 

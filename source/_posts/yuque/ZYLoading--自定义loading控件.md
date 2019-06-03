@@ -1,11 +1,7 @@
 
 title: ZYLoading--自定义loading控件
 date: 2017-12-14 19:20:00 +0800
-tags: [iOS]
-categories: 组件
----
-date: 2017-12-14 19:20:00<br />tags: [iOS]<br />categories: 组件
-
+categories: iOS
 ---
 
 移动端项目的开发离不开loading控件，通常为了能快速在项目中实现loading效果我们有几个主流的开源库可以选择：<br />[MBProgressHUD](https://github.com/jdg/MBProgressHUD)、[SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD)等

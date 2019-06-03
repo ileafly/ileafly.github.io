@@ -1,23 +1,29 @@
 
 title: ZYRouterManager--Swift
 date: 2018-11-21 14:12:41 +0800
-tags: []
-categories: 
+categories: iOS
 ---
-# <a name="9pf8aw"></a>ZYRouterManager--Swift
+
+
+<a name="YIIDE"></a>
+# ZYRouterManager--Swift
 封装一个简易、灵活的路由中间件，适合小型项目使用--Swift版
 
-## <a name="mzlzvo"></a>目的
+<a name="mzlzvo"></a>
+## [](#mzlzvo)目的
 
 随着项目越来越大，页面之间的跳转逻辑也越来越复杂，加上有很多h5页面也存在着与原生页面跳转的逻辑，为了统一管理页面的跳转逻辑，封装了一个路由中间件的类
 
-## <a name="ck62gs"></a>预期
+<a name="ck62gs"></a>
+## [](#ck62gs)预期
 
 提供一个类方法，解析传入的路径，跳转到相应的界面
 
-## <a name="yg84rf"></a>实现方案
+<a name="yg84rf"></a>
+## [](#yg84rf)实现方案
 
-###### <a name="p1oqks"></a>提供一个统一的路由中间件入口
+<a name="p1oqks"></a>
+###### [](#p1oqks)提供一个统一的路由中间件入口
 
 提供了一个唯一对外开放的类方法，需要传入跳转的scheme。
 
@@ -40,7 +46,8 @@ class func routerWithSchema(_ schema: String) -> Bool {
 }
 ```
 
-###### <a name="5n19nl"></a>分析传入的scheme
+<a name="5n19nl"></a>
+###### [](#5n19nl)分析传入的scheme
 
 分析传入的scheme，通过对比host判断跳转路径，通过解析请求参数，将传递的参数赋值给相对应的controller。
 
@@ -98,7 +105,8 @@ private class func analysisScheme(_ url: URL) -> Bool {
 }
 ```
 
-###### <a name="xy09yi"></a>获取当前控制器
+<a name="xy09yi"></a>
+###### [](#xy09yi)获取当前控制器
 
 为了方便使用者调用，`ZYRouterManager`内部实现了获取当前控制器的流程，大体思路是通过rootViewController一步一步向下查找，一直找到`UIViewController`对象，作为当前控制器返回
 
@@ -137,8 +145,8 @@ private class func findCurrentVC(_ parentVC: UIViewController) -> UIViewControll
 }
 ```
 
-## <a name="7882cc"></a>思路扩展
+<a name="7882cc"></a>
+## [](#7882cc)思路扩展
 
-这里路由控制器的实现还是比较简单的，主要就是通过对比host判断加载对应的controller。比较适合中小型项目的使用，如果项目是组件化搭建的，应用场景相对更复杂，目前相关比较好的库是[JLRoutes](https://github.com/joeldev/JLRoutes)。
-[JLRoutes](https://github.com/joeldev/JLRoutes)的主要实现思路是在启动时注册一组跳转map，当传递了对应的scheme后就会触发相应的block方法，在block中实现具体的跳转逻辑。
+这里路由控制器的实现还是比较简单的，主要就是通过对比host判断加载对应的controller。比较适合中小型项目的使用，如果项目是组件化搭建的，应用场景相对更复杂，目前相关比较好的库是[JLRoutes](https://github.com/joeldev/JLRoutes)。<br />[JLRoutes](https://github.com/joeldev/JLRoutes)的主要实现思路是在启动时注册一组跳转map，当传递了对应的scheme后就会触发相应的block方法，在block中实现具体的跳转逻辑。
 

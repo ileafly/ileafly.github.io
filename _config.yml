@@ -7,12 +7,12 @@ title: Leafly
 subtitle: talk is cheap, show me the code
 description: Leafly的博客
 author: Leafly
-language: zh
+language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.ileafly.com
+url: https://ileafly.github.io/ileafly/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -23,7 +23,7 @@ SEOTitle: Leafly的博客 | Leafly's Blog
 email: luzhiyongmail@sohu.com
 
 # SNS settings
-github_username: luzhiyongGit
+github_username: ileafly
 
 # Build settings
 anchorjs: true
@@ -86,11 +86,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: aircloud
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/luzhiyongGit/blog
+  repo: https://github.com/ileafly/ileafly.github.io.git
   branch: master
