@@ -1,7 +1,14 @@
 
+---
+
 title: Github+Hexo搭建个人博客详细教程
+
 date: 2018-11-10 09:14:00 +0800
+
 categories: Hexo
+
+tags: []
+
 ---
 
 <a name="sl6tws"></a>
@@ -97,7 +104,7 @@ $ hexo d
 4. 发布到github
 
 
-我的博客地址是[http://www.ileafly.com](http://www.ileafly.com)
+我的博客地址是[http://blog.ileafly.com](http://blog.ileafly.com)
 <a name="yst3oh"></a>
 #### [](#yst3oh)绑定语雀管理博客内容
 可以利用语雀管理博客内容，非常方便，详细流程可参考[使用语雀管理博客](http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/)。

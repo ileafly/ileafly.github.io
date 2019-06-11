@@ -11,6 +11,10 @@
   "hexo": {
     "version": "3.8.0"
   },
+  "scripts": {
+    "sync": "yuque-hexo sync",
+    "clean:yuque": "yuque-hexo clean" 
+  },
   "dependencies": {
     "cryptiles": ">=4.1.2",
     "fresh": ">=0.5.2",
@@ -31,7 +35,9 @@
     "hexo-server": "^0.3.3",
     "hoek": ">=4.2.1",
     "minimatch": ">=3.0.2",
-    "send": ">=0.11.1",
-    "yuque-hexo": "^1.1.0"
+    "send": ">=0.11.1"
+  },
+  "devDependencies": {
+    "yuque-hexo": "^1.6.1"
   }
 }
