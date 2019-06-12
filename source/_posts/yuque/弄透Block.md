@@ -12,14 +12,13 @@ tags: [iOS]
 ---
 
 
-<a name="CYyta"></a>
-# 目标
+本文重点：
 
-- [x] Block是什么？
-- [x] 总结Block的使用场景
-- [x] 为什么Block属性需要用copy修饰？
-- [x] __block修饰后为何就可以修改？
-- [x] Block循环引用是怎么产生的？
+- Block是什么？
+- 总结Block的使用场景
+- 为什么Block属性需要用copy修饰？
+- __block修饰后为何就可以修改？
+- Block循环引用是怎么产生的？
 
 
 <a name="d9d97201"></a>

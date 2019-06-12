@@ -13,6 +13,7 @@
   },
   "scripts": {
     "dev": "hexo g && hexo s",
+    "d": "hexo d",
     "sync": "yuque-hexo sync",
     "clean:yuque": "yuque-hexo clean"
   },

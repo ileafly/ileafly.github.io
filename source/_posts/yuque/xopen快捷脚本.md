@@ -11,14 +11,10 @@ tags: [iOS]
 
 ---
 
+自定义xopen快捷脚本，在终端中快速打开项目
 
-<a name="wB1xX"></a>
-# 目标
-
-- [x] 自定义xopen快捷脚本，在终端中快速打开项目
-
-<a name="7Hxs8"></a>
-# 详细教程
+<a name="dWZuy"></a>
+#### 详细教程
 
 1. 创建 `xopen` 文件
 1. 编辑 `xopen` 内容
