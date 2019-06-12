@@ -5,11 +5,16 @@ title: xopen快捷脚本
 
 date: 2019-06-11 10:10:16 +0800
 
-tags: []
+categories: iOS
+
+tags: [iOS]
 
 ---
-<a name="VQMty"></a>
+
+
+<a name="wB1xX"></a>
 # 目标
+
 - [x] 自定义xopen快捷脚本，在终端中快速打开项目
 
 <a name="7Hxs8"></a>

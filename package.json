@@ -12,8 +12,9 @@
     "version": "3.8.0"
   },
   "scripts": {
+    "dev": "hexo g && hexo s",
     "sync": "yuque-hexo sync",
-    "clean:yuque": "yuque-hexo clean" 
+    "clean:yuque": "yuque-hexo clean"
   },
   "dependencies": {
     "cryptiles": ">=4.1.2",
@@ -30,7 +31,7 @@
     "hexo-renderer-jade": "^0.4.1",
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-pug": "0.0.5",
-    "hexo-renderer-sass": "^0.2.0",
+    "hexo-renderer-sass": "^0.4.0",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
     "hoek": ">=4.2.1",

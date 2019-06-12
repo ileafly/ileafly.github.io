@@ -5,10 +5,14 @@ title: 弄透Block
 
 date: 2019-06-11 10:18:48 +0800
 
-tags: []
+categories: iOS
+
+tags: [iOS]
 
 ---
-<a name="73e82552"></a>
+
+
+<a name="CYyta"></a>
 # 目标
 
 - [x] Block是什么？
@@ -245,4 +249,5 @@ Test *t = [[Test alloc] init];
     self.name = @"lealfy";
 }];
 ```
+
 
