@@ -7,12 +7,11 @@ date: 2019-06-11 10:10:16 +0800
 
 categories: iOS
 
-tags: [iOS]
+tags: [教程]
 
 ---
 
-自定义xopen快捷脚本，在终端中快速打开项目
-
+自定义xopen快捷脚本，在终端中快速打开项目<br />![xopen.gif](https://cdn.nlark.com/yuque/0/2019/gif/183307/1562028112900-78c7a90a-d135-43da-bda3-a8f633731c6d.gif#align=left&display=inline&height=410&name=xopen.gif&originHeight=410&originWidth=656&size=702849&status=done&width=656)
 <a name="dWZuy"></a>
 #### 详细教程
 

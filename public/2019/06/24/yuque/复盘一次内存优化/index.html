@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Leafly的博客"><title>复盘一次内存优化 | Leafly</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">复盘一次内存优化</h1><a id="logo" href="/.">Leafly</a><p class="description">talk is cheap, show me the code</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">复盘一次内存优化</h1><div class="post-meta">Jun 24, 2019</div><div class="post-content"><p><a name="PMUtg"></a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
+<p>最近有用户反馈，App在进入后台后经常会被杀死，需要重新启动，对于用户来说，这样的体验无疑非常糟糕。当App内存消耗比较大，切换到其他App时，即使其他App向系统申请的内存不是特别大，系统也会因为资源紧张，优先把内存消耗较多的App回收，这就出现了用户反馈的问题。要想解决这个问题，就需要对App的内存进行优化。</p>
+</blockquote>
+<p><a name="deoSu"></a></p>
+<h1 id="常见的内存问题有哪些？"><a href="#常见的内存问题有哪些？" class="headerlink" title="常见的内存问题有哪些？"></a>常见的内存问题有哪些？</h1><ul>
+<li><p>内存泄漏：申请的内存空间使用完毕之后未回收</p>
+<blockquote>
+<p>一次两次的内存泄漏危害还好，但是如果一直泄漏，内存迟早要被消耗光，导致App崩溃，因此在日常开发过程中一定要避免内存泄漏</p>
+</blockquote>
+</li>
+<li><p>内存常驻：内存不合理运用，存在已分配内存的引用，但实际中程序不会再使用。</p>
+<blockquote>
+<p>因为一些原因，有些对象在App的整个生命周期中常驻，比如单例，如果不善加管理，任由这些内存常驻，App的内存就会一直居高不下，这类问题很难利用工具直接定位，需要我们结合代码分析</p>
+</blockquote>
+</li>
+<li><p>内存峰值过大：某个场景下，内存消耗大幅增加，产生一个较高的内存峰值</p>
+<blockquote>
+<p>某些场景可能因为代码的原因，导致内存瞬间大幅增加，这时就需要针对性分析，排查内存增加的原因，并进行优化</p>
+</blockquote>
+</li>
+<li><p>内存溢出：申请内存时，系统没有足够的内存空间供其使用，导致App崩溃</p>
+<blockquote>
+<p>当内存消耗一直比较高，新申请的内存又比较大，就有可能导致内存溢出，这时App就会被系统杀死，也就是OOM</p>
+</blockquote>
+</li>
+</ul>
+<p><br><br><a name="te3Wg"></a></p>
+<h1 id="优化思路"><a href="#优化思路" class="headerlink" title="优化思路"></a>优化思路</h1><p><a name="nwgan"></a></p>
+<h3 id="1-利用Instrument分析内存"><a href="#1-利用Instrument分析内存" class="headerlink" title="1. 利用Instrument分析内存"></a>1. 利用Instrument分析内存</h3><p>Instrument是苹果提供的分析工具，可以利用Instrument分析内存分配和内存泄漏的情况。网上关于Instrument使用的教程非常多，这里我总结几点注意点。</p>
+<ul>
+<li>利用Instrument分析内存主要依赖 <code>Allocations</code> 和 <code>Leaks</code> 两个选项，分别对应内存分配和内存泄漏</li>
+<li><code>Allocations</code> 分析内存时，总的内存占用 = <code>All Heap Allocations</code> + <code>All Anonymous VM:</code> <ul>
+<li><code>All Heap Allocations</code> App运行在堆上的内存，对应着由代码生成的各种实例对象</li>
+<li><code>All Anonymous VM:</code> 匿名的虚拟内存，这里包含一些系统模块的内存占用，也有一些保证我们代码正常运行不可缺少的部分<ul>
+<li>CG raster data（光栅化数据，也就是像素数据。注意不一定是图片，一块显示缓存里也可能是文字或者其他内容。通常每像素消耗 4 个字节）</li>
+<li>Image IO（图片编解码缓存）</li>
+<li>Stack (每个线程都会需要500KB左右的栈空间)</li>
+<li>CoreAnimation</li>
+<li>SQLite</li>
+<li>Network</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果所有的calltree显示的都是地址时，可以确认一下 <code>Debug Information Format</code> 是不是选择的 <code>DWARF with dSYM File</code> </li>
+<li>Instrument每一列的数据解释<br>| 列名 | 含义 |<br>| :—: | :—: |<br>| Graph | 是否选择要绘制对应Category的走势图 |<br>| Category | 类别，真实内存、虚拟内存等 |<br>| Persistent Bytes | 没有释放的内存大小 |<br>| # Persistent | 没有释放的内存个数 |<br>| # Transient | 已经释放的内存个数 |<br>| Total Bytes | 累计的内存大小 |<br>| # Total | 累计的内存个数 |<br>| Bytes Used | 占用的字节大小 |<br>| Count | 申请内存的次数 |<br>| Symbol Name | 调用栈信息 |</li>
+</ul>
+<p>我这边经过使用Instrument对内存的分析，很快就定位到了 <code>Kingfisher</code> 这个库。接下来，重点调研 <code>Kingfisher</code> </p>
+<p><a name="AvPoN"></a></p>
+<h3 id="2-Kingfisher内存优化"><a href="#2-Kingfisher内存优化" class="headerlink" title="2. Kingfisher内存优化"></a>2. Kingfisher内存优化</h3><p>首先查看Kingfisher有关内存问题的<a href="https://github.com/onevcat/Kingfisher/issues?utf8=✓&amp;q=is%3Aissue+is%3Aclosed+memory" target="_blank" rel="noopener">issues</a>，通过查看这些issues终于明白了，原来Kingfisher V4版本在设计之初选择了一个相对比较激进的处理图片内存缓存的方法，让图片在内存中无限制的缓存，直到遇到内存警告时再进行清理。通常情况下，这个策略可以很好的工作，但是有些情况下系统并不会及时、准确的传递内存警告，这就会导致App有概率被杀死，尤其在一些低端设备上。在Kingfisher V5版本，喵神已经调整了策略，针对Kingfisher V4版本也可以通过设置最大缓存值来限制。</p>
+<p>下面是喵神的原话：</p>
+<blockquote>
+<p>In Kingfisher 4, by default, the memory cache was using a “greedy” way to accept images. It will keep sending images to memory cache without an upper limitation, until a <code>.didReceiveMemoryWarningNotification</code> received. As soon as the system detects the memory availability level is low, Kingfisher will free up the used memory to make the system happy.<br>This mechanism worked well, at least for a time. We received reports on users apps crash due to memory pressure recently. After some investigation, we found that sometimes, the system won’t deliver the <code>.didReceiveMemoryWarningNotification</code> correctly. It, in turn, makes Kingfisher think there is still plenty of memory to use. But it is not the truth.<br>This problem can be fixed by limiting the max memory cache size in Kingfisher. But since the default behavior is “no limit”, so it keeps happening for new users of Kingfisher. In Kingfisher 5, we use a more conservative strategy by default. Now a maximum of 25% device memory would be used as the memory cache.</p>
+</blockquote>
+<p>因为Kingfisher V5需要从iOS 10开始支持，我们项目需要支持iOS 9系统，所以我就基于Kingfisher V4进行优化。<br><a name="NywtA"></a></p>
+<h4 id="2-1-限制图片缓存大小"><a href="#2-1-限制图片缓存大小" class="headerlink" title="2.1 限制图片缓存大小"></a>2.1 限制图片缓存大小</h4><p>正如喵神在文档中讲的，Kingfisher V4版本可以通过限制图片缓存的大小来避免内存增长过大的情况。为了能充分利用各个型号设备的内存，我这里参考了Kingfisher V5的策略，限制图片缓存大小为当前设备最大物理内存的5%。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> totalMemory = <span class="type">ProcessInfo</span>.processInfo.physicalMemory</span><br><span class="line"><span class="keyword">let</span> costLimit = totalMemory / <span class="number">20</span></span><br><span class="line"><span class="keyword">let</span> costMemory = (costLimit &gt; <span class="type">UInt</span>.<span class="built_in">max</span>) ? <span class="type">UInt</span>.<span class="built_in">max</span> : <span class="type">UInt</span>(costLimit)</span><br><span class="line"><span class="type">ImageCache</span>.<span class="keyword">default</span>.maxMemoryCost = costMemory</span><br></pre></td></tr></table></figure>
+<p><a name="WRHRD"></a></p>
+<h4 id="2-2-及时停止不必要的图片请求"><a href="#2-2-及时停止不必要的图片请求" class="headerlink" title="2.2 及时停止不必要的图片请求"></a>2.2 及时停止不必要的图片请求</h4><p>Kingfisher提供了 <code>cancelDownloadTask</code> 方法，可以在一些合适时机主动停止图片的下载请求，比如对于列表页面，可以通过实现 <code>didEndDisplaying</code> 代理回调，在回调中执行 <code>cell.imageView.kf.cancelDownloadTask()</code> 来停止图片下载。</p>
+<p><a name="OmOXQ"></a></p>
+<h3 id="3-内存常驻排查"><a href="#3-内存常驻排查" class="headerlink" title="3. 内存常驻排查"></a>3. 内存常驻排查</h3><p>内存常驻问题相对比较难排查，这里总结一下我的解决思路：<br><a name="EjaD4"></a></p>
+<h4 id="3-1-使用懒加载方式延迟加载一些不需要立即使用的对象或资源"><a href="#3-1-使用懒加载方式延迟加载一些不需要立即使用的对象或资源" class="headerlink" title="3.1 使用懒加载方式延迟加载一些不需要立即使用的对象或资源"></a>3.1 使用懒加载方式延迟加载一些不需要立即使用的对象或资源</h4><p>结合代码分析项目中是否存在一些对象或资源并不需要立即创建，将这些对象或资源采用懒加载的方式在需要的时候再进行加载，比如我们项目中在进入App后不仅加载了书城，同时还加载了福利页面，事实上福利页面是一个WebView页面相对比较消耗内存，而用户不一定需要进入福利页面，这就增加了不必要的内存消耗。</p>
+<p><a name="15goR"></a></p>
+<h4 id="3-2-避免单例滥用"><a href="#3-2-避免单例滥用" class="headerlink" title="3.2 避免单例滥用"></a>3.2 避免单例滥用</h4><p>单例对象在整个App的生命周期内都存活，结合代码分析项目的单例是否一定要存在，单例中是否存在一些不必要的对象，能否将它们移除。</p>
+<p><a name="cjarl"></a></p>
+<h4 id="3-3-图片加载优化"><a href="#3-3-图片加载优化" class="headerlink" title="3.3 图片加载优化"></a>3.3 图片加载优化</h4><ul>
+<li>避免使用 <code>[UIColor colorWithPatternImage:]</code> 方法</li>
+</ul>
+<p><code>[UIColor colorWithPatternImage:]</code> 这个方法会引用一个加载到内存的图片，同时在内存中创建出另一个对象，可以使用 self.view.layer.contents = (id) image.CGImage; 替换，以优化内存。</p>
+<ul>
+<li>善用 <code>imageNamed:</code> 和 <code>contentsOfFile:</code> 方法</li>
+</ul>
+<p>这两个方法都可以加载图片，区别是 <code>imageNamed:</code> 会在内存中缓存图片资源， <code>contentsOfFile:</code> 不会缓存图片资源，因此，根据实际情况合理选择加载方式，有助于内存优化。</p>
+<p><a name="FnSmF"></a></p>
+<h4 id="3-4-删除冗余的模型字段"><a href="#3-4-删除冗余的模型字段" class="headerlink" title="3.4 删除冗余的模型字段"></a>3.4 删除冗余的模型字段</h4><p>随着版本迭代，有些接口字段已经不再使用，这时及时将这些字段移除，有助于减少这些模型占用的内存空间，积少成多，优化内存。</p>
+<p><a name="E4BtI"></a></p>
+<h3 id="4-分析对比优化效果"><a href="#4-分析对比优化效果" class="headerlink" title="4. 分析对比优化效果"></a>4. 分析对比优化效果</h3><p>完成优化工作后，还需要对比优化前后的内存，用数据来表现优化的效果。这时可以利用 <code>Instrument</code> 的 <code>Mark Generation</code> 功能，分别统计每个功能模块优化前后的内存增长。经过统计对比，我们项目在阅读器翻页过程中的性能优化最明显，达到了60%。这是因为我们在阅读器中插入了大量的广告图片，如果按照Kingfisher的默认缓存设置，这些图片会一直保留在内存中，等待内存警告或进入后台时才会释放，限制了缓存最大值后，这个现象自然就得到了大幅度的优化。</p>
+</div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2019/06/28/yuque/iOS高效开发/">iOS高效开发</a><a class="next" href="/2019/06/11/yuque/弄透Block/">弄透Block</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+  clientID: '672129204f49cd5664c7',
+  clientSecret: '57735927f823cfa24256debfb225c5935c2894f9',
+  repo: 'ileafly.github.io',
+  owner: 'ileafly',
+  admin: ['ileafly'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://ileafly.github.io/ileafly"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/原理/" style="font-size: 15px;">原理</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/yuque/阅读器翻页动画优化总结/">阅读器翻页动画优化总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/yuque/iOS封装SDK/">iOS封装SDK</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/28/yuque/iOS高效开发/">iOS高效开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/24/yuque/复盘一次内存优化/">复盘一次内存优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/11/yuque/弄透Block/">弄透Block</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/11/yuque/xopen快捷脚本/">xopen快捷脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/09/yuque/使用语雀管理博客/">使用语雀管理博客</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Leafly.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

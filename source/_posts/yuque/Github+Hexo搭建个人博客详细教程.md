@@ -7,7 +7,7 @@ date: 2018-11-10 09:14:00 +0800
 
 categories: Hexo
 
-tags: []
+tags: [教程]
 
 ---
 
@@ -110,27 +110,36 @@ $ hexo d
 可以利用语雀管理博客内容，非常方便，详细流程可参考[使用语雀管理博客](http://www.ileafly.com/2018/11/09/yuque/使用语雀管理博客/)。
 <a name="qvkuep"></a>
 #### [](#qvkuep)自定义主题
-Hexo有非常非常多的主题，你可以在[Themes | Hexo](https://hexo.io/themes/index.html)浏览这些主题，选择你喜欢的主题进行使用。<br />我比较喜欢的主题是[Anisina](https://github.com/haojen/hexo-theme-Anisina)和[cafe](https://github.com/giscafer/hexo-theme-cafe)，这里就以[cafe](https://github.com/giscafer/hexo-theme-cafe)为例简述一下集成的流程。
-```
+Hexo有非常非常多的主题，你可以在[Themes | Hexo](https://hexo.io/themes/index.html)浏览这些主题，选择你喜欢的主题进行使用。<br />我比较喜欢的主题是[maupassant](https://github.com/tufu9441/maupassant-hexo)，这里就以[maupassant](https://github.com/tufu9441/maupassant-hexo)为例简述一下集成的流程。
+```shell
 # 安装
-$ git clone https://github.com/giscafer/hexo-theme-cafe.git themes/cafe
+$ git clone https://github.com/tufu9441/maupassant-hexo.git themes/maupassant
+$ npm install hexo-renderer-pug --save
+$ npm install hexo-renderer-sass --save
 
-# 修改博客配置文件 `_config.yml` 主题属性 theme 为 `cafe`.
-
-# 更新cafe文件
-cd themes/cafe
-git pull
-
-# 主题 themes/cafe/_config.yml 文件内容参考说明配置 https://github.com/giscafer/hexo-theme-cafe/blob/master/_config.yml
+# 修改博客配置文件 `_config.yml` 主题属性 theme 为 `maupassant`
+# 更多的配置信息可以参考ReadMe
 ```
 <a name="ctisce"></a>
 #### [](#ctisce)集成评论
-目前比较好用的评论是[LiveRe](https://www.livere.com)，注册并按照City版，获取uid。在__config.yml作如下配置：
+Gittalk是基于Github issues开发的评论系统，每一篇文章对应一个issues，issues里面的评论对应文章的评论，这样对于利用GitHub搭建的博客来说简直是完美的搭配。
+
+1. 创建一个OAuth Application
+- 访问 [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+- 随意填写一个Application Name
+- 在Homepage URL一栏填入博客的地址：https://ileafly.github.io
+- 在Authorization callback URL一栏同样填入博客的地址：https://ileafly.github.io
+- 创建应用，得到 `Client ID` 和 `Client Secret` 
+2. 修改主题配置，填入 `Client ID` 和 `Client Secret` 
+
 ```ruby
-comment:
-   type: livere
-   livere_id: 'city'
-   livere_uid: '*******'
+gittalk:
+  enable: true ## If you want to use Gitment comment system please set the value to true.
+  owner: ileafly ## Your GitHub ID, e.g. username
+  repo: ileafly.github.io ## The repository to store your comments, make sure you're the repo's owner, e.g. imsun.github.io
+  client_id: ## GitHub client ID, e.g. 75752dafe7907a897619
+  client_secret: ## GitHub client secret, e.g. ec2fb9054972c891289640354993b662f4cccc50
+  admin: ileafly
 ```
 
 
