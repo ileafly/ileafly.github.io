@@ -5,9 +5,13 @@ title: iOS封装SDK
 
 date: 2019-07-01 13:19:08 +0800
 
-tags: []
+categories: iOS
+
+tags: [教程]
 
 ---
+
+
 日常开发中，我们可能需要封装一些SDK或者使用一些别人封装的SDK。这里总结一下SDK的封装流程。
 
 <a name="sH1aJ"></a>
