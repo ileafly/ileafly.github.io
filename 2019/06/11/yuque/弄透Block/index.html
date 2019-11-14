@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    <link rel="dns-prefetch" href="//cdn.bootcss.com">
+    <link rel="dns-prefetch" href="//secure.gravatar.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    
+    <title>
+    
+        弄透Block - Leafly
+    
+    </title>
+    <meta name="keywords" content="undefined">
+    <meta name="description" content="Leafly的博客">
+    
+    <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.min.css">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</head>
+<body class="bg-white" gtools_scp_screen_capture_injected="true">
+<a id="top" style="top: 0px;"></a>
+<!--[if lt IE 8]>
+<div class="browsehappy" role="dialog">
+    当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
+</div>
+<![endif]-->
+<header id="header" class="header bg-white">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">
+            
+            Leafly
+            
+        </a>
+        <div class="navbar-menu">
+            
+            <a href="/categories" class>分类</a>
+            
+            <a href="/tags" class>标签</a>
+            
+            <a href="/archives" class>归档</a>
+            
+            <a href="/links" class>友情链接</a>
+            
+            <a href="/about" class>关于我</a>
+            
+        </div>
+        <div class="navbar-mobile-menu" onclick>
+            <span class="icon-menu cross"><span class="middle"></span></span>
+            <ul>
+                
+                <li><a href="/categories" class>分类</a></li>
+                
+                <li><a href="/tags" class>标签</a></li>
+                
+                <li><a href="/archives" class>归档</a></li>
+                
+                <li><a href="/links" class>友情链接</a></li>
+                
+                <li><a href="/about" class>关于我</a></li>
+                
+            </ul>
+        </div>
+    </div>
+</header></body></html>
+
+
+
+<div class="post-header-thumb">
+	<div class="post-header-thumb-op" style="background-image:url(/images/thumbs/12.jpg);"></div>
+	<div class="post-header-thumb-cover">
+		<div class="post-header-thumb-container">
+			<div class="post-header-thumb-title">
+				弄透Block
+			</div>
+			<div class="post-header-thumb-meta">
+				
+				<time datetime="1560219528" itemprop="datePublished">Published on Jun 11, 2019 in </time>
+				<a href="/categories/iOS/">iOS</a>
+				
+				<div class="post-header-thumb-meta" style="font-size: 13px;">
+					<span class="post-count">本文字数：1.8k 字</span>
+					<span>|</span>
+					<span class="post-count">阅读时长 ≈ 7 min</span>
+				</div>
+			</div>
+			<div class="post-tags">
+				
+				
+                <a href="/tags/原理/">原理</a>
+                
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<article class="main-content post-page" itemscope itemtype="http://schema.org/Article">
+	<div class="post-header">
+		<h1 class="post-title" itemprop="name headline">
+			弄透Block
+		</h1>
+		<div class="post-data">
+			
+            <time datetime="1560219528" itemprop="datePublished">Published on Jun 11, 2019 in </time><a href="/categories/iOS/">iOS</a>
+			
+			<div style="font-size: 13px;">
+				<span class="post-count">本文字数：1.8k 字</span>
+				<span>|</span>
+				<span class="post-count">阅读时长 ≈ 7 min</span>
+			</div>
+		</div>
+	</div>
+	<div id="post-content" class="post-content" itemprop="articleBody">
+		<p class="post-tags">
+            
+            
+            <a href="/tags/原理/">原理</a>
+            
+            
+        </p>
+		<p>本文重点：</p>
+<ul>
+<li>Block是什么？</li>
+<li>总结Block的使用场景</li>
+<li>为什么Block属性需要用copy修饰？</li>
+<li>__block修饰后为何就可以修改？</li>
+<li>Block循环引用是怎么产生的？</li>
+</ul>
+<p><a name="d9d97201"></a></p>
+<h1 id="Block是什么？"><a href="#Block是什么？" class="headerlink" title="Block是什么？"></a>Block是什么？</h1><blockquote>
+<p>Block：带有自动变量的匿名函数，它是C语言的拓展功能，之所以是扩展，是因为C语言不允许存在这样的匿名函数</p>
+</blockquote>
+<ol>
+<li>匿名函数</li>
+</ol>
+<p>匿名函数是指不带函数名称的函数</p>
+<ol start="2">
+<li>带有自动变量</li>
+</ol>
+<p>这是因为Block拥有捕获外部变量的功能，在Block中访问一个外部的局部变量，Block会持有它的临时状态，自动捕获变量值，外部局部变量的变化不会影响它的状态</p>
+<pre><code class="objectivec">int val = 10;
+void (^blk)(void) = ^{
+  printf(&quot;val=%d\n&quot;, val);
+};
+val = 2;
+blk(); // 这里输出的值是10，而不是2，因为block在实现时就会对它所在方法中定义的栈变量进行一次只读拷贝
+</code></pre>
+<ol start="3">
+<li>为了解决block不能修改自动变量的值，可以使用 <code>__block</code> 修饰</li>
+</ol>
+<pre><code class="objectivec">__block int val = 10;
+void (^blk)(void) = ^{
+ printf(&quot;val=%d\n&quot;, val);
+};
+val = 2;
+blk(); // 这里输出的值是2
+</code></pre>
+<p><a name="e3d6ac67"></a></p>
+<h1 id="Block的使用场景"><a href="#Block的使用场景" class="headerlink" title="Block的使用场景"></a>Block的使用场景</h1><ol>
+<li>声明Block属性 利用Block属性响应事件或传递数据</li>
+</ol>
+<blockquote>
+<p>UIViewController 需要监听TableView中Cell的某个按钮的点击事件，既可以通过Delegate回调，也可以利用Block回调<br>Block回调的思路：<br>声明一个Block属性，注意这里要用copy。<br>利用Block属性进行回调</p>
+</blockquote>
+<ol start="2">
+<li>方法参数为Block 利用Block实现回调</li>
+</ol>
+<blockquote>
+<p>以 <code>[UIView animateWithDuration:animations:]</code> 为例，animations是一个block对象，利用block实现调用者与UIView之间的数据传递</p>
+</blockquote>
+<ol start="3">
+<li>链式语法</li>
+</ol>
+<blockquote>
+<p>链式编程思想：将block作为方法的返回值，且返回值的类型为调用者本身，并将该方法以setter的形式返回，从而实现连续调用</p>
+</blockquote>
+<pre><code class="objectivec">//  CaculateMaker.h
+//  ChainBlockTestApp
+
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;UIKit/UIKit.h&gt;
+
+@interface CaculateMaker : NSObject
+
+@property (nonatomic, assign) CGFloat result;
+
+/*
+* 返回类型 CaculateMaker
+* 传入参数 CGFloat num
+*/
+- (CaculateMaker *(^)(CGFloat num))add;
+
+@end
+
+
+//  CaculateMaker.m
+//  ChainBlockTestApp
+
+
+#import &quot;CaculateMaker.h&quot;
+
+@implementation CaculateMaker
+
+- (CaculateMaker *(^)(CGFloat num))add;{
+    return ^CaculateMaker *(CGFloat num){
+        _result += num;
+        return self;
+    };
+}
+
+@end
+
+// 使用
+CaculateMaker *maker = [[CaculateMaker alloc] init];
+maker.add(20).add(30);
+</code></pre>
+<p><a name="fd60c885"></a></p>
+<h1 id="为什么Block属性需要用copy修饰？"><a href="#为什么Block属性需要用copy修饰？" class="headerlink" title="为什么Block属性需要用copy修饰？"></a>为什么Block属性需要用copy修饰？</h1><p><strong>因为在MRC情况下如果Block属性不使用copy修饰，在使用中会出现崩溃，在ARC情况下，Block属性使用strong修饰会被默认进行copy，所以ARC情况下，Block属性可以使用strong或copy修饰，不然会出现崩溃。</strong><br>**<br>为何会有这种现象出现？</p>
+<p>Block在内存中的位置分为三种类型：</p>
+<ul>
+<li><strong>NSGlobalBlock</strong> 是位于全局区的block，它是设置在程序的数据区中。</li>
+<li><strong>NSStackBlock</strong> 是位于栈区，当超出变量作用域时，栈上的Block以及__block变量都会被销毁。</li>
+<li><strong>NSMallocBlock</strong> 是位于堆区，在变量作用域结束时不受影响。</li>
+</ul>
+<p>这三种类型对应以下三种情况：</p>
+<ol>
+<li>Block中没有截获自动变量时Block类型是<strong>NSGlobalBlock</strong></li>
+<li>Block中截获自动变量时Block类型是<strong>NSStackBlock</strong></li>
+<li>堆中的Block无法直接创建，当对<strong>NSStackBlock</strong>类型的Block进行copy时，会将Block放到堆中，Block类型变为<strong>NSMallocBlock</strong></li>
+</ol>
+<p>当Block类型是<strong>NSStackBlock</strong>时，一旦超出了变量作用域，栈上的Block以及__block变量就会被销毁，从而导致调用Block回调时崩溃。因此，Block属性需要用copy修饰来避免这种情况。</p>
+<pre><code class="objectivec">- (void)click:(id)sender {
+        TestClass *test = [[TestClass alloc] init];
+
+        __block int a = 1;
+        // 弱引用，block类型是__NSStackBlock__  当TestClass执行回调时必崩 EXC_BAD_ACCESS
+        test.weakBlock = ^() {
+            NSLog(@&quot;ok&quot;);
+            a = 2;
+        };
+
+        // block类型是__NSStackBlock__  当TestClass执行回调时必崩 EXC_BAD_ACCESS
+        test.assignBlock = ^() {
+            NSLog(@&quot;ok&quot;);
+            a = 3;
+        };
+
+        // block类型是__MallocBlock__ 正常执行
+        test.copyBlock = ^() {
+            NSLog(@&quot;ok&quot;);
+            a = 4;
+        };
+
+        // block类型是__MallocBlock__ 正常执行
+        test.strongBlock = ^() {
+            NSLog(@&quot;ok&quot;);
+            a = 5;
+        };
+
+        NSLog(@&quot;copy property: %@&quot;, test.copyBlock);
+        NSLog(@&quot;assign property: %@&quot;, test.assignBlock);
+        NSLog(@&quot;weak property: %@&quot;, test.weakBlock);
+        NSLog(@&quot;strong property: %@&quot;, test.strongBlock);
+
+
+        [test start];
+    }
+</code></pre>
+<p><a name="7a61fc63"></a></p>
+<h1 id="block修饰后为何就可以修改局部变量？"><a href="#block修饰后为何就可以修改局部变量？" class="headerlink" title="__block修饰后为何就可以修改局部变量？"></a>__block修饰后为何就可以修改局部变量？</h1><p>首先，需要弄明白一个概念，static声明的静态局部变量是可以在block内进行修改的，为何会有这种区别呢？<br>因为，静态局部变量存在于应用程序的整个生命周期，而非静态局部变量仅存在于一个局部上下文中，绝大多数情况下，block都是延后执行的，这就有可能出现非静态局部变量被回收的情况，为了避免这个问题，苹果在设计block时，block中非静态局部变量是值传递，这也解释了为何block会持有变量的临时状态，后续再修改，block中的变量值也不再改变。</p>
+<p>加上<strong>block修饰的局部变量，被block捕获时，就不再是传递局部变量的值了，而是变成了一个结构体实例。比如：<br>定义一个 `</strong>block int a = 10;<code>会变成</code><strong>Block_byref_a_0 *a;<code>&lt;br /&gt;</code></strong>Block_byref_a_0` 的结构体如下所示：</p>
+<pre><code class="objectivec">struct __Block_byref_a_0 {
+ void *__isa;
+ __Block_byref_a_0 *__forwarding; // forwarding指针
+ int __flags;
+ int __size;
+ void (*__Block_byref_id_object_copy)(void*, void*);
+ void (*__Block_byref_id_object_dispose)(void*);
+ int a; // 原变量同类型变量
+};
+</code></pre>
+<p>结构体中有一个<strong>forwarding指针，此指针指向转换后变量本身，结构体中也有一个原变量一样类型的变量。此后代码中涉及到原变量的地方，都会转换成新变量-&gt;forwarding-&gt;原变量同类型变量</strong></p>
+<p>如果在block中直接修改变量的值，实质的过程是新变量-&gt;__forwarding-&gt;原变量同类型变量，最终修改的其实是结构体中原变量同类型变量，很明显这个结构体内的变量已经不属于block的外部变量了，所以能在block内修改。</p>
+<p>这个新变量也是非静态局部变量，所以如果没有copy，block执行时，新变量有可能已经被栈回收</p>
+<p>总结：<br><strong>block修饰的变量转换成了结构体，结构体内有一个forwarding指针和一个与原变量相同类型的成员变量，forwarding指针指向结构体内的成员变量。无论在block内外，都是通过forwarding来访问的。</strong></p>
+<p><a name="0eccb7a1"></a></p>
+<h1 id="Block的循环引用是怎么产生的？"><a href="#Block的循环引用是怎么产生的？" class="headerlink" title="Block的循环引用是怎么产生的？"></a>Block的循环引用是怎么产生的？</h1><p>我们先看一段block导致循环引用的代码：</p>
+<pre><code class="objectivec">TestClass *test = [[TestClass alloc] init]; 
+
+test.copyBlock = ^() {
+    NSLog(@&quot;ok: %d&quot;, test.result);
+};
+</code></pre>
+<p>当我们写完这段代码后，Xcode就会提醒我们，这段代码存在循环引用，事实上也确实存在循环引用。接下来我们就来分析一下为什么会产生循环引用。<br>test的属性block强引用了SecondViewController中的block，SecondViewController中的block又强引用了test的属性result，从而导致了循环引用。</p>
+<p>并非所有的block都存在循环引用，下面列举一些常见的block使用的示例：</p>
+<pre><code class="objectivec">// self--&gt;requestModel--&gt;block--&gt;self 
+[self.requestModel requestData:^(NSData *data) {
+    self.name = @&quot;leafly&quot;;
+}];
+
+// 虽然存在引用环，但是通过主动释放requestModel打破了循环
+[self.requestModel requestData:^(NSData *data) {
+    self.name = @&quot;leafly&quot;;
+    self.requestModel = nil;
+}];
+
+// t--&gt;block--&gt;self 不存在循环引用
+Test *t = [[Test alloc] init];
+
+[t requestData:^(NSData *data) {
+    self.name = @&quot;leafly&quot;;
+}];
+
+// AFNetworking--&gt;block--&gt;self 不存在循环引用
+[AFNetworking requestData:^(NSData *data) {
+    self.name = @&quot;lealfy&quot;;
+}];
+</code></pre>
+
+		
+		
+		<p class="post-info">
+			本文由 <a href="http://blog.ileafly.com">Leafly</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可<br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名<br>最后编辑时间为: Nov 12, 2019 08:40 pm
+		</p>
+	</div>
+</article>
+<div id="post-bottom-bar" class="post-bottom-bar">
+	<div class="bottom-bar-inner">
+		<div class="bottom-bar-items social-share left">
+			<span class="bottom-bar-item">Share : </span>
+			<span class="bottom-bar-item bottom-bar-facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.ileafly.com/2019/06/11/yuque/弄透Block/index.html" target="_blank" title="弄透Block" rel="nofollow">facebook</a></span>
+			<span class="bottom-bar-item bottom-bar-twitter"><a href="https://twitter.com/intent/tweet?url=http://blog.ileafly.com/2019/06/11/yuque/弄透Block/&text=弄透Block" target="_blank" title="弄透Block" rel="nofollow">Twitter</a></span>
+			<span class="bottom-bar-item bottom-bar-weibo"><a href="http://service.weibo.com/share/share.php?url=&amp;title=弄透Block" target="_blank" title="弄透Block" rel="nofollow">Weibo</a></span>
+			<span class="bottom-bar-item bottom-bar-qrcode"><a href="//pan.baidu.com/share/qrcode?w=300&amp;h=300&amp;url=http://blog.ileafly.com/2019/06/11/yuque/弄透Block/index.html" target="_blank" rel="nofollow">QRcode</a></span>
+		</div>
+		<div class="bottom-bar-items right">
+            
+            <span class="bottom-bar-item"><a href="/2019/06/24/yuque/复盘一次内存优化/">←</a></span>
+            
+            
+            <span class="bottom-bar-item"><a href="/2019/06/11/yuque/xopen快捷脚本/">→</a></span>
+            
+			<span class="bottom-bar-item"><a href="#footer">↓</a></span>
+			<span class="bottom-bar-item"><a href="#top">↑</a></span>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<footer id="footer" class="footer bg-white">
+	<div class="footer-social">
+		<div class="footer-container clearfix">
+			<div class="social-list">
+                
+                    <a class="social" target="blank" href="null">知乎</a>
+                
+                    <a class="social" target="blank" href="null">Github</a>
+                
+            </div>
+		</div>
+	</div>
+	<div class="footer-meta">
+		<div class="footer-container">
+			<div class="meta-item meta-copyright">
+				<div class="meta-copyright-info">
+                    <a href="http://blog.ileafly.com" class="info-logo">
+                        
+                        Leafly
+                        
+                    </a>
+					<div class="info-text">
+                        <p id="chakhsu"></p>
+                    	<p>Theme is <a href="https://github.com/cccyb/hexo-theme-pinghsu" target="_blank">Pinghsu</a> by <a href="http://blog.ileafly.com" target="_blank">Leafly</a></p>
+						<p>Powered by <a href="https://hexo.io/" target="_blank" rel="nofollow">hexo</a></p>
+                        <p style="margin-top: 10px">站点总字数：11.5k</p>
+                        
+                        <p><span id="busuanzi_container_site_pv" style='display:none'>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span></p>
+                        <p><span id="busuanzi_container_site_uv" style='display:none'>本站访客数 <span id="busuanzi_value_site_uv"></span> 人次</span></p>
+                        
+                        
+                        <p style="margin-top: 10px">&copy; 2016 - 2019 <a href="http://blog.ileafly.com">Leafly</a></p>
+                    </div>
+				</div>
+            </div>
+            
+            <div class="meta-item meta-posts">
+                <h3 class="meta-title">最近文章</h3>
+                
+                <li><a href="/2019/07/03/yuque/Webpack+Vue+VueRouter+ElementUI/">Webpack+Vue+VueRouter+ElementUI</a></li>
+                
+                <li><a href="/2019/07/02/yuque/阅读器翻页动画优化总结/">阅读器翻页动画优化总结</a></li>
+                
+                <li><a href="/2019/07/01/yuque/iOS封装SDK/">iOS封装SDK</a></li>
+                
+                <li><a href="/2019/06/28/yuque/iOS高效开发/">iOS高效开发</a></li>
+                
+                <li><a href="/2019/06/24/yuque/复盘一次内存优化/">复盘一次内存优化</a></li>
+                
+                <li><a href="/2019/06/11/yuque/弄透Block/">弄透Block</a></li>
+                
+                <li><a href="/2019/06/11/yuque/xopen快捷脚本/">xopen快捷脚本</a></li>
+                
+                <li><a href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></li>
+                
+            </div>
+            
+            
+		</div>
+	</div>
+</footer>
+
+
+<div id="directory-content" class="directory-content">
+    <div id="directory"></div>
+</div>
+<script>
+var postDirectoryBuild = function() {
+    var postChildren = function children(childNodes, reg) {
+        var result = [],
+            isReg = typeof reg === 'object',
+            isStr = typeof reg === 'string',
+            node, i, len;
+        for (i = 0, len = childNodes.length; i < len; i++) {
+            node = childNodes[i];
+            if ((node.nodeType === 1 || node.nodeType === 9) &&
+                (!reg ||
+                isReg && reg.test(node.tagName.toLowerCase()) ||
+                isStr && node.tagName.toLowerCase() === reg)) {
+                result.push(node);
+            }
+        }
+        return result;
+    },
+    createPostDirectory = function(article, directory, isDirNum) {
+        var contentArr = [],
+            titleId = [],
+            levelArr, root, level,
+            currentList, list, li, link, i, len;
+        levelArr = (function(article, contentArr, titleId) {
+            var titleElem = postChildren(article.childNodes, /^h\d$/),
+                levelArr = [],
+                lastNum = 1,
+                lastRevNum = 1,
+                count = 0,
+                guid = 1,
+                id = 'directory' + (Math.random() + '').replace(/\D/, ''),
+                lastRevNum, num, elem;
+            while (titleElem.length) {
+                elem = titleElem.shift();
+                contentArr.push(elem.innerHTML);
+                num = +elem.tagName.match(/\d/)[0];
+                if (num > lastNum) {
+                    levelArr.push(1);
+                    lastRevNum += 1;
+                } else if (num === lastRevNum ||
+                    num > lastRevNum && num <= lastNum) {
+                    levelArr.push(0);
+                    lastRevNum = lastRevNum;
+                } else if (num < lastRevNum) {
+                    levelArr.push(num - lastRevNum);
+                    lastRevNum = num;
+                }
+                count += levelArr[levelArr.length - 1];
+                lastNum = num;
+                elem.id = id + guid++;
+                titleId.push(elem.id);
+            }
+            if (count !== 0 && levelArr[0] === 1) levelArr[0] = 0;
+            return levelArr;
+        })(article, contentArr, titleId);
+        currentList = root = document.createElement('ul');
+        dirNum = [0];
+        for (i = 0, len = levelArr.length; i < len; i++) {
+            level = levelArr[i];
+            if (level === 1) {
+                list = document.createElement('ul');
+                if (!currentList.lastElementChild) {
+                    currentList.appendChild(document.createElement('li'));
+                }
+                currentList.lastElementChild.appendChild(list);
+                currentList = list;
+                dirNum.push(0);
+            } else if (level < 0) {
+                level *= 2;
+                while (level++) {
+                    if (level % 2) dirNum.pop();
+                    currentList = currentList.parentNode;
+                }
+            }
+            dirNum[dirNum.length - 1]++;
+            li = document.createElement('li');
+            link = document.createElement('a');
+            link.href = '#' + titleId[i];
+            link.innerHTML = !isDirNum ? contentArr[i] :
+                dirNum.join('.') + ' ' + contentArr[i] ;
+            li.appendChild(link);
+            currentList.appendChild(li);
+        }
+        directory.appendChild(root);
+    };
+    createPostDirectory(document.getElementById('post-content'),document.getElementById('directory'), true);
+};
+postDirectoryBuild();
+</script>
+
+<script src="//cdn.bootcss.com/headroom/0.9.1/headroom.min.js"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+<script>
+
+var postDirectory = new Headroom(document.getElementById("directory-content"), {
+    tolerance: 0,
+    
+    offset : 280,
+    
+    classes: {
+        initial: "initial",
+        pinned: "pinned",
+        unpinned: "unpinned"
+    }
+});
+postDirectory.init();
+
+
+var postSharer = new Headroom(document.getElementById("post-bottom-bar"), {
+    tolerance: 0,
+    offset : 70,
+    classes: {
+        initial: "animated",
+        pinned: "pinned",
+        unpinned: "unpinned"
+    }
+});
+postSharer.init();
+
+var header = new Headroom(document.getElementById("header"), {
+    tolerance: 0,
+    offset : 70,
+    classes: {
+      initial: "animated",
+      pinned: "slideDown",
+      unpinned: "slideUp"
+    }
+});
+header.init();
+
+hljs.initHighlightingOnLoad();
+ 
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+</script>
+<script>
+var words = 'Hexo,Theme,Pinghsu'.split(',').map(item => item.trim());
+var chakhsu = function(r){function t(){return b[Math.floor(Math.random()*b.length)]}function e(){return String.fromCharCode(94*Math.random()+33)}function n(r){for(var n=document.createDocumentFragment(),i=0;r>i;i++){var l=document.createElement("span");l.textContent=e(),l.style.color=t(),n.appendChild(l)}return n}function i(){var t=o[c.skillI];c.step?c.step--:(c.step=g,c.prefixP<l.length?(c.prefixP>=0&&(c.text+=l[c.prefixP]),c.prefixP++):"forward"===c.direction?c.skillP<t.length?(c.text+=t[c.skillP],c.skillP++):c.delay?c.delay--:(c.direction="backward",c.delay=a):c.skillP>0?(c.text=c.text.slice(0,-1),c.skillP--):(c.skillI=(c.skillI+1)%o.length,c.direction="forward")),r.textContent=c.text,r.appendChild(n(c.prefixP<l.length?Math.min(s,s+c.prefixP):Math.min(s,t.length-c.skillP))),setTimeout(i,d)}var l="I work with ",o=words.map(function(r){return r+"."}),a=2,g=1,s=5,d=75,b=["rgb(110,64,170)","rgb(150,61,179)","rgb(191,60,175)","rgb(228,65,157)","rgb(254,75,131)","rgb(255,94,99)","rgb(255,120,71)","rgb(251,150,51)","rgb(226,183,47)","rgb(198,214,60)","rgb(175,240,91)","rgb(127,246,88)","rgb(82,246,103)","rgb(48,239,130)","rgb(29,223,163)","rgb(26,199,194)","rgb(35,171,216)","rgb(54,140,225)","rgb(76,110,219)","rgb(96,84,200)"],c={text:"",prefixP:-s,skillI:0,skillP:0,direction:"forward",delay:a,step:g};i()};chakhsu(document.getElementById('chakhsu')); if ('addEventListener' in document) { document.addEventListener('DOMContentLoaded', function() { FastClick.attach(document.body); }, false); }
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false,
+    messageStyle: "none",
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+        ignoreClass:"comment-content"
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"],
+        showMathMenu: false
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script src="/js/love.js"></script>
+
+
+
+<script>
+
+
+
+</script>
+
+</body>
+</html>

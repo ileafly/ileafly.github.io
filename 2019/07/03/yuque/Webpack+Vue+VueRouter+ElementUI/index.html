@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    <link rel="dns-prefetch" href="//cdn.bootcss.com">
+    <link rel="dns-prefetch" href="//secure.gravatar.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    
+    <title>
+    
+        Webpack+Vue+VueRouter+ElementUI - Leafly
+    
+    </title>
+    <meta name="keywords" content="undefined">
+    <meta name="description" content="Leafly的博客">
+    
+    <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.min.css">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</head>
+<body class="bg-white" gtools_scp_screen_capture_injected="true">
+<a id="top" style="top: 0px;"></a>
+<!--[if lt IE 8]>
+<div class="browsehappy" role="dialog">
+    当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
+</div>
+<![endif]-->
+<header id="header" class="header bg-white">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">
+            
+            Leafly
+            
+        </a>
+        <div class="navbar-menu">
+            
+            <a href="/categories" class>分类</a>
+            
+            <a href="/tags" class>标签</a>
+            
+            <a href="/archives" class>归档</a>
+            
+            <a href="/links" class>友情链接</a>
+            
+            <a href="/about" class>关于我</a>
+            
+        </div>
+        <div class="navbar-mobile-menu" onclick>
+            <span class="icon-menu cross"><span class="middle"></span></span>
+            <ul>
+                
+                <li><a href="/categories" class>分类</a></li>
+                
+                <li><a href="/tags" class>标签</a></li>
+                
+                <li><a href="/archives" class>归档</a></li>
+                
+                <li><a href="/links" class>友情链接</a></li>
+                
+                <li><a href="/about" class>关于我</a></li>
+                
+            </ul>
+        </div>
+    </div>
+</header></body></html>
+
+
+
+<div class="post-header-thumb">
+	<div class="post-header-thumb-op" style="background-image:url(/images/thumbs/7.jpg);"></div>
+	<div class="post-header-thumb-cover">
+		<div class="post-header-thumb-container">
+			<div class="post-header-thumb-title">
+				Webpack+Vue+VueRouter+ElementUI
+			</div>
+			<div class="post-header-thumb-meta">
+				
+				<time datetime="1562154573" itemprop="datePublished">Published on Jul 03, 2019 in </time>
+				<a href="/categories/前端/">前端</a>
+				
+				<div class="post-header-thumb-meta" style="font-size: 13px;">
+					<span class="post-count">本文字数：2.7k 字</span>
+					<span>|</span>
+					<span class="post-count">阅读时长 ≈ 15 min</span>
+				</div>
+			</div>
+			<div class="post-tags">
+				
+				
+                <a href="/tags/教程/">教程</a>
+                
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<article class="main-content post-page" itemscope itemtype="http://schema.org/Article">
+	<div class="post-header">
+		<h1 class="post-title" itemprop="name headline">
+			Webpack+Vue+VueRouter+ElementUI
+		</h1>
+		<div class="post-data">
+			
+            <time datetime="1562154573" itemprop="datePublished">Published on Jul 03, 2019 in </time><a href="/categories/前端/">前端</a>
+			
+			<div style="font-size: 13px;">
+				<span class="post-count">本文字数：2.7k 字</span>
+				<span>|</span>
+				<span class="post-count">阅读时长 ≈ 15 min</span>
+			</div>
+		</div>
+	</div>
+	<div id="post-content" class="post-content" itemprop="articleBody">
+		<p class="post-tags">
+            
+            
+            <a href="/tags/教程/">教程</a>
+            
+            
+        </p>
+		<p><a name="3qSdE"></a></p>
+<h1 id="本文重点"><a href="#本文重点" class="headerlink" title="本文重点"></a>本文重点</h1><ul>
+<li>搭建Webpack开发环境</li>
+<li>引入Vue</li>
+<li>引入Vue-Router</li>
+<li>引入ElementUI</li>
+</ul>
+<p><a name="bPzMF"></a></p>
+<h1 id="搭建Webpack开发环境"><a href="#搭建Webpack开发环境" class="headerlink" title="搭建Webpack开发环境"></a>搭建Webpack开发环境</h1><p><a name="YSZLE"></a></p>
+<h3 id="1-搭建npm"><a href="#1-搭建npm" class="headerlink" title="1. 搭建npm"></a>1. 搭建npm</h3><pre><code class="shell">npm init -y
+# 打印以下信息
+{
+  &quot;name&quot;: &quot;lesson02&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre>
+<p><a name="RSFLK"></a></p>
+<h3 id="2-集成webpack"><a href="#2-集成webpack" class="headerlink" title="2. 集成webpack"></a>2. 集成webpack</h3><p><a name="fJRBR"></a></p>
+<h4 id="2-1-安装webpack-webpack-cli"><a href="#2-1-安装webpack-webpack-cli" class="headerlink" title="2.1 安装webpack webpack-cli"></a>2.1 安装webpack webpack-cli</h4><pre><code class="shell">yarn add -D webpack webpack-cli
+</code></pre>
+<p><a name="jGOc9"></a></p>
+<h4 id="2-2-创建webpack-config-js"><a href="#2-2-创建webpack-config-js" class="headerlink" title="2.2 创建webpack.config.js"></a>2.2 创建webpack.config.js</h4><pre><code class="javascript">module.exports = {
+    entry: &#39;./src/index.js&#39;, // 指明webpack入口文件
+    mode: &#39;development&#39; // 指明webpack打包模式，development、production
+}
+</code></pre>
+<p><a name="qVBVg"></a></p>
+<h4 id="2-3-配置package-json"><a href="#2-3-配置package-json" class="headerlink" title="2.3 配置package.json"></a>2.3 配置package.json</h4><pre><code class="json">{
+  &quot;name&quot;: &quot;lesson02&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;webpack --config webpack.config.js&quot; // 添加build脚本，webpack并配置webpack.config.js
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;webpack&quot;: &quot;^4.35.0&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.3.4&quot;
+  }
+}
+</code></pre>
+<p><a name="JvMF8"></a></p>
+<h4 id="2-4-创建入口文件并打包"><a href="#2-4-创建入口文件并打包" class="headerlink" title="2.4 创建入口文件并打包"></a>2.4 创建入口文件并打包</h4><p>创建 <code>src/index.js</code> 文件，在终端执行 <code>npm run build</code> </p>
+<pre><code class="shell">$ webpack --config webpack.config.js
+Hash: 5b90c629ada6fed12c59
+Version: webpack 4.35.0
+Time: 42ms
+Built at: 2019-06-23 10:44:26
+  Asset      Size  Chunks             Chunk Names
+main.js  3.77 KiB    main  [emitted]  main
+Entrypoint main = main.js
+[./src/index.js] 0 bytes {main} [built]
+</code></pre>
+<p>执行完命令后，webpack会自动创建 <code>dist/main.js</code> ，此时webpack已经帮我们将源码打包进了 <code>main.js</code> 。</p>
+<p><a name="6mySL"></a></p>
+<h3 id="3-Webpack打包html文件"><a href="#3-Webpack打包html文件" class="headerlink" title="3. Webpack打包html文件"></a>3. Webpack打包html文件</h3><p>webpack打包html文件需要集成 <code>html-webpack-plugin</code> 插件<br><a name="22qUQ"></a></p>
+<h4 id="3-1-创建index-html"><a href="#3-1-创建index-html" class="headerlink" title="3.1 创建index.html"></a>3.1 创建index.html</h4><p>在 <code>src</code> 目录下，创建index.html文件</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Webpack+Vue+Element Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to Webpack!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><a name="wFWIT"></a></p>
+<h4 id="3-2-配置HtmlWebpackPlugin"><a href="#3-2-配置HtmlWebpackPlugin" class="headerlink" title="3.2 配置HtmlWebpackPlugin"></a>3.2 配置HtmlWebpackPlugin</h4><p>在 <code>webpack.config.js</code> 文件里配置 <code>html-webpack-plugin</code> 插件</p>
+<pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="Hsnrm"></a></p>
+<h4 id="3-3-webpack打包"><a href="#3-3-webpack打包" class="headerlink" title="3.3 webpack打包"></a>3.3 webpack打包</h4><p>执行 <code>npm run build</code> 使用webpack打包。</p>
+<pre><code class="shell">$ webpack --config webpack.config.js
+Hash: ceb7a1f973b58b7b2266
+Version: webpack 4.35.0
+Time: 267ms
+Built at: 2019-06-23 11:04:24
+     Asset       Size  Chunks             Chunk Names
+index.html  361 bytes          [emitted]
+   main.js   3.77 KiB    main  [emitted]  main
+Entrypoint main = main.js
+[./src/index.js] 0 bytes {main} [built]
+Child html-webpack-plugin for &quot;index.html&quot;:
+     1 asset
+    Entrypoint undefined = index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html] 512 bytes {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        + 1 hidden module
+✨  Done in 0.81s.
+</code></pre>
+<p>执行完成后，在 <code>dist</code> 目录下同时生成 <code>index.html</code> 和 <code>main.js</code> 文件，其中 <code>index.html</code> 文件自动引入了 <code>main.js</code> </p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Webpack+Vue+Element Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to Webpack!&lt;/h1&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;main.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><a name="LgZB0"></a></p>
+<h3 id="4-使用webpack-dev-server实现热更新"><a href="#4-使用webpack-dev-server实现热更新" class="headerlink" title="4. 使用webpack-dev-server实现热更新"></a>4. 使用webpack-dev-server实现热更新</h3><p><a name="WjklP"></a></p>
+<h4 id="4-1-安装-webpack-dev-server"><a href="#4-1-安装-webpack-dev-server" class="headerlink" title="4.1 安装 webpack-dev-server"></a>4.1 安装 <code>webpack-dev-server</code></h4><p>执行 <code>npm install -S webpack-dev-server</code><br><a name="Hbc5F"></a></p>
+<h4 id="4-2-配置-package-json"><a href="#4-2-配置-package-json" class="headerlink" title="4.2 配置 package.json"></a>4.2 配置 <code>package.json</code></h4><pre><code class="json">{
+  &quot;name&quot;: &quot;lesson02&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;webpack --config webpack.config.js&quot;,
+    &quot;start&quot;: &quot;webpack-dev-server&quot; // 配置webpack-dev-server
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+    &quot;webpack&quot;: &quot;^4.35.0&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.3.4&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^3.7.2&quot;
+  }
+}
+</code></pre>
+<p><a name="z6Ur8"></a></p>
+<h4 id="4-3-启动webpack-dev-server"><a href="#4-3-启动webpack-dev-server" class="headerlink" title="4.3 启动webpack-dev-server"></a>4.3 启动webpack-dev-server</h4><pre><code class="shell">$ webpack-dev-server
+ℹ ｢wds｣: Project is running at http://localhost:8080/
+ℹ ｢wds｣: webpack output is served from /
+ℹ ｢wds｣: Content not from webpack is served from /Users/luzhiyong/workspace/Nugget/FrontEnd/Demos/element-ui/lesson02
+ℹ ｢wdm｣: Hash: 621a07b0efc37e879bd7
+Version: webpack 4.35.0
+Time: 412ms
+Built at: 2019-06-23 18:32:41
+     Asset       Size  Chunks             Chunk Names
+index.html  361 bytes          [emitted]
+   main.js    359 KiB    main  [emitted]  main
+Entrypoint main = main.js
+[0] multi (webpack)-dev-server/client?http://localhost ./src/index.js 40 bytes {main} [built]
+[./node_modules/ansi-html/index.js] 4.16 KiB {main} [built]
+[./node_modules/ansi-regex/index.js] 135 bytes {main} [built]
+[./node_modules/html-entities/index.js] 231 bytes {main} [built]
+[./node_modules/loglevel/lib/loglevel.js] 7.68 KiB {main} [built]
+[./node_modules/strip-ansi/index.js] 161 bytes {main} [built]
+[./node_modules/webpack-dev-server/client/index.js?http://localhost] (webpack)-dev-server/client?http://localhost 4.29 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/overlay.js] (webpack)-dev-server/client/overlay.js 3.51 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/socket.js] (webpack)-dev-server/client/socket.js 1.53 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/createSocketUrl.js] (webpack)-dev-server/client/utils/createSocketUrl.js 2.77 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/log.js] (webpack)-dev-server/client/utils/log.js 964 bytes {main} [built]
+[./node_modules/webpack-dev-server/client/utils/reloadApp.js] (webpack)-dev-server/client/utils/reloadApp.js 1.63 KiB {main} [built]
+[./node_modules/webpack-dev-server/client/utils/sendMessage.js] (webpack)-dev-server/client/utils/sendMessage.js 402 bytes {main} [built]
+[./node_modules/webpack/hot sync ^\.\/log$] (webpack)/hot sync nonrecursive ^\.\/log$ 170 bytes {main} [built]
+[./src/index.js] 0 bytes {main} [built]
+    + 18 hidden modules
+Child html-webpack-plugin for &quot;index.html&quot;:
+     1 asset
+    Entrypoint undefined = index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html] 512 bytes {0} [built]
+    [./node_modules/lodash/lodash.js] 527 KiB {0} [built]
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+ℹ ｢wdm｣: Compiled successfully.
+</code></pre>
+<p>浏览器访问<a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a>即可看到index.html的内容</p>
+<p><a name="xMyMi"></a></p>
+<h3 id="5-Webpack打包css文件"><a href="#5-Webpack打包css文件" class="headerlink" title="5. Webpack打包css文件"></a>5. Webpack打包css文件</h3><p><a name="FwHWT"></a></p>
+<h4 id="5-1-安装-css-loader、style-loader"><a href="#5-1-安装-css-loader、style-loader" class="headerlink" title="5.1 安装 css-loader、style-loader"></a>5.1 安装 css-loader、style-loader</h4><pre><code class="shell">yarn add -D css-loader style-loader
+</code></pre>
+<p><a name="iJQKA"></a></p>
+<h4 id="5-2-配置css-loader、style-loader"><a href="#5-2-配置css-loader、style-loader" class="headerlink" title="5.2 配置css-loader、style-loader"></a>5.2 配置css-loader、style-loader</h4><p>在 <code>webpack.config.js</code> 中配置加载 <code>css-loader</code> 和 <code>style-loader</code> </p>
+<pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    &#39;style-loader&#39;,
+                    &#39;css-loader&#39;
+                ]
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="QPPjR"></a></p>
+<h3 id="6-Webpack打包less文件"><a href="#6-Webpack打包less文件" class="headerlink" title="6. Webpack打包less文件"></a>6. Webpack打包less文件</h3><p><a name="G3rAI"></a></p>
+<h4 id="6-1-安装less-loader"><a href="#6-1-安装less-loader" class="headerlink" title="6.1 安装less-loader"></a>6.1 安装less-loader</h4><p>需要提前安装好 <code>css-loader</code> 和 <code>style-loader</code> </p>
+<pre><code class="shell">yarn add -D less-loader less
+</code></pre>
+<p><a name="6O217"></a></p>
+<h4 id="6-2-配置less-loader"><a href="#6-2-配置less-loader" class="headerlink" title="6.2 配置less-loader"></a>6.2 配置less-loader</h4><pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    &#39;style-loader&#39;,
+                    &#39;css-loader&#39;
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    &#39;style-loader&#39;,
+                    &#39;css-loader&#39;,
+                    &#39;less-loader&#39;
+                ]
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="Dhi3B"></a></p>
+<h1 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h1><p><a name="Kbr6T"></a></p>
+<h3 id="1-安装vue、vue-loader、vue-template-compiler"><a href="#1-安装vue、vue-loader、vue-template-compiler" class="headerlink" title="1. 安装vue、vue-loader、vue-template-compiler"></a>1. 安装vue、vue-loader、vue-template-compiler</h3><p><code>vue-loader</code> 和 <code>vue-template-compiler</code> 这两个插件是webpack打包vue代码所必须的，关于这两个插件的更多信息可以参考<a href="https://vue-loader.vuejs.org/zh/guide/#手动设置" target="_blank" rel="noopener">起步 | Vue Loader</a>。<br><a name="rD8LY"></a></p>
+<h3 id="2-配置webpack-config-js支持加载vue"><a href="#2-配置webpack-config-js支持加载vue" class="headerlink" title="2. 配置webpack.config.js支持加载vue"></a>2. 配置webpack.config.js支持加载vue</h3><pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const VueLoaderPlugin = require(&#39;vue-loader/lib/plugin&#39;)
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    module: {
+        rules: [
+            {
+                test: /\.vue$/, // 通过规则匹配将vue-loader应用到所有扩展名为vue的文件
+                loader: &#39;vue-loader&#39;
+            }
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin(), // 这个插件必须引用，它的职责是将定义过的其他规则应用到vue文件的相应语言块
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="ZU6QK"></a></p>
+<h3 id="3-引用vue"><a href="#3-引用vue" class="headerlink" title="3. 引用vue"></a>3. 引用vue</h3><p><a name="MWWge"></a></p>
+<h4 id="3-1-修改index-html"><a href="#3-1-修改index-html" class="headerlink" title="3.1 修改index.html"></a>3.1 修改index.html</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Webpack+Vue+Element Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div id=&quot;app&quot;&gt;
+       {{ message }}
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><a name="8Q83N"></a></p>
+<h4 id="3-2-修改index-js"><a href="#3-2-修改index-js" class="headerlink" title="3.2 修改index.js"></a>3.2 修改index.js</h4><pre><code class="javascript">import Vue from &#39;vue&#39;;
+
+new Vue({
+    data: {
+        message: &#39;Hello Vue!&#39;
+    }
+}).$mount(&quot;#app&quot;)
+</code></pre>
+<p><a name="Psnit"></a></p>
+<h4 id="3-3-配置vue文件路径"><a href="#3-3-配置vue文件路径" class="headerlink" title="3.3 配置vue文件路径"></a>3.3 配置vue文件路径</h4><p>完成上述配置后，运行项目会遇到以下错误信息：</p>
+<blockquote>
+<p>[Vue warn] : You are using the runtime-only build of Vue where the template option is not available. Either pre-compile the templates into render functions, or use the compiler-included build. (found in root instance)</p>
+</blockquote>
+<p>原因是因为在vue的package.json中引入的是vue.common.js，vue打包时会生成三个文件，一个是 runtime only 的文件 vue.common.js，一个是 compiler only 的文件 compiler.js，一个是 runtime + compiler 的文件 vue.js。如果要使用 template 这个属性的话就一定要用 compiler.js，那么，引入 vue.js 是最恰当的。<br>配置webpack.config.js, 将vue指向 <code>vue/dist/vue.js</code> 。</p>
+<pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const VueLoaderPlugin = require(&#39;vue-loader/lib/plugin&#39;)
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    resolve: {
+        alias: {
+            &#39;vue&#39;: &#39;vue/dist/vue.js&#39;
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: &#39;vue-loader&#39;
+            }
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="U7sPU"></a></p>
+<h3 id="4-引入App-vue文件"><a href="#4-引入App-vue文件" class="headerlink" title="4. 引入App.vue文件"></a>4. 引入App.vue文件</h3><p><a name="qRtjD"></a></p>
+<h4 id="4-1-创建App-vue文件"><a href="#4-1-创建App-vue文件" class="headerlink" title="4.1 创建App.vue文件"></a>4.1 创建App.vue文件</h4><pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;header&gt;header&lt;/header&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+    header {
+        background: red;
+    }
+&lt;/style&gt;
+</code></pre>
+<p><a name="xC0eR"></a></p>
+<h4 id="4-2-引入App-vue文件"><a href="#4-2-引入App-vue文件" class="headerlink" title="4.2 引入App.vue文件"></a>4.2 引入App.vue文件</h4><p>修改 <code>index.js</code> 文件</p>
+<pre><code class="javascript">import Vue from &#39;vue&#39;;
+
+import App from &#39;./App.vue&#39;;
+
+new Vue({
+    el: &#39;#app&#39;,
+    render: h =&gt; h(App)
+})
+</code></pre>
+<p><a name="SkKfn"></a></p>
+<h1 id="引入Vue-Router"><a href="#引入Vue-Router" class="headerlink" title="引入Vue-Router"></a>引入Vue-Router</h1><p><a name="e5pgC"></a></p>
+<h3 id="1-安装vue-router"><a href="#1-安装vue-router" class="headerlink" title="1. 安装vue-router"></a>1. 安装vue-router</h3><pre><code class="shell">yarn add vue-router
+</code></pre>
+<p><a name="XwPCz"></a></p>
+<h3 id="2-引入vue-router"><a href="#2-引入vue-router" class="headerlink" title="2. 引入vue-router"></a>2. 引入vue-router</h3><p><a name="Eg3ks"></a></p>
+<h4 id="2-1-在-src-views-目录下创建-Home-vue-和-About-vue"><a href="#2-1-在-src-views-目录下创建-Home-vue-和-About-vue" class="headerlink" title="2.1 在 src/views 目录下创建 Home.vue 和 About.vue"></a>2.1 在 <code>src/views</code> 目录下创建 <code>Home.vue</code> 和 <code>About.vue</code></h4><pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        Home Page
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        About Page
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<p><a name="WzLjS"></a></p>
+<h4 id="2-2-在-index-js-中引入-vue-router"><a href="#2-2-在-index-js-中引入-vue-router" class="headerlink" title="2.2 在 index.js 中引入 vue-router"></a>2.2 在 <code>index.js</code> 中引入 <code>vue-router</code></h4><pre><code class="javascript">import Vue from &#39;vue&#39;;
+import VueRouter from &#39;vue-router&#39;;
+
+import App from &#39;./App.vue&#39;;
+import Home from &#39;./views/Home.vue&#39;;
+import About from &#39;./views/About.vue&#39;;
+
+Vue.use(VueRouter)
+
+const routes = [
+    { path: &#39;/home&#39;, component: Home },
+    { path: &#39;/about&#39;, component: About }
+]
+
+const router = new VueRouter({
+    routes
+})
+
+new Vue({
+    router,
+    el: &#39;#app&#39;,
+    render: h =&gt; h(App)
+})
+</code></pre>
+<p><a name="lBopn"></a></p>
+<h4 id="2-3-配置-router-link-router-view"><a href="#2-3-配置-router-link-router-view" class="headerlink" title="2.3 配置 router-link  router-view"></a>2.3 配置 <code>router-link</code>  <code>router-view</code></h4><p>在 <code>App.vue</code> 里配置 <code>router-link</code> 与 <code>router-view</code> </p>
+<pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;header&gt;
+            &lt;router-link to=&quot;home&quot;&gt;主页&lt;/router-link&gt;
+            &lt;router-link to=&quot;about&quot;&gt;关于我们&lt;/router-link&gt;
+        &lt;/header&gt;
+        &lt;router-view&gt;&lt;/router-view&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+    header {
+        height: 60px;
+        background: #ff9744;
+    }
+&lt;/style&gt;
+</code></pre>
+<p><a name="HLde3"></a></p>
+<h1 id="引入Element-UI"><a href="#引入Element-UI" class="headerlink" title="引入Element UI"></a>引入Element UI</h1><p><a name="z1iMl"></a></p>
+<h3 id="1-安装-element-ui-、-file-loader"><a href="#1-安装-element-ui-、-file-loader" class="headerlink" title="1. 安装 element-ui 、 file-loader"></a>1. 安装 <code>element-ui</code> 、 <code>file-loader</code></h3><p>分别安装 <code>element-ui</code> 与 <code>file-loader</code> ,安装 <code>file-loader</code> 的原因是 <code>element-ui</code> 中有一些字体文件需要在webpack打包时加载。</p>
+<pre><code class="shell">yarn add element-ui
+yarn add file-loader
+</code></pre>
+<p><a name="pF1W7"></a></p>
+<h3 id="2-配置-file-loader"><a href="#2-配置-file-loader" class="headerlink" title="2. 配置 file-loader"></a>2. 配置 <code>file-loader</code></h3><p>在 <code>webpack.config.js</code> 中配置加载 <code>file-loader</code> </p>
+<pre><code class="javascript">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+const VueLoaderPlugin = require(&#39;vue-loader/lib/plugin&#39;)
+
+module.exports = {
+    entry: &#39;./src/index.js&#39;,
+    mode: &#39;development&#39;,
+    resolve: {
+        alias: {
+            &#39;vue&#39;: &#39;vue/dist/vue.js&#39;
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: &#39;vue-loader&#39;
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    &#39;style-loader&#39;,
+                    &#39;css-loader&#39;
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    &#39;style-loader&#39;,
+                    &#39;css-loader&#39;,
+                    &#39;less-loader&#39;
+                ]
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: &#39;file-loader&#39;
+            }
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            template: &#39;./src/index.html&#39;
+        })
+    ]
+}
+</code></pre>
+<p><a name="T1jf6"></a></p>
+<h3 id="3-引入-element-ui"><a href="#3-引入-element-ui" class="headerlink" title="3. 引入 element-ui"></a>3. 引入 <code>element-ui</code></h3><p>在 <code>index.js</code> 中引入 <code>element-ui</code> 、 <code>theme-chalk/index.css</code> ，详细的配置可以参考<a href>Element-UI快速上手</a></p>
+<pre><code class="javascript">import Vue from &#39;vue&#39;;
+import VueRouter from &#39;vue-router&#39;;
+
+import ElementUI from &#39;element-ui&#39;; 
+import &#39;element-ui/lib/theme-chalk/index.css&#39;;
+
+import App from &#39;./App.vue&#39;;
+import Home from &#39;./views/Home.vue&#39;;
+import About from &#39;./views/About.vue&#39;;
+
+Vue.use(VueRouter)
+Vue.use(ElementUI);
+
+const routes = [
+    { path: &#39;/home&#39;, component: Home },
+    { path: &#39;/about&#39;, component: About }
+]
+
+const router = new VueRouter({
+    routes
+})
+
+new Vue({
+    router,
+    el: &#39;#app&#39;,
+    render: h =&gt; h(App)
+})
+</code></pre>
+<p><a name="XMTpZ"></a></p>
+<h3 id="4-使用element-ui"><a href="#4-使用element-ui" class="headerlink" title="4. 使用element-ui"></a>4. 使用element-ui</h3><p>修改 <code>App.vue</code> 使用 <code>element-ui</code> 进行布局</p>
+<pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;el-container&gt;
+            &lt;el-aside&gt;Aside&lt;/el-aside&gt;
+            &lt;el-container&gt;
+                &lt;el-header&gt;Header&lt;/el-header&gt;
+                &lt;el-main&gt;Main&lt;/el-main&gt;
+            &lt;/el-container&gt;
+        &lt;/el-container&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+    header {
+        height: 60px;
+        background: #ff9744;
+    }
+&lt;/style&gt;
+</code></pre>
+
+		
+		
+		<p class="post-info">
+			本文由 <a href="http://blog.ileafly.com">Leafly</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可<br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名<br>最后编辑时间为: Nov 12, 2019 08:40 pm
+		</p>
+	</div>
+</article>
+<div id="post-bottom-bar" class="post-bottom-bar">
+	<div class="bottom-bar-inner">
+		<div class="bottom-bar-items social-share left">
+			<span class="bottom-bar-item">Share : </span>
+			<span class="bottom-bar-item bottom-bar-facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.ileafly.com/2019/07/03/yuque/Webpack+Vue+VueRouter+ElementUI/index.html" target="_blank" title="Webpack+Vue+VueRouter+ElementUI" rel="nofollow">facebook</a></span>
+			<span class="bottom-bar-item bottom-bar-twitter"><a href="https://twitter.com/intent/tweet?url=http://blog.ileafly.com/2019/07/03/yuque/Webpack+Vue+VueRouter+ElementUI/&text=Webpack+Vue+VueRouter+ElementUI" target="_blank" title="Webpack+Vue+VueRouter+ElementUI" rel="nofollow">Twitter</a></span>
+			<span class="bottom-bar-item bottom-bar-weibo"><a href="http://service.weibo.com/share/share.php?url=&amp;title=Webpack+Vue+VueRouter+ElementUI" target="_blank" title="Webpack+Vue+VueRouter+ElementUI" rel="nofollow">Weibo</a></span>
+			<span class="bottom-bar-item bottom-bar-qrcode"><a href="//pan.baidu.com/share/qrcode?w=300&amp;h=300&amp;url=http://blog.ileafly.com/2019/07/03/yuque/Webpack+Vue+VueRouter+ElementUI/index.html" target="_blank" rel="nofollow">QRcode</a></span>
+		</div>
+		<div class="bottom-bar-items right">
+            
+            
+            <span class="bottom-bar-item"><a href="/2019/07/02/yuque/阅读器翻页动画优化总结/">→</a></span>
+            
+			<span class="bottom-bar-item"><a href="#footer">↓</a></span>
+			<span class="bottom-bar-item"><a href="#top">↑</a></span>
+		</div>
+	</div>
+</div>
+
+
+<div class="related-post-lists">
+	<div class="post-lists">
+		<div class="post-lists-body">
+		
+			<div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-label">
+						<div class="item-title"><a href="/2019/07/01/yuque/iOS封装SDK/">iOS封装SDK</a></div>
+						<div class="item-meta clearfix">
+							<div class="item-meta-date" style="color: #5f5f5f;">Jul 01, 2019</div>
+							<div class="item-meta-ico bg-ico-link" style="background: url(/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-cat">
+                                
+                                <a href="/categories/iOS/">iOS</a>
+                                
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-label">
+						<div class="item-title"><a href="/2019/06/11/yuque/xopen快捷脚本/">xopen快捷脚本</a></div>
+						<div class="item-meta clearfix">
+							<div class="item-meta-date" style="color: #5f5f5f;">Jun 11, 2019</div>
+							<div class="item-meta-ico bg-ico-web" style="background: url(/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-cat">
+                                
+                                <a href="/categories/iOS/">iOS</a>
+                                
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-label">
+						<div class="item-title"><a href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></div>
+						<div class="item-meta clearfix">
+							<div class="item-meta-date" style="color: #5f5f5f;">Nov 10, 2018</div>
+							<div class="item-meta-ico bg-ico-web" style="background: url(/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-cat">
+                                
+                                <a href="/categories/Hexo/">Hexo</a>
+                                
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="post-list-item">
+				<div class="post-list-item-container">
+					<div class="item-label">
+						<div class="item-title"><a href="/2018/11/09/yuque/使用语雀管理博客/">使用语雀管理博客</a></div>
+						<div class="item-meta clearfix">
+							<div class="item-meta-date" style="color: #5f5f5f;">Nov 09, 2018</div>
+							<div class="item-meta-ico bg-ico-lock" style="background: url(/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-cat">
+                                
+                                <a href="/categories/Hexo/">Hexo</a>
+                                
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+
+
+
+<footer id="footer" class="footer bg-white">
+	<div class="footer-social">
+		<div class="footer-container clearfix">
+			<div class="social-list">
+                
+                    <a class="social" target="blank" href="null">知乎</a>
+                
+                    <a class="social" target="blank" href="null">Github</a>
+                
+            </div>
+		</div>
+	</div>
+	<div class="footer-meta">
+		<div class="footer-container">
+			<div class="meta-item meta-copyright">
+				<div class="meta-copyright-info">
+                    <a href="http://blog.ileafly.com" class="info-logo">
+                        
+                        Leafly
+                        
+                    </a>
+					<div class="info-text">
+                        <p id="chakhsu"></p>
+                    	<p>Theme is <a href="https://github.com/cccyb/hexo-theme-pinghsu" target="_blank">Pinghsu</a> by <a href="http://blog.ileafly.com" target="_blank">Leafly</a></p>
+						<p>Powered by <a href="https://hexo.io/" target="_blank" rel="nofollow">hexo</a></p>
+                        <p style="margin-top: 10px">站点总字数：11.5k</p>
+                        
+                        <p><span id="busuanzi_container_site_pv" style='display:none'>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span></p>
+                        <p><span id="busuanzi_container_site_uv" style='display:none'>本站访客数 <span id="busuanzi_value_site_uv"></span> 人次</span></p>
+                        
+                        
+                        <p style="margin-top: 10px">&copy; 2016 - 2019 <a href="http://blog.ileafly.com">Leafly</a></p>
+                    </div>
+				</div>
+            </div>
+            
+            <div class="meta-item meta-posts">
+                <h3 class="meta-title">最近文章</h3>
+                
+                <li><a href="/2019/07/03/yuque/Webpack+Vue+VueRouter+ElementUI/">Webpack+Vue+VueRouter+ElementUI</a></li>
+                
+                <li><a href="/2019/07/02/yuque/阅读器翻页动画优化总结/">阅读器翻页动画优化总结</a></li>
+                
+                <li><a href="/2019/07/01/yuque/iOS封装SDK/">iOS封装SDK</a></li>
+                
+                <li><a href="/2019/06/28/yuque/iOS高效开发/">iOS高效开发</a></li>
+                
+                <li><a href="/2019/06/24/yuque/复盘一次内存优化/">复盘一次内存优化</a></li>
+                
+                <li><a href="/2019/06/11/yuque/弄透Block/">弄透Block</a></li>
+                
+                <li><a href="/2019/06/11/yuque/xopen快捷脚本/">xopen快捷脚本</a></li>
+                
+                <li><a href="/2018/11/10/yuque/Github+Hexo搭建个人博客详细教程/">Github+Hexo搭建个人博客详细教程</a></li>
+                
+            </div>
+            
+            
+		</div>
+	</div>
+</footer>
+
+
+<div id="directory-content" class="directory-content">
+    <div id="directory"></div>
+</div>
+<script>
+var postDirectoryBuild = function() {
+    var postChildren = function children(childNodes, reg) {
+        var result = [],
+            isReg = typeof reg === 'object',
+            isStr = typeof reg === 'string',
+            node, i, len;
+        for (i = 0, len = childNodes.length; i < len; i++) {
+            node = childNodes[i];
+            if ((node.nodeType === 1 || node.nodeType === 9) &&
+                (!reg ||
+                isReg && reg.test(node.tagName.toLowerCase()) ||
+                isStr && node.tagName.toLowerCase() === reg)) {
+                result.push(node);
+            }
+        }
+        return result;
+    },
+    createPostDirectory = function(article, directory, isDirNum) {
+        var contentArr = [],
+            titleId = [],
+            levelArr, root, level,
+            currentList, list, li, link, i, len;
+        levelArr = (function(article, contentArr, titleId) {
+            var titleElem = postChildren(article.childNodes, /^h\d$/),
+                levelArr = [],
+                lastNum = 1,
+                lastRevNum = 1,
+                count = 0,
+                guid = 1,
+                id = 'directory' + (Math.random() + '').replace(/\D/, ''),
+                lastRevNum, num, elem;
+            while (titleElem.length) {
+                elem = titleElem.shift();
+                contentArr.push(elem.innerHTML);
+                num = +elem.tagName.match(/\d/)[0];
+                if (num > lastNum) {
+                    levelArr.push(1);
+                    lastRevNum += 1;
+                } else if (num === lastRevNum ||
+                    num > lastRevNum && num <= lastNum) {
+                    levelArr.push(0);
+                    lastRevNum = lastRevNum;
+                } else if (num < lastRevNum) {
+                    levelArr.push(num - lastRevNum);
+                    lastRevNum = num;
+                }
+                count += levelArr[levelArr.length - 1];
+                lastNum = num;
+                elem.id = id + guid++;
+                titleId.push(elem.id);
+            }
+            if (count !== 0 && levelArr[0] === 1) levelArr[0] = 0;
+            return levelArr;
+        })(article, contentArr, titleId);
+        currentList = root = document.createElement('ul');
+        dirNum = [0];
+        for (i = 0, len = levelArr.length; i < len; i++) {
+            level = levelArr[i];
+            if (level === 1) {
+                list = document.createElement('ul');
+                if (!currentList.lastElementChild) {
+                    currentList.appendChild(document.createElement('li'));
+                }
+                currentList.lastElementChild.appendChild(list);
+                currentList = list;
+                dirNum.push(0);
+            } else if (level < 0) {
+                level *= 2;
+                while (level++) {
+                    if (level % 2) dirNum.pop();
+                    currentList = currentList.parentNode;
+                }
+            }
+            dirNum[dirNum.length - 1]++;
+            li = document.createElement('li');
+            link = document.createElement('a');
+            link.href = '#' + titleId[i];
+            link.innerHTML = !isDirNum ? contentArr[i] :
+                dirNum.join('.') + ' ' + contentArr[i] ;
+            li.appendChild(link);
+            currentList.appendChild(li);
+        }
+        directory.appendChild(root);
+    };
+    createPostDirectory(document.getElementById('post-content'),document.getElementById('directory'), true);
+};
+postDirectoryBuild();
+</script>
+
+<script src="//cdn.bootcss.com/headroom/0.9.1/headroom.min.js"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+<script>
+
+var postDirectory = new Headroom(document.getElementById("directory-content"), {
+    tolerance: 0,
+    
+    offset : 280,
+    
+    classes: {
+        initial: "initial",
+        pinned: "pinned",
+        unpinned: "unpinned"
+    }
+});
+postDirectory.init();
+
+
+var postSharer = new Headroom(document.getElementById("post-bottom-bar"), {
+    tolerance: 0,
+    offset : 70,
+    classes: {
+        initial: "animated",
+        pinned: "pinned",
+        unpinned: "unpinned"
+    }
+});
+postSharer.init();
+
+var header = new Headroom(document.getElementById("header"), {
+    tolerance: 0,
+    offset : 70,
+    classes: {
+      initial: "animated",
+      pinned: "slideDown",
+      unpinned: "slideUp"
+    }
+});
+header.init();
+
+hljs.initHighlightingOnLoad();
+ 
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
+</script>
+<script>
+var words = 'Hexo,Theme,Pinghsu'.split(',').map(item => item.trim());
+var chakhsu = function(r){function t(){return b[Math.floor(Math.random()*b.length)]}function e(){return String.fromCharCode(94*Math.random()+33)}function n(r){for(var n=document.createDocumentFragment(),i=0;r>i;i++){var l=document.createElement("span");l.textContent=e(),l.style.color=t(),n.appendChild(l)}return n}function i(){var t=o[c.skillI];c.step?c.step--:(c.step=g,c.prefixP<l.length?(c.prefixP>=0&&(c.text+=l[c.prefixP]),c.prefixP++):"forward"===c.direction?c.skillP<t.length?(c.text+=t[c.skillP],c.skillP++):c.delay?c.delay--:(c.direction="backward",c.delay=a):c.skillP>0?(c.text=c.text.slice(0,-1),c.skillP--):(c.skillI=(c.skillI+1)%o.length,c.direction="forward")),r.textContent=c.text,r.appendChild(n(c.prefixP<l.length?Math.min(s,s+c.prefixP):Math.min(s,t.length-c.skillP))),setTimeout(i,d)}var l="I work with ",o=words.map(function(r){return r+"."}),a=2,g=1,s=5,d=75,b=["rgb(110,64,170)","rgb(150,61,179)","rgb(191,60,175)","rgb(228,65,157)","rgb(254,75,131)","rgb(255,94,99)","rgb(255,120,71)","rgb(251,150,51)","rgb(226,183,47)","rgb(198,214,60)","rgb(175,240,91)","rgb(127,246,88)","rgb(82,246,103)","rgb(48,239,130)","rgb(29,223,163)","rgb(26,199,194)","rgb(35,171,216)","rgb(54,140,225)","rgb(76,110,219)","rgb(96,84,200)"],c={text:"",prefixP:-s,skillI:0,skillP:0,direction:"forward",delay:a,step:g};i()};chakhsu(document.getElementById('chakhsu')); if ('addEventListener' in document) { document.addEventListener('DOMContentLoaded', function() { FastClick.attach(document.body); }, false); }
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false,
+    messageStyle: "none",
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+        ignoreClass:"comment-content"
+    },
+    "HTML-CSS": {
+        availableFonts: ["STIX","TeX"],
+        showMathMenu: false
+    }
+});
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script src="/js/love.js"></script>
+
+
+
+<script>
+
+
+
+</script>
+
+</body>
+</html>
